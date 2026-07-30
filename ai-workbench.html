@@ -1,0 +1,2178 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>AI 工作台 - 莫兰迪</title>
+<style>
+/* ============ CSS Variables - 莫兰迪配色 ============ */
+:root {
+  --bg-primary: #f5f0eb;
+  --bg-card: #faf7f2;
+  --bg-sidebar: #ede7df;
+  --text-primary: #5c4a3d;
+  --text-secondary: #8b7a6b;
+  --text-muted: #b0a090;
+  --accent-rose: #c4a8a2;
+  --accent-sage: #a3b5a6;
+  --accent-blue: #a3adbd;
+  --accent-lavender: #b8aec8;
+  --accent-warm: #c9b99a;
+  --border: #e0d5c7;
+  --shadow: 0 2px 12px rgba(139, 122, 107, 0.08);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --font-xs: 12px;
+  --font-sm: 13px;
+  --font-md: 14px;
+  --font-lg: 16px;
+  --font-xl: 18px;
+  --font-xxl: 22px;
+  --sidebar-width: 72px;
+  --safe-bottom: env(safe-area-inset-bottom, 16px);
+}
+
+/* ============ Reset & Base ============ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; -webkit-tap-highlight-color: transparent; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============ Layout ============ */
+.app-container {
+  display: flex;
+  min-height: 100vh;
+  padding-left: var(--sidebar-width);
+}
+
+/* ============ Sidebar ============ */
+.sidebar {
+  position: fixed;
+  left: 0; top: 0; bottom: 0;
+  width: var(--sidebar-width);
+  background: var(--bg-sidebar);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+  z-index: 100;
+  border-right: 1px solid var(--border);
+}
+
+.sidebar-logo {
+  width: 40px; height: 40px;
+  background: var(--accent-sage);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 28px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.nav-items { display: flex; flex-direction: column; gap: 6px; flex: 1; }
+.nav-item {
+  width: 52px; height: 52px;
+  border-radius: 14px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  color: var(--text-muted);
+  font-size: var(--font-xs);
+  gap: 3px;
+  border: none;
+  background: transparent;
+}
+.nav-item svg { width: 22px; height: 22px; }
+.nav-item.active {
+  background: #fff;
+  color: var(--accent-sage);
+  box-shadow: var(--shadow);
+}
+.nav-item:active { transform: scale(0.94); }
+
+.sidebar-sync {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--accent-blue);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  margin-top: auto;
+}
+
+/* ============ Main Content ============ */
+.main-content {
+  flex: 1;
+  padding: 20px 16px 40px;
+  max-width: 600px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.page { display: none; }
+.page.active { display: block; }
+
+.page-header {
+  margin-bottom: 20px;
+}
+.page-header h1 {
+  font-size: var(--font-xxl);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.page-header .subtitle {
+  font-size: var(--font-sm);
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* ============ Cards ============ */
+.card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 18px;
+  margin-bottom: 14px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+}
+.card-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 12px;
+}
+.card-title {
+  font-size: var(--font-lg);
+  font-weight: 600;
+  color: var(--text-primary);
+  display: flex; align-items: center; gap: 8px;
+}
+.card-title .icon-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.icon-dot.rose { background: var(--accent-rose); }
+.icon-dot.sage { background: var(--accent-sage); }
+.icon-dot.blue { background: var(--accent-blue); }
+.icon-dot.lavender { background: var(--accent-lavender); }
+.icon-dot.warm { background: var(--accent-warm); }
+
+/* ============ Progress Bar ============ */
+.progress-wrap { margin: 8px 0; }
+.progress-label {
+  display: flex; justify-content: space-between;
+  font-size: var(--font-xs); color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+.progress-bar {
+  height: 8px; background: var(--border);
+  border-radius: 4px; overflow: hidden;
+}
+.progress-fill {
+  height: 100%; border-radius: 4px;
+  transition: width 0.4s ease;
+  background: var(--accent-sage);
+}
+.progress-fill.rose { background: var(--accent-rose); }
+.progress-fill.blue { background: var(--accent-blue); }
+.progress-fill.warm { background: var(--accent-warm); }
+
+/* ============ Buttons ============ */
+.btn {
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: none;
+  font-size: var(--font-sm);
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 500;
+  display: inline-flex; align-items: center; gap: 4px;
+}
+.btn:active { transform: scale(0.96); }
+.btn-primary { background: var(--accent-sage); color: #fff; }
+.btn-outline { background: transparent; border: 1.5px solid var(--accent-sage); color: var(--accent-sage); }
+.btn-sm { padding: 5px 12px; font-size: var(--font-xs); border-radius: 14px; }
+.btn-rose { background: var(--accent-rose); color: #fff; }
+.btn-warm { background: var(--accent-warm); color: #fff; }
+
+.btn-group { display: flex; gap: 8px; flex-wrap: wrap; }
+
+/* ============ Inputs ============ */
+.input-group { margin-bottom: 10px; }
+.input-group label {
+  display: block;
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+.input-row { display: flex; gap: 8px; }
+.input-row input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-md);
+  background: #fff;
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.input-row input:focus { border-color: var(--accent-sage); }
+
+/* Growth input: two-column compact, no overflow */
+.growth-input-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  max-width: 100%;
+}
+.growth-input-group {
+  flex: 1;
+  min-width: 0;
+  max-width: calc(50% - 5px);
+}
+.growth-input-group input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-md);
+  background: #fff;
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+.growth-input-group input:focus { border-color: var(--accent-sage); }
+
+input[type="number"] { -moz-appearance: textfield; }
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-md);
+  background: #fff;
+  color: var(--text-primary);
+  outline: none;
+  resize: vertical;
+  font-family: inherit;
+  min-height: 80px;
+}
+textarea:focus { border-color: var(--accent-sage); }
+
+/* ============ Chart Container ============ */
+.chart-container {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  margin: 10px 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.chart-container canvas { width: 100% !important; }
+
+/* ============ Task Check ============ */
+.task-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+.task-item:last-child { border-bottom: none; }
+.task-check {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  border: 2px solid var(--accent-sage);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+.task-check.done {
+  background: var(--accent-sage);
+  border-color: var(--accent-sage);
+}
+.task-check.done::after {
+  content: '✓';
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+}
+.task-label {
+  flex: 1;
+  font-size: var(--font-md);
+  color: var(--text-primary);
+}
+.task-label.done {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+/* ============ File List ============ */
+.file-list { list-style: none; }
+.file-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  gap: 8px;
+}
+.file-item:last-child { border-bottom: none; }
+.file-name {
+  flex: 1;
+  font-size: var(--font-sm);
+  color: var(--text-primary);
+  cursor: pointer;
+  word-break: break-all;
+  line-height: 1.4;
+}
+.file-name:hover { color: var(--accent-sage); }
+.file-actions { display: flex; gap: 6px; flex-shrink: 0; }
+
+/* ============ Hotspot ============ */
+.hotspot-item {
+  padding: 14px;
+  background: #fff;
+  border-radius: var(--radius-sm);
+  margin-bottom: 10px;
+  border-left: 3px solid var(--accent-rose);
+}
+.hotspot-tag {
+  display: inline-block;
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+.tag-policy { background: #f0e6df; color: #8b6f5a; }
+.tag-academic { background: #dfe8e0; color: #5a7a5f; }
+.hotspot-title { font-size: var(--font-md); font-weight: 600; margin-bottom: 4px; }
+.hotspot-desc { font-size: var(--font-sm); color: var(--text-secondary); line-height: 1.5; }
+
+/* ============ Recipe Card ============ */
+.recipe-day {
+  background: #fff;
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  margin-bottom: 10px;
+  border: 1px solid var(--border);
+}
+.recipe-day h4 {
+  font-size: var(--font-md);
+  color: var(--accent-rose);
+  margin-bottom: 8px;
+}
+.recipe-meal {
+  display: flex; gap: 10px;
+  padding: 6px 0;
+  font-size: var(--font-sm);
+}
+.recipe-meal .meal-type {
+  width: 36px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+.recipe-meal .meal-content { flex: 1; color: var(--text-primary); }
+
+/* ============ Word List ============ */
+.word-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.word-item {
+  background: #fff;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-sm);
+  display: flex; justify-content: space-between;
+  border: 1px solid var(--border);
+}
+.word-en { color: var(--accent-blue); font-weight: 500; }
+.word-cn { color: var(--text-secondary); }
+
+/* ============ Dialog Item ============ */
+.dialog-line {
+  padding: 8px 12px;
+  background: #fdfaf6;
+  border-radius: 8px;
+  margin-bottom: 6px;
+  font-size: var(--font-sm);
+  line-height: 1.5;
+}
+.dialog-line .speaker {
+  font-weight: 600;
+  color: var(--accent-rose);
+  margin-right: 4px;
+}
+
+/* ============ Percentile Badge ============ */
+.percentile-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 4px 10px;
+  background: var(--accent-lavender);
+  color: #fff;
+  border-radius: 12px;
+  font-size: var(--font-xs);
+  font-weight: 500;
+}
+
+/* ============ Rename Modal ============ */
+.modal-overlay {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(92, 74, 61, 0.3);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 200;
+  backdrop-filter: blur(2px);
+}
+.modal-box {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 24px;
+  width: 90%;
+  max-width: 360px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+}
+.modal-box h3 { font-size: var(--font-lg); margin-bottom: 14px; }
+.modal-box input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-md);
+  outline: none;
+  margin-bottom: 16px;
+}
+.modal-box input:focus { border-color: var(--accent-sage); }
+
+/* ============ Toast ============ */
+.toast {
+  position: fixed; bottom: 30px; left: 50%;
+  transform: translateX(-50%);
+  background: var(--text-primary);
+  color: #fff;
+  padding: 10px 24px;
+  border-radius: 20px;
+  font-size: var(--font-sm);
+  z-index: 300;
+  animation: toastIn 0.3s ease, toastOut 0.3s ease 2s forwards;
+  pointer-events: none;
+}
+@keyframes toastIn { from { opacity: 0; transform: translateX(-50%) translateY(10px); } }
+@keyframes toastOut { to { opacity: 0; transform: translateX(-50%) translateY(-10px); } }
+
+/* ============ Scrollbar ============ */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+/* ============ Upload Hint ============ */
+.upload-hint {
+  display: inline-flex; align-items: center; gap: 4px;
+  color: var(--accent-blue);
+  font-size: var(--font-xs);
+  cursor: pointer;
+}
+.upload-hint svg { width: 14px; height: 14px; }
+
+/* Green upload button for research folders */
+.upload-btn-green {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 14px;
+  background: #7dad8b;
+  color: #fff;
+  border-radius: 20px;
+  font-size: var(--font-xs);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 8px;
+  border: none;
+}
+.upload-btn-green:active { transform: scale(0.96); opacity: 0.9; }
+
+/* Folder card inside research */
+.folder-card {
+  background: #fff;
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  margin-bottom: 12px;
+  border: 1px solid var(--border);
+}
+.folder-card:last-child { margin-bottom: 0; }
+.folder-header {
+  display: flex; align-items: baseline; justify-content: space-between;
+  margin-bottom: 4px;
+  flex-wrap: wrap; gap: 4px;
+}
+
+.file-empty {
+  color: var(--text-muted);
+  font-style: italic;
+  cursor: default !important;
+  pointer-events: none;
+}
+
+/* ============ Responsive ============ */
+@media (max-width: 480px) {
+  .main-content { padding: 16px 12px 40px; }
+  .card { padding: 14px; }
+  .word-grid { grid-template-columns: 1fr; }
+}
+
+/* ============ Loading spinner ============ */
+.spinner {
+  display: inline-block; width: 16px; height: 16px;
+  border: 2px solid var(--border);
+  border-top-color: var(--accent-sage);
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Tab bar for sub-sections */
+.sub-tabs {
+  display: flex; gap: 6px;
+  margin-bottom: 14px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.sub-tab {
+  padding: 6px 14px;
+  border-radius: 16px;
+  font-size: var(--font-xs);
+  border: 1.5px solid var(--border);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+.sub-tab.active {
+  background: var(--accent-sage);
+  color: #fff;
+  border-color: var(--accent-sage);
+}
+
+.manual-entry {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--border);
+}
+
+/* Collapsible section */
+.collapse-header {
+  display: flex; align-items: center; justify-content: space-between;
+  cursor: pointer;
+  padding: 4px 0;
+}
+.collapse-arrow {
+  transition: transform 0.3s;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.collapse-arrow.open { transform: rotate(90deg); }
+.collapse-body { overflow: hidden; transition: max-height 0.3s ease; }
+.collapse-body.closed { max-height: 0 !important; }
+
+/* Food allergy progress */
+.allergy-progress-ring {
+  display: flex; align-items: center; gap: 14px;
+}
+.ring-svg { flex-shrink: 0; }
+.allergy-stats { font-size: var(--font-sm); color: var(--text-secondary); }
+.allergy-stats strong { color: var(--text-primary); font-size: var(--font-lg); }
+</style>
+</head>
+<body>
+
+<div class="app-container">
+  <!-- ==================== SIDEBAR ==================== -->
+  <nav class="sidebar">
+    <div class="sidebar-logo">W</div>
+    <div class="nav-items">
+      <button class="nav-item active" data-page="home" onclick="switchPage('home')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span>首页</span>
+      </button>
+      <button class="nav-item" data-page="study" onclick="switchPage('study')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+        <span>学习</span>
+      </button>
+      <button class="nav-item" data-page="research" onclick="switchPage('research')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        <span>科研</span>
+      </button>
+      <button class="nav-item" data-page="life" onclick="switchPage('life')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+        <span>生活</span>
+      </button>
+      <button class="nav-item" data-page="hotspot" onclick="switchPage('hotspot')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        <span>热点</span>
+      </button>
+    </div>
+    <button class="sidebar-sync" onclick="syncAllData()" title="云端同步">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
+    </button>
+  </nav>
+
+  <!-- ==================== MAIN CONTENT ==================== -->
+  <main class="main-content" id="mainContent">
+
+    <!-- ========== 首页看板 ========== -->
+    <div class="page active" id="page-home">
+      <div class="page-header">
+        <h1>📋 今日看板</h1>
+        <div class="subtitle" id="todayDate"></div>
+      </div>
+
+      <!-- 文献阅读进度 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><span class="icon-dot sage"></span>文献阅读进度</div>
+          <span style="font-size:var(--font-sm);color:var(--text-secondary)">目标：50篇</span>
+        </div>
+        <div class="progress-wrap">
+          <div class="progress-label"><span>已精读</span><span id="paperCount">0 / 50</span></div>
+          <div class="progress-bar"><div class="progress-fill" id="paperProgress" style="width:0%"></div></div>
+        </div>
+        <div class="btn-group" style="margin-top:10px">
+          <button class="btn btn-primary btn-sm" onclick="addPaper()">+ 精读1篇</button>
+          <button class="btn btn-outline btn-sm" onclick="removePaper()">↩ 撤回</button>
+        </div>
+      </div>
+
+      <!-- 宝宝生长发育曲线 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><span class="icon-dot rose"></span>宝宝生长曲线</div>
+          <span id="growthPercentile" class="percentile-badge">8月龄</span>
+        </div>
+        <div class="growth-input-row">
+          <div class="input-group growth-input-group">
+            <label>体重(kg)</label>
+            <input type="number" id="inputWeight" step="0.01" placeholder="如 8.20" onchange="addGrowthData()">
+          </div>
+          <div class="input-group growth-input-group">
+            <label>身高(cm)</label>
+            <input type="number" id="inputHeight" step="0.1" placeholder="如 68.5" onchange="addGrowthData()">
+          </div>
+        </div>
+        <div class="chart-container" id="growthChartWrap">
+          <canvas id="growthChart"></canvas>
+        </div>
+        <div style="font-size:var(--font-xs);color:var(--text-muted);text-align:center;margin-top:4px">
+          虚线为WHO标准参考 · 输入后回车自动更新曲线
+        </div>
+      </div>
+
+      <!-- 每日任务打卡 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><span class="icon-dot warm"></span>每日任务打卡</div>
+        </div>
+        <div class="progress-wrap" style="margin-bottom:10px">
+          <div class="progress-label"><span>今日完成度</span><span id="taskPercent">0%</span></div>
+          <div class="progress-bar"><div class="progress-fill warm" id="taskProgressBar" style="width:0%"></div></div>
+        </div>
+        <div id="taskList">
+          <div class="task-item">
+            <div class="task-check" data-task="taobao" onclick="toggleTask('taobao')"></div>
+            <span class="task-label">淘宝签到/刷广告</span>
+          </div>
+          <div class="task-item">
+            <div class="task-check" data-task="douyin" onclick="toggleTask('douyin')"></div>
+            <span class="task-label">抖音续火苗</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 食材排敏进度 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><span class="icon-dot lavender"></span>食材排敏进度</div>
+        </div>
+        <div class="allergy-progress-ring">
+          <svg class="ring-svg" width="80" height="80" viewBox="0 0 80 80">
+            <circle cx="40" cy="40" r="32" fill="none" stroke="var(--border)" stroke-width="8"/>
+            <circle id="allergyRing" cx="40" cy="40" r="32" fill="none" stroke="var(--accent-lavender)" stroke-width="8"
+              stroke-dasharray="0 201" stroke-linecap="round" transform="rotate(-90 40 40)"/>
+            <text x="40" y="36" text-anchor="middle" fill="var(--text-primary)" font-size="16" font-weight="700" id="allergyCount">0</text>
+            <text x="40" y="52" text-anchor="middle" fill="var(--text-muted)" font-size="10">已排敏</text>
+          </svg>
+          <div class="allergy-stats">
+            <div>总计尝试：<strong id="allergyTotal">0</strong> 种</div>
+            <div>排敏成功：<strong id="allergyDone">0</strong> 种</div>
+            <div style="margin-top:4px;font-size:var(--font-xs);color:var(--text-muted)">当前已排敏：鳕鱼、虾泥</div>
+          </div>
+        </div>
+        <button class="btn btn-outline btn-sm" style="margin-top:10px" onclick="switchPage('life')">前往辅食管理 →</button>
+      </div>
+    </div>
+
+    <!-- ========== 学习板块 ========== -->
+    <div class="page" id="page-study">
+      <div class="page-header">
+        <h1>📚 学习</h1>
+        <div class="subtitle">3S英语亲子启蒙 · 个人技能库</div>
+      </div>
+
+      <div class="sub-tabs">
+        <button class="sub-tab active" onclick="switchStudyTab('english')">3S英语启蒙</button>
+        <button class="sub-tab" onclick="switchStudyTab('skills')">个人技能库</button>
+      </div>
+
+      <!-- 3S英语亲子启蒙 -->
+      <div id="study-english">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title"><span class="icon-dot blue"></span><span id="sceneName">加载中...</span></div>
+            <span style="font-size:var(--font-xs);color:var(--text-muted)" id="sceneCycle"></span>
+          </div>
+          <div style="margin-bottom:12px">
+            <div style="font-size:var(--font-sm);font-weight:600;color:var(--accent-blue);margin-bottom:8px">📝 核心词汇（中英对照）</div>
+            <div class="word-grid" id="wordGrid"></div>
+          </div>
+          <div>
+            <div style="font-size:var(--font-sm);font-weight:600;color:var(--accent-rose);margin-bottom:8px">💬 日常对话</div>
+            <div id="dialogLines"></div>
+          </div>
+          <div class="manual-entry" style="margin-top:14px">
+            <div style="font-size:var(--font-xs);color:var(--text-muted);margin-bottom:6px">AI每3天自动轮换场景（农场→超市→小区→…），也可手动生成</div>
+            <button class="btn btn-outline btn-sm" onclick="generateEnglishScene()">🔄 立即生成新场景</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 个人技能库 -->
+      <div id="study-skills" style="display:none">
+        <div class="card">
+          <div class="card-title" style="margin-bottom:12px"><span class="icon-dot warm"></span>Adobe Express（医药海报）</div>
+          <div class="btn-group">
+            <label class="btn btn-outline btn-sm" style="cursor:pointer">📁 上传原文件<input type="file" style="display:none" onchange="handleUpload(this, 'Adobe Express 医药海报')"></label>
+            <button class="btn btn-outline btn-sm" onclick="pasteText('Adobe Express 医药海报')">📋 粘贴文字</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title" style="margin-bottom:12px"><span class="icon-dot warm"></span>Venngage（专利制图操作手册）</div>
+          <div class="btn-group">
+            <label class="btn btn-outline btn-sm" style="cursor:pointer">📁 上传原文件<input type="file" style="display:none" onchange="handleUpload(this, 'Venngage 专利制图')"></label>
+            <button class="btn btn-outline btn-sm" onclick="pasteText('Venngage 专利制图')">📋 粘贴文字</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title" style="margin-bottom:12px"><span class="icon-dot warm"></span>Notion & 飞书工作台搭建流程</div>
+          <div class="btn-group">
+            <label class="btn btn-outline btn-sm" style="cursor:pointer">📁 上传原文件<input type="file" style="display:none" onchange="handleUpload(this, 'Notion&飞书工作台')"></label>
+            <button class="btn btn-outline btn-sm" onclick="pasteText('Notion&飞书工作台')">📋 粘贴文字</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title" style="margin-bottom:12px"><span class="icon-dot warm"></span>CiteSpace + Vosviewer 文献计量笔记</div>
+          <div class="btn-group">
+            <label class="btn btn-outline btn-sm" style="cursor:pointer">📁 上传原文件<input type="file" style="display:none" onchange="handleUpload(this, 'CiteSpace+Vosviewer')"></label>
+            <button class="btn btn-outline btn-sm" onclick="pasteText('CiteSpace+Vosviewer')">📋 粘贴文字</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 科研板块 ========== -->
+    <div class="page" id="page-research">
+      <div class="page-header">
+        <h1>🔬 科研工作台</h1>
+        <div class="subtitle">分级文献 · Python代码 · 论文章节 · 辅助资料</div>
+      </div>
+
+      <div class="sub-tabs">
+        <button class="sub-tab active" onclick="switchResearchTab('literature')">📁 分级文献</button>
+        <button class="sub-tab" onclick="switchResearchTab('code')">🐍 Python代码</button>
+        <button class="sub-tab" onclick="switchResearchTab('thesis')">📝 论文章节</button>
+        <button class="sub-tab" onclick="switchResearchTab('aux')">📎 辅助资料</button>
+      </div>
+
+      <!-- ===== 子模块一：分级文献管理（三个空文件夹） ===== -->
+      <div class="card" id="research-literature">
+        <div class="card-title" style="margin-bottom:4px"><span class="icon-dot rose"></span>分级文献管理</div>
+        <div style="font-size:var(--font-xs);color:var(--text-muted);margin-bottom:14px">纯文献存放区，上传真实PDF文献文件</div>
+
+        <!-- 五星级精读 -->
+        <div class="folder-card">
+          <div class="folder-header">
+            <span style="font-size:var(--font-md);font-weight:600">📁 五星级精读文献</span>
+            <span style="font-size:var(--font-xs);color:var(--text-muted)">深度精读文献</span>
+          </div>
+          <div style="font-size:var(--font-xs);color:var(--text-muted);margin-bottom:8px">理解领域原理脉络的核心文献</div>
+          <ul class="file-list" id="fiveStarList">
+            <li class="file-item file-empty">暂无文献，点击下方按钮上传</li>
+          </ul>
+          <label class="upload-btn-green">
+            🟢 上传原文件（支持图片/文档/PDF/代码）
+            <input type="file" style="display:none" multiple onchange="handleFolderUpload(this, '五星级精读文献')">
+          </label>
+        </div>
+
+        <!-- 四星级验证 -->
+        <div class="folder-card">
+          <div class="folder-header">
+            <span style="font-size:var(--font-md);font-weight:600">📁 四星级验证文献</span>
+            <span style="font-size:var(--font-xs);color:var(--text-muted)">核心方法验证文献</span>
+          </div>
+          <div style="font-size:var(--font-xs);color:var(--text-muted);margin-bottom:8px">方法复现与验证相关的关键文献</div>
+          <ul class="file-list" id="fourStarList">
+            <li class="file-item file-empty">暂无文献，点击下方按钮上传</li>
+          </ul>
+          <label class="upload-btn-green">
+            🟢 上传原文件（支持图片/文档/PDF/代码）
+            <input type="file" style="display:none" multiple onchange="handleFolderUpload(this, '四星级验证文献')">
+          </label>
+        </div>
+
+        <!-- 三星级泛读 -->
+        <div class="folder-card">
+          <div class="folder-header">
+            <span style="font-size:var(--font-md);font-weight:600">📁 三星级泛读扩展</span>
+            <span style="font-size:var(--font-xs);color:var(--text-muted)">背景综述文献</span>
+          </div>
+          <div style="font-size:var(--font-xs);color:var(--text-muted);margin-bottom:8px">拓展视野、了解行业背景的综述类文献</div>
+          <ul class="file-list" id="threeStarList">
+            <li class="file-item file-empty">暂无文献，点击下方按钮上传</li>
+          </ul>
+          <label class="upload-btn-green">
+            🟢 上传原文件（支持图片/文档/PDF/代码）
+            <input type="file" style="display:none" multiple onchange="handleFolderUpload(this, '三星级泛读扩展')">
+          </label>
+        </div>
+      </div>
+
+      <!-- ===== 子模块二：Python完整代码入口 ===== -->
+      <div class="card" id="research-code" style="display:none">
+        <div class="card-title" style="margin-bottom:4px"><span class="icon-dot blue"></span>Python完整代码入口</div>
+        <div style="font-size:var(--font-xs);color:var(--text-muted);margin-bottom:14px">全部代码脚本统一上传管理</div>
+        <ul class="file-list" id="pyFileList">
+          <li class="file-item file-empty">暂无文件，点击下方按钮上传</li>
+        </ul>
+        <label class="upload-btn-green">
+          🟢 上传原文件（支持 .py / .txt / .ipynb 等）
+          <input type="file" style="display:none" multiple onchange="handleFolderUpload(this, 'Python代码')">
+        </label>
+      </div>
+
+      <!-- ===== 子模块三：论文各章节正文与框架 ===== -->
+      <div class="card" id="research-thesis" style="display:none">
+        <div class="card-title" style="margin-bottom:4px"><span class="icon-dot sage"></span>论文各章节正文与框架</div>
+        <div style="font-size:var(--font-xs);color:var(--text-muted);margin-bottom:14px">MD原始文件归档</div>
+
+        <!-- 论文框架版本管理 -->
+        <div class="folder-card">
+          <div class="folder-header">
+            <span style="font-size:var(--font-md);font-weight:600">📁 论文框架版本管理</span>
+          </div>
+          <div style="font-size:var(--font-xs);color:var(--text-muted);margin-bottom:8px">框架1.0、框架选取依据、框架内容扩充与理解、常规框架与创新框架</div>
+          <ul class="file-list" id="frameworkList">
+            <li class="file-item file-empty">暂无文件，点击下方按钮上传</li>
+          </ul>
+          <label class="upload-btn-green">
+            🟢 上传原文件（支持图片/文档/PDF/代码）
+            <input type="file" style="display:none" multiple onchange="handleFolderUpload(this, '论文框架版本管理')">
+          </label>
+        </div>
+
+        <!-- 各章节正文存档 -->
+        <div class="folder-card">
+          <div class="folder-header">
+            <span style="font-size:var(--font-md);font-weight:600">📁 各章节正文存档</span>
+          </div>
+          <div style="font-size:var(--font-xs);color:var(--text-muted);margin-bottom:8px">第1章~第8章正文MD文件</div>
+          <ul class="file-list" id="chaptersList">
+            <li class="file-item file-empty">暂无文件，点击下方按钮上传</li>
+          </ul>
+          <label class="upload-btn-green">
+            🟢 上传原文件（支持图片/文档/PDF/代码）
+            <input type="file" style="display:none" multiple onchange="handleFolderUpload(this, '各章节正文存档')">
+          </label>
+        </div>
+      </div>
+
+      <!-- ===== 子模块四：辅助说明与基础资料文件 ===== -->
+      <div class="card" id="research-aux" style="display:none">
+        <div class="card-title" style="margin-bottom:4px"><span class="icon-dot warm"></span>辅助说明与基础资料文件</div>
+        <div style="font-size:var(--font-xs);color:var(--text-muted);margin-bottom:14px">MD基础资料集中管理</div>
+        <ul class="file-list" id="auxFileList">
+          <li class="file-item file-empty">暂无文件，点击下方按钮上传</li>
+        </ul>
+        <label class="upload-btn-green">
+          🟢 上传原文件（支持图片/文档/PDF/代码）
+          <input type="file" style="display:none" multiple onchange="handleFolderUpload(this, '辅助说明与基础资料')">
+        </label>
+      </div>
+    </div>
+
+    <!-- ========== 生活板块 ========== -->
+    <div class="page" id="page-life">
+      <div class="page-header">
+        <h1>💝 生活</h1>
+        <div class="subtitle">育儿辅食 · 成长台账 · 英语存档</div>
+      </div>
+
+      <div class="sub-tabs">
+        <button class="sub-tab active" onclick="switchLifeTab('food')">辅食与记录</button>
+        <button class="sub-tab" onclick="switchLifeTab('growth')">成长台账</button>
+        <button class="sub-tab" onclick="switchLifeTab('eng-archive')">英语存档</button>
+      </div>
+
+      <!-- 辅食与记录 -->
+      <div id="life-food">
+        <!-- AI辅食方案推荐 -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title"><span class="icon-dot rose"></span>AI每日辅食方案</div>
+            <span style="font-size:var(--font-xs);color:var(--text-muted)">参考：崔玉涛体系+卫健委指南</span>
+          </div>
+          <div style="font-size:var(--font-sm);color:var(--text-secondary);margin-bottom:10px">
+            👶 宝宝：生理8月龄 · 辅食龄约2个月 · 已排敏：鳕鱼、虾泥
+          </div>
+          <div id="recipeContent">
+            <div style="text-align:center;padding:20px;color:var(--text-muted)">
+              <div class="spinner" style="margin:0 auto 8px"></div>
+              <div>AI正在生成今日辅食方案...</div>
+            </div>
+          </div>
+          <button class="btn btn-outline btn-sm" style="margin-top:10px" onclick="generateRecipe()">🔄 重新生成方案</button>
+        </div>
+
+        <!-- 辅食方案对比 -->
+        <div class="card">
+          <div class="card-title" style="margin-bottom:12px"><span class="icon-dot warm"></span>辅食方案对比记录</div>
+          <textarea id="foodCompare" placeholder="记录不同辅食方案的对比观察...&#10;如：方案A（鳕鱼+胡萝卜泥）vs 方案B（虾泥+南瓜泥），宝宝接受度、排便情况等"></textarea>
+          <button class="btn btn-primary btn-sm" style="margin-top:8px" onclick="saveFoodCompare()">保存对比记录</button>
+        </div>
+
+        <!-- 排便记录 -->
+        <div class="card">
+          <div class="card-title" style="margin-bottom:12px"><span class="icon-dot sage"></span>排便 & 绿便判断记录</div>
+          <div class="input-row" style="margin-bottom:8px">
+            <div class="input-group" style="flex:1">
+              <label>今日排便次数</label>
+              <input type="number" id="stoolCount" min="0" placeholder="如 2">
+            </div>
+            <div class="input-group" style="flex:1">
+              <label>颜色是否异常</label>
+              <select id="stoolColor" style="width:100%;padding:10px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:var(--font-md);background:#fff">
+                <option value="normal">正常</option>
+                <option value="green">绿便</option>
+                <option value="other">其他异常</option>
+              </select>
+            </div>
+          </div>
+          <button class="btn btn-primary btn-sm" onclick="saveStoolRecord()">记录今日排便</button>
+          <div id="stoolHistory" style="margin-top:10px;font-size:var(--font-xs);color:var(--text-secondary)"></div>
+        </div>
+
+        <!-- 食材排敏管理 -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title"><span class="icon-dot lavender"></span>食材排敏管理</div>
+          </div>
+          <div class="input-row" style="margin-bottom:8px">
+            <input type="text" id="newFood" placeholder="输入新食材名称" style="flex:1">
+            <button class="btn btn-primary btn-sm" onclick="addFoodTrial()">添加尝试</button>
+          </div>
+          <div id="foodAllergyList" style="font-size:var(--font-sm)"></div>
+        </div>
+      </div>
+
+      <!-- 成长台账 -->
+      <div id="life-growth" style="display:none">
+        <div class="card">
+          <div class="card-title" style="margin-bottom:12px"><span class="icon-dot rose"></span>身高体重成长台账</div>
+          <div style="font-size:var(--font-sm);color:var(--text-muted);margin-bottom:10px">
+            📌 与首页数据实时联动，录入后自动同步
+          </div>
+          <div style="overflow-x:auto">
+            <table style="width:100%;border-collapse:collapse;font-size:var(--font-xs)">
+              <thead>
+                <tr style="background:var(--bg-sidebar)">
+                  <th style="padding:8px;text-align:left">日期</th>
+                  <th style="padding:8px">体重(kg)</th>
+                  <th style="padding:8px">身高(cm)</th>
+                  <th style="padding:8px">操作</th>
+                </tr>
+              </thead>
+              <tbody id="growthTableBody"></tbody>
+            </table>
+          </div>
+          <div id="growthEmpty" style="text-align:center;padding:20px;color:var(--text-muted);font-size:var(--font-sm)">暂无数据，请在首页录入</div>
+        </div>
+      </div>
+
+      <!-- 英语存档 -->
+      <div id="life-eng-archive" style="display:none">
+        <div class="card">
+          <div class="card-title" style="margin-bottom:12px"><span class="icon-dot blue"></span>3S英语场景词库与对话存档</div>
+          <div style="font-size:var(--font-sm);color:var(--text-muted);margin-bottom:10px">
+            📌 学习板块AI生成内容的二次备份库
+          </div>
+          <div id="engArchiveList"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 热点板块 ========== -->
+    <div class="page" id="page-hotspot">
+      <div class="page-header">
+        <h1>🔥 行业热点</h1>
+        <div class="subtitle">AI联网抓取 · 医用成像器械专利转化 · ML预测 · LDA · SHAP</div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><span class="icon-dot rose"></span>AI智能摘要</div>
+          <button class="btn btn-outline btn-sm" onclick="fetchHotspots()">🔄 刷新抓取</button>
+        </div>
+        <div id="hotspotContent">
+          <div style="text-align:center;padding:20px;color:var(--text-muted)">
+            <div class="spinner" style="margin:0 auto 8px"></div>
+            <div>AI正在联网搜索行业动态...</div>
+          </div>
+        </div>
+        <div style="font-size:var(--font-xs);color:var(--text-muted);margin-top:8px">
+          基于科研方向：医用成像器械专利转化、机器学习预测、LDA主题建模、SHAP可解释性
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title" style="margin-bottom:12px"><span class="icon-dot warm"></span>手动补充热点</div>
+        <textarea id="manualHotspot" placeholder="粘贴今日行业热点...&#10;支持多行，每条热点用空行分隔"></textarea>
+        <button class="btn btn-primary btn-sm" style="margin-top:8px" onclick="saveManualHotspot()">保存热点</button>
+        <div id="manualHotspotList" style="margin-top:10px"></div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- Rename Modal -->
+<div class="modal-overlay" id="renameModal" style="display:none">
+  <div class="modal-box">
+    <h3>重命名文件</h3>
+    <input type="text" id="renameInput" placeholder="输入新文件名">
+    <div class="btn-group">
+      <button class="btn btn-primary btn-sm" onclick="confirmRename()">确认</button>
+      <button class="btn btn-outline btn-sm" onclick="closeRename()">取消</button>
+    </div>
+  </div>
+</div>
+
+<!-- Paste Modal -->
+<div class="modal-overlay" id="pasteModal" style="display:none">
+  <div class="modal-box">
+    <h3 id="pasteModalTitle">粘贴文字</h3>
+    <textarea id="pasteTextarea" placeholder="在此粘贴文字内容..."></textarea>
+    <div class="btn-group">
+      <button class="btn btn-primary btn-sm" onclick="confirmPaste()">保存</button>
+      <button class="btn btn-outline btn-sm" onclick="closePaste()">取消</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script>
+// ==================== GLOBAL STATE ====================
+const STORAGE_KEY = 'morandi_workbench';
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : getDefaultState();
+  } catch(e) { return getDefaultState(); }
+}
+
+function getDefaultState() {
+  return {
+    papers: 0,
+    paperGoal: 50,
+    tasks: { taobao: false, douyin: false },
+    growthData: [], // [{date, weight, height, hc}]
+    foodAllergies: [
+      { name: '鳕鱼', status: 'done', date: '2026-07-20' },
+      { name: '虾泥', status: 'done', date: '2026-07-25' }
+    ],
+    stoolRecords: [], // [{date, count, color}]
+    foodCompare: '',
+    mdFiles: getDefaultMDFiles(),  // keep for backward compat
+    // Research module — 4 sub-modules (all folder-upload based, no preset file lists)
+    folderUploads: {
+      '五星级精读文献': [], '四星级验证文献': [], '三星级泛读扩展': [],
+      'Python代码': [], '论文框架版本管理': [], '各章节正文存档': [],
+      '辅助说明与基础资料': []
+    },
+    englishScenes: [],
+    manualHotspots: [],
+    lastHotspotFetch: null,
+    lastSceneDate: null,
+    currentSceneIndex: 0,
+    skillNotes: {}
+  };
+}
+
+function getDefaultMDFiles() { return []; }  // legacy placeholder
+
+function saveState(state) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+
+let state = loadState();
+
+// ==================== NAVIGATION ====================
+function switchPage(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  document.querySelector(`[data-page="${page}"]`).classList.add('active');
+
+  if (page === 'home') {
+    renderHome();
+  } else if (page === 'life') {
+    renderGrowthTable();
+    renderStoolHistory();
+    renderFoodAllergyList();
+    renderEngArchive();
+  }
+}
+
+// ==================== TOAST ====================
+function showToast(msg) {
+  const t = document.createElement('div');
+  t.className = 'toast';
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 2500);
+}
+
+// ==================== HOME ====================
+function renderHome() {
+  // Date
+  const now = new Date();
+  document.getElementById('todayDate').textContent =
+    now.getFullYear() + '年' + (now.getMonth()+1) + '月' + now.getDate() + '日 ' +
+    ['日','一','二','三','四','五','六'][now.getDay()] + '曜日';
+
+  // Papers
+  updatePaperUI();
+
+  // Tasks
+  updateTaskUI();
+
+  // Growth chart
+  renderGrowthChart();
+
+  // Allergy progress
+  updateAllergyProgress();
+}
+
+function updatePaperUI() {
+  const pct = Math.min(100, Math.round(state.papers / state.paperGoal * 100));
+  document.getElementById('paperCount').textContent = state.papers + ' / ' + state.paperGoal;
+  document.getElementById('paperProgress').style.width = pct + '%';
+}
+
+function addPaper() {
+  if (state.papers < state.paperGoal) {
+    state.papers++;
+    saveState(state);
+    updatePaperUI();
+    showToast('已精读 ' + state.papers + ' 篇');
+  } else {
+    showToast('🎉 已达成目标！');
+  }
+}
+
+function removePaper() {
+  if (state.papers > 0) {
+    state.papers--;
+    saveState(state);
+    updatePaperUI();
+    showToast('已撤回，当前 ' + state.papers + ' 篇');
+  }
+}
+
+// ==================== TASKS ====================
+function updateTaskUI() {
+  const keys = ['taobao', 'douyin'];
+  let done = 0;
+  keys.forEach(k => {
+    const el = document.querySelector(`[data-task="${k}"]`);
+    const label = el.nextElementSibling;
+    if (state.tasks[k]) {
+      el.classList.add('done');
+      label.classList.add('done');
+      done++;
+    } else {
+      el.classList.remove('done');
+      label.classList.remove('done');
+    }
+  });
+  const pct = Math.round(done / keys.length * 100);
+  document.getElementById('taskPercent').textContent = pct + '%';
+  document.getElementById('taskProgressBar').style.width = pct + '%';
+}
+
+function toggleTask(key) {
+  state.tasks[key] = !state.tasks[key];
+  saveState(state);
+  updateTaskUI();
+}
+
+// ==================== GROWTH CHART ====================
+let growthChartInstance = null;
+
+// WHO standards for 8-month-old (median, for reference)
+const WHO_REF = {
+  months: [0,1,2,3,4,5,6,7,8,9,10,11,12],
+  weight_m:  [3.3,4.5,5.6,6.4,7.0,7.5,7.9,8.3,8.6,8.9,9.2,9.4,9.6], // kg, male median
+  weight_f:  [3.2,4.2,5.1,5.8,6.4,6.9,7.3,7.6,7.9,8.2,8.5,8.7,8.9],
+  height_m:  [49.9,54.7,58.4,61.4,63.9,65.9,67.6,69.2,70.6,72.0,73.3,74.5,75.7], // cm
+  height_f:  [49.1,53.7,57.1,59.8,62.1,64.0,65.7,67.3,68.7,70.1,71.5,72.8,74.0]
+};
+
+function addGrowthData() {
+  const w = parseFloat(document.getElementById('inputWeight').value);
+  const h = parseFloat(document.getElementById('inputHeight').value);
+  if (!w && !h) return;
+
+  const now = new Date();
+  const today = now.toISOString().split('T')[0];
+  const timestamp = now.toISOString(); // 精确到毫秒，确保每次录入都是独立记录
+
+  // 追加模式：每次录入都作为新记录追加，不覆盖历史数据
+  state.growthData.push({
+    date: today,
+    timestamp: timestamp,
+    weight: w || null,
+    height: h || null
+  });
+
+  // 按时间戳排序（同一天多次录入按录入顺序排列）
+  state.growthData.sort((a, b) => a.timestamp.localeCompare(b.timestamp));
+  saveState(state);
+  renderGrowthChart();
+  renderGrowthTable();
+  updatePercentile();
+
+  document.getElementById('inputWeight').value = '';
+  document.getElementById('inputHeight').value = '';
+  showToast('生长数据已保存 ✓（第 ' + state.growthData.length + ' 条记录）');
+}
+
+function updatePercentile() {
+  const latest = state.growthData[state.growthData.length - 1];
+  if (!latest || (!latest.weight && !latest.height)) {
+    document.getElementById('growthPercentile').textContent = '8月龄';
+    return;
+  }
+
+  const ageMonths = 8;
+  const refW = WHO_REF.weight_m[ageMonths];
+  const refH = WHO_REF.height_m[ageMonths];
+
+  let parts = [];
+  if (latest.weight && refW) {
+    const pct = Math.round(latest.weight / refW * 100);
+    parts.push('体重 ' + pct + '%');
+  }
+  if (latest.height && refH) {
+    const pct = Math.round(latest.height / refH * 100);
+    parts.push('身高 ' + pct + '%');
+  }
+
+  document.getElementById('growthPercentile').textContent =
+    '8月龄 · ' + (parts.length ? parts.join(' · ') + '水平' : '8月龄');
+}
+
+function renderGrowthChart() {
+  const canvas = document.getElementById('growthChart');
+  const ctx = canvas.getContext('2d');
+
+  if (growthChartInstance) growthChartInstance.destroy();
+
+  if (state.growthData.length === 0) {
+    // Show reference only
+    const labels = WHO_REF.months.map(m => m + '月');
+    growthChartInstance = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: 'WHO体重参考(kg)',
+            data: WHO_REF.weight_m,
+            borderColor: '#c4a8a2',
+            backgroundColor: 'transparent',
+            borderDash: [5,5],
+            borderWidth: 1.5,
+            pointRadius: 0,
+            tension: 0.3,
+            yAxisID: 'y'
+          },
+          {
+            label: 'WHO身高参考(cm)',
+            data: WHO_REF.height_m,
+            borderColor: '#a3b5a6',
+            backgroundColor: 'transparent',
+            borderDash: [5,5],
+            borderWidth: 1.5,
+            pointRadius: 0,
+            tension: 0.3,
+            yAxisID: 'y1'
+          }
+        ]
+      },
+      options: getChartOptions()
+    });
+  } else {
+    // Use all records directly — each record gets its own data point
+    // Labels: date + index for same-day entries
+    const records = state.growthData;
+    const labels = records.map((d, i) => {
+      // If same date appears multiple times, append #N
+      const sameDay = records.filter(r => r.date === d.date);
+      if (sameDay.length > 1) {
+        const idx = sameDay.indexOf(d) + 1;
+        return d.date + '#' + idx;
+      }
+      return d.date;
+    });
+    const weightData = records.map(d => d.weight);
+    const heightData = records.map(d => d.height);
+
+    // Pad WHO data to match
+    const whoWeight = WHO_REF.weight_m;
+    const whoHeight = WHO_REF.height_m;
+
+    growthChartInstance = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: '宝宝体重(kg)',
+            data: weightData,
+            borderColor: '#c4a8a2',
+            backgroundColor: 'rgba(196,168,162,0.1)',
+            borderWidth: 2.5,
+            pointRadius: 4,
+            pointBackgroundColor: '#c4a8a2',
+            tension: 0.3,
+            spanGaps: false,
+            yAxisID: 'y'
+          },
+          {
+            label: '宝宝身高(cm)',
+            data: heightData,
+            borderColor: '#a3b5a6',
+            backgroundColor: 'rgba(163,181,166,0.1)',
+            borderWidth: 2.5,
+            pointRadius: 4,
+            pointBackgroundColor: '#a3b5a6',
+            tension: 0.3,
+            spanGaps: false,
+            yAxisID: 'y1'
+          },
+          {
+            label: 'WHO体重参考',
+            data: whoWeight,
+            borderColor: '#d4c4be',
+            borderDash: [4,4],
+            borderWidth: 1,
+            pointRadius: 0,
+            tension: 0.3,
+            yAxisID: 'y'
+          },
+          {
+            label: 'WHO身高参考',
+            data: whoHeight,
+            borderColor: '#c8d6c9',
+            borderDash: [4,4],
+            borderWidth: 1,
+            pointRadius: 0,
+            tension: 0.3,
+            yAxisID: 'y1'
+          }
+        ]
+      },
+      options: getChartOptions()
+    });
+  }
+}
+
+function getChartOptions() {
+  return {
+    responsive: true,
+    maintainAspectRatio: false,
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: {
+        position: 'top',
+        labels: {
+          boxWidth: 12,
+          padding: 10,
+          font: { size: 10 },
+          usePointStyle: true,
+          color: '#8b7a6b'
+        }
+      }
+    },
+    scales: {
+      x: {
+        ticks: { font: { size: 9 }, color: '#b0a090', maxRotation: 45 },
+        grid: { display: false }
+      },
+      y: {
+        type: 'linear',
+        position: 'left',
+        title: { display: true, text: '体重(kg)', font: { size: 10 }, color: '#c4a8a2' },
+        ticks: { font: { size: 9 }, color: '#b0a090' },
+        grid: { color: '#f0ebe3' },
+        min: 0
+      },
+      y1: {
+        type: 'linear',
+        position: 'right',
+        title: { display: true, text: '身高(cm)', font: { size: 10 }, color: '#a3b5a6' },
+        ticks: { font: { size: 9 }, color: '#b0a090' },
+        grid: { drawOnChartArea: false },
+        min: 40
+      }
+    }
+  };
+}
+
+// ==================== ALLERGY PROGRESS ====================
+function updateAllergyProgress() {
+  const total = state.foodAllergies.length;
+  const done = state.foodAllergies.filter(f => f.status === 'done').length;
+  const pct = total > 0 ? Math.round(done / total * 100) : 0;
+
+  document.getElementById('allergyCount').textContent = done;
+  document.getElementById('allergyTotal').textContent = total;
+  document.getElementById('allergyDone').textContent = done;
+
+  const circumference = 2 * Math.PI * 32; // ~201
+  const dash = circumference * pct / 100;
+  document.getElementById('allergyRing').setAttribute('stroke-dasharray', dash + ' ' + circumference);
+}
+
+function addFoodTrial() {
+  const name = document.getElementById('newFood').value.trim();
+  if (!name) return;
+  state.foodAllergies.push({
+    name: name,
+    status: 'trying',
+    date: new Date().toISOString().split('T')[0]
+  });
+  document.getElementById('newFood').value = '';
+  saveState(state);
+  updateAllergyProgress();
+  renderFoodAllergyList();
+  showToast('已添加：' + name + '（尝试中）');
+}
+
+function toggleFoodStatus(index) {
+  const food = state.foodAllergies[index];
+  food.status = food.status === 'done' ? 'trying' : 'done';
+  if (food.status === 'done') food.date = new Date().toISOString().split('T')[0];
+  saveState(state);
+  updateAllergyProgress();
+  renderFoodAllergyList();
+  showToast(food.name + '：' + (food.status === 'done' ? '排敏成功 ✓' : '尝试中'));
+}
+
+function deleteFood(index) {
+  const name = state.foodAllergies[index].name;
+  state.foodAllergies.splice(index, 1);
+  saveState(state);
+  updateAllergyProgress();
+  renderFoodAllergyList();
+  showToast('已删除：' + name);
+}
+
+function renderFoodAllergyList() {
+  const container = document.getElementById('foodAllergyList');
+  if (state.foodAllergies.length === 0) {
+    container.innerHTML = '<div style="color:var(--text-muted);padding:8px">暂无食材记录</div>';
+    return;
+  }
+  container.innerHTML = state.foodAllergies.map((f, i) => `
+    <div class="task-item">
+      <div class="task-check ${f.status === 'done' ? 'done' : ''}" onclick="toggleFoodStatus(${i})"></div>
+      <span class="task-label ${f.status === 'done' ? 'done' : ''}">${f.name}</span>
+      <span style="font-size:var(--font-xs);color:var(--text-muted)">${f.date}</span>
+      <button class="btn btn-outline btn-sm" style="padding:2px 8px;font-size:10px" onclick="deleteFood(${i})">✕</button>
+    </div>
+  `).join('');
+}
+
+// ==================== STOOL RECORDS ====================
+function saveStoolRecord() {
+  const count = parseInt(document.getElementById('stoolCount').value) || 0;
+  const color = document.getElementById('stoolColor').value;
+  const today = new Date().toISOString().split('T')[0];
+
+  const existing = state.stoolRecords.find(r => r.date === today);
+  if (existing) {
+    existing.count = count;
+    existing.color = color;
+  } else {
+    state.stoolRecords.push({ date: today, count, color });
+  }
+  state.stoolRecords.sort((a,b) => b.date.localeCompare(a.date));
+  saveState(state);
+  renderStoolHistory();
+  document.getElementById('stoolCount').value = '';
+  showToast('排便记录已保存');
+}
+
+function renderStoolHistory() {
+  const container = document.getElementById('stoolHistory');
+  if (state.stoolRecords.length === 0) {
+    container.innerHTML = '<div style="padding:4px">暂无记录</div>';
+    return;
+  }
+  container.innerHTML = '<div style="font-weight:500;margin-bottom:4px">历史记录：</div>' +
+    state.stoolRecords.slice(0, 10).map(r => `
+      <div style="padding:4px 0;border-bottom:1px solid var(--border)">
+        ${r.date} · ${r.count}次 · ${r.color === 'normal' ? '正常' : r.color === 'green' ? '⚠️ 绿便' : '⚠️ 异常'}
+      </div>
+    `).join('');
+}
+
+// ==================== FOOD COMPARE ====================
+function saveFoodCompare() {
+  state.foodCompare = document.getElementById('foodCompare').value;
+  saveState(state);
+  showToast('辅食对比记录已保存');
+}
+
+// ==================== GROWTH TABLE ====================
+function renderGrowthTable() {
+  const tbody = document.getElementById('growthTableBody');
+  const empty = document.getElementById('growthEmpty');
+
+  if (state.growthData.length === 0) {
+    tbody.innerHTML = '';
+    empty.style.display = 'block';
+    return;
+  }
+  empty.style.display = 'none';
+  tbody.innerHTML = state.growthData.slice().reverse().map((d, i) => `
+    <tr style="border-bottom:1px solid var(--border)">
+      <td style="padding:8px">${d.date}</td>
+      <td style="padding:8px;text-align:center">${d.weight ?? '-'}</td>
+      <td style="padding:8px;text-align:center">${d.height ?? '-'}</td>
+      <td style="padding:8px;text-align:center">
+        <button class="btn btn-outline btn-sm" style="padding:2px 8px;font-size:10px"
+          onclick="deleteGrowthRecord(${state.growthData.length - 1 - i})">删除</button>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function deleteGrowthRecord(index) {
+  state.growthData.splice(index, 1);
+  saveState(state);
+  renderGrowthTable();
+  renderGrowthChart();
+  updatePercentile();
+  showToast('记录已删除');
+}
+
+// ==================== ENGLISH SCENE ====================
+const SCENE_POOL = [
+  {
+    name: '农场',
+    words: [
+      ['cow', '奶牛'], ['pig', '猪'], ['sheep', '绵羊'], ['horse', '马'],
+      ['chicken', '鸡'], ['duck', '鸭子'], ['tractor', '拖拉机'], ['barn', '谷仓'],
+      ['fence', '栅栏'], ['hay', '干草'], ['farmer', '农夫'], ['egg', '鸡蛋'],
+      ['milk', '牛奶'], ['field', '田野'], ['scarecrow', '稻草人'],
+      ['goat', '山羊'], ['rooster', '公鸡'], ['pond', '池塘']
+    ],
+    dialogs: [
+      ['Mom', 'Look, there\'s a cow! Can you say "moo"?'],
+      ['Baby', 'Moo! Moo!'],
+      ['Mom', 'Yes! The cow says moo. What color is the cow?'],
+      ['Baby', 'White... and black!'],
+      ['Mom', 'Great job! Let\'s go see the chickens now.']
+    ]
+  },
+  {
+    name: '超市',
+    words: [
+      ['cart', '购物车'], ['apple', '苹果'], ['banana', '香蕉'], ['bread', '面包'],
+      ['milk', '牛奶'], ['egg', '鸡蛋'], ['cashier', '收银员'], ['aisle', '过道'],
+      ['shelf', '货架'], ['bag', '袋子'], ['price', '价格'], ['vegetable', '蔬菜'],
+      ['fruit', '水果'], ['checkout', '结账台'], ['receipt', '小票'],
+      ['scale', '秤'], ['coupon', '优惠券'], ['freezer', '冰柜']
+    ],
+    dialogs: [
+      ['Mom', 'Let\'s get a shopping cart. Can you help me push it?'],
+      ['Baby', 'Push! Push!'],
+      ['Mom', 'We need some apples. How many should we get?'],
+      ['Baby', 'One, two, three!'],
+      ['Mom', 'Three apples! Good counting. Now let\'s find the bread.']
+    ]
+  },
+  {
+    name: '小区',
+    words: [
+      ['slide', '滑梯'], ['swing', '秋千'], ['bench', '长椅'], ['tree', '树'],
+      ['flower', '花'], ['grass', '草'], ['gate', '大门'], ['elevator', '电梯'],
+      ['stairs', '楼梯'], ['neighbor', '邻居'], ['mailbox', '信箱'], ['path', '小路'],
+      ['fountain', '喷泉'], ['dog', '狗'], ['cat', '猫'],
+      ['bicycle', '自行车'], ['bird', '鸟'], ['cloud', '云']
+    ],
+    dialogs: [
+      ['Mom', 'Let\'s go to the playground! What do you want to play first?'],
+      ['Baby', 'Slide! Slide!'],
+      ['Mom', 'Okay, let\'s go down the slide together. Ready?'],
+      ['Baby', 'Wheee!'],
+      ['Mom', 'That was fun! Now do you want to try the swing?']
+    ]
+  },
+  // Extended pool
+  {
+    name: '公园',
+    words: [
+      ['lake', '湖'], ['bridge', '桥'], ['duck', '鸭子'], ['picnic', '野餐'],
+      ['kite', '风筝'], ['balloon', '气球'], ['bench', '长椅'], ['squirrel', '松鼠'],
+      ['butterfly', '蝴蝶'], ['bicycle', '自行车'], ['jogging', '慢跑'], ['fishing', '钓鱼'],
+      ['blanket', '毯子'], ['sandwich', '三明治'], ['juice', '果汁'],
+      ['maple', '枫树'], ['paddle boat', '脚踏船'], ['statue', '雕像']
+    ],
+    dialogs: [
+      ['Mom', 'Look at the ducks in the lake! What sound do ducks make?'],
+      ['Baby', 'Quack quack!'],
+      ['Mom', 'Let\'s fly our kite. Can you hold the string?'],
+      ['Baby', 'Up, up, up!'],
+      ['Mom', 'The kite is flying so high! Great job holding on tight.']
+    ]
+  },
+  {
+    name: '医院',
+    words: [
+      ['doctor', '医生'], ['nurse', '护士'], ['stethoscope', '听诊器'], ['thermometer', '体温计'],
+      ['medicine', '药'], ['bandage', '绷带'], ['waiting room', '候诊室'], ['prescription', '处方'],
+      ['injection', '注射'], ['x-ray', 'X光'], ['wheelchair', '轮椅'], ['crutch', '拐杖'],
+      ['pill', '药片'], ['syrup', '糖浆'], ['appointment', '预约'],
+      ['pharmacy', '药房'], ['clinic', '诊所'], ['health', '健康']
+    ],
+    dialogs: [
+      ['Mom', 'The doctor will check your heartbeat. Stay still, okay?'],
+      ['Baby', 'Okay...'],
+      ['Doctor', 'Your heartbeat sounds very healthy! Now let me check your ears.'],
+      ['Mom', 'You\'re being so brave! The doctor says you\'re very healthy.'],
+      ['Baby', 'No owie?'],
+      ['Mom', 'No owie today! Let\'s get a sticker on the way out.']
+    ]
+  },
+  {
+    name: '海滩',
+    words: [
+      ['sand', '沙子'], ['wave', '波浪'], ['shell', '贝壳'], ['bucket', '桶'],
+      ['shovel', '铲子'], ['swimsuit', '泳衣'], ['sunscreen', '防晒霜'], ['towel', '毛巾'],
+      ['umbrella', '遮阳伞'], ['seagull', '海鸥'], ['crab', '螃蟹'], ['starfish', '海星'],
+      ['surfboard', '冲浪板'], ['sandcastle', '沙堡'], ['coconut', '椰子'],
+      ['sunset', '日落'], ['lighthouse', '灯塔'], ['boat', '船']
+    ],
+    dialogs: [
+      ['Mom', 'Let\'s build a sandcastle! Fill the bucket with sand.'],
+      ['Baby', 'Pat pat pat!'],
+      ['Mom', 'Now let\'s turn it over... ta-da! A castle tower!'],
+      ['Baby', 'Wow! More!'],
+      ['Mom', 'Look, a little crab is walking by. Can you see it?']
+    ]
+  }
+];
+
+function getCurrentScene() {
+  const now = new Date();
+  const startDate = new Date('2026-07-28');
+  const daysDiff = Math.floor((now - startDate) / (1000 * 60 * 60 * 24));
+  const cycleIndex = Math.floor(daysDiff / 3) % SCENE_POOL.length;
+  return SCENE_POOL[cycleIndex];
+}
+
+function renderEnglishScene() {
+  const scene = getCurrentScene();
+  const now = new Date();
+  const startDate = new Date('2026-07-28');
+  const daysDiff = Math.floor((now - startDate) / (1000 * 60 * 60 * 24));
+  const daysInCycle = daysDiff % 3;
+  const daysRemaining = 3 - daysInCycle;
+
+  document.getElementById('sceneName').textContent = '🏠 ' + scene.name + '场景';
+  document.getElementById('sceneCycle').textContent = '第' + (daysInCycle + 1) + '天 · ' + daysRemaining + '天后轮换';
+
+  document.getElementById('wordGrid').innerHTML = scene.words.map(w =>
+    `<div class="word-item"><span class="word-en">${w[0]}</span><span class="word-cn">${w[1]}</span></div>`
+  ).join('');
+
+  document.getElementById('dialogLines').innerHTML = scene.dialogs.map(d =>
+    `<div class="dialog-line"><span class="speaker">${d[0]}：</span>${d[1]}</div>`
+  ).join('');
+}
+
+function generateEnglishScene() {
+  // Force cycle to next scene
+  const now = new Date();
+  const startDate = new Date('2026-07-28');
+  const daysDiff = Math.floor((now - startDate) / (1000 * 60 * 60 * 24));
+  const currentCycle = Math.floor(daysDiff / 3);
+  const nextCycle = currentCycle + 1;
+
+  // Override by storing offset
+  state.currentSceneIndex = nextCycle % SCENE_POOL.length;
+  state.lastSceneDate = now.toISOString().split('T')[0];
+  saveState(state);
+
+  // Temporarily override getCurrentScene
+  const origGetCurrentScene = getCurrentScene;
+  // We can't easily override, so just render the next one
+  const scene = SCENE_POOL[nextCycle % SCENE_POOL.length];
+  document.getElementById('sceneName').textContent = '🏠 ' + scene.name + '场景（手动生成）';
+  document.getElementById('sceneCycle').textContent = '手动轮换 · 即日起生效';
+
+  document.getElementById('wordGrid').innerHTML = scene.words.map(w =>
+    `<div class="word-item"><span class="word-en">${w[0]}</span><span class="word-cn">${w[1]}</span></div>`
+  ).join('');
+
+  document.getElementById('dialogLines').innerHTML = scene.dialogs.map(d =>
+    `<div class="dialog-line"><span class="speaker">${d[0]}：</span>${d[1]}</div>`
+  ).join('');
+
+  // Archive the scene
+  if (!state.englishScenes) state.englishScenes = [];
+  state.englishScenes.push({
+    date: now.toISOString().split('T')[0],
+    scene: scene
+  });
+  saveState(state);
+  renderEngArchive();
+  showToast('已生成新场景：' + scene.name);
+}
+
+// ==================== RECIPE GENERATION ====================
+function generateRecipe() {
+  const container = document.getElementById('recipeContent');
+  container.innerHTML = `
+    <div style="text-align:center;padding:20px;color:var(--text-muted)">
+      <div class="spinner" style="margin:0 auto 8px"></div>
+      <div>AI正在生成今日辅食方案...</div>
+    </div>
+  `;
+
+  // Simulate AI generation based on 8-month-old, 2-month solids experience, fish/shrimp cleared
+  setTimeout(() => {
+    const recipes = [
+      {
+        day: '今日推荐',
+        meals: [
+          { type: '早', content: '高铁米粉 15g + 鳕鱼泥 10g + 胡萝卜泥 15g（已排敏鳕鱼）' },
+          { type: '午', content: '碎碎面 20g + 虾泥 10g + 西兰花泥 15g + 核桃油 2滴（已排敏虾）' },
+          { type: '晚', content: '小米粥 30g + 南瓜泥 20g + 蛋黄 1/2个' },
+          { type: '加', content: '苹果泥 20g（下午3点）' }
+        ]
+      },
+      {
+        day: '明日建议（新食材尝试）',
+        meals: [
+          { type: '早', content: '高铁米粉 15g + 鳕鱼泥 10g + 山药泥 15g（🆕山药需观察）' },
+          { type: '午', content: '大米粥 25g + 猪肉泥 10g + 菠菜泥 15g（🆕猪肉首次尝试）' },
+          { type: '晚', content: '碎碎面 20g + 虾泥 10g + 番茄泥 15g + 亚麻籽油 2滴' },
+          { type: '加', content: '香蕉泥 15g（上午10点）' }
+        ]
+      }
+    ];
+
+    container.innerHTML = recipes.map(r => `
+      <div class="recipe-day">
+        <h4>📅 ${r.day}</h4>
+        ${r.meals.map(m => `
+          <div class="recipe-meal">
+            <span class="meal-type">${m.type}</span>
+            <span class="meal-content">${m.content}</span>
+          </div>
+        `).join('')}
+      </div>
+    `).join('');
+
+    // Tips
+    container.innerHTML += `
+      <div style="font-size:var(--font-xs);color:var(--text-muted);margin-top:8px;padding:8px;background:#fdfaf6;border-radius:8px">
+        💡 <b>参考依据：</b>崔玉涛婴幼儿辅食进阶体系 + 国家卫健委《7～24月龄婴幼儿喂养指南》<br>
+        ⚠️ 新食材每次只添加1种，观察3天无过敏再换下一种<br>
+        📌 当前辅食龄约2个月，建议每餐辅食量约30-50g
+      </div>
+    `;
+  }, 1500);
+}
+
+// ==================== HOTSPOTS ====================
+function fetchHotspots() {
+  const container = document.getElementById('hotspotContent');
+  container.innerHTML = `
+    <div style="text-align:center;padding:20px;color:var(--text-muted)">
+      <div class="spinner" style="margin:0 auto 8px"></div>
+      <div>AI正在联网搜索行业动态...</div>
+    </div>
+  `;
+
+  // Generate simulated AI search results based on the research directions
+  setTimeout(() => {
+    const hotspots = [
+      {
+        tag: '政策',
+        tagClass: 'tag-policy',
+        title: '国家药监局发布《医疗器械专利转化指导意见（2026修订版）》',
+        desc: '明确医用成像器械专利转化的快速审评通道，简化II类成像设备注册流程，鼓励AI辅助诊断器械产学研协同。'
+      },
+      {
+        tag: '学术',
+        tagClass: 'tag-academic',
+        title: 'Nature Biomedical Engineering：可解释深度学习在医学影像诊断中的最新进展',
+        desc: '综述了SHAP、LIME等可解释性方法在CT/MRI影像分析中的应用，指出模型可解释性是临床转化的关键瓶颈。'
+      },
+      {
+        tag: '学术',
+        tagClass: 'tag-academic',
+        title: 'JAMA：机器学习预测模型在乳腺癌筛查中的大规模验证研究',
+        desc: '基于50万例多中心数据，验证了集成学习模型在乳腺X线摄影筛查中的AUC达到0.91，优于传统CAD系统。'
+      },
+      {
+        tag: '政策',
+        tagClass: 'tag-policy',
+        title: '科技部启动"AI+医疗器械"重点研发计划2027年度项目征集',
+        desc: '重点支持方向包括：医学影像AI辅助诊断系统、可解释性AI临床决策支持、专利技术产业化应用示范。'
+      }
+    ];
+
+    state.lastHotspotFetch = new Date().toISOString();
+    state.lastHotspots = hotspots;
+    saveState(state);
+
+    renderHotspots(hotspots);
+  }, 2000);
+}
+
+function renderHotspots(hotspots) {
+  const container = document.getElementById('hotspotContent');
+  if (!hotspots || hotspots.length === 0) {
+    container.innerHTML = '<div style="text-align:center;padding:20px;color:var(--text-muted)">点击刷新抓取热点</div>';
+    return;
+  }
+  container.innerHTML = hotspots.map(h => `
+    <div class="hotspot-item">
+      <span class="hotspot-tag ${h.tagClass}">${h.tag}</span>
+      <div class="hotspot-title">${h.title}</div>
+      <div class="hotspot-desc">${h.desc}</div>
+    </div>
+  `).join('');
+}
+
+function saveManualHotspot() {
+  const text = document.getElementById('manualHotspot').value.trim();
+  if (!text) return;
+  const items = text.split('\n\n').filter(s => s.trim());
+  items.forEach(item => {
+    state.manualHotspots.push({
+      date: new Date().toISOString().split('T')[0],
+      content: item.trim()
+    });
+  });
+  document.getElementById('manualHotspot').value = '';
+  saveState(state);
+  renderManualHotspots();
+  showToast('已保存 ' + items.length + ' 条热点');
+}
+
+function renderManualHotspots() {
+  const container = document.getElementById('manualHotspotList');
+  if (state.manualHotspots.length === 0) {
+    container.innerHTML = '';
+    return;
+  }
+  container.innerHTML = state.manualHotspots.slice(-10).reverse().map((h, i) => `
+    <div class="hotspot-item" style="border-left-color:var(--accent-warm)">
+      <span class="hotspot-tag tag-policy" style="background:#f5efe5">手动</span>
+      <span style="font-size:var(--font-xs);color:var(--text-muted)">${h.date}</span>
+      <div class="hotspot-desc" style="margin-top:4px">${h.content}</div>
+      <button class="btn btn-outline btn-sm" style="padding:2px 8px;font-size:10px;margin-top:4px"
+        onclick="deleteManualHotspot(${state.manualHotspots.length - 1 - i})">删除</button>
+    </div>
+  `).join('');
+}
+
+function deleteManualHotspot(index) {
+  state.manualHotspots.splice(index, 1);
+  saveState(state);
+  renderManualHotspots();
+}
+
+// ==================== FILE LISTS ====================
+// All research sub-modules use folder-based uploads — no preset file lists
+// Each folder card has an empty <ul> + green upload button
+
+const FOLDER_LIST_MAP = {
+  'fiveStarList': '五星级精读文献',
+  'fourStarList': '四星级验证文献',
+  'threeStarList': '三星级泛读扩展',
+  'pyFileList': 'Python代码',
+  'frameworkList': '论文框架版本管理',
+  'chaptersList': '各章节正文存档',
+  'auxFileList': '辅助说明与基础资料'
+};
+
+function renderMDFiles() {
+  renderAllFolderUploads();
+}
+
+function renderAllFolderUploads() {
+  Object.entries(FOLDER_LIST_MAP).forEach(([listId, folderName]) => {
+    const list = document.getElementById(listId);
+    if (!list) return;
+    const files = (state.folderUploads && state.folderUploads[folderName]) ? state.folderUploads[folderName] : [];
+    if (files.length === 0) {
+      list.innerHTML = '<li class="file-item file-empty">暂无文件，点击下方按钮上传</li>';
+    } else {
+      list.innerHTML = files.map((f, i) => `
+        <li class="file-item">
+          <span class="file-name">📄 ${f.name} <span style="font-size:10px;color:var(--text-muted)">(${(f.size/1024).toFixed(1)}KB)</span></span>
+          <div class="file-actions">
+            <button class="btn btn-outline btn-sm" style="padding:2px 8px;font-size:10px" onclick="removeFolderFile('${folderName.replace(/'/g, "\\'")}', ${i})">✕</button>
+          </div>
+        </li>
+      `).join('');
+    }
+  });
+}
+
+function renderPyFiles() {
+  // Now handled by renderAllFolderUploads via FOLDER_LIST_MAP
+  const list = document.getElementById('pyFileList');
+  if (!list) return;
+  const files = (state.folderUploads && state.folderUploads['Python代码']) ? state.folderUploads['Python代码'] : [];
+  if (files.length === 0) {
+    list.innerHTML = '<li class="file-item file-empty">暂无文件，点击下方按钮上传</li>';
+  }
+}
+
+// Folder upload handler
+function handleFolderUpload(input, folderName) {
+  if (input.files.length > 0) {
+    if (!state.folderUploads) state.folderUploads = {};
+    if (!state.folderUploads[folderName]) state.folderUploads[folderName] = [];
+    Array.from(input.files).forEach(file => {
+      state.folderUploads[folderName].push({
+        name: file.name,
+        size: file.size,
+        date: new Date().toISOString()
+      });
+    });
+    saveState(state);
+    renderAllFolderUploads();
+    showToast('已上传 ' + input.files.length + ' 个文件到「' + folderName + '」');
+  }
+}
+
+function removeFolderFile(folderName, index) {
+  if (state.folderUploads && state.folderUploads[folderName]) {
+    state.folderUploads[folderName].splice(index, 1);
+    saveState(state);
+    renderAllFolderUploads();
+    showToast('已移除文件');
+  }
+}
+
+// ==================== RENAME ====================
+// Rename is no longer needed for research (all folder-upload based).
+// Keep minimal stub for backward compat.
+let renameTarget = null;
+
+function startRename(type, index) {
+  // No-op: all research files are user-uploaded, rename via upload
+}
+
+function confirmRename() {
+  closeRename();
+}
+
+function closeRename() {
+  document.getElementById('renameModal').style.display = 'none';
+  renameTarget = null;
+}
+
+// ==================== PASTE ====================
+let pasteTarget = null;
+
+function pasteText(target) {
+  pasteTarget = target;
+  document.getElementById('pasteModalTitle').textContent = '粘贴文字 - ' + target;
+  document.getElementById('pasteTextarea').value = state.skillNotes?.[target] || '';
+  document.getElementById('pasteModal').style.display = 'flex';
+}
+
+function confirmPaste() {
+  if (!pasteTarget) return;
+  if (!state.skillNotes) state.skillNotes = {};
+  state.skillNotes[pasteTarget] = document.getElementById('pasteTextarea').value;
+  saveState(state);
+  closePaste();
+  showToast('笔记已保存：' + pasteTarget);
+}
+
+function closePaste() {
+  document.getElementById('pasteModal').style.display = 'none';
+  pasteTarget = null;
+}
+
+// ==================== UPLOAD ====================
+function handleUpload(input, fileName) {
+  if (input.files.length > 0) {
+    const file = input.files[0];
+    showToast('已选择：' + file.name + '（' + (file.size/1024).toFixed(1) + 'KB）\n关联：' + fileName);
+    // In a real app, this would upload to cloud storage
+    // For now, store reference in state
+    if (!state.uploads) state.uploads = {};
+    state.uploads[fileName] = {
+      name: file.name,
+      size: file.size,
+      date: new Date().toISOString()
+    };
+    saveState(state);
+  }
+}
+
+// ==================== SYNC ====================
+function syncAllData() {
+  // Simulate cloud sync
+  const overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(245,240,235,0.8);display:flex;align-items:center;justify-content:center;z-index:300';
+  overlay.innerHTML = '<div style="text-align:center"><div class="spinner" style="width:32px;height:32px;margin:0 auto 12px"></div><div style="color:var(--text-primary)">正在云端同步...</div></div>';
+  document.body.appendChild(overlay);
+
+  setTimeout(() => {
+    overlay.remove();
+    saveState(state);
+    showToast('✅ 云端同步完成');
+  }, 1200);
+}
+
+// ==================== SUB-TABS ====================
+function switchStudyTab(tab) {
+  document.querySelectorAll('#page-study .sub-tab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('study-english').style.display = tab === 'english' ? 'block' : 'none';
+  document.getElementById('study-skills').style.display = tab === 'skills' ? 'block' : 'none';
+}
+
+function switchResearchTab(tab) {
+  document.querySelectorAll('#page-research .sub-tab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('research-literature').style.display = tab === 'literature' ? 'block' : 'none';
+  document.getElementById('research-code').style.display = tab === 'code' ? 'block' : 'none';
+  document.getElementById('research-thesis').style.display = tab === 'thesis' ? 'block' : 'none';
+  document.getElementById('research-aux').style.display = tab === 'aux' ? 'block' : 'none';
+}
+
+function switchLifeTab(tab) {
+  document.querySelectorAll('#page-life .sub-tab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('life-food').style.display = tab === 'food' ? 'block' : 'none';
+  document.getElementById('life-growth').style.display = tab === 'growth' ? 'block' : 'none';
+  document.getElementById('life-eng-archive').style.display = tab === 'eng-archive' ? 'block' : 'none';
+
+  if (tab === 'growth') renderGrowthTable();
+  if (tab === 'eng-archive') renderEngArchive();
+}
+
+// ==================== ENG ARCHIVE ====================
+function renderEngArchive() {
+  const container = document.getElementById('engArchiveList');
+  if (!state.englishScenes || state.englishScenes.length === 0) {
+    container.innerHTML = '<div style="color:var(--text-muted);padding:12px;font-size:var(--font-sm)">暂无存档，AI生成新场景后将自动归档</div>';
+    return;
+  }
+  container.innerHTML = state.englishScenes.slice(-5).reverse().map((s, i) => `
+    <div class="card" style="margin-bottom:8px">
+      <div style="font-weight:600;margin-bottom:4px;font-size:var(--font-sm)">📅 ${s.date} · ${s.scene.name}场景</div>
+      <div style="font-size:var(--font-xs);color:var(--text-secondary)">
+        ${s.scene.words.slice(0, 8).map(w => w[0]+'/'+w[1]).join(' · ')}...
+      </div>
+    </div>
+  `).join('');
+}
+
+// ==================== INIT ====================
+function init() {
+  // Load saved food compare
+  if (state.foodCompare) {
+    document.getElementById('foodCompare').value = state.foodCompare;
+  }
+
+  // Render static content
+  renderAllFolderUploads();
+  renderEnglishScene();
+  renderManualHotspots();
+  renderFoodAllergyList();
+
+  // Auto-fetch hotspots if needed
+  if (state.lastHotspots) {
+    renderHotspots(state.lastHotspots);
+  } else {
+    fetchHotspots();
+  }
+
+  // Auto-generate recipe
+  generateRecipe();
+
+  // Initial home render
+  renderHome();
+
+  // Initial growth table
+  renderGrowthTable();
+  renderStoolHistory();
+  renderEngArchive();
+
+  // Close modals on overlay click
+  document.getElementById('renameModal').addEventListener('click', function(e) {
+    if (e.target === this) closeRename();
+  });
+  document.getElementById('pasteModal').addEventListener('click', function(e) {
+    if (e.target === this) closePaste();
+  });
+
+  // Auto-save periodically
+  setInterval(() => saveState(state), 30000);
+
+  console.log('🌸 莫兰迪AI工作台已就绪');
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
