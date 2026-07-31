@@ -447,6 +447,8 @@ textarea:focus { border-color: var(--accent-sage); }
 }
 .tag-policy { background: #f0e6df; color: #8b6f5a; }
 .tag-academic { background: #dfe8e0; color: #5a7a5f; }
+.tag-industry { background: #dfe4f0; color: #5a6a8b; }
+.tag-patent { background: #f0dfee; color: #8b5a7a; }
 .hotspot-title { font-size: var(--font-md); font-weight: 600; margin-bottom: 6px; }
 .hotspot-desc { font-size: var(--font-sm); color: var(--text-secondary); line-height: 1.6; }
 
@@ -1165,7 +1167,7 @@ textarea:focus { border-color: var(--accent-sage); }
       <div class="card">
         <div class="card-header">
           <div class="card-title"><span class="icon-dot rose"></span>AI智能摘要</div>
-          <button class="btn btn-outline btn-sm" onclick="fetchHotspots()">🔄 刷新抓取</button>
+          <button class="btn btn-outline btn-sm" onclick="fetchHotspots(true)">🔄 刷新抓取</button>
         </div>
         <div id="hotspotContent">
           <div style="text-align:center;padding:24px;color:var(--text-muted)">
@@ -1271,6 +1273,8 @@ function getDefaultState() {
     englishScenes: [],
     manualHotspots: [],
     lastHotspotFetch: null,
+    lastHotspots: null,
+    lastHotspotFetch: null,
     lastSceneDate: null,
     currentSceneIndex: 0,
     skillNotes: {}
@@ -1292,6 +1296,13 @@ function switchPage(page) {
 
   if (page === 'home') {
     renderHome();
+  } else if (page === 'hotspot') {
+    // 热点数据由用户手动刷新，不自动覆盖旧数据
+    if (!state.lastHotspots) {
+      document.getElementById('hotspotContent').innerHTML = '<div style="text-align:center;padding:24px;color:var(--text-muted)">👇 点击下方「刷新抓取」获取最新热点</div>';
+    } else {
+      renderHotspots(state.lastHotspots);
+    }
   } else if (page === 'life') {
     renderGrowthTable();
     renderStoolHistory();
@@ -2065,7 +2076,11 @@ function generateRecipe() {
 }
 
 // ==================== HOTSPOTS ====================
-function fetchHotspots() {
+// ==================== HOTSPOT FETCH (真实API联网) ====================
+const HOTSPOT_CACHE_KEY = 'morandi_hotspot_cache';
+const HOTSPOT_CACHE_TTL = 4 * 60 * 60 * 1000; // 4小时
+
+function fetchHotspots(forceRefresh = false) {
   const container = document.getElementById('hotspotContent');
   container.innerHTML = `
     <div style="text-align:center;padding:24px;color:var(--text-muted)">
@@ -2074,40 +2089,117 @@ function fetchHotspots() {
     </div>
   `;
 
-  setTimeout(() => {
-    const hotspots = [
-      {
-        tag: '政策',
-        tagClass: 'tag-policy',
-        title: '国家药监局发布《医疗器械专利转化指导意见（2026修订版）》',
-        desc: '明确医用成像器械专利转化的快速审评通道，简化II类成像设备注册流程，鼓励AI辅助诊断器械产学研协同。'
-      },
-      {
-        tag: '学术',
-        tagClass: 'tag-academic',
-        title: 'Nature Biomedical Engineering：可解释深度学习在医学影像诊断中的最新进展',
-        desc: '综述了SHAP、LIME等可解释性方法在CT/MRI影像分析中的应用，指出模型可解释性是临床转化的关键瓶颈。'
-      },
-      {
-        tag: '学术',
-        tagClass: 'tag-academic',
-        title: 'JAMA：机器学习预测模型在乳腺癌筛查中的大规模验证研究',
-        desc: '基于50万例多中心数据，验证了集成学习模型在乳腺X线摄影筛查中的AUC达到0.91，优于传统CAD系统。'
-      },
-      {
-        tag: '政策',
-        tagClass: 'tag-policy',
-        title: '科技部启动"AI+医疗器械"重点研发计划2027年度项目征集',
-        desc: '重点支持方向包括：医学影像AI辅助诊断系统、可解释性AI临床决策支持、专利技术产业化应用示范。'
-      }
-    ];
+  // 检查缓存
+  if (!forceRefresh) {
+    const cached = getCachedHotspots();
+    if (cached) {
+      state.lastHotspots = cached.data;
+      state.lastHotspotFetch = cached.time;
+      saveState(state);
+      renderHotspots(cached.data);
+      return;
+    }
+  }
 
-    state.lastHotspotFetch = new Date().toISOString();
+  // 并行从多个RSS数据源抓取
+  Promise.any([
+    fetchFromRSS2JSON('https://news.google.com/rss/search?q=%E5%8C%BB%E7%96%97%E5%99%A8%E6%A2%B0+AI+%E5%BD%B1%E5%83%8F&hl=zh-CN&gl=CN&ceid=CN:zh-Hans'),
+    fetchFromRSS2JSON('https://news.google.com/rss/search?q=%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0+%E5%8C%BB%E5%AD%A6%E5%BD%B1%E5%83%8F&hl=zh-CN&gl=CN&ceid=CN:zh-Hans'),
+    fetchFromRSS2JSON('https://news.google.com/rss/search?q=medical+imaging+AI+patent&hl=en&gl=US&ceid=US:en'),
+    fetchFromRSS2JSON('https://news.google.com/rss/search?q=%E5%8C%BB%E7%96%97%E5%99%A8%E6%A2%B0+%E4%B8%93%E5%88%A9&hl=zh-CN&gl=CN&ceid=CN:zh-Hans')
+  ]).then(hotspots => {
+    if (!hotspots || hotspots.length === 0) throw new Error('empty');
+    const now = new Date().toISOString();
+    state.lastHotspotFetch = now;
     state.lastHotspots = hotspots;
     saveState(state);
-
+    saveCachedHotspots(hotspots, now);
     renderHotspots(hotspots);
-  }, 2000);
+  }).catch(() => {
+    // 所有数据源都失败，降级到缓存
+    const cached = getCachedHotspots();
+    if (cached) {
+      state.lastHotspots = cached.data;
+      state.lastHotspotFetch = cached.time;
+      saveState(state);
+      renderHotspots(cached.data);
+      showToast('⚠️ 联网失败，显示最近一次缓存数据');
+    } else {
+      // 最终兜底：硬编码数据
+      const fallback = getFallbackHotspots();
+      state.lastHotspots = fallback;
+      state.lastHotspotFetch = new Date().toISOString();
+      saveState(state);
+      renderHotspots(fallback);
+      showToast('⚠️ 网络不可用，显示示例热点');
+    }
+  });
+}
+
+async function fetchFromRSS2JSON(rssUrl) {
+  try {
+    const proxyUrl = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(rssUrl);
+    const resp = await fetch(proxyUrl, { signal: AbortSignal.timeout(8000) });
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    const json = await resp.json();
+    if (json.status !== 'ok' || !json.items) throw new Error('invalid');
+    return json.items.slice(0, 6).map(item => {
+      const title = stripHtml(item.title || '');
+      const desc = stripHtml(item.description || item.content || '').slice(0, 120);
+      const tag = detectTag(title);
+      return { tag, tagClass: tagToClass(tag), title, desc, link: item.link, pubDate: item.pubDate };
+    });
+  } catch (e) {
+    console.warn('RSS source failed:', rssUrl.slice(-40), e.message);
+    return [];
+  }
+}
+
+function stripHtml(html) {
+  const div = document.createElement('div');
+  div.innerHTML = html;
+  return div.textContent || div.innerText || '';
+}
+
+function detectTag(title) {
+  const t = title.toLowerCase();
+  if (/政策|药监局|卫健委|科技部|国办|国务院|法规|监管/.test(t)) return '政策';
+  if (/研究|论文|journal|nature|science|lancet|发表|发现|突破/.test(t)) return '学术';
+  if (/公司|企业|上市|融资|收购|联影|迈瑞|东软|ge|西门子|philips/.test(t)) return '产业';
+  if (/专利|patent/.test(t)) return '专利';
+  return '学术';
+}
+
+function tagToClass(tag) {
+  const map = { '政策': 'tag-policy', '学术': 'tag-academic', '产业': 'tag-industry', '专利': 'tag-patent' };
+  return map[tag] || 'tag-academic';
+}
+
+function getCachedHotspots() {
+  try {
+    const raw = localStorage.getItem(HOTSPOT_CACHE_KEY);
+    if (!raw) return null;
+    const cache = JSON.parse(raw);
+    if (Date.now() - cache.time < HOTSPOT_CACHE_TTL) {
+      return cache;
+    }
+    return null; // 过期
+  } catch { return null; }
+}
+
+function saveCachedHotspots(data, time) {
+  try {
+    localStorage.setItem(HOTSPOT_CACHE_KEY, JSON.stringify({ data, time: time || new Date().toISOString() }));
+  } catch {}
+}
+
+function getFallbackHotspots() {
+  return [
+    { tag: '政策', tagClass: 'tag-policy', title: '国家药监局发布《医疗器械专利转化指导意见（2026修订版）》', desc: '明确医用成像器械专利转化的快速审评通道，简化II类成像设备注册流程。' },
+    { tag: '学术', tagClass: 'tag-academic', title: 'Nature BME：可解释深度学习在医学影像诊断中的最新进展', desc: '综述SHAP、LIME等可解释性方法在CT/MRI影像分析中的应用。' },
+    { tag: '学术', tagClass: 'tag-academic', title: 'JAMA：机器学习预测模型在乳腺癌筛查中的大规模验证', desc: '基于50万例多中心数据，集成学习模型AUC达到0.91。' },
+    { tag: '政策', tagClass: 'tag-policy', title: '科技部启动"AI+医疗器械"重点研发计划2027年度项目征集', desc: '重点支持：医学影像AI辅助诊断、可解释性AI临床决策支持。' }
+  ];
 }
 
 function renderHotspots(hotspots) {
@@ -2116,8 +2208,11 @@ function renderHotspots(hotspots) {
     container.innerHTML = '<div style="text-align:center;padding:24px;color:var(--text-muted)">点击刷新抓取热点</div>';
     return;
   }
-  container.innerHTML = '<div class="hotspot-grid">' + hotspots.map(h => `
-    <div class="hotspot-item">
+  const timeHtml = state.lastHotspotFetch
+    ? `<div style="font-size:var(--font-xs);color:var(--text-muted);margin-bottom:10px">🕐 更新于 ${new Date(state.lastHotspotFetch).toLocaleString('zh-CN')}</div>`
+    : '';
+  container.innerHTML = timeHtml + '<div class="hotspot-grid">' + hotspots.map(h => `
+    <div class="hotspot-item"${h.link ? ` onclick="window.open('${h.link.replace(/'/g, "\\'")}','_blank')" style="cursor:pointer"` : ''}>
       <span class="hotspot-tag ${h.tagClass}">${h.tag}</span>
       <div class="hotspot-title">${h.title}</div>
       <div class="hotspot-desc">${h.desc}</div>
@@ -2163,6 +2258,53 @@ function deleteManualHotspot(index) {
   saveState(state);
   renderManualHotspots();
 }
+
+// ==================== HOTSPOT PULL TO REFRESH ====================
+(function setupHotspotPullRefresh() {
+  const HOTSPOT_PULL_KEY = 'morandi_hotspot_pull';
+  let startY = 0, isPulling = false, threshold = 60;
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('hotspotContent');
+    if (!container) return;
+
+    const zone = container.parentElement || container;
+    if (!zone) return;
+
+    zone.addEventListener('touchstart', e => {
+      const el = document.getElementById('hotspotContent');
+      if (!el) return;
+      // 只有在滚动到顶部时才触发下拉刷新
+      if (el.scrollTop <= 0) {
+        startY = e.touches[0].clientY;
+        isPulling = true;
+      }
+    }, { passive: true });
+
+    zone.addEventListener('touchmove', e => {
+      if (!isPulling) return;
+      const diff = e.touches[0].clientY - startY;
+      if (diff > threshold) {
+        isPulling = false;
+        // 检查是否已在刷新中
+        if (container.querySelector('.pull-refresh-indicator')) return;
+        // 显示下拉刷新提示
+        const indicator = document.createElement('div');
+        indicator.className = 'pull-refresh-indicator';
+        indicator.style.cssText = 'text-align:center;padding:12px;color:var(--text-muted);font-size:var(--font-sm);';
+        indicator.innerHTML = '🔄 松开刷新...';
+        container.insertBefore(indicator, container.firstChild);
+        // 自动触发刷新（松手效果）
+        setTimeout(() => {
+          indicator.remove();
+          fetchHotspots(true);
+        }, 400);
+      }
+    }, { passive: true });
+
+    zone.addEventListener('touchend', () => { isPulling = false; });
+  });
+})();
 
 // ==================== ENGLISH ARCHIVE ====================
 function renderEngArchive() {
