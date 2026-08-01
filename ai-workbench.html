@@ -535,6 +535,7 @@ textarea:focus { border-color: var(--accent-sage); }
 .ledger-form-row input {
   width: 100%;
   min-width: 0;
+  max-width: 100%;
   box-sizing: border-box;
   padding: 9px 10px;
   border: 1.5px solid var(--border);
@@ -543,6 +544,13 @@ textarea:focus { border-color: var(--accent-sage); }
   background: #fff;
   color: var(--text-primary);
   outline: none;
+}
+/* 日期输入框与数字输入框等宽（手机端 date 内部日历图标会导致偏宽） */
+.ledger-form-row input[type="date"] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+  -webkit-appearance: textfield;
+  padding-right: 10px;
 }
 .ledger-form-row input:focus { border-color: var(--accent-sage); }
 .ledger-form-row label { font-size: 11px; }
@@ -571,6 +579,7 @@ textarea:focus { border-color: var(--accent-sage); }
   background: #faf7f2;
   border-radius: 12px;
   padding: 10px 4px;
+  overflow: visible;
 }
 .rc-num {
   font-size: 22px;
@@ -581,12 +590,13 @@ textarea:focus { border-color: var(--accent-sage); }
 .rc-num .rc-unit { font-size: 12px; font-weight: 500; color: var(--text-muted); margin-left: 2px; }
 .rc-badge {
   display: inline-block;
-  margin-top: 8px;
-  padding: 3px 10px;
-  border-radius: 12px;
+  margin-top: 6px;
+  padding: 2px 10px;
+  border-radius: 20px;
   font-size: 11px;
   font-weight: 600;
   white-space: nowrap;
+  line-height: 1.6;
 }
 .rc-badge.normal { background: #dfe8e0; color: #4a7a55; }
 .rc-badge.low { background: #f3e7d8; color: #b07d3a; }
@@ -2299,7 +2309,7 @@ function colHtml(value, unit, pct) {
   const num = hasVal ? (value + '<span class="rc-unit">' + unit + '</span>') : '—';
   let badge;
   if (!hasVal) badge = '<span class="rc-badge normal">—</span>';
-  else if (pct == null) badge = '<span class="rc-badge low">--% 待定</span>';
+  else if (pct == null) badge = '<span class="rc-badge low">—%</span>';
   else { const c = pctCategory(pct); badge = '<span class="rc-badge ' + c.cls + '">' + pct + '% ' + c.txt + '</span>'; }
   return '<div class="record-col"><div class="rc-num">' + num + '</div>' + badge + '</div>';
 }
