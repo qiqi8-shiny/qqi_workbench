@@ -1,24 +1,56 @@
 {
-  "updatedAt": "2026-08-01T11:00:00+08:00",
-  "source": "AI 每3天自动轮换生成",
+  "updatedAt": "2026-08-01T12:25:00+08:00",
+  "source": "AI 每3天自动轮换（SSS儿歌核心）",
   "current": {
-    "name": "超市",
+    "name": "洗澡",
     "words": [
-      ["cart", "购物车"], ["apple", "苹果"], ["banana", "香蕉"], ["bread", "面包"],
-      ["milk", "牛奶"], ["egg", "鸡蛋"], ["cashier", "收银员"], ["aisle", "过道"],
-      ["shelf", "货架"], ["bag", "袋子"], ["price", "价格"], ["vegetable", "蔬菜"],
-      ["fruit", "水果"], ["checkout", "结账台"], ["receipt", "小票"], ["scale", "秤"],
-      ["coupon", "优惠券"], ["freezer", "冰柜"]
+      ["water", "水"],
+      ["tub", "澡盆"],
+      ["soap", "肥皂"],
+      ["towel", "毛巾"],
+      ["duck", "小鸭"],
+      ["bubble", "泡泡"],
+      ["wash", "洗"],
+      ["splash", "拍水"],
+      ["pour", "倒"],
+      ["dry", "擦干"],
+      ["happy", "开心"]
     ],
     "dialogs": [
-      ["Mom", "Let's get a shopping cart. Can you help me push it?"],
-      ["Baby", "Push! Push!"],
-      ["Mom", "We need some apples. How many should we get?"],
-      ["Baby", "One, two, three!"],
-      ["Mom", "Three apples! Good counting. Now let's find the bread."]
+      ["Mom", "Time for a bath!"],
+      ["Baby", "Yay! Water!"],
+      ["Mom", "Let's wash your tummy."],
+      ["Baby", "Splash! Splash!"],
+      ["Mom", "Now dry with the towel."],
+      ["Baby", "I'm clean!"]
     ]
   },
   "history": [
+    {
+      "date": "2026-08-01",
+      "name": "洗澡",
+      "words": [
+        ["water", "水"],
+        ["tub", "澡盆"],
+        ["soap", "肥皂"],
+        ["towel", "毛巾"],
+        ["duck", "小鸭"],
+        ["bubble", "泡泡"],
+        ["wash", "洗"],
+        ["splash", "拍水"],
+        ["pour", "倒"],
+        ["dry", "擦干"],
+        ["happy", "开心"]
+      ],
+      "dialogs": [
+        ["Mom", "Time for a bath!"],
+        ["Baby", "Yay! Water!"],
+        ["Mom", "Let's wash your tummy."],
+        ["Baby", "Splash! Splash!"],
+        ["Mom", "Now dry with the towel."],
+        ["Baby", "I'm clean!"]
+      ]
+    },
     {
       "date": "2026-07-28",
       "name": "农场",
