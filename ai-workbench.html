@@ -545,12 +545,17 @@ textarea:focus { border-color: var(--accent-sage); }
   color: var(--text-primary);
   outline: none;
 }
-/* 日期输入框与数字输入框等宽（手机端 date 内部日历图标会导致偏宽） */
+/* 日期输入框与数字输入框等宽（iOS Safari 原生日历图标会导致 date 偏宽） */
 .ledger-form-row input[type="date"] {
-  appearance: textfield;
+  appearance: none;
   -moz-appearance: textfield;
-  -webkit-appearance: textfield;
+  -webkit-appearance: none;
   padding-right: 10px;
+}
+/* 缩小 iOS Safari 日历选择器图标，避免撑宽 */
+.ledger-form-row input[type="date"]::-webkit-calendar-picker-indicator {
+  margin-left: 2px;
+  opacity: 0.6;
 }
 .ledger-form-row input:focus { border-color: var(--accent-sage); }
 .ledger-form-row label { font-size: 11px; }
@@ -686,6 +691,7 @@ textarea:focus { border-color: var(--accent-sage); }
   /* 手机端：添加记录表单竖向单排，一个输入框占一行，避免重叠/溢出 */
   .ledger-form-row { grid-template-columns: 1fr; gap: 12px; }
   .ledger-form-row .input-group { width: 100%; }
+  .ledger-form-row input[type="date"] { width: 100% !important; box-sizing: border-box !important; }
   #growth-list .btn-save-green { width: 100%; margin-top: 4px; }
 }
 
