@@ -261,6 +261,22 @@ body {
   transition: border-color 0.2s;
 }
 .input-row input:focus, .input-row select:focus { border-color: var(--accent-sage); }
+/* 排便卡片：今日排便次数 与 颜色下拉框 强制等宽并排 */
+.stool-input-row { align-items: flex-end; }
+.stool-input-row .input-group { flex: 1; min-width: 0; }
+.stool-input-row input, .stool-input-row select {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 10px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-md);
+  background: #fff;
+  color: var(--text-primary);
+  outline: none;
+}
+.stool-input-row input:focus, .stool-input-row select:focus { border-color: var(--accent-sage); }
 
 .growth-input-row {
   display: grid;
@@ -365,6 +381,300 @@ textarea:focus { border-color: var(--accent-sage); }
   margin: 12px 0;
 }
 .chart-container canvas { width: 100% !important; }
+
+/* ============ Growth Input (vertical) + Green Save ============ */
+.growth-input-col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.growth-input-col .input-group { width: 100%; }
+
+.btn-save-green {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background: #7dad8b;
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  font-size: var(--font-md);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 4px;
+}
+.btn-save-green:hover { background: #6d9a7b; transform: translateY(-1px); }
+.btn-save-green:active { transform: translateY(0); }
+
+/* ============ 辅食每日记录（动态行） ============ */
+.fr-row { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 8px; }
+.fr-input {
+  flex: 1;
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-md);
+  background: #fff;
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+.fr-input:focus { border-color: var(--accent-sage); }
+.fr-del {
+  flex: 0 0 auto;
+  width: 26px; height: 26px;
+  margin-top: 6px;
+  border: none;
+  border-radius: 50%;
+  background: #eadada;
+  color: #9a6b6b;
+  font-size: 13px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.fr-del:hover { background: #e0c3c3; }
+
+/* ============ 辅食排敏进度条 ============ */
+.allergy-progress { margin-bottom: 4px; }
+.ap-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+.ap-row strong { color: var(--text-primary); }
+.ap-track {
+  height: 10px;
+  border-radius: 6px;
+  background: var(--bg-sidebar);
+  overflow: hidden;
+}
+.ap-fill {
+  height: 100%;
+  border-radius: 6px;
+  background: var(--accent-sage);
+  transition: width 0.4s ease;
+}
+.allergy-status-tag {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: var(--font-xs);
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s;
+}
+.allergy-status-tag.done { background: #e3ede4; color: #5a7a5f; }
+.allergy-status-tag.trying { background: #f3ebe2; color: #9a8050; }
+
+.chart-hint {
+  text-align: center;
+  font-size: var(--font-xs);
+  color: var(--text-muted);
+  cursor: pointer;
+  margin-top: 6px;
+  user-select: none;
+}
+
+/* ============ Growth Chart Modal (popup) ============ */
+.growth-modal-overlay {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(92,74,61,0.32);
+  display: none;
+  align-items: center; justify-content: center;
+  z-index: 250;
+  backdrop-filter: blur(2px);
+  padding: 20px;
+}
+.growth-modal-overlay.show { display: flex; }
+.growth-modal-box {
+  position: relative;
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 22px 22px 14px;
+  width: 100%;
+  max-width: 580px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.15);
+}
+.growth-modal-box .modal-title {
+  font-size: var(--font-lg);
+  font-weight: 600;
+  margin-bottom: 12px;
+  padding-right: 44px;
+}
+.growth-modal-close {
+  position: absolute;
+  top: 16px; right: 16px;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: #f0ebe3;
+  color: var(--text-secondary);
+  font-size: 16px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+}
+.growth-modal-close:hover { background: #e0d8cd; color: var(--text-primary); }
+
+/* ============ Ledger (成长台账) ============ */
+.ledger-form-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.ledger-form-row .input-group { width: 100%; min-width: 0; }
+.ledger-form-row input {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 9px 10px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-sm);
+  background: #fff;
+  color: var(--text-primary);
+  outline: none;
+}
+.ledger-form-row input:focus { border-color: var(--accent-sage); }
+.ledger-form-row label { font-size: 11px; }
+
+.growth-record-card {
+  position: relative;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px 18px 14px;
+  margin-bottom: 12px;
+}
+.record-date {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+.record-cols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.record-col {
+  text-align: center;
+  background: #faf7f2;
+  border-radius: 12px;
+  padding: 10px 4px;
+}
+.rc-num {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+.rc-num .rc-unit { font-size: 12px; font-weight: 500; color: var(--text-muted); margin-left: 2px; }
+.rc-badge {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.rc-badge.normal { background: #dfe8e0; color: #4a7a55; }
+.rc-badge.low { background: #f3e7d8; color: #b07d3a; }
+.rc-badge.high { background: #f0dcd9; color: #b5604f; }
+.rc-badge.danger { background: #ecc9c4; color: #a23b2c; }
+.record-del {
+  position: absolute;
+  top: 12px; right: 12px;
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 13px;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+}
+.record-del:hover { border-color: #c98e86; color: #c98e86; }
+
+.standard-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 10px; margin-bottom: 12px;
+}
+.standard-bar .std-label { font-size: var(--font-sm); color: var(--text-secondary); font-weight: 500; }
+.btn-std-switch {
+  padding: 7px 14px;
+  border-radius: 10px;
+  border: 1.5px solid var(--border);
+  background: #fff;
+  color: var(--text-secondary);
+  font-size: var(--font-sm);
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.btn-std-switch:hover { border-color: var(--accent-sage); color: var(--text-primary); }
+
+/* ============ Bottom Sheet (标准切换) ============ */
+.bottom-sheet-overlay {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(92,74,61,0.32);
+  display: none;
+  align-items: flex-end; justify-content: center;
+  z-index: 260;
+  backdrop-filter: blur(2px);
+}
+.bottom-sheet-overlay.show { display: flex; }
+.bottom-sheet {
+  background: #fff;
+  width: 100%;
+  max-width: 480px;
+  border-radius: 20px 20px 0 0;
+  padding: 10px 20px calc(20px + env(safe-area-inset-bottom));
+  box-shadow: 0 -8px 40px rgba(0,0,0,0.15);
+  animation: sheetUp 0.28s ease;
+}
+@keyframes sheetUp { from { transform: translateY(100%); } }
+.sheet-title { text-align: center; font-size: var(--font-sm); color: var(--text-muted); padding: 8px 0 14px; }
+.sheet-option {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 4px;
+  border-bottom: 1px solid var(--border);
+  font-size: var(--font-md);
+  color: var(--text-primary);
+  cursor: pointer;
+  background: none; border-left: none; border-right: none; border-top: none;
+  width: 100%;
+  text-align: left;
+  transition: color 0.2s;
+}
+.sheet-option:last-of-type { border-bottom: none; }
+.sheet-option.active { color: var(--accent-sage); font-weight: 600; }
+.sheet-option .check { color: var(--accent-sage); }
+.sheet-cancel {
+  width: 100%; margin-top: 12px;
+  padding: 14px;
+  border: none; border-radius: 12px;
+  background: #f0ebe3;
+  color: var(--text-secondary);
+  font-size: var(--font-md);
+  cursor: pointer;
+}
+.sheet-cancel:hover { background: #e7dfd2; }
+
+@media (max-width: 560px) {
+  .ledger-form-row { grid-template-columns: repeat(2, 1fr); }
+}
 
 /* ============ Task Check ============ */
 .task-item {
@@ -769,23 +1079,18 @@ textarea:focus { border-color: var(--accent-sage); }
             <span id="growthPercentile" class="percentile-badge">8月龄</span>
           </div>
 
-          <!-- 性别选择 -->
-          <div class="gender-selector">
-            <button class="gender-btn active" id="genderMale" onclick="setGender('male')">👦 男童</button>
-            <button class="gender-btn" id="genderFemale" onclick="setGender('female')">👧 女童</button>
-          </div>
-
-          <!-- 身高体重输入 -->
-          <div class="growth-input-row">
+          <!-- 身高体重输入（垂直排列 + 绿色保存按钮） -->
+          <div class="growth-input-col">
             <div class="input-group growth-input-group">
               <label>体重(kg)</label>
-              <input type="number" id="inputWeight" step="0.01" placeholder="如 8.20" onchange="addGrowthData()">
+              <input type="number" id="inputWeight" step="0.01" placeholder="如 8.20">
             </div>
             <div class="input-group growth-input-group">
               <label>身高(cm)</label>
-              <input type="number" id="inputHeight" step="0.1" placeholder="如 68.5" onchange="addGrowthData()">
+              <input type="number" id="inputHeight" step="0.1" placeholder="如 68.5">
             </div>
           </div>
+          <button class="btn-save-green" onclick="addGrowthData()">保存录入</button>
 
           <!-- 标准 dropdown（核心改造：拆分两个下拉） -->
           <div class="standard-selectors">
@@ -805,9 +1110,10 @@ textarea:focus { border-color: var(--accent-sage); }
             </div>
           </div>
 
-          <div class="chart-container" id="growthChartWrap">
+          <div class="chart-container" id="growthChartWrap" onclick="openGrowthModal()" title="点击查看大图" style="cursor:pointer">
             <canvas id="growthChart"></canvas>
           </div>
+          <div class="chart-hint" onclick="openGrowthModal()">📈 点击图表查看大图</div>
           <div class="data-source-note">
             <b>数据说明：</b>WHO 数据源自 WHO Multicentre Growth Reference Study (2006) 50th 中位数；卫健委数据基于《中国7岁以下儿童生长发育参照标准》(WS/T 423-2013) 整理（卫健委2025评估指南实际参考依据）。<br>
             <b>注：</b>下拉菜单切换后，体重曲线对应「体重标准」，身高曲线对应「身高标准」，两条虚线独立渲染。
@@ -1066,10 +1372,18 @@ textarea:focus { border-color: var(--accent-sage); }
       </div>
 
       <div id="life-food">
-        <div class="card-grid">
+        <!-- 内部三大子标签页 -->
+        <div class="sub-tabs" style="margin-bottom:16px">
+          <button class="sub-tab active" data-ftab="weekly" onclick="switchFoodTab('weekly')">📅 每周辅食推荐</button>
+          <button class="sub-tab" data-ftab="daily" onclick="switchFoodTab('daily')">📖 每日辅食记录</button>
+          <button class="sub-tab" data-ftab="allergy" onclick="switchFoodTab('allergy')">🌿 辅食排敏进度</button>
+        </div>
+
+        <!-- 第1页：每周辅食推荐 -->
+        <div id="food-weekly">
           <div class="card">
             <div class="card-header">
-              <div class="card-title"><span class="icon-dot rose"></span>AI每日辅食方案</div>
+              <div class="card-title"><span class="icon-dot rose"></span>AI每周辅食推荐</div>
               <span style="font-size:var(--font-xs);color:var(--text-muted)">参考：崔玉涛体系+卫健委指南</span>
             </div>
             <div style="font-size:var(--font-sm);color:var(--text-secondary);margin-bottom:12px">
@@ -1078,21 +1392,27 @@ textarea:focus { border-color: var(--accent-sage); }
             <div id="recipeContent">
               <div style="text-align:center;padding:24px;color:var(--text-muted)">
                 <div class="spinner" style="margin:0 auto 10px"></div>
-                <div>AI正在生成今日辅食方案...</div>
+                <div>AI正在生成本周辅食方案...</div>
               </div>
             </div>
-            <button class="btn btn-outline btn-sm" style="margin-top:12px" onclick="generateRecipe()">🔄 重新生成方案</button>
+            <button class="btn btn-outline btn-sm" style="margin-top:12px" onclick="loadWeeklyFood(true)">🔄 重新生成方案</button>
           </div>
+        </div>
 
+        <!-- 第2页：每日辅食记录 -->
+        <div id="food-daily" style="display:none">
           <div class="card">
-            <div class="card-title" style="margin-bottom:14px"><span class="icon-dot warm"></span>辅食方案对比记录</div>
-            <textarea id="foodCompare" placeholder="记录不同辅食方案的对比观察...&#10;如：方案A（鳕鱼+胡萝卜泥）vs 方案B（虾泥+南瓜泥），宝宝接受度、排便情况等"></textarea>
-            <button class="btn btn-primary btn-sm" style="margin-top:10px" onclick="saveFoodCompare()">保存对比记录</button>
+            <div class="card-title" style="margin-bottom:14px"><span class="icon-dot warm"></span>每日辅食记录</div>
+            <div style="font-size:var(--font-xs);color:var(--text-muted);margin-bottom:12px">
+              📌 每天最多记录 3 条，输入后自动保存到本地
+            </div>
+            <div id="foodRecordList"></div>
+            <button id="addFoodRecordBtn" class="btn-save-green" style="margin-top:12px;width:100%;text-align:center" onclick="addFoodRecord()">➕ 添加记录</button>
           </div>
 
           <div class="card">
             <div class="card-title" style="margin-bottom:14px"><span class="icon-dot sage"></span>排便 & 绿便判断记录</div>
-            <div class="input-row" style="margin-bottom:10px">
+            <div class="input-row stool-input-row" style="margin-bottom:10px">
               <div class="input-group" style="flex:1">
                 <label>今日排便次数</label>
                 <input type="number" id="stoolCount" min="0" placeholder="如 2">
@@ -1109,11 +1429,13 @@ textarea:focus { border-color: var(--accent-sage); }
             <button class="btn btn-primary btn-sm" onclick="saveStoolRecord()">记录今日排便</button>
             <div id="stoolHistory" style="margin-top:12px;font-size:var(--font-xs);color:var(--text-secondary)"></div>
           </div>
+        </div>
 
+        <!-- 第3页：辅食排敏进度 -->
+        <div id="food-allergy" style="display:none">
           <div class="card">
-            <div class="card-header">
-              <div class="card-title"><span class="icon-dot lavender"></span>食材排敏管理</div>
-            </div>
+            <div class="card-title" style="margin-bottom:14px"><span class="icon-dot lavender"></span>辅食排敏进度</div>
+            <div id="allergyProgressWrap" class="allergy-progress"></div>
             <div class="input-row" style="margin-bottom:10px">
               <input type="text" id="newFood" placeholder="输入新食材名称" style="flex:1">
               <button class="btn btn-primary btn-sm" onclick="addFoodTrial()">添加尝试</button>
@@ -1124,25 +1446,66 @@ textarea:focus { border-color: var(--accent-sage); }
       </div>
 
       <div id="life-growth" style="display:none">
-        <div class="card">
-          <div class="card-title" style="margin-bottom:14px"><span class="icon-dot rose"></span>身高体重成长台账</div>
-          <div style="font-size:var(--font-sm);color:var(--text-muted);margin-bottom:12px">
-            📌 与首页数据实时联动，录入后自动同步
+        <!-- 三大子标签页 -->
+        <div class="sub-tabs" style="margin-bottom:16px">
+          <button class="sub-tab active" data-gtab="list" onclick="switchGrowthTab('list')">📋 记录列表</button>
+          <button class="sub-tab" data-gtab="height" onclick="switchGrowthTab('height')">📐 身高曲线</button>
+          <button class="sub-tab" data-gtab="weight" onclick="switchGrowthTab('weight')">⚖️ 体重曲线</button>
+        </div>
+
+        <!-- 记录列表 -->
+        <div id="growth-list">
+          <div class="card">
+            <div class="card-title" style="margin-bottom:12px"><span class="icon-dot sage"></span>添加记录</div>
+            <div class="ledger-form-row">
+              <div class="input-group">
+                <label>日期</label>
+                <input type="date" id="recDate">
+              </div>
+              <div class="input-group">
+                <label>身高(cm)</label>
+                <input type="number" id="recHeight" step="0.1" placeholder="68.5">
+              </div>
+              <div class="input-group">
+                <label>体重(kg)</label>
+                <input type="number" id="recWeight" step="0.01" placeholder="8.2">
+              </div>
+              <div class="input-group">
+                <label>头围(cm)</label>
+                <input type="number" id="recHead" step="0.1" placeholder="44.0">
+              </div>
+            </div>
+            <button class="btn-save-green" onclick="addGrowthRecordFull()">保存录入</button>
           </div>
-          <div style="overflow-x:auto">
-            <table style="width:100%;border-collapse:collapse;font-size:var(--font-sm)">
-              <thead>
-                <tr style="background:var(--bg-sidebar)">
-                  <th style="padding:12px;text-align:left">日期</th>
-                  <th style="padding:12px">体重(kg)</th>
-                  <th style="padding:12px">身高(cm)</th>
-                  <th style="padding:12px">操作</th>
-                </tr>
-              </thead>
-              <tbody id="growthTableBody"></tbody>
-            </table>
+          <div id="growthCardList"></div>
+        </div>
+
+        <!-- 身高曲线 -->
+        <div id="growth-height" style="display:none">
+          <div class="card">
+            <div class="standard-bar">
+              <span class="std-label" id="heightStdLabel">标准：WHO 0-5岁</span>
+              <button class="btn-std-switch" onclick="openStdSheet('height')">⇄ 切换标准</button>
+            </div>
+            <div class="chart-container" style="height:340px"><canvas id="ledgerHeightChart"></canvas></div>
+            <div class="data-source-note" style="margin-top:10px">
+              浅绿色通道为 3%–97% 生长区间（基于中位数估算，拿到真实 LMS 分位数数据后可替换）。记录点高亮显示。
+            </div>
           </div>
-          <div id="growthEmpty" style="text-align:center;padding:24px;color:var(--text-muted);font-size:var(--font-sm)">暂无数据，请在首页录入</div>
+        </div>
+
+        <!-- 体重曲线 -->
+        <div id="growth-weight" style="display:none">
+          <div class="card">
+            <div class="standard-bar">
+              <span class="std-label" id="weightStdLabel">标准：WHO 0-5岁</span>
+              <button class="btn-std-switch" onclick="openStdSheet('weight')">⇄ 切换标准</button>
+            </div>
+            <div class="chart-container" style="height:340px"><canvas id="ledgerWeightChart"></canvas></div>
+            <div class="data-source-note" style="margin-top:10px">
+              浅绿色通道为 3%–97% 生长区间（基于中位数估算，拿到真实 LMS 分位数数据后可替换）。记录点高亮显示。
+            </div>
+          </div>
         </div>
       </div>
 
@@ -1167,7 +1530,7 @@ textarea:focus { border-color: var(--accent-sage); }
       <div class="card">
         <div class="card-header">
           <div class="card-title"><span class="icon-dot rose"></span>AI智能摘要</div>
-          <button class="btn btn-outline btn-sm" onclick="fetchHotspots(true)">🔄 刷新抓取</button>
+          <button class="btn btn-outline btn-sm" onclick="loadHotspots(true)">🔄 刷新抓取</button>
         </div>
         <div id="hotspotContent">
           <div style="text-align:center;padding:24px;color:var(--text-muted)">
@@ -1257,13 +1620,16 @@ function getDefaultState() {
     tasks: { taobao: false, douyin: false },
     growthData: [],
     growthGender: 'male',
+    babyBirthDate: '2025-12-01',
     weightStandard: 'who',
     heightStandard: 'who',
+    growthLedgerStandard: 'who',
     foodAllergies: [
       { name: '鳕鱼', status: 'done', date: '2026-07-20' },
       { name: '虾泥', status: 'done', date: '2026-07-25' }
     ],
     stoolRecords: [],
+    foodRecords: [''],
     foodCompare: '',
     folderUploads: {
       '五星级精读文献': [], '四星级验证文献': [], '三星级泛读扩展': [],
@@ -1297,14 +1663,16 @@ function switchPage(page) {
   if (page === 'home') {
     renderHome();
   } else if (page === 'hotspot') {
-    // 热点数据由用户手动刷新，不自动覆盖旧数据
-    if (!state.lastHotspots) {
-      document.getElementById('hotspotContent').innerHTML = '<div style="text-align:center;padding:24px;color:var(--text-muted)">👇 点击下方「刷新抓取」获取最新热点</div>';
-    } else {
+    // 优先加载云端热点；若尚未加载则尝试拉取，否则回退缓存
+    if (remoteStore.hotspots) {
+      applyRemoteHotspots(remoteStore.hotspots);
+    } else if (state.lastHotspots) {
       renderHotspots(state.lastHotspots);
+    } else {
+      loadHotspots();
     }
   } else if (page === 'life') {
-    renderGrowthTable();
+    renderGrowthCardList();
     renderStoolHistory();
     renderFoodAllergyList();
     renderEngArchive();
@@ -1432,20 +1800,22 @@ const GROWTH_STANDARDS = {
     height_m: [50.4,55.2,58.8,61.8,64.3,66.3,68.0,69.6,71.0,72.4,73.7,74.9,76.1,79.5,82.7,85.5,88.2,90.7,92.8,94.9,96.5],
     // 女童身高(cm) [SIMULATED] - 待用真实 PDF 数据替换
     height_f: [49.6,54.2,57.6,60.3,62.6,64.5,66.2,67.8,69.2,70.6,72.0,73.3,74.5,78.0,81.2,83.7,86.9,89.0,91.2,93.3,95.9]
+  },
+
+  // ---------- 卫健委 2022 · 7岁以下儿童生长发育标准 (WS/T 423-2022/2013) ----------
+  // [SIMULATED] 占位：暂与 nhc2025 共用同一套中国儿童数据，待真实 PDF/表格数据替换
+  nhc2022: {
+    name: '卫健委 2022 · 7岁以下儿童标准',
+    source: '《中国7岁以下儿童生长发育参照标准》(WS/T 423-2013) - 占位数据',
+    months: [0,1,2,3,4,5,6,7,8,9,10,11,12,15,18,21,24,27,30,33,36],
+    weight_m: [3.32,4.51,5.68,6.70,7.45,8.00,8.41,8.76,9.05,9.33,9.58,9.83,10.05,10.68,11.29,11.93,12.54,13.11,13.64,14.15,14.65],
+    weight_f: [3.21,4.20,5.30,6.20,6.90,7.40,7.80,8.10,8.40,8.70,8.90,9.10,9.30,9.90,10.50,11.10,11.70,12.20,12.70,13.20,13.70],
+    height_m: [50.4,55.2,58.8,61.8,64.3,66.3,68.0,69.6,71.0,72.4,73.7,74.9,76.1,79.5,82.7,85.5,88.2,90.7,92.8,94.9,96.5],
+    height_f: [49.6,54.2,57.6,60.3,62.6,64.5,66.2,67.8,69.2,70.6,72.0,73.3,74.5,78.0,81.2,83.7,86.9,89.0,91.2,93.3,95.9]
   }
 };
 
-// ==================== GENDER & STANDARD SELECTORS ====================
-function setGender(g) {
-  state.growthGender = g;
-  saveState(state);
-  document.getElementById('genderMale').classList.toggle('active', g === 'male');
-  document.getElementById('genderFemale').classList.toggle('active', g === 'female');
-  renderGrowthChart();
-  updatePercentile();
-  showToast('已切换为' + (g === 'male' ? '男童' : '女童') + '标准');
-}
-
+// ==================== STANDARD SELECTORS ====================
 function onStandardChange() {
   state.weightStandard = document.getElementById('weightStandard').value;
   state.heightStandard = document.getElementById('heightStandard').value;
@@ -1458,9 +1828,6 @@ function onStandardChange() {
 function syncSelectorUI() {
   document.getElementById('weightStandard').value = state.weightStandard || 'who';
   document.getElementById('heightStandard').value = state.heightStandard || 'who';
-  const g = state.growthGender || 'male';
-  document.getElementById('genderMale').classList.toggle('active', g === 'male');
-  document.getElementById('genderFemale').classList.toggle('active', g === 'female');
 }
 
 // ==================== GROWTH CHART ====================
@@ -1485,12 +1852,41 @@ function addGrowthData() {
   state.growthData.sort((a, b) => a.timestamp.localeCompare(b.timestamp));
   saveState(state);
   renderGrowthChart();
-  renderGrowthTable();
+  renderGrowthCardList();
   updatePercentile();
 
   document.getElementById('inputWeight').value = '';
   document.getElementById('inputHeight').value = '';
   showToast('生长数据已保存 ✓（第 ' + state.growthData.length + ' 条记录）');
+}
+
+// 月龄计算：根据出生日期推算记录时的月龄
+function getAgeMonths(dateStr) {
+  const birth = new Date(state.babyBirthDate || '2025-12-01');
+  const d = new Date(dateStr);
+  if (isNaN(d)) return 0;
+  let months = (d.getFullYear() - birth.getFullYear()) * 12 + (d.getMonth() - birth.getMonth());
+  months += (d.getDate() - birth.getDate()) / 30;
+  return Math.max(0, Math.round(months));
+}
+
+// 近似百分位（兜底）：仅有中位数时按 ratio*50 估算；拿到真实 LMS 分位数后替换此函数
+function calcPct(value, median) {
+  if (!value || !median) return null;
+  return Math.round(value / median * 50 * 10) / 10;
+}
+function pctCategory(pct) {
+  if (pct == null) return { cls: 'normal', txt: '—' };
+  if (pct < 3) return { cls: 'danger', txt: '过低' };
+  if (pct < 15) return { cls: 'low', txt: '偏低' };
+  if (pct <= 85) return { cls: 'normal', txt: '正常' };
+  if (pct <= 97) return { cls: 'high', txt: '偏高' };
+  return { cls: 'danger', txt: '过高' };
+}
+function nearestIdx(months, target) {
+  let idx = 0, min = Infinity;
+  months.forEach((m, i) => { const diff = Math.abs(m - target); if (diff < min) { min = diff; idx = i; } });
+  return idx;
 }
 
 function getRefData(standardKey, metric, gender) {
@@ -1510,46 +1906,32 @@ function updatePercentile() {
     return;
   }
 
-  const ageMonths = 8;
+  const ageMonths = getAgeMonths(latest.date);
   const gender = state.growthGender || 'male';
   const wStd = getRefData(state.weightStandard || 'who', 'weight', gender);
   const hStd = getRefData(state.heightStandard || 'who', 'height', gender);
 
-  // 找到最接近 ageMonths 的月龄索引
-  const findIdx = (months, target) => {
-    let idx = 0, minDiff = Infinity;
-    months.forEach((m, i) => {
-      const diff = Math.abs(m - target);
-      if (diff < minDiff) { minDiff = diff; idx = i; }
-    });
-    return idx;
-  };
-
-  const wIdx = findIdx(wStd.months, ageMonths);
-  const hIdx = findIdx(hStd.months, ageMonths);
+  const wIdx = nearestIdx(wStd.months, ageMonths);
+  const hIdx = nearestIdx(hStd.months, ageMonths);
   const refW = wStd.values[wIdx];
   const refH = hStd.values[hIdx];
 
   let parts = [];
   if (latest.weight && refW) {
-    const pct = Math.round(latest.weight / refW * 100);
+    const pct = calcPct(latest.weight, refW);
     parts.push('体重 ' + pct + '%');
   }
   if (latest.height && refH) {
-    const pct = Math.round(latest.height / refH * 100);
+    const pct = calcPct(latest.height, refH);
     parts.push('身高 ' + pct + '%');
   }
 
   const stdName = (GROWTH_STANDARDS[state.weightStandard || 'who'] || {}).name || '';
   document.getElementById('growthPercentile').textContent =
-    '8月龄 · ' + (parts.length ? parts.join(' · ') + '（参考' + (stdName.split(' ')[0]) + '）' : '8月龄');
+    ageMonths + '月龄 · ' + (parts.length ? parts.join(' · ') + '（参考' + (stdName.split(' ')[0]) + '）' : ageMonths + '月龄');
 }
 
-function renderGrowthChart() {
-  const canvas = document.getElementById('growthChart');
-  const ctx = canvas.getContext('2d');
-  if (growthChartInstance) growthChartInstance.destroy();
-
+function buildGrowthChartConfig() {
   const gender = state.growthGender || 'male';
   const wStdKey = state.weightStandard || 'who';
   const hStdKey = state.heightStandard || 'who';
@@ -1560,7 +1942,7 @@ function renderGrowthChart() {
   const wStdName = (GROWTH_STANDARDS[wStdKey] || {}).name || '';
   const hStdName = (GROWTH_STANDARDS[hStdKey] || {}).name || '';
 
-  // 合并月龄作为 X 轴（取体重标准和身高标准的并集，加上宝宝记录日期）
+  // 合并月龄作为 X 轴（取体重标准和身高标准的并集）
   const allMonths = [...new Set([...wRef.months, ...hRef.months])].sort((a,b) => a-b);
   const labels = allMonths.map(m => m + '月');
 
@@ -1575,22 +1957,16 @@ function renderGrowthChart() {
   const wRefAligned = alignRef(wRef.months, wRef.values, allMonths);
   const hRefAligned = alignRef(hRef.months, hRef.values, allMonths);
 
-  // 宝宝数据（如果有）- 用月龄近似映射
+  // 宝宝数据：按各自记录的月龄落点
   const babyWeightData = new Array(allMonths.length).fill(null);
   const babyHeightData = new Array(allMonths.length).fill(null);
-  // 简化处理：宝宝当前8月龄，数据点放在8月位置（实际应基于出生日期计算月龄）
   if (state.growthData.length > 0) {
     state.growthData.forEach(d => {
-      // 假设每条记录对应8月龄附近，简化为放在8月
-      const targetMonth = 8;
+      const targetMonth = getAgeMonths(d.date);
       const idx = allMonths.indexOf(targetMonth);
       if (idx >= 0) {
-        if (d.weight !== null && d.weight !== undefined) {
-          babyWeightData[idx] = d.weight;
-        }
-        if (d.height !== null && d.height !== undefined) {
-          babyHeightData[idx] = d.height;
-        }
+        if (d.weight != null) babyWeightData[idx] = d.weight;
+        if (d.height != null) babyHeightData[idx] = d.height;
       }
     });
   }
@@ -1648,11 +2024,35 @@ function renderGrowthChart() {
     }
   ];
 
-  growthChartInstance = new Chart(ctx, {
-    type: 'line',
-    data: { labels: labels, datasets: datasets },
-    options: getChartOptions()
-  });
+  return { type: 'line', data: { labels: labels, datasets: datasets }, options: getChartOptions() };
+}
+
+function renderGrowthChart() {
+  const canvas = document.getElementById('growthChart');
+  const ctx = canvas.getContext('2d');
+  if (growthChartInstance) growthChartInstance.destroy();
+  growthChartInstance = new Chart(ctx, buildGrowthChartConfig());
+}
+
+// 大图弹窗
+let growthChartModalInst = null;
+function openGrowthModal() {
+  const m = document.getElementById('growthModal');
+  if (!m) return;
+  m.classList.add('show');
+  renderGrowthChartModal();
+}
+function closeGrowthModal() {
+  const m = document.getElementById('growthModal');
+  if (m) m.classList.remove('show');
+  if (growthChartModalInst) { growthChartModalInst.destroy(); growthChartModalInst = null; }
+}
+function renderGrowthChartModal() {
+  const canvas = document.getElementById('growthChartModal');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  if (growthChartModalInst) growthChartModalInst.destroy();
+  growthChartModalInst = new Chart(ctx, buildGrowthChartConfig());
 }
 
 function getChartOptions() {
@@ -1720,13 +2120,31 @@ function updateAllergyProgress() {
   const done = state.foodAllergies.filter(f => f.status === 'done').length;
   const pct = total > 0 ? Math.round(done / total * 100) : 0;
 
-  document.getElementById('allergyCount').textContent = done;
-  document.getElementById('allergyTotal').textContent = total;
-  document.getElementById('allergyDone').textContent = done;
+  // 首页环形进度（如存在）
+  const countEl = document.getElementById('allergyCount');
+  const totalEl = document.getElementById('allergyTotal');
+  const doneEl = document.getElementById('allergyDone');
+  const ringEl = document.getElementById('allergyRing');
+  if (countEl) countEl.textContent = done;
+  if (totalEl) totalEl.textContent = total;
+  if (doneEl) doneEl.textContent = done;
+  if (ringEl) {
+    const circumference = 2 * Math.PI * 32;
+    const dash = circumference * pct / 100;
+    ringEl.setAttribute('stroke-dasharray', dash + ' ' + circumference);
+  }
 
-  const circumference = 2 * Math.PI * 32;
-  const dash = circumference * pct / 100;
-  document.getElementById('allergyRing').setAttribute('stroke-dasharray', dash + ' ' + circumference);
+  // 辅食与记录 - 排敏进度子页（横向条）
+  const wrap = document.getElementById('allergyProgressWrap');
+  if (wrap) {
+    wrap.innerHTML = `
+      <div class="ap-row">
+        <span>总共已尝试 <strong>${total}</strong> 种食材</span>
+        <span>排敏成功 <strong>${done}</strong> 种</span>
+      </div>
+      <div class="ap-track"><div class="ap-fill" style="width:${pct}%"></div></div>
+    `;
+  }
 }
 
 function addFoodTrial() {
@@ -1766,17 +2184,68 @@ function deleteFood(index) {
 function renderFoodAllergyList() {
   const container = document.getElementById('foodAllergyList');
   if (state.foodAllergies.length === 0) {
-    container.innerHTML = '<div style="color:var(--text-muted);padding:8px">暂无食材记录</div>';
+    container.innerHTML = '<div style="color:var(--text-muted);padding:8px">暂无食材记录，上方添加尝试</div>';
     return;
   }
-  container.innerHTML = state.foodAllergies.map((f, i) => `
-    <div class="task-item">
-      <div class="task-check ${f.status === 'done' ? 'done' : ''}" onclick="toggleFoodStatus(${i})"></div>
-      <span class="task-label ${f.status === 'done' ? 'done' : ''}">${f.name}</span>
-      <span style="font-size:var(--font-xs);color:var(--text-muted)">${f.date}</span>
-      <button class="btn btn-outline btn-sm" style="padding:3px 10px;font-size:11px" onclick="deleteFood(${i})">✕</button>
+  container.innerHTML = state.foodAllergies.map((f, i) => {
+    const isDone = f.status === 'done';
+    return `
+      <div class="task-item">
+        <span class="task-label ${isDone ? 'done' : ''}">${f.name}</span>
+        <span class="allergy-status-tag ${isDone ? 'done' : 'trying'}" onclick="toggleFoodStatus(${i})">${isDone ? '排敏成功' : '试敏中'}</span>
+        <span style="font-size:var(--font-xs);color:var(--text-muted)">${f.date}</span>
+        <button class="btn btn-outline btn-sm" style="padding:3px 10px;font-size:11px" onclick="deleteFood(${i})">✕</button>
+      </div>
+    `;
+  }).join('');
+}
+
+// ==================== 每日辅食记录（动态行） ====================
+function renderFoodRecords() {
+  const container = document.getElementById('foodRecordList');
+  if (!container) return;
+  if (!state.foodRecords || state.foodRecords.length === 0) state.foodRecords = [''];
+  if (state.foodRecords.length > 3) state.foodRecords = state.foodRecords.slice(0, 3);
+
+  container.innerHTML = state.foodRecords.map((val, i) => `
+    <div class="fr-row">
+      <input class="fr-input" type="text" placeholder="如：高铁米粉15g + 鳕鱼泥10g + 胡萝卜泥15g"
+        value="${escapeHtml(val)}" oninput="onFoodRecordInput(${i}, this.value)" data-fr="${i}">
+      <button class="fr-del" title="删除该行" onclick="deleteFoodRecord(${i})">✕</button>
     </div>
   `).join('');
+
+  const addBtn = document.getElementById('addFoodRecordBtn');
+  if (addBtn) addBtn.style.display = state.foodRecords.length >= 3 ? 'none' : 'block';
+}
+
+function onFoodRecordInput(index, value) {
+  if (!state.foodRecords) state.foodRecords = [''];
+  state.foodRecords[index] = value;
+  saveState(state);
+}
+
+function addFoodRecord() {
+  if (!state.foodRecords) state.foodRecords = [''];
+  if (state.foodRecords.length >= 3) return;
+  state.foodRecords.push('');
+  saveState(state);
+  renderFoodRecords();
+}
+
+function deleteFoodRecord(index) {
+  if (!state.foodRecords) state.foodRecords = [''];
+  if (state.foodRecords.length <= 1) {
+    state.foodRecords = [''];
+  } else {
+    state.foodRecords.splice(index, 1);
+  }
+  saveState(state);
+  renderFoodRecords();
+}
+
+function escapeHtml(s) {
+  return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
 // ==================== STOOL RECORDS ====================
@@ -1821,36 +2290,307 @@ function saveFoodCompare() {
 }
 
 // ==================== GROWTH TABLE ====================
-function renderGrowthTable() {
-  const tbody = document.getElementById('growthTableBody');
-  const empty = document.getElementById('growthEmpty');
-
-  if (state.growthData.length === 0) {
-    tbody.innerHTML = '';
-    empty.style.display = 'block';
-    return;
-  }
-  empty.style.display = 'none';
-  tbody.innerHTML = state.growthData.slice().reverse().map((d, i) => `
-    <tr style="border-bottom:1px solid var(--border)">
-      <td style="padding:12px">${d.date}</td>
-      <td style="padding:12px;text-align:center">${d.weight ?? '-'}</td>
-      <td style="padding:12px;text-align:center">${d.height ?? '-'}</td>
-      <td style="padding:12px;text-align:center">
-        <button class="btn btn-outline btn-sm" style="padding:3px 10px;font-size:11px"
-          onclick="deleteGrowthRecord(${state.growthData.length - 1 - i})">删除</button>
-      </td>
-    </tr>
-  `).join('');
+// ==================== 成长台账：记录列表（卡片式） ====================
+function colHtml(value, unit, pct) {
+  const hasVal = (value != null && value !== '' && !isNaN(value));
+  const num = hasVal ? (value + '<span class="rc-unit">' + unit + '</span>') : '—';
+  let badge;
+  if (!hasVal) badge = '<span class="rc-badge normal">—</span>';
+  else if (pct == null) badge = '<span class="rc-badge low">--% 待定</span>';
+  else { const c = pctCategory(pct); badge = '<span class="rc-badge ' + c.cls + '">' + pct + '% ' + c.txt + '</span>'; }
+  return '<div class="record-col"><div class="rc-num">' + num + '</div>' + badge + '</div>';
 }
 
-function deleteGrowthRecord(index) {
-  state.growthData.splice(index, 1);
+function getRefStd(std, metric, gender) {
+  if (metric === 'head') return null; // 头围暂无真实标准，占位
+  const suffix = gender === 'male' ? '_m' : '_f';
+  return { months: std.months, values: std[metric + suffix] };
+}
+
+function renderGrowthCardList() {
+  const container = document.getElementById('growthCardList');
+  if (!container) return;
+  // 默认日期为今天
+  const recDate = document.getElementById('recDate');
+  if (recDate && !recDate.value) recDate.value = new Date().toISOString().split('T')[0];
+
+  if (state.growthData.length === 0) {
+    container.innerHTML = '<div style="text-align:center;padding:32px;color:var(--text-muted);font-size:var(--font-sm)">暂无记录，请在上方添加，或回到首页录入</div>';
+    return;
+  }
+  const gender = state.growthGender || 'male';
+  const std = GROWTH_STANDARDS[state.growthLedgerStandard] || GROWTH_STANDARDS.who;
+  const wRef = getRefStd(std, 'weight', gender);
+  const hRef = getRefStd(std, 'height', gender);
+
+  const sorted = state.growthData.slice().sort((a, b) => b.timestamp.localeCompare(a.timestamp));
+  container.innerHTML = sorted.map(d => {
+    const age = getAgeMonths(d.date);
+    const wp = wRef ? calcPct(d.weight, wRef.values[nearestIdx(wRef.months, age)]) : (d.weight != null ? null : null);
+    const hp = hRef ? calcPct(d.height, hRef.values[nearestIdx(hRef.months, age)]) : null;
+    return `
+    <div class="growth-record-card">
+      <button class="record-del" onclick="deleteGrowthRecord('${d.timestamp}')" title="删除">✕</button>
+      <div class="record-date">${d.date} · ${age}月龄</div>
+      <div class="record-cols">
+        ${colHtml(d.height, 'cm', hp)}
+        ${colHtml(d.weight, 'kg', wp)}
+        ${colHtml(d.head, 'cm', null)}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function addGrowthRecordFull() {
+  const date = document.getElementById('recDate').value || new Date().toISOString().split('T')[0];
+  const h = parseFloat(document.getElementById('recHeight').value);
+  const w = parseFloat(document.getElementById('recWeight').value);
+  const hd = parseFloat(document.getElementById('recHead').value);
+  if (!h && !w && !hd) { showToast('请至少填写一项数据'); return; }
+  state.growthData.push({
+    date: date,
+    timestamp: new Date().toISOString(),
+    weight: w || null,
+    height: h || null,
+    head: hd || null
+  });
   saveState(state);
-  renderGrowthTable();
+  document.getElementById('recHeight').value = '';
+  document.getElementById('recWeight').value = '';
+  document.getElementById('recHead').value = '';
+  renderGrowthCardList();
+  renderGrowthChart();
+  updatePercentile();
+  showToast('记录已保存 ✓');
+}
+
+function deleteGrowthRecord(ts) {
+  const idx = state.growthData.findIndex(d => d.timestamp === ts);
+  if (idx < 0) return;
+  state.growthData.splice(idx, 1);
+  saveState(state);
+  renderGrowthCardList();
   renderGrowthChart();
   updatePercentile();
   showToast('记录已删除');
+}
+
+// ==================== 成长台账：三大子标签页 ====================
+function switchGrowthTab(tab) {
+  ['list', 'height', 'weight'].forEach(t => {
+    const el = document.getElementById('growth-' + t);
+    if (el) el.style.display = (t === tab) ? 'block' : 'none';
+  });
+  document.querySelectorAll('#life-growth .sub-tab').forEach(b => {
+    b.classList.toggle('active', b.dataset.gtab === tab);
+  });
+  if (tab === 'list') renderGrowthCardList();
+  if (tab === 'height') renderLedgerChart('height');
+  if (tab === 'weight') renderLedgerChart('weight');
+}
+
+// ==================== 成长台账：曲线（单指标 + 5线通道） ====================
+let ledgerChartInst = { height: null, weight: null };
+
+function renderLedgerChart(metric) {
+  const canvasId = metric === 'height' ? 'ledgerHeightChart' : 'ledgerWeightChart';
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  if (ledgerChartInst[metric]) ledgerChartInst[metric].destroy();
+
+  const gender = state.growthGender || 'male';
+  const stdKey = state.growthLedgerStandard || 'who';
+  const std = GROWTH_STANDARDS[stdKey] || GROWTH_STANDARDS.who;
+  const ref = getRefStd(std, metric, gender);
+  if (!ref) return;
+
+  const months = std.months;
+  const median = ref.values;
+  // 5 条百分位通道（兜底）：以中位数为基准按比例展开，拿到真实 LMS 分位数后替换
+  const f = { p3: 0.88, p15: 0.94, p50: 1.0, p85: 1.07, p97: 1.13 };
+  const p3 = median.map(v => +(v * f.p3).toFixed(2));
+  const p15 = median.map(v => +(v * f.p15).toFixed(2));
+  const p50 = median.map(v => +(v * f.p50).toFixed(2));
+  const p85 = median.map(v => +(v * f.p85).toFixed(2));
+  const p97 = median.map(v => +(v * f.p97).toFixed(2));
+
+  const babyData = new Array(months.length).fill(null);
+  state.growthData.forEach(d => {
+    const age = getAgeMonths(d.date);
+    const idx = months.indexOf(age);
+    if (idx >= 0) {
+      const val = metric === 'height' ? d.height : d.weight;
+      if (val != null) babyData[idx] = val;
+    }
+  });
+
+  const labels = months.map(m => m + '月');
+  const unit = metric === 'height' ? 'cm' : 'kg';
+  const babyLabel = metric === 'height' ? '宝宝身高' : '宝宝体重';
+
+  const datasets = [
+    { label: '97%', data: p97, borderColor: 'rgba(163,181,166,0.7)', borderWidth: 1, pointRadius: 0, tension: 0.35 },
+    { label: '3%', data: p3, borderColor: 'rgba(163,181,166,0.7)', borderWidth: 1, pointRadius: 0, tension: 0.35, fill: '-1', backgroundColor: 'rgba(163,181,166,0.18)' },
+    { label: '15%', data: p15, borderColor: 'rgba(143,174,147,0.9)', borderWidth: 1, pointRadius: 0, tension: 0.35 },
+    { label: '50%', data: p50, borderColor: '#8fae93', borderWidth: 2, borderDash: [5,4], pointRadius: 0, tension: 0.35 },
+    { label: '85%', data: p85, borderColor: 'rgba(143,174,147,0.9)', borderWidth: 1, pointRadius: 0, tension: 0.35 },
+    { label: babyLabel, data: babyData, borderColor: '#c4a8a2', backgroundColor: '#c4a8a2', borderWidth: 2.5, pointRadius: 6, pointHoverRadius: 8, tension: 0.3, spanGaps: true }
+  ];
+
+  const yMin = Math.floor(Math.min(...p3) * 0.92);
+  const yMax = Math.ceil(Math.max(...p97) * 1.05);
+
+  ledgerChartInst[metric] = new Chart(ctx, {
+    type: 'line',
+    data: { labels, datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: {
+          position: 'top',
+          labels: {
+            boxWidth: 12, padding: 10, font: { size: 11 }, usePointStyle: true, color: '#5c4a3d',
+            filter: function(item) { return !['97%','3%','15%','85%'].includes(item.text); }
+          }
+        },
+        tooltip: { backgroundColor: 'rgba(92,74,61,0.95)', titleColor: '#fff', bodyColor: '#fff', padding: 12, cornerRadius: 8 }
+      },
+      scales: {
+        x: { ticks: { font: { size: 10 }, color: '#8b7a6b', maxRotation: 45, autoSkip: true, maxTicksLimit: 15 }, grid: { display: false }, title: { display: true, text: '月龄', font: { size: 11 }, color: '#8b7a6b' } },
+        y: {
+          ticks: { font: { size: 10 }, color: '#8b7a6b' },
+          grid: { color: '#f0ebe3' },
+          title: { display: true, text: unit, font: { size: 11 }, color: '#a3b5a6' },
+          min: yMin, max: yMax
+        }
+      }
+    }
+  });
+
+  const labelEl = document.getElementById(metric === 'height' ? 'heightStdLabel' : 'weightStdLabel');
+  if (labelEl) labelEl.textContent = '标准：' + std.name;
+}
+
+// ==================== 标准切换底部弹窗 ====================
+let stdSheetTarget = 'height';
+function openStdSheet(target) {
+  stdSheetTarget = target;
+  const cur = state.growthLedgerStandard || 'who';
+  ['nhc2025', 'nhc2022', 'who'].forEach(k => {
+    const el = document.getElementById('stdCheck-' + k);
+    if (el) el.style.visibility = (k === cur) ? 'visible' : 'hidden';
+    const opt = document.getElementById('opt-' + k);
+    if (opt) opt.classList.toggle('active', k === cur);
+  });
+  document.getElementById('stdSheet').classList.add('show');
+}
+function closeStdSheet() {
+  document.getElementById('stdSheet').classList.remove('show');
+}
+function selectStd(key) {
+  state.growthLedgerStandard = key;
+  saveState(state);
+  closeStdSheet();
+  if (stdSheetTarget === 'height') renderLedgerChart('height');
+  else renderLedgerChart('weight');
+  showToast('已切换为：' + (GROWTH_STANDARDS[key] || {}).name);
+}
+
+// ==================== REMOTE DATA (data/*.json) ====================
+// 三个自动化模块的数据由后台定时任务生成并推送到 data/*.json。
+// 页面优先读取云端数据；若读取失败（断网/未部署）则回退到本地生成或缓存。
+const DATA_BASE = 'data/';
+const remoteStore = { weeklyFood: null, hotspots: null, english: null };
+
+async function fetchJsonSafe(url) {
+  try {
+    const resp = await fetch(url, { cache: 'no-store', signal: AbortSignal.timeout(8000) });
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    return await resp.json();
+  } catch (e) {
+    console.warn('[remote] 读取失败:', url, e.message);
+    return null;
+  }
+}
+
+function renderRecipeFromData(json) {
+  const container = document.getElementById('recipeContent');
+  if (!container) return;
+  const updated = json.updatedAt ? new Date(json.updatedAt).toLocaleString('zh-CN') : '—';
+  const recipes = (json.recipes || []).map(r => ({ day: r.day, meals: r.meals || [] }));
+  if (recipes.length === 0) {
+    container.innerHTML = '<div style="text-align:center;padding:24px;color:var(--text-muted)">暂无辅食方案，点「重新生成方案」试试</div>';
+    return;
+  }
+  container.innerHTML = '<div class="recipe-grid">' + recipes.map(r => `
+    <div class="recipe-day">
+      <h4>📅 ${r.day}</h4>
+      ${r.meals.map(m => `
+        <div class="recipe-meal">
+          <span class="meal-type">${m.type || ''}</span>
+          <span class="meal-content">${m.content || ''}</span>
+        </div>
+      `).join('')}
+    </div>
+  `).join('') + '</div>';
+  container.innerHTML += `
+    <div class="data-source-note" style="margin-top:12px">
+      💡 <b>参考依据：</b>崔玉涛婴幼儿辅食进阶体系 + 国家卫健委《7～24月龄婴幼儿喂养指南》<br>
+      ⚠️ 新食材（🆕）每次只添加1种，观察3天无过敏再换下一种<br>
+      🤖 本方案由 AI 每周自动生成（更新于 ${updated}）
+    </div>
+  `;
+}
+
+async function loadWeeklyFood(force) {
+  if (remoteStore.weeklyFood && !force) { renderRecipeFromData(remoteStore.weeklyFood); return; }
+  const container = document.getElementById('recipeContent');
+  if (container) container.innerHTML = `<div style="text-align:center;padding:24px;color:var(--text-muted)"><div class="spinner" style="margin:0 auto 10px"></div><div>正在加载本周辅食方案...</div></div>`;
+  const json = await fetchJsonSafe(DATA_BASE + 'weekly-food.json');
+  if (json && json.recipes && json.recipes.length) {
+    remoteStore.weeklyFood = json;
+    renderRecipeFromData(json);
+  } else {
+    generateRecipe(); // 离线兜底：本地生成
+  }
+}
+
+function applyRemoteHotspots(json) {
+  state.lastHotspots = json.items;
+  state.lastHotspotFetch = json.updatedAt || new Date().toISOString();
+  saveState(state);
+  renderHotspots(json.items);
+}
+
+async function loadHotspots(force) {
+  if (remoteStore.hotspots && !force) { applyRemoteHotspots(remoteStore.hotspots); return; }
+  const container = document.getElementById('hotspotContent');
+  if (container) container.innerHTML = `<div style="text-align:center;padding:24px;color:var(--text-muted)"><div class="spinner" style="margin:0 auto 10px"></div><div>正在加载最新热点...</div></div>`;
+  const json = await fetchJsonSafe(DATA_BASE + 'hotspots.json');
+  if (json && Array.isArray(json.items) && json.items.length) {
+    remoteStore.hotspots = json;
+    applyRemoteHotspots(json);
+  } else {
+    fetchHotspots(true); // 离线兜底：仍尝试 RSS 实时抓取
+  }
+}
+
+async function loadRemoteData() {
+  const [wf, hs, en] = await Promise.all([
+    fetchJsonSafe(DATA_BASE + 'weekly-food.json'),
+    fetchJsonSafe(DATA_BASE + 'hotspots.json'),
+    fetchJsonSafe(DATA_BASE + 'english-history.json')
+  ]);
+  if (wf && wf.recipes && wf.recipes.length) { remoteStore.weeklyFood = wf; renderRecipeFromData(wf); }
+  if (hs && Array.isArray(hs.items) && hs.items.length) { remoteStore.hotspots = hs; applyRemoteHotspots(hs); }
+  if (en && en.current) {
+    remoteStore.english = en;
+    renderEnglishScene();
+    renderEngArchive();
+  }
 }
 
 // ==================== ENGLISH SCENE ====================
@@ -1969,21 +2709,29 @@ function getCurrentScene() {
 }
 
 function renderEnglishScene() {
-  const scene = getCurrentScene();
-  const now = new Date();
-  const startDate = new Date('2026-07-28');
-  const daysDiff = Math.floor((now - startDate) / (1000 * 60 * 60 * 24));
-  const daysInCycle = daysDiff % 3;
-  const daysRemaining = 3 - daysInCycle;
+  let scene, cycleText;
+  if (remoteStore.english && remoteStore.english.current) {
+    scene = remoteStore.english.current;
+    const ud = remoteStore.english.updatedAt ? new Date(remoteStore.english.updatedAt).toLocaleDateString('zh-CN') : '';
+    cycleText = 'AI 自动轮换 · 更新于 ' + (ud || '最近');
+  } else {
+    scene = getCurrentScene();
+    const now = new Date();
+    const startDate = new Date('2026-07-28');
+    const daysDiff = Math.floor((now - startDate) / (1000 * 60 * 60 * 24));
+    const daysInCycle = daysDiff % 3;
+    const daysRemaining = 3 - daysInCycle;
+    cycleText = '第' + (daysInCycle + 1) + '天 · ' + daysRemaining + '天后轮换';
+  }
 
   document.getElementById('sceneName').textContent = '🏠 ' + scene.name + '场景';
-  document.getElementById('sceneCycle').textContent = '第' + (daysInCycle + 1) + '天 · ' + daysRemaining + '天后轮换';
+  document.getElementById('sceneCycle').textContent = cycleText;
 
-  document.getElementById('wordGrid').innerHTML = scene.words.map(w =>
+  document.getElementById('wordGrid').innerHTML = (scene.words || []).map(w =>
     `<div class="word-item"><span class="word-en">${w[0]}</span><span class="word-cn">${w[1]}</span></div>`
   ).join('');
 
-  document.getElementById('dialogLines').innerHTML = scene.dialogs.map(d =>
+  document.getElementById('dialogLines').innerHTML = (scene.dialogs || []).map(d =>
     `<div class="dialog-line"><span class="speaker">${d[0]}：</span>${d[1]}</div>`
   ).join('');
 }
@@ -2032,26 +2780,53 @@ function generateRecipe() {
   `;
 
   setTimeout(() => {
-    const recipes = [
-      {
-        day: '今日推荐',
-        meals: [
-          { type: '早', content: '高铁米粉 15g + 鳕鱼泥 10g + 胡萝卜泥 15g（已排敏鳕鱼）' },
-          { type: '午', content: '碎碎面 20g + 虾泥 10g + 西兰花泥 15g + 核桃油 2滴（已排敏虾）' },
-          { type: '晚', content: '小米粥 30g + 南瓜泥 20g + 蛋黄 1/2个' },
-          { type: '加', content: '苹果泥 20g（下午3点）' }
-        ]
-      },
-      {
-        day: '明日建议（新食材尝试）',
-        meals: [
-          { type: '早', content: '高铁米粉 15g + 鳕鱼泥 10g + 山药泥 15g（🆕山药需观察）' },
-          { type: '午', content: '大米粥 25g + 猪肉泥 10g + 菠菜泥 15g（🆕猪肉首次尝试）' },
-          { type: '晚', content: '碎碎面 20g + 虾泥 10g + 番茄泥 15g + 亚麻籽油 2滴' },
-          { type: '加', content: '香蕉泥 15g（上午10点）' }
-        ]
-      }
+    const weekday = ['周一','周二','周三','周四','周五','周六','周日'];
+    const dayPlans = [
+      [
+        { type: '早', content: '高铁米粉 15g + 鳕鱼泥 10g + 胡萝卜泥 15g（已排敏鳕鱼）' },
+        { type: '午', content: '碎碎面 20g + 虾泥 10g + 西兰花泥 15g + 核桃油 2滴（已排敏虾）' },
+        { type: '晚', content: '小米粥 30g + 南瓜泥 20g + 蛋黄 1/2个' },
+        { type: '加', content: '苹果泥 20g（下午3点）' }
+      ],
+      [
+        { type: '早', content: '高铁米粉 15g + 鳕鱼泥 10g + 山药泥 15g（🆕山药需观察3天）' },
+        { type: '午', content: '大米粥 25g + 猪肉泥 10g + 菠菜泥 15g（🆕猪肉首次尝试）' },
+        { type: '晚', content: '碎碎面 20g + 鸡肉泥 10g + 番茄泥 15g + 亚麻籽油 2滴' },
+        { type: '加', content: '香蕉泥 15g（上午10点）' }
+      ],
+      [
+        { type: '早', content: '燕麦糊 20g + 蛋黄 1/2个 + 牛油果泥 10g' },
+        { type: '午', content: '烂面条 25g + 牛肉泥 10g + 西葫芦泥 15g + 核桃油 2滴' },
+        { type: '晚', content: '十倍粥 30g + 鳕鱼泥 10g + 冬瓜泥 15g' },
+        { type: '加', content: '梨泥 20g（下午3点）' }
+      ],
+      [
+        { type: '早', content: '高铁米粉 15g + 虾泥 10g + 紫薯泥 15g（已排敏虾）' },
+        { type: '午', content: '软米饭 20g + 三文鱼泥 10g + 芦笋泥 15g（🆕三文鱼观察3天）' },
+        { type: '晚', content: '小米南瓜粥 30g + 豆腐泥 10g + 青菜碎 10g' },
+        { type: '加', content: '蓝莓山药泥 20g（上午10点）' }
+      ],
+      [
+        { type: '早', content: '米粉 15g + 鸡肉泥 10g + 胡萝卜泥 15g' },
+        { type: '午', content: '碎碎面 20g + 猪肝泥 8g + 西兰花泥 15g + 核桃油 2滴（补铁）' },
+        { type: '晚', content: '十倍粥 30g + 鳕鱼泥 10g + 番茄泥 15g' },
+        { type: '加', content: '橙子泥 20g（下午3点）' }
+      ],
+      [
+        { type: '早', content: '燕麦糊 20g + 蛋黄 1/2个 + 香蕉泥 10g' },
+        { type: '午', content: '烂面条 25g + 虾泥 10g + 菠菜泥 15g + 亚麻籽油 2滴' },
+        { type: '晚', content: '小米粥 30g + 牛肉泥 10g + 南瓜泥 15g' },
+        { type: '加', content: '苹果泥 20g（上午10点）' }
+      ],
+      [
+        { type: '早', content: '高铁米粉 15g + 鳕鱼泥 10g + 紫薯泥 15g（已排敏）' },
+        { type: '午', content: '软米饭 20g + 猪肉泥 10g + 胡萝卜泥 15g + 核桃油 2滴' },
+        { type: '晚', content: '十倍粥 30g + 三文鱼泥 10g + 冬瓜泥 15g' },
+        { type: '加', content: '火龙果泥 20g（下午3点）' }
+      ]
     ];
+
+    const recipes = weekday.map((d, i) => ({ day: d, meals: dayPlans[i] }));
 
     container.innerHTML = '<div class="recipe-grid">' + recipes.map(r => `
       <div class="recipe-day">
@@ -2068,8 +2843,8 @@ function generateRecipe() {
     container.innerHTML += `
       <div class="data-source-note" style="margin-top:12px">
         💡 <b>参考依据：</b>崔玉涛婴幼儿辅食进阶体系 + 国家卫健委《7～24月龄婴幼儿喂养指南》<br>
-        ⚠️ 新食材每次只添加1种，观察3天无过敏再换下一种<br>
-        📌 当前辅食龄约2个月，建议每餐辅食量约30-50g
+        ⚠️ 新食材（🆕）每次只添加1种，观察3天无过敏再换下一种<br>
+        📌 当前辅食龄约2个月，建议每餐辅食量约30-50g；点击「重新生成方案」可换一周搭配
       </div>
     `;
   }, 1500);
@@ -2297,7 +3072,7 @@ function deleteManualHotspot(index) {
         // 自动触发刷新（松手效果）
         setTimeout(() => {
           indicator.remove();
-          fetchHotspots(true);
+          loadHotspots(true);
         }, 400);
       }
     }, { passive: true });
@@ -2309,19 +3084,37 @@ function deleteManualHotspot(index) {
 // ==================== ENGLISH ARCHIVE ====================
 function renderEngArchive() {
   const container = document.getElementById('engArchiveList');
-  if (!state.englishScenes || state.englishScenes.length === 0) {
-    container.innerHTML = '<div style="color:var(--text-muted);padding:12px;text-align:center">暂无存档，生成新场景后会自动备份</div>';
+  if (!container) return;
+  let list = [];
+  if (remoteStore.english && Array.isArray(remoteStore.english.history)) {
+    list = remoteStore.english.history.slice();
+  }
+  if (state.englishScenes && state.englishScenes.length) {
+    const seen = new Set(list.map(s => (s.date || '') + '|' + (s.name || (s.scene && s.scene.name) || '')));
+    state.englishScenes.forEach(s => {
+      const name = s.name || (s.scene && s.scene.name);
+      const key = (s.date || '') + '|' + name;
+      if (!seen.has(key)) { list.push(s); seen.add(key); }
+    });
+  }
+  if (list.length === 0) {
+    container.innerHTML = '<div style="color:var(--text-muted);padding:12px;text-align:center">暂无存档，AI 每3天自动生成新场景并备份</div>';
     return;
   }
-  container.innerHTML = state.englishScenes.slice().reverse().map((s, i) => `
-    <div style="padding:14px;background:#fdfaf6;border-radius:8px;margin-bottom:10px;border:1px solid var(--border)">
-      <div style="font-weight:600;color:var(--accent-blue);margin-bottom:6px">🏠 ${s.scene.name}场景 · ${s.date}</div>
-      <div style="font-size:var(--font-xs);color:var(--text-secondary);margin-bottom:6px">
-        词汇：${s.scene.words.slice(0,5).map(w => w[0]).join(', ')}...
+  container.innerHTML = list.slice().reverse().map(s => {
+    const name = s.name || (s.scene && s.scene.name) || '未知';
+    const words = s.words || (s.scene && s.scene.words) || [];
+    const dialogs = s.dialogs || (s.scene && s.scene.dialogs) || [];
+    return `
+      <div style="padding:14px;background:#fdfaf6;border-radius:8px;margin-bottom:10px;border:1px solid var(--border)">
+        <div style="font-weight:600;color:var(--accent-blue);margin-bottom:6px">🏠 ${name}场景 · ${s.date || ''}</div>
+        <div style="font-size:var(--font-xs);color:var(--text-secondary);margin-bottom:6px">
+          词汇：${words.slice(0,5).map(w => w[0]).join(', ')}...
+        </div>
+        <div style="font-size:var(--font-xs);color:var(--text-muted)">共 ${words.length} 词 · ${dialogs.length} 句对话</div>
       </div>
-      <div style="font-size:var(--font-xs);color:var(--text-muted)">共 ${s.scene.words.length} 词 · ${s.scene.dialogs.length} 句对话</div>
-    </div>
-  `).join('');
+    `;
+  }).join('');
 }
 
 // ==================== FILE LISTS ====================
@@ -2473,10 +3266,33 @@ function switchLifeTab(tab) {
   ['food','growth','eng-archive'].forEach(t => {
     document.getElementById('life-' + t).style.display = t === tab ? 'block' : 'none';
   });
-  if (tab === 'growth') renderGrowthTable();
+  if (tab === 'growth') renderGrowthCardList();
   if (tab === 'eng-archive') renderEngArchive();
   if (tab === 'food') {
-    renderStoolHistory();
+    switchFoodTab('weekly');
+  }
+}
+
+// ==================== 辅食与记录 内部子标签页 ====================
+function switchFoodTab(tab) {
+  document.querySelectorAll('#life-food .sub-tab').forEach(t => t.classList.remove('active'));
+  const activeBtn = document.querySelector('#life-food .sub-tab[data-ftab="' + tab + '"]');
+  if (activeBtn) activeBtn.classList.add('active');
+
+  ['weekly','daily','allergy'].forEach(t => {
+    const el = document.getElementById('food-' + t);
+    if (el) el.style.display = (t === tab) ? 'block' : 'none';
+  });
+
+  if (tab === 'weekly') {
+    // 首次进入且尚未生成时自动生成一次
+    const rc = document.getElementById('recipeContent');
+    if (rc && rc.innerHTML.indexOf('spinner') >= 0) loadWeeklyFood();
+    else if (rc && rc.innerHTML.trim() === '') loadWeeklyFood();
+  } else if (tab === 'daily') {
+    renderFoodRecords();
+  } else if (tab === 'allergy') {
+    updateAllergyProgress();
     renderFoodAllergyList();
   }
 }
@@ -2540,6 +3356,11 @@ function generateExportContent() {
       lines.push('    ' + r.date + ' | ' + r.count + '次 | ' + (r.color === 'normal' ? '正常' : r.color === 'green' ? '绿便⚠️' : '异常⚠️'));
     });
     if ((s.stoolRecords || []).length === 0) lines.push('    （暂无）');
+    lines.push('');
+    lines.push('📝 每日辅食记录');
+    const fr = (s.foodRecords || []).filter(x => x && x.trim());
+    if (fr.length === 0) lines.push('  （暂无）');
+    else fr.forEach((t, i) => lines.push('  ' + (i + 1) + '. ' + t));
     lines.push('');
     lines.push('📝 辅食对比记录');
     lines.push(s.foodCompare ? '  已记录（' + s.foodCompare.length + '字）' : '  （暂无）');
@@ -2615,9 +3436,37 @@ function init() {
   renderHome();
   renderEnglishScene();
   renderAllFolderUploads();
+  loadRemoteData(); // 异步加载 data/*.json（辅食/热点/英语）
 }
 
 window.addEventListener('DOMContentLoaded', init);
 </script>
+
+  <!-- 生长曲线大图弹窗 -->
+  <div class="growth-modal-overlay" id="growthModal" onclick="closeGrowthModal()">
+    <div class="growth-modal-box" onclick="event.stopPropagation()">
+      <button class="growth-modal-close" onclick="closeGrowthModal()">✕</button>
+      <div class="modal-title">宝宝生长曲线</div>
+      <div class="chart-container" style="height:58vh"><canvas id="growthChartModal"></canvas></div>
+    </div>
+  </div>
+
+  <!-- 标准切换底部弹窗 -->
+  <div class="bottom-sheet-overlay" id="stdSheet" onclick="closeStdSheet()">
+    <div class="bottom-sheet" onclick="event.stopPropagation()">
+      <div class="sheet-title">选择生长标准</div>
+      <button class="sheet-option" id="opt-nhc2025" onclick="selectStd('nhc2025')">
+        <span>卫健委 2025 · 喂养评估指南 0-3岁</span><span class="check" id="stdCheck-nhc2025">✓</span>
+      </button>
+      <button class="sheet-option" id="opt-nhc2022" onclick="selectStd('nhc2022')">
+        <span>卫健委 2022 · 7岁以下儿童标准</span><span class="check" id="stdCheck-nhc2022">✓</span>
+      </button>
+      <button class="sheet-option" id="opt-who" onclick="selectStd('who')">
+        <span>WHO 0-5岁儿童生长标准</span><span class="check" id="stdCheck-who">✓</span>
+      </button>
+      <button class="sheet-cancel" onclick="closeStdSheet()">取消</button>
+    </div>
+  </div>
+
 </body>
 </html>

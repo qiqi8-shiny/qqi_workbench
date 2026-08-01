@@ -1,0 +1,59 @@
+{
+  "updatedAt": "2026-08-01T11:00:00+08:00",
+  "source": "AI 每3天自动轮换生成",
+  "current": {
+    "name": "超市",
+    "words": [
+      ["cart", "购物车"], ["apple", "苹果"], ["banana", "香蕉"], ["bread", "面包"],
+      ["milk", "牛奶"], ["egg", "鸡蛋"], ["cashier", "收银员"], ["aisle", "过道"],
+      ["shelf", "货架"], ["bag", "袋子"], ["price", "价格"], ["vegetable", "蔬菜"],
+      ["fruit", "水果"], ["checkout", "结账台"], ["receipt", "小票"], ["scale", "秤"],
+      ["coupon", "优惠券"], ["freezer", "冰柜"]
+    ],
+    "dialogs": [
+      ["Mom", "Let's get a shopping cart. Can you help me push it?"],
+      ["Baby", "Push! Push!"],
+      ["Mom", "We need some apples. How many should we get?"],
+      ["Baby", "One, two, three!"],
+      ["Mom", "Three apples! Good counting. Now let's find the bread."]
+    ]
+  },
+  "history": [
+    {
+      "date": "2026-07-28",
+      "name": "农场",
+      "words": [
+        ["cow", "奶牛"], ["pig", "猪"], ["sheep", "绵羊"], ["horse", "马"],
+        ["chicken", "鸡"], ["duck", "鸭子"], ["tractor", "拖拉机"], ["barn", "谷仓"],
+        ["fence", "栅栏"], ["hay", "干草"], ["farmer", "农夫"], ["egg", "鸡蛋"],
+        ["milk", "牛奶"], ["field", "田野"], ["scarecrow", "稻草人"], ["goat", "山羊"],
+        ["rooster", "公鸡"], ["pond", "池塘"]
+      ],
+      "dialogs": [
+        ["Mom", "Look, there's a cow! Can you say \"moo\"?"],
+        ["Baby", "Moo! Moo!"],
+        ["Mom", "Yes! The cow says moo. What color is the cow?"],
+        ["Baby", "White... and black!"],
+        ["Mom", "Great job! Let's go see the chickens now."]
+      ]
+    },
+    {
+      "date": "2026-07-31",
+      "name": "超市",
+      "words": [
+        ["cart", "购物车"], ["apple", "苹果"], ["banana", "香蕉"], ["bread", "面包"],
+        ["milk", "牛奶"], ["egg", "鸡蛋"], ["cashier", "收银员"], ["aisle", "过道"],
+        ["shelf", "货架"], ["bag", "袋子"], ["price", "价格"], ["vegetable", "蔬菜"],
+        ["fruit", "水果"], ["checkout", "结账台"], ["receipt", "小票"], ["scale", "秤"],
+        ["coupon", "优惠券"], ["freezer", "冰柜"]
+      ],
+      "dialogs": [
+        ["Mom", "Let's get a shopping cart. Can you help me push it?"],
+        ["Baby", "Push! Push!"],
+        ["Mom", "We need some apples. How many should we get?"],
+        ["Baby", "One, two, three!"],
+        ["Mom", "Three apples! Good counting. Now let's find the bread."]
+      ]
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "updatedAt": "2026-08-01T11:00:00+08:00",
+  "source": "AI 每周联网抓取（医学影像 AI）",
+  "items": [
+    {
+      "tag": "产业",
+      "tagClass": "tag-industry",
+      "title": "DeepHealth 获两项 FDA 许可：乳腺影像套件新增心血管洞察与既往检查整合",
+      "desc": "RadNet 子公司 DeepHealth 的 Breast Suite 新增乳腺动脉钙化(BAC)评估与 Mammo Dx 既往检查整合功能，将乳腺 AI 拓展至心血管风险与个性化评估。",
+      "link": "https://www.vbdata.cn/intelDetail/1036237",
+      "pubDate": "2026-06-25"
+    },
+    {
+      "tag": "学术",
+      "tagClass": "tag-academic",
+      "title": "基于头颅 CT 平扫的急性脑梗死分诊功能首获 FDA 510(k) 批准",
+      "desc": "Harrison.ai 功能覆盖六大血管供血区全脑缺血卒中优先级分级，薄层序列灵敏度最高达 89.2%，可在首项检查中完成分诊。",
+      "link": "https://www.brainmed.com/info/detail?id=58386",
+      "pubDate": "2026-03-12"
+    },
+    {
+      "tag": "政策",
+      "tagClass": "tag-policy",
+      "title": "多款 AI 医疗器械获 NMPA 三类证，联影智能拿下核医学领域首张三类证",
+      "desc": "2026 年 AI 医械加速切入 PET-CT、消化内镜、手术导航等赛道；联影智能累计获三类证 20 张，行业从辅助诊断迈向辅助治疗。",
+      "link": "https://wxb.xzdw.gov.cn/xxh/xxhgzdt/202607/t20260707_682610.html",
+      "pubDate": "2026-07-07"
+    },
+    {
+      "tag": "产业",
+      "tagClass": "tag-industry",
+      "title": "Aidoc「First Read」获 FDA 突破性设备认定：AI 先读胸片并自动草拟报告",
+      "desc": "AI 基于 CARE 基础模型先生成初步报告草稿，由放射科医师审查签署，目标缩短急诊影像判读空窗期；生成式 AI 正式进入放射科核心工作流。",
+      "link": "https://www.hotmolts.com/post/ai-fda--75ee73b6-4f35-4722-a41f-450c4bc2a814",
+      "pubDate": "2026-06-18"
+    },
+    {
+      "tag": "产业",
+      "tagClass": "tag-industry",
+      "title": "迈瑞「启元」超声大模型登场：多模态融合实现 BI-RADS 分级与可解释思维链",
+      "desc": "融合 B 模式/血流/弹性等模态，实时提示病灶特征并完成良恶性判断；妇产筛查可节省 85% 操作时间，提供可解释诊断逻辑。",
+      "link": "https://www.medteccn.com/?p=25536",
+      "pubDate": "2026-06-20"
+    },
+    {
+      "tag": "学术",
+      "tagClass": "tag-academic",
+      "title": "放射学占 2026 年 FDA AI 算法许可逾 3/4，累计已清 1524 项",
+      "desc": "2026 年初放射学新增 68 项 FDA 许可，占全部 AI 临床许可的 76%；月均许可由 2024 年 21 项升至约 30 项，商业化生态加速成形。",
+      "link": "https://xrayinterpreter.com/news/radiology-dominates-fda-ai-algorithm-clearances-in-2026",
+      "pubDate": "2026-06-30"
+    }
+  ]
+}
