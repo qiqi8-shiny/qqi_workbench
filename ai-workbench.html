@@ -1134,11 +1134,14 @@ textarea:focus { border-color: var(--accent-sage); }
 .data-source-note b { color: var(--text-secondary); }
 
 /* ============ Responsive ============ */
-@media (max-width: 1024px) {
+@media (max-width: 1100px) {
   .card-grid { grid-template-columns: 1fr; }
   .main-content { padding: 24px 20px 40px; }
+  /* 窄屏：签到卡片占满父容器，避免被侧边栏+padding 推出视口 */
+  .signin-card { max-width: 100%; }
 }
-@media (max-width: 768px) {
+@media (max-width: 900px) {
+  /* 触发侧边栏图标-only 折叠态（Workbuddy 内嵌窗口常在 800-1000px 视口） */
   :root { --sidebar-width: 64px; }
   .sidebar { padding: 16px 8px; }
   .sidebar-brand, .nav-item span:not(.icon-dot) { display: none; }
@@ -1149,8 +1152,49 @@ textarea:focus { border-color: var(--accent-sage); }
   .main-content { padding: 16px 12px 40px; }
   .growth-input-row, .standard-selectors { grid-template-columns: 1fr; }
   .word-grid { grid-template-columns: 1fr 1fr; }
+  /* 防止任何子元素（特别是带长 URL 的 signin-note）撑爆容器 */
+  .main-content, .page, .card, .signin-card, .signin-status, .signin-note {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+}
+@media (max-width: 560px) {
+  /* 极窄屏（手机/Workbuddy 浮窗）：完全收起侧边栏，main-content 占满；
+     用底部固定 dock 承担导航，避免汉堡按钮的复杂度 */
+  :root { --sidebar-width: 0px; }
+  .sidebar { display: none; }
+  .main-content { padding: 12px 12px 80px; }
+  .mobile-dock { display: flex; }
+  .signin-card { max-width: 100%; }
+  .card { padding: 16px 14px; }
+  h1 { font-size: 1.45rem !important; }
+  .page-header { margin-bottom: 18px; }
 }
 .signin-card { max-width: 520px; }
+
+/* ============ Mobile Dock (极窄屏底部导航) ============ */
+.mobile-dock {
+  display: none;
+  position: fixed; left: 0; right: 0; bottom: 0;
+  background: var(--bg-sidebar);
+  border-top: 1px solid rgba(0,0,0,0.06);
+  z-index: 100;
+  justify-content: space-around;
+  align-items: center;
+  padding: 8px 4px calc(8px + env(safe-area-inset-bottom));
+}
+.mobile-dock .dock-item {
+  flex: 1;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 2px;
+  padding: 6px 4px;
+  background: none; border: none; cursor: pointer;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-family: inherit;
+}
+.mobile-dock .dock-item svg { width: 22px; height: 22px; }
+.mobile-dock .dock-item.active { color: var(--accent-sage); font-weight: 600; }
 .signin-status {
   font-size: var(--font-lg);
   font-weight: 600;
@@ -1820,6 +1864,30 @@ textarea:focus { border-color: var(--accent-sage); }
   </main>
 </div>
 
+<!-- 极窄屏底部导航（手机/Workbuddy 浮窗） -->
+<nav class="mobile-dock" aria-label="底部导航">
+  <button class="dock-item active" data-page="home" onclick="switchPage('home')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <span>首页</span>
+  </button>
+  <button class="dock-item" data-page="learning" onclick="switchPage('learning')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+    <span>学习</span>
+  </button>
+  <button class="dock-item" data-page="research" onclick="switchPage('research')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+    <span>科研</span>
+  </button>
+  <button class="dock-item" data-page="life" onclick="switchPage('life')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+    <span>生活</span>
+  </button>
+  <button class="dock-item" data-page="signin" onclick="switchPage('signin')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    <span>签到</span>
+  </button>
+</nav>
+
 <!-- Rename Modal -->
 <div class="modal-overlay" id="renameModal" style="display:none" onclick="closeRename()">
   <div class="modal-box" onclick="event.stopPropagation()">
@@ -1870,26 +1938,26 @@ textarea:focus { border-color: var(--accent-sage); }
     <!-- ========== 每日签到 ========== -->
     <div class="page" id="page-signin">
       <div class="page-header">
-        <h1>✅️ 每日签到</h1>
+        <h1><svg class="page-h1-ico" viewBox="0 0 24 24" fill="none" stroke="#9caf88" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:1.05em;height:1.05em;vertical-align:-0.18em;margin-right:6px"><polyline points="20 6 9 17 4 12"/></svg>每日签到</h1>
         <div class="subtitle" id="signinUpdated">状态加载中…</div>
       </div>
 
       <div class="card signin-card">
         <div class="card-title" style="margin-bottom:14px"><span class="icon-dot sage"></span>Workbuddy 每日签到</div>
-        <div class="signin-status" id="signinWorkbuddy">今日签到：❌ 未签到</div>
-        <div class="signin-note">每日自动登录工作台完成签到，奖励 +100 积分</div>
+        <div class="signin-status" id="signinWorkbuddy">今日签到：—</div>
+        <div class="signin-note">未开启自动（Workbuddy 为手机验证码登录，暂不接入自动签到；可手动在 App 内签到）</div>
       </div>
 
       <div class="card signin-card" style="margin-top:16px">
         <div class="card-title" style="margin-bottom:14px"><span class="icon-dot blue"></span>科研通每日签到</div>
         <div class="signin-status" id="signinKeyantong">今日签到：❌ 未签到</div>
-        <div class="signin-note">每日自动登录科研通完成签到</div>
+        <div class="signin-note">每日自动登录科研通（邮箱+密码）完成签到</div>
       </div>
 
       <button class="btn btn-outline btn-sm" style="margin-top:16px" onclick="loadSigninStatus(true)">🔄 刷新签到状态</button>
       <div style="font-size:var(--font-xs);color:var(--text-muted);margin-top:10px;line-height:1.6">
-        💡 签到由 GitHub Actions 每日北京时间 8:00 自动执行（脚本读取仓库 Secrets 中的账号，密码不写死在前端）。<br>
-        执行结果会写入 <code>data/signin-status.json</code>，本页每次打开自动读取并展示。
+        💡 科研通签到由 GitHub Actions 每日北京时间 8:00 自动执行（脚本读取仓库 Secrets 中的账号，密码不写死在前端）。<br>
+        执行结果会写入 <code>data/signin-status.json</code>，本页每次打开自动读取并展示；点上方「刷新」可手动更新。
       </div>
     </div>
 
@@ -1950,9 +2018,9 @@ let state = loadState();
 // ==================== NAVIGATION ====================
 function switchPage(page) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.querySelectorAll('.nav-item, .dock-item').forEach(n => n.classList.remove('active'));
   document.getElementById('page-' + page).classList.add('active');
-  document.querySelector(`[data-page="${page}"]`).classList.add('active');
+  document.querySelectorAll(`[data-page="${page}"]`).forEach(n => n.classList.add('active'));
 
   if (page === 'home') {
     renderHome();
@@ -1993,7 +2061,7 @@ async function loadSigninStatus(force) {
   wbEl.className = 'signin-status ' + (wb.done ? 'done' : 'fail');
   wbEl.innerHTML = wb.done
     ? ('<svg class="signin-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>今日签到：已完成' + (wb.points ? ' <span style="opacity:0.78">(+' + wb.points + '积分)</span>' : ''))
-    : '<svg class="signin-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>今日签到：未签到';
+    : '<svg class="signin-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>今日签到：' + (wb.note ? wb.note.replace('未开启自动签到', '未开启自动') : '未签到');
   // 科研通
   ktEl.className = 'signin-status ' + (kt.done ? 'done' : 'fail');
   ktEl.innerHTML = kt.done
