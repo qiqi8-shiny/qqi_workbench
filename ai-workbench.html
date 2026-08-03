@@ -687,12 +687,83 @@ textarea:focus { border-color: var(--accent-sage); }
 }
 .sheet-cancel:hover { background: #e7dfd2; }
 
+/* ============ 个人健康（经期 / 步数 / 卡路里） ============ */
+.time-range-btns { display: flex; gap: 8px; }
+.range-btn {
+  flex: 1;
+  padding: 9px 0;
+  border: 1.5px solid var(--border);
+  background: #fff;
+  border-radius: 10px;
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 500;
+}
+.range-btn.active { background: var(--accent-sage); color: #fff; border-color: var(--accent-sage); }
+.range-btn:active { transform: scale(0.97); }
+
+.period-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 14px; }
+.period-top .today { font-size: var(--font-lg); font-weight: 600; color: var(--text-primary); }
+.btn-back-today {
+  padding: 6px 12px;
+  border: 1.5px solid var(--accent-sage);
+  background: transparent;
+  color: var(--accent-sage);
+  border-radius: 8px;
+  font-size: var(--font-xs);
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.btn-back-today:active { transform: scale(0.96); }
+
+.period-status { font-size: var(--font-md); color: var(--text-primary); padding: 6px 0; }
+.period-pred { font-size: var(--font-xl); font-weight: 600; color: var(--accent-rose); }
+
+.checkin-btn {
+  display: block;
+  width: 100%;
+  padding: 16px;
+  margin-top: 14px;
+  background: linear-gradient(135deg, #d9b8c4, #c4a8a2);
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  font-size: var(--font-lg);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: var(--shadow);
+}
+.checkin-btn:hover { transform: translateY(-1px); box-shadow: var(--shadow-lg); }
+.checkin-btn:active { transform: scale(0.98); }
+
+.history-list { margin-top: 4px; }
+.history-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 11px 4px;
+  border-bottom: 1px solid var(--border);
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+}
+.history-item:last-child { border-bottom: none; }
+
+.calorie-big { font-size: var(--font-xxl); font-weight: 700; color: var(--accent-warm); text-align: center; padding: 10px 0; }
+.steps-summary { font-size: var(--font-xs); color: var(--text-muted); margin-bottom: 4px; }
+
 @media (max-width: 640px) {
   /* 手机端：添加记录表单竖向单排，一个输入框占一行，避免重叠/溢出 */
   .ledger-form-row { grid-template-columns: 1fr; gap: 12px; }
   .ledger-form-row .input-group { width: 100%; }
   .ledger-form-row input[type="date"] { width: 100% !important; box-sizing: border-box !important; }
   #growth-list .btn-save-green { width: 100%; margin-top: 4px; }
+  /* 个人健康：步数录入表单手机端竖排，避免日期+数字挤压溢出 */
+  .step-input-row { flex-direction: column; }
+  .step-input-row .input-group { width: 100%; }
 }
 
 /* ============ Task Check ============ */
@@ -1439,6 +1510,7 @@ textarea:focus { border-color: var(--accent-sage); }
         <button class="sub-tab active" onclick="switchLifeTab('food')">辅食与记录</button>
         <button class="sub-tab" onclick="switchLifeTab('growth')">成长台账</button>
         <button class="sub-tab" onclick="switchLifeTab('eng-archive')">英语存档</button>
+        <button class="sub-tab" onclick="switchLifeTab('health')">个人健康</button>
       </div>
 
       <div id="life-food">
@@ -1588,6 +1660,79 @@ textarea:focus { border-color: var(--accent-sage); }
           <div id="engArchiveList"></div>
         </div>
       </div>
+
+      <div id="life-health" style="display:none">
+        <!-- 内部两大子标签页 -->
+        <div class="sub-tabs" style="margin-bottom:16px">
+          <button class="sub-tab active" data-htab="period" onclick="switchHealthTab('period')">🌸 经期记录</button>
+          <button class="sub-tab" data-htab="steps" onclick="switchHealthTab('steps')">👟 步数与卡路里</button>
+        </div>
+
+        <!-- 子模块一：经期记录 -->
+        <div id="health-period">
+          <div class="card">
+            <div class="card-title" style="margin-bottom:14px"><span class="icon-dot rose"></span>经期记录</div>
+            <div class="period-top">
+              <div>
+                <div style="font-size:var(--font-xs);color:var(--text-muted)">今天是</div>
+                <div class="today" id="periodToday">—</div>
+              </div>
+              <button class="btn-back-today" onclick="backToToday()">↩ 回到今天</button>
+            </div>
+            <div style="font-size:var(--font-xs);color:var(--text-muted);margin-bottom:6px">记录日期（可回溯过往）</div>
+            <input type="date" id="periodDateInput" style="width:100%;padding:9px 10px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:var(--font-sm);background:#fff;color:var(--text-primary);margin-bottom:16px">
+            <div class="card-title" style="font-size:var(--font-md);margin-bottom:8px">当前周期状态</div>
+            <div class="period-status" id="periodStatus">—</div>
+            <button class="checkin-btn" onclick="checkInPeriod()">🌸 今天来潮打卡</button>
+            <div class="card-title" style="font-size:var(--font-md);margin:18px 0 8px">系统预测下次生理期</div>
+            <div class="period-pred" id="periodPrediction">—</div>
+            <div class="card-title" style="font-size:var(--font-md);margin:18px 0 8px">历史记录</div>
+            <div class="history-list" id="periodHistory"></div>
+          </div>
+        </div>
+
+        <!-- 子模块二：步数与卡路里 -->
+        <div id="health-steps" style="display:none">
+          <div class="card">
+            <div class="card-title" style="margin-bottom:12px"><span class="icon-dot sage"></span>步数记录</div>
+            <div class="time-range-btns">
+              <button class="range-btn" data-range="halfyear" onclick="setStepsRange('halfyear')">半年内</button>
+              <button class="range-btn" data-range="month" onclick="setStepsRange('month')">一个月内</button>
+              <button class="range-btn active" data-range="week" onclick="setStepsRange('week')">一周内</button>
+            </div>
+            <div class="input-row step-input-row" style="margin-top:12px">
+              <div class="input-group" style="flex:1">
+                <label>日期</label>
+                <input type="date" id="stepDateInput">
+              </div>
+              <div class="input-group" style="flex:1.2">
+                <label>今日步数</label>
+                <input type="number" id="stepInput" placeholder="如 8500" min="0">
+              </div>
+            </div>
+            <button class="btn btn-primary btn-sm" style="width:100%;justify-content:center;text-align:center;margin-top:4px" onclick="addStepRecord()">＋ 记录步数</button>
+          </div>
+
+          <div class="card" style="margin-top:16px">
+            <div class="card-title" style="margin-bottom:6px"><span class="icon-dot blue"></span>步数统计图表</div>
+            <div class="steps-summary" id="stepsSummary"></div>
+            <div class="chart-container" style="height:300px"><canvas id="stepsChart"></canvas></div>
+          </div>
+
+          <div class="card" style="margin-top:16px">
+            <div class="card-title" style="margin-bottom:10px"><span class="icon-dot sage"></span>每日步数记录</div>
+            <div class="history-list" id="stepsList"></div>
+          </div>
+
+          <div class="card" style="margin-top:16px">
+            <div class="card-title" style="margin-bottom:8px"><span class="icon-dot warm"></span>今日卡路里消耗</div>
+            <div class="calorie-big" id="todayCalorie">0 千卡</div>
+            <div style="font-size:var(--font-xs);color:var(--text-muted);text-align:center;margin-bottom:6px">按 10000 步 ≈ 400 千卡 估算</div>
+            <div class="card-title" style="font-size:var(--font-md);margin:14px 0 8px">每日卡路里消耗</div>
+            <div class="history-list" id="calorieList"></div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- ========== 热点板块 ========== -->
@@ -1713,7 +1858,9 @@ function getDefaultState() {
     lastHotspotFetch: null,
     lastSceneDate: null,
     currentSceneIndex: 0,
-    skillNotes: {}
+    skillNotes: {},
+    periodRecords: [],
+    stepRecords: {}
   };
 }
 
@@ -3350,17 +3497,223 @@ function switchResearchTab(tab) {
   }
 }
 
+// ==================== 个人健康：经期记录 ====================
+function fmtDate(dt) {
+  const y = dt.getFullYear();
+  const m = ('0' + (dt.getMonth() + 1)).slice(-2);
+  const d = ('0' + dt.getDate()).slice(-2);
+  return y + '-' + m + '-' + d;
+}
+function parseDate(s) { return new Date(s + 'T00:00:00'); }
+
+function switchHealthTab(tab) {
+  document.querySelectorAll('#life-health .sub-tab').forEach(t => t.classList.remove('active'));
+  const b = document.querySelector('#life-health .sub-tab[data-htab="' + tab + '"]');
+  if (b) b.classList.add('active');
+  ['period','steps'].forEach(t => {
+    const el = document.getElementById('health-' + t);
+    if (el) el.style.display = (t === tab) ? 'block' : 'none';
+  });
+  if (tab === 'period') renderHealthPeriod();
+  if (tab === 'steps') renderHealthSteps();
+}
+
+function renderHealthPeriod() {
+  const today = new Date();
+  const todayStr = fmtDate(today);
+  const todayEl = document.getElementById('periodToday');
+  if (todayEl) todayEl.textContent = today.getFullYear() + '年' + (today.getMonth()+1) + '月' + today.getDate() + '日';
+  const dateInput = document.getElementById('periodDateInput');
+  if (dateInput && !dateInput.value) dateInput.value = todayStr;
+
+  const recs = (state.periodRecords || []).slice().sort();
+  const statusEl = document.getElementById('periodStatus');
+  if (recs.length === 0) {
+    statusEl.innerHTML = '<div style="color:var(--text-muted)">暂无足够数据，请开始打卡</div>';
+  } else {
+    const last = recs[recs.length - 1];
+    const days = Math.floor((parseDate(todayStr) - parseDate(last)) / 86400000);
+    statusEl.innerHTML = '上次来潮：' + last + '（已 ' + days + ' 天）';
+  }
+
+  const predEl = document.getElementById('periodPrediction');
+  if (recs.length < 2) {
+    predEl.textContent = '尚无足够数据';
+  } else {
+    const intervals = [];
+    for (let i = 1; i < recs.length; i++) {
+      intervals.push(Math.floor((parseDate(recs[i]) - parseDate(recs[i-1])) / 86400000));
+    }
+    const avg = Math.round(intervals.reduce((a,b)=>a+b,0) / intervals.length);
+    const next = parseDate(recs[recs.length - 1]);
+    next.setDate(next.getDate() + avg);
+    predEl.textContent = next.getFullYear() + '年' + (next.getMonth()+1) + '月' + next.getDate() + '日';
+  }
+
+  const hist = document.getElementById('periodHistory');
+  if (recs.length === 0) {
+    hist.innerHTML = '<div style="color:var(--text-muted);text-align:center;padding:12px">还没有打卡记录</div>';
+  } else {
+    hist.innerHTML = recs.slice().reverse().map(d => '<div class="history-item"><span>' + d + '</span><span style="color:var(--accent-rose)">🌸 来潮</span></div>').join('');
+  }
+}
+
+function backToToday() {
+  const el = document.getElementById('periodDateInput');
+  if (el) el.value = fmtDate(new Date());
+  renderHealthPeriod();
+}
+
+function checkInPeriod() {
+  const el = document.getElementById('periodDateInput');
+  const d = el ? el.value : fmtDate(new Date());
+  if (!d) { showToast('请选择日期'); return; }
+  state.periodRecords = state.periodRecords || [];
+  if (state.periodRecords.indexOf(d) >= 0) { showToast('这一天已打卡过啦 🌸'); return; }
+  state.periodRecords.push(d);
+  saveState(state);
+  renderHealthPeriod();
+  showToast('已记录 ' + d);
+}
+
+// ==================== 个人健康：步数与卡路里 ====================
+let stepsRange = 'week';
+let stepsChartInst = null;
+
+function inRange(dateStr, range) {
+  const d = parseDate(dateStr);
+  const now = new Date(); now.setHours(0,0,0,0);
+  let days = 7;
+  if (range === 'month') days = 30;
+  else if (range === 'halfyear') days = 182;
+  const cut = new Date(now); cut.setDate(cut.getDate() - days);
+  return d >= cut;
+}
+
+function renderHealthSteps() {
+  const todayStr = fmtDate(new Date());
+  const di = document.getElementById('stepDateInput');
+  if (di && !di.value) di.value = todayStr;
+  renderStepsChart();
+  renderStepsList();
+  renderCalorie();
+}
+
+function setStepsRange(r) {
+  stepsRange = r;
+  document.querySelectorAll('#health-steps .range-btn').forEach(b => b.classList.remove('active'));
+  const active = document.querySelector('#health-steps .range-btn[data-range="' + r + '"]');
+  if (active) active.classList.add('active');
+  renderStepsChart();
+  renderStepsList();
+}
+
+function renderStepsChart() {
+  const canvas = document.getElementById('stepsChart');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const recs = state.stepRecords || {};
+  const entries = Object.entries(recs)
+    .filter(([d]) => inRange(d, stepsRange))
+    .sort((a,b) => a[0] < b[0] ? -1 : 1);
+  const labels = entries.map(e => e[0].slice(5));
+  const data = entries.map(e => e[1]);
+  const sum = data.reduce((a,b)=>a+b,0);
+  const avg = data.length ? Math.round(sum / data.length) : 0;
+  const sumEl = document.getElementById('stepsSummary');
+  if (sumEl) sumEl.textContent = '平均 ' + avg + ' 步 · 总计 ' + sum + ' 步';
+
+  if (stepsChartInst) stepsChartInst.destroy();
+  stepsChartInst = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: '步数',
+        data: data,
+        backgroundColor: 'rgba(163,181,166,0.85)',
+        hoverBackgroundColor: 'rgba(143,165,146,0.95)',
+        borderRadius: 6,
+        maxBarThickness: 34
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: c => c.parsed.y + ' 步' } }
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { maxRotation: 0, autoSkip: true, font: { size: 10 } } },
+        y: { beginAtZero: true, grid: { color: 'rgba(139,122,107,0.1)' }, ticks: { font: { size: 10 } } }
+      }
+    }
+  });
+}
+
+function renderStepsList() {
+  const recs = state.stepRecords || {};
+  const entries = Object.entries(recs).sort((a,b) => a[0] < b[0] ? 1 : -1);
+  const el = document.getElementById('stepsList');
+  if (!el) return;
+  if (entries.length === 0) {
+    el.innerHTML = '<div style="color:var(--text-muted);text-align:center;padding:12px">还没有步数记录</div>';
+    return;
+  }
+  el.innerHTML = entries.map(([d,s]) =>
+    '<div class="history-item"><span>' + d + '</span><span style="color:var(--accent-sage);font-weight:600">' + s + ' 步</span></div>'
+  ).join('');
+}
+
+function renderCalorie() {
+  const recs = state.stepRecords || {};
+  const todayStr = fmtDate(new Date());
+  const todaySteps = recs[todayStr] || 0;
+  const kcal = Math.round(todaySteps * 0.04);
+  const todayEl = document.getElementById('todayCalorie');
+  if (todayEl) todayEl.textContent = kcal + ' 千卡';
+
+  const entries = Object.entries(recs).sort((a,b) => a[0] < b[0] ? 1 : -1);
+  const el = document.getElementById('calorieList');
+  if (!el) return;
+  if (entries.length === 0) {
+    el.innerHTML = '<div style="color:var(--text-muted);text-align:center;padding:12px">暂无记录</div>';
+    return;
+  }
+  el.innerHTML = entries.map(([d,s]) =>
+    '<div class="history-item"><span>' + d + '</span><span style="color:var(--accent-warm);font-weight:600">' + Math.round(s * 0.04) + ' 千卡</span></div>'
+  ).join('');
+}
+
+function addStepRecord() {
+  const dEl = document.getElementById('stepDateInput');
+  const sEl = document.getElementById('stepInput');
+  const d = dEl ? dEl.value : fmtDate(new Date());
+  const s = parseInt(sEl ? sEl.value : '', 10);
+  if (!d) { showToast('请选择日期'); return; }
+  if (isNaN(s) || s < 0) { showToast('请输入有效步数'); return; }
+  state.stepRecords = state.stepRecords || {};
+  state.stepRecords[d] = s;
+  saveState(state);
+  if (sEl) sEl.value = '';
+  renderHealthSteps();
+  showToast('已记录 ' + d + '：' + s + ' 步');
+}
+
 function switchLifeTab(tab) {
   document.querySelectorAll('#page-life .sub-tab').forEach(t => t.classList.remove('active'));
   event.target.classList.add('active');
-  ['food','growth','eng-archive'].forEach(t => {
-    document.getElementById('life-' + t).style.display = t === tab ? 'block' : 'none';
+  ['food','growth','eng-archive','health'].forEach(t => {
+    const el = document.getElementById('life-' + t);
+    if (el) el.style.display = t === tab ? 'block' : 'none';
   });
   if (tab === 'growth') renderGrowthCardList();
   if (tab === 'eng-archive') renderEngArchive();
   if (tab === 'food') {
     switchFoodTab('weekly');
   }
+  if (tab === 'health') switchHealthTab('period');
 }
 
 // ==================== 辅食与记录 内部子标签页 ====================
