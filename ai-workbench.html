@@ -46,15 +46,17 @@ body {
 
 /* ============ Layout ============ */
 .app-container {
-  display: flex;
+  display: grid;
+  grid-template-columns: var(--sidebar-width) 1fr;
   min-height: 100vh;
-  padding-left: var(--sidebar-width);
 }
 
 /* ============ Sidebar (Desktop) ============ */
 .sidebar {
-  position: fixed;
-  left: 0; top: 0; bottom: 0;
+  position: sticky;
+  top: 0;
+  align-self: start;
+  height: 100vh;
   width: var(--sidebar-width);
   background: var(--bg-sidebar);
   display: flex;
@@ -1160,9 +1162,9 @@ textarea:focus { border-color: var(--accent-sage); }
 }
 /* 700px 以下（手机/iPad 竖屏）：彻底收起侧边栏，由底部 dock 接管导航 */
 @media (max-width: 700px) {
+  .app-container { grid-template-columns: 0 1fr; }
   :root { --sidebar-width: 0px; }
   .sidebar { display: none !important; }
-  .app-container { padding-left: 0 !important; }
   .main-content { padding: 16px 14px 96px; } /* 多留 96px 给底部 dock + safe-area */
   .signin-card { max-width: 100%; }
   .card { padding: 18px 16px; }
@@ -1201,6 +1203,61 @@ textarea:focus { border-color: var(--accent-sage); }
 .mobile-dock .dock-item.active { color: var(--accent-sage); font-weight: 600; }
 .mobile-dock .dock-item:active { opacity: 0.6; }
 
+/* ============ Signin Banner (简洁一行小条) ============ */
+.signin-banner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(156,175,136,0.10), rgba(156,175,136,0.04));
+  border: 1px solid rgba(156,175,136,0.18);
+  font-size: var(--font-md);
+  color: var(--text);
+}
+.signin-banner .icon-dot { flex-shrink: 0; }
+.signin-banner-label {
+  font-weight: 600;
+  color: var(--text);
+}
+.signin-banner-divider {
+  width: 1px; height: 14px;
+  background: rgba(139,122,107,0.20);
+}
+.signin-banner-status {
+  flex: 1;
+  color: var(--text-muted);
+  font-size: var(--font-sm);
+}
+.signin-banner-status.done {
+  color: var(--accent-sage);
+  font-weight: 600;
+}
+.signin-banner-status.pending {
+  color: var(--text-muted);
+}
+.signin-banner-time {
+  font-size: var(--font-xs);
+  color: var(--text-muted);
+  opacity: 0.7;
+}
+.signin-tip {
+  font-size: var(--font-xs);
+  color: var(--text-muted);
+  margin-top: 12px;
+  line-height: 1.65;
+  padding: 12px 14px;
+  background: rgba(139,122,107,0.05);
+  border-radius: 8px;
+}
+.signin-tip code {
+  background: rgba(139,122,107,0.10);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-family: ui-monospace, monospace;
+  font-size: 0.92em;
+}
+.signin-status {
   font-size: var(--font-lg);
   font-weight: 600;
   padding: 14px 16px;
@@ -1947,22 +2004,21 @@ textarea:focus { border-color: var(--accent-sage); }
         <div class="subtitle" id="signinUpdated">状态加载中…</div>
       </div>
 
-      <div class="card signin-card">
-        <div class="card-title" style="margin-bottom:14px"><span class="icon-dot sage"></span>Workbuddy 每日签到</div>
-        <div class="signin-status" id="signinWorkbuddy">今日签到：—</div>
-        <div class="signin-note">未开启自动（Workbuddy 为手机验证码登录，暂不接入自动签到；可手动在 App 内签到）</div>
+      <div class="signin-banner card">
+        <span class="icon-dot blue"></span>
+        <span class="signin-banner-label">科研通</span>
+        <span class="signin-banner-divider"></span>
+        <span class="signin-banner-status" id="signinKeyantong">加载中…</span>
+        <span class="signin-banner-time" id="signinKeyantongTime"></span>
       </div>
 
-      <div class="card signin-card" style="margin-top:16px">
-        <div class="card-title" style="margin-bottom:14px"><span class="icon-dot blue"></span>科研通每日签到</div>
-        <div class="signin-status" id="signinKeyantong">今日签到：❌ 未签到</div>
-        <div class="signin-note">每日自动登录科研通（邮箱+密码）完成签到</div>
-      </div>
+      <button class="btn btn-outline btn-sm" style="margin-top:14px" onclick="loadSigninStatus(true)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;vertical-align:-2px;margin-right:4px"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+        刷新签到状态
+      </button>
 
-      <button class="btn btn-outline btn-sm" style="margin-top:16px" onclick="loadSigninStatus(true)">🔄 刷新签到状态</button>
-      <div style="font-size:var(--font-xs);color:var(--text-muted);margin-top:10px;line-height:1.6">
-        💡 科研通签到由 GitHub Actions 每日北京时间 8:00 自动执行（脚本读取仓库 Secrets 中的账号，密码不写死在前端）。<br>
-        执行结果会写入 <code>data/signin-status.json</code>，本页每次打开自动读取并展示；点上方「刷新」可手动更新。
+      <div class="signin-tip">
+        科研通签到由 GitHub Actions 每日北京时间 8:00 自动执行（读取仓库 Secrets 内的账号密码）。状态写入 <code>data/signin-status.json</code>，本页面每次打开自动读取展示。
       </div>
     </div>
 
@@ -2050,28 +2106,25 @@ function switchPage(page) {
 
 // ==================== 每日签到状态 ====================
 async function loadSigninStatus(force) {
-  const wbEl = document.getElementById('signinWorkbuddy');
   const ktEl = document.getElementById('signinKeyantong');
+  const ktTimeEl = document.getElementById('signinKeyantongTime');
   const upEl = document.getElementById('signinUpdated');
-  if (!wbEl || !ktEl) return;
+  if (!ktEl) return;
   if (force && upEl) upEl.textContent = '刷新中…';
   const json = await fetchJsonSafe(DATA_BASE + 'signin-status.json');
   if (!json) {
     if (upEl) upEl.textContent = '暂无签到数据（GitHub Actions 尚未运行）';
+    ktEl.className = 'signin-banner-status pending';
+    ktEl.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;vertical-align:-2px;margin-right:4px"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>等待执行';
     return;
   }
-  const wb = json.workbuddy || {};
   const kt = json.keyantong || {};
-  // Workbuddy（用 SVG check/x 替代系统彩色 emoji，色系统一为莫兰迪）
-  wbEl.className = 'signin-status ' + (wb.done ? 'done' : 'fail');
-  wbEl.innerHTML = wb.done
-    ? ('<svg class="signin-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>今日签到：已完成' + (wb.points ? ' <span style="opacity:0.78">(+' + wb.points + '积分)</span>' : ''))
-    : '<svg class="signin-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>今日签到：' + (wb.note ? wb.note.replace('未开启自动签到', '未开启自动') : '未签到');
-  // 科研通
-  ktEl.className = 'signin-status ' + (kt.done ? 'done' : 'fail');
+  // 科研通（简洁小条样式）
+  ktEl.className = 'signin-banner-status ' + (kt.done ? 'done' : 'pending');
   ktEl.innerHTML = kt.done
-    ? '<svg class="signin-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>今日签到：已完成'
-    : '<svg class="signin-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>今日签到：未签到';
+    ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;vertical-align:-2px;margin-right:5px"><polyline points="20 6 9 17 4 12"/></svg>今日已签到'
+    : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;vertical-align:-2px;margin-right:5px"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>今日尚未签到';
+  if (ktTimeEl && kt.time) ktTimeEl.textContent = '· ' + new Date(kt.time).toLocaleTimeString('zh-CN', {hour:'2-digit', minute:'2-digit'});
   // 更新时间
   if (upEl) {
     const t = json.updatedAt ? new Date(json.updatedAt).toLocaleString('zh-CN') : '—';
