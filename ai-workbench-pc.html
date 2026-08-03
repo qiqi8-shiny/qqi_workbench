@@ -1145,6 +1145,55 @@ textarea:focus { border-color: var(--accent-sage); }
   .growth-input-row, .standard-selectors { grid-template-columns: 1fr; }
   .word-grid { grid-template-columns: 1fr 1fr; }
 }
+
+/* ============ 智能检索中心 ============ */
+.search-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.db-jump-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; margin-top: 4px; }
+.db-jump-btn {
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 12px 14px; border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border); background: #fff; color: var(--text-primary);
+  font-size: var(--font-sm); cursor: pointer; transition: all .2s; width: 100%;
+}
+.db-jump-btn:hover { border-color: var(--accent-sage); background: rgba(163,181,166,0.08); color: var(--text-primary); }
+.chk-group { display: flex; flex-wrap: wrap; gap: 10px 18px; margin-top: 4px; }
+.chk-item { display: flex; align-items: center; gap: 6px; font-size: var(--font-sm); color: var(--text-primary); cursor: pointer; margin-bottom: 0; font-weight: 400; }
+.chk-item input { width: 16px; height: 16px; accent-color: var(--accent-sage); cursor: pointer; }
+.history-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.history-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 12px; border-radius: 20px; background: #fff;
+  border: 1px solid var(--border); font-size: var(--font-xs); color: var(--text-secondary); cursor: pointer;
+  transition: all .2s;
+}
+.history-chip:hover { border-color: var(--accent-sage); color: var(--text-primary); }
+.history-chip .x { color: var(--text-muted); font-weight: 700; cursor: pointer; }
+.history-chip .x:hover { color: #c97b7b; }
+.trend-card { border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px 14px; background: #fff; margin-bottom: 10px; }
+.trend-card .tc-title { font-size: var(--font-md); color: var(--text-primary); font-weight: 600; margin-bottom: 8px; line-height: 1.5; }
+.sc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }
+.sc-card {
+  position: relative; display: flex; align-items: center; gap: 10px;
+  padding: 14px; border-radius: var(--radius-sm); border: 1.5px solid var(--border);
+  background: #fff; color: var(--text-primary); text-decoration: none; transition: all .2s; cursor: pointer;
+}
+.sc-card:hover { border-color: var(--accent-sage); background: rgba(163,181,166,0.08); }
+.sc-card .sc-emoji { font-size: 22px; flex-shrink: 0; line-height: 1; }
+.sc-card .sc-name { font-size: var(--font-sm); font-weight: 600; }
+.sc-card .sc-note { font-size: var(--font-xs); color: var(--text-muted); margin-top: 2px; }
+.sc-card .sc-del {
+  position: absolute; top: 4px; right: 6px; border: none; background: transparent;
+  color: var(--text-muted); cursor: pointer; font-size: 14px; line-height: 1; padding: 2px;
+}
+.sc-card .sc-del:hover { color: #c97b7b; }
+.add-entry-row { display: grid; grid-template-columns: 1fr 1.4fr auto; gap: 8px; margin-top: 16px; align-items: end; }
+.add-entry-row input { width: 100%; padding: 10px 14px; border: 1.5px solid var(--border); border-radius: var(--radius-sm); font-size: var(--font-md); background: #fff; color: var(--text-primary); outline: none; box-sizing: border-box; }
+.add-entry-row input:focus { border-color: var(--accent-sage); }
+.sec-note { font-size: var(--font-xs); color: var(--text-muted); line-height: 1.6; margin-top: 14px; padding: 10px 12px; background: #fdfaf6; border-radius: 8px; border-left: 2px solid var(--accent-warm); }
+.sec-note b { color: var(--text-secondary); }
+@media (max-width: 768px) {
+  .search-grid, .add-entry-row { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
@@ -1166,6 +1215,10 @@ textarea:focus { border-color: var(--accent-sage); }
       <button class="nav-item" data-page="research" onclick="switchPage('research')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
         <span>科研工作台</span>
+      </button>
+      <button class="nav-item" data-page="search" onclick="switchPage('search')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span>智能检索中心</span>
       </button>
       <button class="nav-item" data-page="life" onclick="switchPage('life')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
@@ -1765,6 +1818,110 @@ textarea:focus { border-color: var(--accent-sage); }
         <div id="manualHotspotList" style="margin-top:14px"></div>
       </div>
     </div>
+
+  <!-- ========== 智能检索中心 ========== -->
+  <div class="page" id="page-search">
+    <div class="page-header">
+      <h1>📚 智能检索中心</h1>
+      <div class="subtitle">一键检索学术数据库 · 挖掘前沿热点 · 常用入口聚合</div>
+    </div>
+
+    <div class="sub-tabs">
+      <button class="sub-tab active" data-stab="db" onclick="switchSearchTab('db')">📒 数据库一键检索</button>
+      <button class="sub-tab" data-stab="trend" onclick="switchSearchTab('trend')">🔥 前沿热点挖掘</button>
+      <button class="sub-tab" data-stab="entry" onclick="switchSearchTab('entry')">🚪 常用入口</button>
+    </div>
+
+    <!-- Tab 1: 数据库一键检索 -->
+    <div class="sub-tab-content" id="tab-db">
+      <div class="card">
+        <div class="card-title" style="margin-bottom:14px"><span class="icon-dot sage"></span>检索条件</div>
+
+        <label class="search-label">关键词 / 研究方向</label>
+        <div class="input-row" style="margin-bottom:12px">
+          <input type="text" id="searchKeyword" placeholder="输入论文关键词，如“国际贸易”" />
+        </div>
+
+        <div class="search-grid" style="margin-bottom:12px">
+          <div>
+            <label class="search-label">起始年份</label>
+            <div class="input-row"><select id="yearStart"></select></div>
+          </div>
+          <div>
+            <label class="search-label">结束年份</label>
+            <div class="input-row"><select id="yearEnd"></select></div>
+          </div>
+        </div>
+
+        <label class="search-label">来源类型（可多选，默认全选）</label>
+        <div class="chk-group">
+          <label class="chk-item"><input type="checkbox" class="src-chk" value="核心期刊" checked> 核心期刊</label>
+          <label class="chk-item"><input type="checkbox" class="src-chk" value="CSSCI" checked> CSSCI</label>
+          <label class="chk-item"><input type="checkbox" class="src-chk" value="SCI" checked> SCI</label>
+          <label class="chk-item"><input type="checkbox" class="src-chk" value="硕博士毕业论文" checked> 硕博士毕业论文</label>
+        </div>
+
+        <label class="search-label" style="margin-top:16px">一键跳转数据库（新标签页打开）</label>
+        <div class="db-jump-grid">
+          <button class="db-jump-btn" onclick="jumpDB('cnki')">📕 知网检索</button>
+          <button class="db-jump-btn" onclick="jumpDB('wos')">🌐 Web of Science</button>
+          <button class="db-jump-btn" onclick="jumpDB('scholar')">🎓 Google Scholar</button>
+          <button class="db-jump-btn" onclick="jumpDB('pubmed')">🧬 PubMed</button>
+          <button class="db-jump-btn" onclick="jumpDB('all')">🔎 全部库检索</button>
+        </div>
+
+        <label class="search-label" style="margin-top:18px">检索记录（点击可重新检索 · × 删除）</label>
+        <div class="history-list" id="historyList"></div>
+        <div id="historyEmpty" style="font-size:var(--font-xs);color:var(--text-muted)">暂无检索记录</div>
+      </div>
+    </div>
+
+    <!-- Tab 2: 前沿热点挖掘 -->
+    <div class="sub-tab-content" id="tab-trend" style="display:none">
+      <div class="card">
+        <div class="card-title" style="margin-bottom:14px"><span class="icon-dot warm"></span>前沿方向生成</div>
+
+        <label class="search-label">方向关键词（可留空，默认使用上方检索词）</label>
+        <div class="input-row" style="margin-bottom:12px">
+          <input type="text" id="trendKeyword" placeholder="方向关键词，如“跨境数据流动”" />
+        </div>
+
+        <label class="search-label">最新国家 / 国际大新闻</label>
+        <textarea id="trendNews" placeholder="粘贴最新政策、国际会议倡议等，如“国家发布XX政策”、“某国际会议提出XX倡议”" style="margin-bottom:12px"></textarea>
+
+        <label class="search-label">企业 / 社会 / 人类痛点</label>
+        <textarea id="trendPain" placeholder="如“中小企业算力成本高”、“老龄化照护人力短缺”"></textarea>
+
+        <button class="btn btn-primary btn-sm" style="margin-top:14px" onclick="generateTrends()">🚀 生成前沿方向</button>
+
+        <div id="trendResults" style="margin-top:16px"></div>
+      </div>
+    </div>
+
+    <!-- Tab 3: 常用入口 -->
+    <div class="sub-tab-content" id="tab-entry" style="display:none">
+      <div class="card">
+        <div class="card-title" style="margin-bottom:14px"><span class="icon-dot blue"></span>常用入口</div>
+        <div class="sc-grid" id="shortcutGrid"></div>
+
+        <div class="add-entry-row">
+          <div>
+            <label class="search-label">名称</label>
+            <input type="text" id="newScName" placeholder="输入显示名称，如：学校邮箱" />
+          </div>
+          <div>
+            <label class="search-label">链接地址</label>
+            <input type="text" id="newScUrl" placeholder="粘贴网址，如：https://xxx.com" />
+          </div>
+          <button class="btn btn-primary btn-sm" onclick="addShortcut()">➕ 添加入口</button>
+        </div>
+
+        <div class="sec-note">
+          🔒 <b>安全说明：</b>本模块不存储任何密码。实现“一键登录”的方法——首次点击链接跳转至登录页，输入账号密码后，<b>点击浏览器弹出的“保存密码”提示</b>；之后每次从本模块点击，浏览器会自动填充，你只需点登录即可。若担心浏览器保存不安全，建议使用正规密码管理器（如 Bitwarden、1Password）。
+        </div>
+      </div>
+    </div>
+  </div>
 
   </main>
 </div>
@@ -3880,6 +4037,201 @@ function init() {
   renderEnglishScene();
   renderAllFolderUploads();
   loadRemoteData(); // 异步加载 data/*.json（辅食/热点/英语）
+  initSearchCenter();
+}
+
+// ==================== 智能检索中心 ====================
+const SEARCH_HISTORY_KEY = 'wb_search_history';
+const SHORTCUTS_KEY = 'wb_shortcuts';
+const PRESET_SHORTCUTS = [
+  { id: 'preset-campus', name: '校园网认证', url: 'https://portal.syphu.edu.cn', note: '连接校内网络', emoji: '🏫' },
+  { id: 'preset-vpn', name: 'VPN-主线路', url: 'https://vpn.syphu.edu.cn', note: '远程访问首选', emoji: '🔗' }
+];
+
+function switchSearchTab(tab) {
+  document.querySelectorAll('#page-search .sub-tab').forEach(t => t.classList.remove('active'));
+  const active = document.querySelector('#page-search .sub-tab[data-stab="' + tab + '"]');
+  if (active) active.classList.add('active');
+  document.getElementById('tab-db').style.display = tab === 'db' ? '' : 'none';
+  document.getElementById('tab-trend').style.display = tab === 'trend' ? '' : 'none';
+  document.getElementById('tab-entry').style.display = tab === 'entry' ? '' : 'none';
+}
+
+function getHistory() {
+  try { const r = localStorage.getItem(SEARCH_HISTORY_KEY); return r ? JSON.parse(r) : []; } catch(e) { return []; }
+}
+function recordHistory(kw, year) {
+  let data = getHistory().filter(h => h.kw !== kw);
+  data.unshift({ kw, year });
+  if (data.length > 15) data = data.slice(0, 15);
+  localStorage.setItem(SEARCH_HISTORY_KEY, JSON.stringify(data));
+  renderHistory();
+}
+function renderHistory() {
+  const list = document.getElementById('historyList');
+  const empty = document.getElementById('historyEmpty');
+  if (!list) return;
+  list.innerHTML = '';
+  const data = getHistory();
+  if (!data.length) { if (empty) empty.style.display = ''; return; }
+  if (empty) empty.style.display = 'none';
+  data.forEach((h, i) => {
+    const chip = document.createElement('span');
+    chip.className = 'history-chip';
+    chip.appendChild(document.createTextNode(h.kw + ' · ' + h.year));
+    const x = document.createElement('span');
+    x.className = 'x'; x.textContent = '×';
+    x.onclick = (e) => { e.stopPropagation(); removeHistory(i); };
+    chip.appendChild(x);
+    chip.onclick = () => reSearch(h.kw, h.year);
+    list.appendChild(chip);
+  });
+}
+function removeHistory(i) {
+  const data = getHistory();
+  data.splice(i, 1);
+  localStorage.setItem(SEARCH_HISTORY_KEY, JSON.stringify(data));
+  renderHistory();
+}
+function reSearch(kw, year) {
+  document.getElementById('searchKeyword').value = kw;
+  const parts = String(year).split('-');
+  if (parts.length === 2) {
+    document.getElementById('yearStart').value = parts[0];
+    document.getElementById('yearEnd').value = parts[1];
+  }
+  jumpDB('cnki');
+}
+function dbName(db) {
+  return ({ cnki:'知网', wos:'Web of Science', scholar:'Google Scholar', pubmed:'PubMed', all:'全部库检索' })[db] || db;
+}
+function jumpDB(db) {
+  const kwEl = document.getElementById('searchKeyword');
+  const kw = kwEl.value.trim();
+  if (!kw) { showToast('⚠️ 请先输入关键词'); kwEl.focus(); return; }
+  const ys = document.getElementById('yearStart').value;
+  const ye = document.getElementById('yearEnd').value;
+  const sources = Array.from(document.querySelectorAll('.src-chk:checked')).map(c => c.value);
+  const enc = encodeURIComponent(kw);
+  let url = '';
+  if (db === 'cnki') url = 'https://kns.cnki.net/kns8/defaultresult/index?kw=' + enc;
+  else if (db === 'wos') url = 'https://www.webofscience.com';
+  else if (db === 'scholar') url = 'https://scholar.google.com/scholar?q=' + enc;
+  else if (db === 'pubmed') url = 'https://pubmed.ncbi.nlm.nih.gov/?term=' + enc;
+  else if (db === 'all') url = 'https://xueshu.baidu.com/s?wd=' + enc;
+  window.open(url, '_blank');
+  recordHistory(kw, ys + '-' + ye);
+  if (sources.length) showToast('🔗 已打开「' + dbName(db) + '」· 来源筛选已记录');
+}
+
+function generateTrends() {
+  const kwEl = document.getElementById('searchKeyword');
+  const kw = document.getElementById('trendKeyword').value.trim() || kwEl.value.trim() || '前沿交叉领域';
+  const news = document.getElementById('trendNews').value.trim();
+  const pain = document.getElementById('trendPain').value.trim();
+  const box = document.getElementById('trendResults');
+  if (!box) return;
+  box.innerHTML = '';
+  const n = news ? '基于“' + news + '”' : '面向新兴政策与产业变革';
+  const p = pain ? '针对“' + pain + '”' : '回应社会与产业实际需求';
+  const templates = [
+    kw + '视角下' + p + '的协同治理机制研究',
+    n + '的' + kw + '创新路径与实证分析',
+    p + '驱动的' + kw + '技术适配与优化策略',
+    '面向' + n + '的' + kw + '政策响应与效果评估',
+    '数智赋能：' + kw + '与' + (pain || '现实痛点') + '融合的交叉研究'
+  ];
+  templates.forEach(t => {
+    const card = document.createElement('div');
+    card.className = 'trend-card';
+    const title = document.createElement('div');
+    title.className = 'tc-title';
+    title.textContent = t;
+    const btn = document.createElement('button');
+    btn.className = 'btn btn-outline btn-sm';
+    btn.textContent = '🔍 检索此方向';
+    btn.onclick = () => searchThisDirection(t);
+    card.appendChild(title);
+    card.appendChild(btn);
+    box.appendChild(card);
+  });
+  showToast('✨ 已生成 ' + templates.length + ' 个前沿方向（示例）');
+}
+function searchThisDirection(text) {
+  switchSearchTab('db');
+  document.getElementById('searchKeyword').value = text;
+  jumpDB('cnki');
+}
+
+function getShortcuts() {
+  try { const r = localStorage.getItem(SHORTCUTS_KEY); if (r) return JSON.parse(r); } catch(e) {}
+  return PRESET_SHORTCUTS.slice();
+}
+function saveShortcuts(list) { localStorage.setItem(SHORTCUTS_KEY, JSON.stringify(list)); }
+function domainOf(url) { try { return new URL(url).hostname.replace(/^www\./, ''); } catch(e) { return url; } }
+function emojiFor(name) {
+  const map = { '学':'🏫', '校':'🏫', '图':'📚', '书':'📚', '邮':'📧', '网':'🌐', '实':'🏢', '公':'🏛️', '医':'🏥', '财':'💰', '研':'🔬', '科':'🔬', '课':'📖' };
+  const f = (name || '').trim().charAt(0);
+  if (map[f]) return map[f];
+  if (/^[a-zA-Z]/.test(f)) return '🔗';
+  return '🔗';
+}
+function renderShortcuts() {
+  const grid = document.getElementById('shortcutGrid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  getShortcuts().forEach(sc => {
+    const a = document.createElement('a');
+    a.className = 'sc-card';
+    a.href = sc.url;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    const em = document.createElement('span');
+    em.className = 'sc-emoji';
+    em.textContent = sc.emoji || emojiFor(sc.name);
+    const info = document.createElement('div');
+    const nm = document.createElement('div'); nm.className = 'sc-name'; nm.textContent = sc.name;
+    const nt = document.createElement('div'); nt.className = 'sc-note'; nt.textContent = sc.note || domainOf(sc.url);
+    info.appendChild(nm); info.appendChild(nt);
+    const del = document.createElement('button');
+    del.className = 'sc-del'; del.textContent = '✕'; del.title = '删除';
+    del.onclick = (e) => { e.preventDefault(); e.stopPropagation(); removeShortcut(sc.id); };
+    a.appendChild(em); a.appendChild(info); a.appendChild(del);
+    grid.appendChild(a);
+  });
+}
+function addShortcut() {
+  const nameEl = document.getElementById('newScName');
+  const urlEl = document.getElementById('newScUrl');
+  const name = nameEl.value.trim();
+  const url = urlEl.value.trim();
+  if (!name || !url) { showToast('⚠️ 请填写名称和链接'); return; }
+  if (!/^https?:\/\//i.test(url)) { showToast('请输入有效的网址（以http://或https://开头）'); return; }
+  const list = getShortcuts();
+  list.push({ id: 'sc-' + Date.now(), name, url, note: domainOf(url), emoji: emojiFor(name) });
+  saveShortcuts(list);
+  renderShortcuts();
+  nameEl.value = '';
+  urlEl.value = '';
+  showToast('✅ 已添加入口：' + name);
+}
+function removeShortcut(id) {
+  saveShortcuts(getShortcuts().filter(s => s.id !== id));
+  renderShortcuts();
+}
+function fillYearSelect(sel, selected) {
+  for (let y = 2020; y <= 2026; y++) {
+    const o = document.createElement('option');
+    o.value = y; o.textContent = y;
+    if (y === selected) o.selected = true;
+    sel.appendChild(o);
+  }
+}
+function initSearchCenter() {
+  fillYearSelect(document.getElementById('yearStart'), 2024);
+  fillYearSelect(document.getElementById('yearEnd'), 2026);
+  renderHistory();
+  renderShortcuts();
 }
 
 window.addEventListener('DOMContentLoaded', init);
