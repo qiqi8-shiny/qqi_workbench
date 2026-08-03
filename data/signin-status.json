@@ -1,13 +1,13 @@
 {
-  "updatedAt": "2026-08-03T00:00:00+08:00",
+  "updatedAt": "2026-08-03T14:51:11.948068+08:00",
   "workbuddy": {
     "done": false,
     "points": 0,
-    "note": "尚未首次自动运行（GitHub Actions 每日北京时间 8:00 执行）"
+    "note": "未开启自动签到（Workbuddy 为手机验证码登录，未接入自动）"
   },
   "keyantong": {
-    "done": false,
-    "points": 0,
-    "note": "尚未首次自动运行（GitHub Actions 每日北京时间 8:00 执行）"
+    "done": true,
+    "points": 10,
+    "note": "今日已签到（无需重复）：签到失败，您今天已于 [13:56:20] 签到。"
   }
 }
