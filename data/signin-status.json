@@ -1,0 +1,13 @@
+{
+  "updatedAt": "2026-08-03T00:00:00+08:00",
+  "workbuddy": {
+    "done": false,
+    "points": 0,
+    "note": "尚未首次自动运行（GitHub Actions 每日北京时间 8:00 执行）"
+  },
+  "keyantong": {
+    "done": false,
+    "points": 0,
+    "note": "尚未首次自动运行（GitHub Actions 每日北京时间 8:00 执行）"
+  }
+}
