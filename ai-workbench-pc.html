@@ -1829,6 +1829,7 @@ textarea:focus { border-color: var(--accent-sage); }
     <div class="sub-tabs">
       <button class="sub-tab active" data-stab="db" onclick="switchSearchTab('db')">📒 数据库一键检索</button>
       <button class="sub-tab" data-stab="trend" onclick="switchSearchTab('trend')">🔥 前沿热点挖掘</button>
+      <button class="sub-tab" data-stab="history" onclick="switchSearchTab('history')">📋 检索记录</button>
       <button class="sub-tab" data-stab="entry" onclick="switchSearchTab('entry')">🚪 常用入口</button>
     </div>
 
@@ -1869,10 +1870,6 @@ textarea:focus { border-color: var(--accent-sage); }
           <button class="db-jump-btn" onclick="jumpDB('pubmed')">🧬 PubMed</button>
           <button class="db-jump-btn" onclick="jumpDB('all')">🔎 全部库检索</button>
         </div>
-
-        <label class="search-label" style="margin-top:26px">检索记录（点击可重新检索 · × 删除）</label>
-        <div class="history-list" id="historyList" style="margin-top:26px"></div>
-        <div id="historyEmpty" style="font-size:var(--font-xs);color:var(--text-muted)">暂无检索记录</div>
       </div>
     </div>
 
@@ -1919,6 +1916,15 @@ textarea:focus { border-color: var(--accent-sage); }
         <div class="sec-note">
           🔒 <b>安全说明：</b>本模块不存储任何密码。实现“一键登录”的方法——首次点击链接跳转至登录页，输入账号密码后，<b>点击浏览器弹出的“保存密码”提示</b>；之后每次从本模块点击，浏览器会自动填充，你只需点登录即可。若担心浏览器保存不安全，建议使用正规密码管理器（如 Bitwarden、1Password）。
         </div>
+      </div>
+    </div>
+    <!-- Tab 4: 检索记录 -->
+    <div class="sub-tab-content" id="tab-history" style="display:none">
+      <div class="card">
+        <div class="card-title" style="margin-bottom:14px"><span class="icon-dot sage"></span>检索记录</div>
+        <label class="search-label">检索记录（点击可重新检索 · × 删除）</label>
+        <div class="history-list" id="historyList" style="margin-top:14px"></div>
+        <div id="historyEmpty" style="font-size:var(--font-xs);color:var(--text-muted)">暂无检索记录</div>
       </div>
     </div>
   </div>
@@ -4054,6 +4060,7 @@ function switchSearchTab(tab) {
   if (active) active.classList.add('active');
   document.getElementById('tab-db').style.display = tab === 'db' ? '' : 'none';
   document.getElementById('tab-trend').style.display = tab === 'trend' ? '' : 'none';
+  document.getElementById('tab-history').style.display = tab === 'history' ? '' : 'none';
   document.getElementById('tab-entry').style.display = tab === 'entry' ? '' : 'none';
 }
 
