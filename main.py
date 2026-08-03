@@ -1,75 +1,52 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-每日签到自动化脚本（Playwright 版）
-====================================
-目标平台：
-  1. Workbuddy  （工作台，签到 +100 积分）
-  2. 科研通 Keyan Tong（每日签到）
-
-安全约定：
-  - 所有账号密码 ONLY 来自环境变量，绝不写死在本文件：
-      WB_USER / WB_PASS  —— Workbuddy 账号密码
-      KYT_USER / KYT_PASS —— 科研通账号密码
-  - 由 GitHub Actions 每天北京时间 08:00 自动运行（见 .github/workflows/daily_signin.yml）
-  - 运行结果写入 data/signin-status.json，供前端工作台「每日签到」页面读取展示
-
-⚠️ 重要（请先阅读）：
-  下方 CONFIG 中的「登录地址」与「元素选择器(selector)」是占位符，
-  因为不同网站的页面结构不同，我无法在不知情的情况下猜出真实选择器。
-  脚本的「流程骨架 / 凭证读取 / 状态写入 / 日志输出」均已完整可用，
-  但你需把 CONFIG 里标 ← 的字段替换成两个平台真实的登录页地址与签到按钮选择器，
-  脚本才能真正完成签到。替换后把真实值告诉我，我也可以帮你直接填好。
+科研通(AbleSci) 每日签到自动化脚本（Playwright 版，仅科研通）
+==============================================================
+登录地址 : https://www.ablesci.com/site/login  (邮箱 + 密码)
+签到接口 : 登录后 GET https://www.ablesci.com/user/sign 即完成签到
+           （该接口返回 JSON：code=0 签到成功；code=1 且提示已签到=今日已签过）
+结果     : 写入 data/signin-status.json，供前端工作台「每日签到」读取
+触发     : GitHub Actions 每天北京时间 08:00（见 .github/workflows/daily_signin.yml）
+凭证     : 仅来自环境变量 KYT_USER / KYT_PASS（由仓库 Secrets 注入），不写死本文件
 """
 
 import os
 import sys
 import json
+import threading
 from datetime import datetime, timezone, timedelta
 
 try:
     from playwright.sync_api import sync_playwright
 except ImportError:
-    print("❌ 缺少依赖：请先执行  pip install playwright && playwright install chromium")
+    print("❌ 缺少依赖：pip install playwright && playwright install chromium")
     sys.exit(1)
 
-
-# ============================ 可配置项（请填入真实值） ============================
-CONFIG = {
-    "workbuddy": {
-        "login_url": "https://YOUR_WORKBUDDY_DOMAIN/login",          # ← 替换为 Workbuddy 登录页地址
-        "signin_url": "",                                            # ← 若签到在独立页面，填地址；否则留空（登录后同页签到）
-        "user_selector": "input[name='username'], input[type='email']",
-        "pass_selector": "input[name='password'], input[type='password']",
-        "submit_selector": "button[type='submit'], .login-btn",
-        "signed_selector": ".signin-done, text=今日已签到",          # ← 已签到后的页面标识
-        "do_signin_selector": ".signin-btn, text=签到",              # ← 点击「签到」的按钮
-        "points": 100,                                               # 签到成功奖励积分
-    },
-    "keyantong": {
-        "login_url": "https://YOUR_KEYANTONG_DOMAIN/login",          # ← 替换为科研通登录页地址
-        "signin_url": "",
-        "user_selector": "input[name='username'], input[type='email']",
-        "pass_selector": "input[name='password'], input[type='password']",
-        "submit_selector": "button[type='submit'], .login-btn",
-        "signed_selector": ".signed, text=今日已签到",
-        "do_signin_selector": ".checkin-btn, text=签到",
-        "points": 0,
-    },
-}
-# ===========================================================================================
-
+KYT_LOGIN_URL = "https://www.ablesci.com/site/login"
+KYT_SIGN_URL = "https://www.ablesci.com/user/sign"
 STATUS_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "signin-status.json")
+UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+
+
+def _safe_close(obj):
+    """后台线程带超时关闭 Playwright 对象，避免 close() 卡死导致进程挂起。"""
+    def _c():
+        try:
+            obj.close()
+        except Exception:
+            pass
+    th = threading.Thread(target=_c, daemon=True)
+    th.start()
+    th.join(timeout=20)
 
 
 def load_status():
-    if os.path.exists(STATUS_PATH):
-        try:
-            with open(STATUS_PATH, "r", encoding="utf-8") as f:
-                return json.load(f)
-        except Exception:
-            pass
-    return {}
+    try:
+        with open(STATUS_PATH, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        return {}
 
 
 def save_status(status):
@@ -78,41 +55,79 @@ def save_status(status):
         json.dump(status, f, ensure_ascii=False, indent=2)
 
 
-def signin_one(name, cfg, user, password):
-    """对单个平台执行登录 + 签到。返回 (done: bool, note: str)。"""
+def kyts_signin(user, password):
+    """登录科研通并调用签到接口。返回 (done: bool, note: str)。"""
     if not user or not password:
-        return False, "缺少账号/密码环境变量（%s）" % name
+        return False, "缺少 KYT_USER / KYT_PASS 环境变量"
 
-    with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True)
-        page = browser.new_page()
+    result = (False, "未知错误")
+    p = None
+    browser = None
+    try:
+        p = sync_playwright().start()
+        browser = p.chromium.launch(
+            headless=True,
+            args=["--no-sandbox", "--disable-background-networking",
+                  "--disable-dev-shm-usage", "--disable-extensions"],
+        )
+        context = browser.new_context(user_agent=UA, locale="zh-CN")
+        page = context.new_page()
+        page.set_default_timeout(30000)
+
+        print("→ 打开科研通登录页：%s" % KYT_LOGIN_URL)
+        page.goto(KYT_LOGIN_URL, wait_until="domcontentloaded", timeout=30000)
+
+        # 登录按钮是 layui 动态渲染且 JS 绑定点击，用 JS 派发 click 绕过可见性判定
+        page.wait_for_selector("button[lay-filter='do-submit']", state="attached", timeout=15000)
+        page.fill("#LAY-user-login-email", user)
+        page.fill("#LAY-user-login-password", password)
+        page.evaluate("document.querySelector(\"button[lay-filter='do-submit']\").click()")
+        # 等待登录结果（layui 用 JS 跳转，成功后离开登录页）
+        page.wait_for_timeout(8000)
+
+        # 登录失败：仍停在登录页
+        if "/site/login" in page.url:
+            err = page.evaluate(
+                "() => {"
+                "  const el = document.querySelector('.layui-layer-content')"
+                " || document.querySelector('.error')"
+                " || document.querySelector('.layui-form-item .error')"
+                " || document.querySelector('[class*=err]');"
+                "  return el ? (el.innerText||'').trim().slice(0,120) : '（页面停留在登录页，可能触发了验证码/风控）';"
+                "}"
+            )
+            return False, "登录失败：" + err
+        print("✓ 登录成功")
+
+        # 调用签到接口（GET 即签到）
+        print("→ 调用签到接口：%s" % KYT_SIGN_URL)
+        page.goto(KYT_SIGN_URL, wait_until="domcontentloaded", timeout=20000)
+        page.wait_for_timeout(1500)
+        body = page.evaluate("() => document.body.innerText").strip()
+        print("  接口返回：" + body)
+
         try:
-            print("→ [%s] 打开登录页：%s" % (name, cfg["login_url"]))
-            page.goto(cfg["login_url"], wait_until="networkidle", timeout=30000)
+            data = json.loads(body)
+            code = data.get("code")
+            msg = data.get("msg", "")
+        except Exception:
+            code, msg = None, body[:120]
 
-            page.fill(cfg["user_selector"], user)
-            page.fill(cfg["pass_selector"], password)
-            page.click(cfg["submit_selector"])
-            page.wait_for_timeout(3000)  # 等待登录跳转
-
-            # 若签到在独立页面，跳过去
-            if cfg.get("signin_url"):
-                page.goto(cfg["signin_url"], wait_until="networkidle", timeout=30000)
-
-            # 先判断是否已签到（避免重复签到报错）
-            if page.locator(cfg["signed_selector"]).count() > 0:
-                return True, "今日已签到（无需重复）"
-
-            # 点击签到按钮
-            page.click(cfg["do_signin_selector"])
-            page.wait_for_timeout(2000)
-
-            done = page.locator(cfg["signed_selector"]).count() > 0
-            return done, ("签到成功" if done else "点击后未检测到成功标识，请检查选择器")
-        except Exception as e:
-            return False, "运行异常：" + str(e)
-        finally:
-            browser.close()
+        if code == 0:
+            result = (True, "签到成功：" + msg)
+        elif code == 1 and ("已签到" in msg or "已经" in msg or "已" in msg):
+            # 今日已签过，视为成功
+            result = (True, "今日已签到（无需重复）：" + msg)
+        else:
+            result = (False, "签到接口返回异常：" + msg)
+    except Exception as e:
+        result = (False, "运行异常：" + str(e))
+    finally:
+        if browser:
+            _safe_close(browser)
+        if p:
+            _safe_close(p)
+    return result
 
 
 def main():
@@ -120,37 +135,24 @@ def main():
     tz = timezone(timedelta(hours=8))
     now = datetime.now(tz)
 
-    # ---------- Workbuddy ----------
-    wb_user = os.getenv("WB_USER")
-    wb_pass = os.getenv("WB_PASS")
-    wb_done, wb_note = signin_one("workbuddy", CONFIG["workbuddy"], wb_user, wb_pass)
-    status["workbuddy"] = {
-        "done": wb_done,
-        "points": CONFIG["workbuddy"]["points"] if wb_done else 0,
-        "note": wb_note,
-    }
-    if wb_done:
-        print("Workbuddy 今日签到成功，+100积分")
-    else:
-        print("Workbuddy 今日签到失败：" + wb_note)
-
-    # ---------- 科研通 ----------
     kt_user = os.getenv("KYT_USER")
     kt_pass = os.getenv("KYT_PASS")
-    kt_done, kt_note = signin_one("keyantong", CONFIG["keyantong"], kt_user, kt_pass)
+    kt_done, kt_note = kyts_signin(kt_user, kt_pass)
     status["keyantong"] = {
         "done": kt_done,
-        "points": CONFIG["keyantong"]["points"] if kt_done else 0,
+        "points": 10 if kt_done else 0,
         "note": kt_note,
     }
-    if kt_done:
-        print("科研通今日签到成功")
-    else:
-        print("科研通今日签到失败：" + kt_note)
-
+    # Workbuddy 本仓库不做自动签到，保留键位兼容前端展示为「未开启」
+    status["workbuddy"] = {
+        "done": False,
+        "points": 0,
+        "note": "未开启自动签到（Workbuddy 为手机验证码登录，未接入自动）",
+    }
     status["updatedAt"] = now.isoformat()
     save_status(status)
     print("✅ 已写入状态文件：" + STATUS_PATH)
+    print("   科研通 done=%s note=%s" % (kt_done, kt_note))
 
 
 if __name__ == "__main__":
