@@ -1134,14 +1134,14 @@ textarea:focus { border-color: var(--accent-sage); }
 .data-source-note b { color: var(--text-secondary); }
 
 /* ============ Responsive ============ */
+/* 基线（桌面）：侧边栏 200px，主内容留出 padding-left */
 @media (max-width: 1100px) {
   .card-grid { grid-template-columns: 1fr; }
   .main-content { padding: 24px 20px 40px; }
-  /* 窄屏：签到卡片占满父容器，避免被侧边栏+padding 推出视口 */
   .signin-card { max-width: 100%; }
 }
+/* 1000px 以下：侧边栏收成 64px 图标条（Workbuddy 浮窗刚好在这区间） */
 @media (max-width: 1000px) {
-  /* 触发侧边栏图标-only 折叠态（Workbuddy 内嵌窗口常在 800-1000px 视口） */
   :root { --sidebar-width: 64px; }
   .sidebar { padding: 16px 8px; }
   .sidebar-brand, .nav-item span:not(.icon-dot) { display: none; }
@@ -1152,51 +1152,55 @@ textarea:focus { border-color: var(--accent-sage); }
   .main-content { padding: 16px 12px 40px; }
   .growth-input-row, .standard-selectors { grid-template-columns: 1fr; }
   .word-grid { grid-template-columns: 1fr 1fr; }
-  /* 防止任何子元素（特别是带长 URL 的 signin-note）撑爆容器 */
+  /* 长内容撑爆容器处理 */
   .main-content, .page, .card, .signin-card, .signin-status, .signin-note {
     overflow-wrap: anywhere;
     word-break: break-word;
   }
 }
+/* 700px 以下（手机/iPad 竖屏）：彻底收起侧边栏，由底部 dock 接管导航 */
 @media (max-width: 700px) {
-  /* 极窄屏（手机/Workbuddy 浮窗）：完全收起侧边栏，main-content 占满；
-     用底部固定 dock 承担导航，避免汉堡按钮的复杂度 */
   :root { --sidebar-width: 0px; }
-  .sidebar { display: none; }
-  .app-container { padding-left: 0; }
-  .main-content { padding: 12px 12px 80px; }
-  .mobile-dock { display: flex; }
+  .sidebar { display: none !important; }
+  .app-container { padding-left: 0 !important; }
+  .main-content { padding: 16px 14px 96px; } /* 多留 96px 给底部 dock + safe-area */
   .signin-card { max-width: 100%; }
-  .card { padding: 16px 14px; }
-  h1 { font-size: 1.45rem !important; }
+  .card { padding: 18px 16px; }
+  h1 { font-size: 1.5rem !important; }
   .page-header { margin-bottom: 18px; }
+  /* 唯一允许 dock 显示的断点（基线是 display:none，必须在媒体查询里覆盖） */
+  .mobile-dock { display: flex !important; }
 }
 .signin-card { max-width: 520px; }
 
-/* ============ Mobile Dock (极窄屏底部导航) ============ */
+/* ============ Mobile Dock (基线永远隐藏，窄屏媒体查询切回 flex) ============ */
 .mobile-dock {
-  display: none;
+  display: none; /* 关键：基线隐藏，窄屏断点 override */
   position: fixed; left: 0; right: 0; bottom: 0;
   background: var(--bg-sidebar);
   border-top: 1px solid rgba(0,0,0,0.06);
   z-index: 100;
   justify-content: space-around;
   align-items: center;
-  padding: 8px 4px calc(8px + env(safe-area-inset-bottom));
+  padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
+  backdrop-filter: blur(12px);
 }
 .mobile-dock .dock-item {
   flex: 1;
   display: flex; flex-direction: column; align-items: center;
-  gap: 2px;
-  padding: 6px 4px;
+  gap: 3px;
+  padding: 6px 2px 4px;
   background: none; border: none; cursor: pointer;
   color: var(--text-muted);
   font-size: 11px;
   font-family: inherit;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
 }
 .mobile-dock .dock-item svg { width: 22px; height: 22px; }
 .mobile-dock .dock-item.active { color: var(--accent-sage); font-weight: 600; }
-.signin-status {
+.mobile-dock .dock-item:active { opacity: 0.6; }
+
   font-size: var(--font-lg);
   font-weight: 600;
   padding: 14px 16px;
