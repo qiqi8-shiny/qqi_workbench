@@ -1158,6 +1158,14 @@ textarea:focus { border-color: var(--accent-sage); }
   border-radius: 12px;
   background: rgba(139,122,107,0.08);
   color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.signin-status .signin-ico {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
 }
 .signin-status.done {
   background: rgba(163,181,166,0.18);
@@ -1203,7 +1211,7 @@ textarea:focus { border-color: var(--accent-sage); }
         <span>行业热点</span>
       </button>
       <button class="nav-item" data-page="signin" onclick="switchPage('signin')">
-        <span class="nav-emoji">✅️</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
         <span>每日签到</span>
       </button>
     </div>
@@ -1981,14 +1989,16 @@ async function loadSigninStatus(force) {
   }
   const wb = json.workbuddy || {};
   const kt = json.keyantong || {};
-  // Workbuddy
+  // Workbuddy（用 SVG check/x 替代系统彩色 emoji，色系统一为莫兰迪）
   wbEl.className = 'signin-status ' + (wb.done ? 'done' : 'fail');
-  wbEl.textContent = wb.done
-    ? ('今日签到：✅ 已完成' + (wb.points ? ' (+' + wb.points + '积分)' : ''))
-    : '今日签到：❌ 未签到';
+  wbEl.innerHTML = wb.done
+    ? ('<svg class="signin-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>今日签到：已完成' + (wb.points ? ' <span style="opacity:0.78">(+' + wb.points + '积分)</span>' : ''))
+    : '<svg class="signin-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>今日签到：未签到';
   // 科研通
   ktEl.className = 'signin-status ' + (kt.done ? 'done' : 'fail');
-  ktEl.textContent = kt.done ? '今日签到：✅ 已完成' : '今日签到：❌ 未签到';
+  ktEl.innerHTML = kt.done
+    ? '<svg class="signin-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>今日签到：已完成'
+    : '<svg class="signin-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>今日签到：未签到';
   // 更新时间
   if (upEl) {
     const t = json.updatedAt ? new Date(json.updatedAt).toLocaleString('zh-CN') : '—';
