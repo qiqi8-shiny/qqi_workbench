@@ -46,17 +46,15 @@ body {
 
 /* ============ Layout ============ */
 .app-container {
-  display: grid;
-  grid-template-columns: var(--sidebar-width) 1fr;
+  display: flex;
   min-height: 100vh;
+  padding-left: var(--sidebar-width);
 }
 
 /* ============ Sidebar (Desktop) ============ */
 .sidebar {
-  position: sticky;
-  top: 0;
-  align-self: start;
-  height: 100vh;
+  position: fixed;
+  left: 0; top: 0; bottom: 0;
   width: var(--sidebar-width);
   background: var(--bg-sidebar);
   display: flex;
@@ -101,7 +99,6 @@ body {
   text-align: left;
 }
 .nav-item svg { width: 20px; height: 20px; flex-shrink: 0; }
-.nav-emoji { font-size: 20px; line-height: 1; flex-shrink: 0; }
 .nav-item:hover {
   background: rgba(255,255,255,0.5);
   color: var(--text-primary);
@@ -757,9 +754,6 @@ textarea:focus { border-color: var(--accent-sage); }
 
 .calorie-big { font-size: var(--font-xxl); font-weight: 700; color: var(--accent-warm); text-align: center; padding: 10px 0; }
 .steps-summary { font-size: var(--font-xs); color: var(--text-muted); margin-bottom: 4px; }
-.steps-hint { font-size: 11px; color: var(--text-muted); line-height: 1.5; margin-bottom: 10px; }
-.step-input-row .input-group label { font-size: var(--font-sm); }
-#stepQueryResult { background: #faf7f2; color: var(--text-primary); cursor: default; }
 
 @media (max-width: 640px) {
   /* 手机端：添加记录表单竖向单排，一个输入框占一行，避免重叠/溢出 */
@@ -1136,155 +1130,20 @@ textarea:focus { border-color: var(--accent-sage); }
 .data-source-note b { color: var(--text-secondary); }
 
 /* ============ Responsive ============ */
-/* 基线（桌面）：侧边栏 200px，主内容留出 padding-left */
-@media (max-width: 1100px) {
+@media (max-width: 1024px) {
   .card-grid { grid-template-columns: 1fr; }
   .main-content { padding: 24px 20px 40px; }
-  .signin-card { max-width: 100%; }
 }
-/* 1000px 以下：侧边栏收成 64px 图标条（Workbuddy 浮窗刚好在这区间） */
-@media (max-width: 1000px) {
+@media (max-width: 768px) {
   :root { --sidebar-width: 64px; }
   .sidebar { padding: 16px 8px; }
   .sidebar-brand, .nav-item span:not(.icon-dot) { display: none; }
-  .nav-emoji { display: inline !important; }
   .nav-item { justify-content: center; padding: 14px; }
   .sidebar-sync span { display: none; }
   .sidebar-sync { justify-content: center; }
   .main-content { padding: 16px 12px 40px; }
   .growth-input-row, .standard-selectors { grid-template-columns: 1fr; }
   .word-grid { grid-template-columns: 1fr 1fr; }
-  /* 长内容撑爆容器处理 */
-  .main-content, .page, .card, .signin-card, .signin-status, .signin-note {
-    overflow-wrap: anywhere;
-    word-break: break-word;
-  }
-}
-/* 700px 以下（手机/iPad 竖屏）：彻底收起侧边栏，由底部 dock 接管导航 */
-@media (max-width: 700px) {
-  .app-container { grid-template-columns: 0 1fr; }
-  :root { --sidebar-width: 0px; }
-  .sidebar { display: none !important; }
-  .main-content { padding: 16px 14px 96px; } /* 多留 96px 给底部 dock + safe-area */
-  .signin-card { max-width: 100%; }
-  .card { padding: 18px 16px; }
-  h1 { font-size: 1.5rem !important; }
-  .page-header { margin-bottom: 18px; }
-  /* 唯一允许 dock 显示的断点（基线是 display:none，必须在媒体查询里覆盖） */
-  .mobile-dock { display: flex !important; }
-}
-.signin-card { max-width: 520px; }
-
-/* ============ Mobile Dock (基线永远隐藏，窄屏媒体查询切回 flex) ============ */
-.mobile-dock {
-  display: none; /* 关键：基线隐藏，窄屏断点 override */
-  position: fixed; left: 0; right: 0; bottom: 0;
-  background: var(--bg-sidebar);
-  border-top: 1px solid rgba(0,0,0,0.06);
-  z-index: 100;
-  justify-content: space-around;
-  align-items: center;
-  padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
-  backdrop-filter: blur(12px);
-}
-.mobile-dock .dock-item {
-  flex: 1;
-  display: flex; flex-direction: column; align-items: center;
-  gap: 3px;
-  padding: 6px 2px 4px;
-  background: none; border: none; cursor: pointer;
-  color: var(--text-muted);
-  font-size: 11px;
-  font-family: inherit;
-  -webkit-tap-highlight-color: transparent;
-  user-select: none;
-}
-.mobile-dock .dock-item svg { width: 22px; height: 22px; }
-.mobile-dock .dock-item.active { color: var(--accent-sage); font-weight: 600; }
-.mobile-dock .dock-item:active { opacity: 0.6; }
-
-/* ============ Signin Banner (简洁一行小条) ============ */
-.signin-banner {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 14px 18px;
-  border-radius: 12px;
-  background: linear-gradient(135deg, rgba(156,175,136,0.10), rgba(156,175,136,0.04));
-  border: 1px solid rgba(156,175,136,0.18);
-  font-size: var(--font-md);
-  color: var(--text);
-}
-.signin-banner .icon-dot { flex-shrink: 0; }
-.signin-banner-label {
-  font-weight: 600;
-  color: var(--text);
-}
-.signin-banner-divider {
-  width: 1px; height: 14px;
-  background: rgba(139,122,107,0.20);
-}
-.signin-banner-status {
-  flex: 1;
-  color: var(--text-muted);
-  font-size: var(--font-sm);
-}
-.signin-banner-status.done {
-  color: var(--accent-sage);
-  font-weight: 600;
-}
-.signin-banner-status.pending {
-  color: var(--text-muted);
-}
-.signin-banner-time {
-  font-size: var(--font-xs);
-  color: var(--text-muted);
-  opacity: 0.7;
-}
-.signin-tip {
-  font-size: var(--font-xs);
-  color: var(--text-muted);
-  margin-top: 12px;
-  line-height: 1.65;
-  padding: 12px 14px;
-  background: rgba(139,122,107,0.05);
-  border-radius: 8px;
-}
-.signin-tip code {
-  background: rgba(139,122,107,0.10);
-  padding: 1px 6px;
-  border-radius: 4px;
-  font-family: ui-monospace, monospace;
-  font-size: 0.92em;
-}
-.signin-status {
-  font-size: var(--font-lg);
-  font-weight: 600;
-  padding: 14px 16px;
-  border-radius: 12px;
-  background: rgba(139,122,107,0.08);
-  color: var(--text-muted);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.signin-status .signin-ico {
-  width: 20px;
-  height: 20px;
-  flex-shrink: 0;
-}
-.signin-status.done {
-  background: rgba(163,181,166,0.18);
-  color: var(--accent-sage);
-}
-.signin-status.fail {
-  background: rgba(191,140,140,0.16);
-  color: var(--accent-rose);
-}
-.signin-note {
-  font-size: var(--font-xs);
-  color: var(--text-muted);
-  margin-top: 8px;
 }
 </style>
 </head>
@@ -1315,10 +1174,6 @@ textarea:focus { border-color: var(--accent-sage); }
       <button class="nav-item" data-page="hotspot" onclick="switchPage('hotspot')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
         <span>行业热点</span>
-      </button>
-      <button class="nav-item" data-page="signin" onclick="switchPage('signin')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        <span>每日签到</span>
       </button>
     </div>
     <button class="sidebar-sync" onclick="syncAllData()" title="云端同步">
@@ -1836,12 +1691,15 @@ textarea:focus { border-color: var(--accent-sage); }
           </div>
         </div>
 
-        <!-- 子模块二：步数与卡路里（4张独立卡片） -->
+        <!-- 子模块二：步数与卡路里 -->
         <div id="health-steps" style="display:none">
-          <!-- 卡片一：每日步数记录 -->
           <div class="card">
-            <div class="card-title" style="margin-bottom:8px"><span class="icon-dot sage"></span>每日步数记录</div>
-            <div class="steps-hint">提示：可在手机开启快捷指令，读取健康步数后，直接自动同步到工作台</div>
+            <div class="card-title" style="margin-bottom:12px"><span class="icon-dot sage"></span>步数记录</div>
+            <div class="time-range-btns">
+              <button class="range-btn" data-range="halfyear" onclick="setStepsRange('halfyear')">半年内</button>
+              <button class="range-btn" data-range="month" onclick="setStepsRange('month')">一个月内</button>
+              <button class="range-btn active" data-range="week" onclick="setStepsRange('week')">一周内</button>
+            </div>
             <div class="input-row step-input-row" style="margin-top:12px">
               <div class="input-group" style="flex:1">
                 <label>日期</label>
@@ -1855,32 +1713,17 @@ textarea:focus { border-color: var(--accent-sage); }
             <button class="btn btn-primary btn-sm" style="width:100%;justify-content:center;text-align:center;margin-top:4px" onclick="addStepRecord()">＋ 记录步数</button>
           </div>
 
-          <!-- 卡片二：步数统计图表 -->
           <div class="card" style="margin-top:16px">
-            <div class="card-title" style="margin-bottom:8px"><span class="icon-dot blue"></span>步数统计图表</div>
-            <div class="time-range-btns" style="margin-bottom:8px">
-              <button class="range-btn" data-range="halfyear" onclick="setStepsRange('halfyear')">半年内</button>
-              <button class="range-btn" data-range="month" onclick="setStepsRange('month')">一个月内</button>
-              <button class="range-btn active" data-range="week" onclick="setStepsRange('week')">一周内</button>
-            </div>
+            <div class="card-title" style="margin-bottom:6px"><span class="icon-dot blue"></span>步数统计图表</div>
             <div class="steps-summary" id="stepsSummary"></div>
-            <div class="chart-container" style="height:300px;cursor:pointer" title="点击查看大图" onclick="openStepsChartModal()"><canvas id="stepsChart"></canvas></div>
+            <div class="chart-container" style="height:300px"><canvas id="stepsChart"></canvas></div>
           </div>
 
-          <!-- 卡片三：历史查询面板 -->
           <div class="card" style="margin-top:16px">
-            <div class="card-title" style="margin-bottom:10px"><span class="icon-dot lavender"></span>历史查询面板</div>
-            <div class="input-group" style="margin-bottom:12px">
-              <label>查询日期</label>
-              <input type="date" id="stepQueryDate" onchange="queryStepByDate()">
-            </div>
-            <div class="input-group">
-              <label>该日步数</label>
-              <input type="text" id="stepQueryResult" readonly placeholder="选择日期后自动显示">
-            </div>
+            <div class="card-title" style="margin-bottom:10px"><span class="icon-dot sage"></span>每日步数记录</div>
+            <div class="history-list" id="stepsList"></div>
           </div>
 
-          <!-- 卡片四：今日卡路里消耗 -->
           <div class="card" style="margin-top:16px">
             <div class="card-title" style="margin-bottom:8px"><span class="icon-dot warm"></span>今日卡路里消耗</div>
             <div class="calorie-big" id="todayCalorie">0 千卡</div>
@@ -1926,33 +1769,9 @@ textarea:focus { border-color: var(--accent-sage); }
   </main>
 </div>
 
-<!-- 极窄屏底部导航（手机/Workbuddy 浮窗） -->
-<nav class="mobile-dock" aria-label="底部导航">
-  <button class="dock-item active" data-page="home" onclick="switchPage('home')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-    <span>首页</span>
-  </button>
-  <button class="dock-item" data-page="learning" onclick="switchPage('learning')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
-    <span>学习</span>
-  </button>
-  <button class="dock-item" data-page="research" onclick="switchPage('research')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
-    <span>科研</span>
-  </button>
-  <button class="dock-item" data-page="life" onclick="switchPage('life')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
-    <span>生活</span>
-  </button>
-  <button class="dock-item" data-page="signin" onclick="switchPage('signin')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-    <span>签到</span>
-  </button>
-</nav>
-
 <!-- Rename Modal -->
-<div class="modal-overlay" id="renameModal" style="display:none" onclick="closeRename()">
-  <div class="modal-box" onclick="event.stopPropagation()">
+<div class="modal-overlay" id="renameModal" style="display:none">
+  <div class="modal-box">
     <h3>重命名文件</h3>
     <input type="text" id="renameInput" placeholder="输入新文件名">
     <div class="btn-group">
@@ -1963,8 +1782,8 @@ textarea:focus { border-color: var(--accent-sage); }
 </div>
 
 <!-- Paste Modal -->
-<div class="modal-overlay" id="pasteModal" style="display:none" onclick="closePaste()">
-  <div class="modal-box" onclick="event.stopPropagation()">
+<div class="modal-overlay" id="pasteModal" style="display:none">
+  <div class="modal-box">
     <h3 id="pasteModalTitle">粘贴文字</h3>
     <textarea id="pasteTextarea" placeholder="在此粘贴文字内容..." style="min-height:140px"></textarea>
     <div class="btn-group">
@@ -1975,8 +1794,8 @@ textarea:focus { border-color: var(--accent-sage); }
 </div>
 
 <!-- Export Modal -->
-<div class="modal-overlay" id="exportModal" style="display:none" onclick="closeExportModal()">
-  <div class="modal-box" style="max-width:680px" onclick="event.stopPropagation()">
+<div class="modal-overlay" id="exportModal" style="display:none">
+  <div class="modal-box" style="max-width:680px">
     <h3>📤 导出数据到 Notion</h3>
     <div style="margin-bottom:12px">
       <div style="display:flex;gap:6px;margin-bottom:8px">
@@ -1996,31 +1815,6 @@ textarea:focus { border-color: var(--accent-sage); }
     </div>
   </div>
 </div>
-
-    <!-- ========== 每日签到 ========== -->
-    <div class="page" id="page-signin">
-      <div class="page-header">
-        <h1><svg class="page-h1-ico" viewBox="0 0 24 24" fill="none" stroke="#9caf88" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:1.05em;height:1.05em;vertical-align:-0.18em;margin-right:6px"><polyline points="20 6 9 17 4 12"/></svg>每日签到</h1>
-        <div class="subtitle" id="signinUpdated">状态加载中…</div>
-      </div>
-
-      <div class="signin-banner card">
-        <span class="icon-dot blue"></span>
-        <span class="signin-banner-label">科研通</span>
-        <span class="signin-banner-divider"></span>
-        <span class="signin-banner-status" id="signinKeyantong">加载中…</span>
-        <span class="signin-banner-time" id="signinKeyantongTime"></span>
-      </div>
-
-      <button class="btn btn-outline btn-sm" style="margin-top:14px" onclick="loadSigninStatus(true)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;vertical-align:-2px;margin-right:4px"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
-        刷新签到状态
-      </button>
-
-      <div class="signin-tip">
-        科研通签到由 GitHub Actions 每日北京时间 8:00 自动执行（读取仓库 Secrets 内的账号密码）。状态写入 <code>data/signin-status.json</code>，本页面每次打开自动读取展示。
-      </div>
-    </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
@@ -2079,9 +1873,9 @@ let state = loadState();
 // ==================== NAVIGATION ====================
 function switchPage(page) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-item, .dock-item').forEach(n => n.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   document.getElementById('page-' + page).classList.add('active');
-  document.querySelectorAll(`[data-page="${page}"]`).forEach(n => n.classList.add('active'));
+  document.querySelector(`[data-page="${page}"]`).classList.add('active');
 
   if (page === 'home') {
     renderHome();
@@ -2099,36 +1893,6 @@ function switchPage(page) {
     renderStoolHistory();
     renderFoodAllergyList();
     renderEngArchive();
-  } else if (page === 'signin') {
-    loadSigninStatus();
-  }
-}
-
-// ==================== 每日签到状态 ====================
-async function loadSigninStatus(force) {
-  const ktEl = document.getElementById('signinKeyantong');
-  const ktTimeEl = document.getElementById('signinKeyantongTime');
-  const upEl = document.getElementById('signinUpdated');
-  if (!ktEl) return;
-  if (force && upEl) upEl.textContent = '刷新中…';
-  const json = await fetchJsonSafe(DATA_BASE + 'signin-status.json');
-  if (!json) {
-    if (upEl) upEl.textContent = '暂无签到数据（GitHub Actions 尚未运行）';
-    ktEl.className = 'signin-banner-status pending';
-    ktEl.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;vertical-align:-2px;margin-right:4px"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>等待执行';
-    return;
-  }
-  const kt = json.keyantong || {};
-  // 科研通（简洁小条样式）
-  ktEl.className = 'signin-banner-status ' + (kt.done ? 'done' : 'pending');
-  ktEl.innerHTML = kt.done
-    ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;vertical-align:-2px;margin-right:5px"><polyline points="20 6 9 17 4 12"/></svg>今日已签到'
-    : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;vertical-align:-2px;margin-right:5px"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>今日尚未签到';
-  if (ktTimeEl && kt.time) ktTimeEl.textContent = '· ' + new Date(kt.time).toLocaleTimeString('zh-CN', {hour:'2-digit', minute:'2-digit'});
-  // 更新时间
-  if (upEl) {
-    const t = json.updatedAt ? new Date(json.updatedAt).toLocaleString('zh-CN') : '—';
-    upEl.textContent = '最近更新：' + t;
   }
 }
 
@@ -3831,10 +3595,8 @@ function renderHealthSteps() {
   const di = document.getElementById('stepDateInput');
   if (di && !di.value) di.value = todayStr;
   renderStepsChart();
+  renderStepsList();
   renderCalorie();
-  const qd = document.getElementById('stepQueryDate');
-  if (qd && !qd.value) qd.value = todayStr;
-  queryStepByDate();
 }
 
 function setStepsRange(r) {
@@ -3843,29 +3605,26 @@ function setStepsRange(r) {
   const active = document.querySelector('#health-steps .range-btn[data-range="' + r + '"]');
   if (active) active.classList.add('active');
   renderStepsChart();
+  renderStepsList();
 }
 
-function getStepsEntries() {
+function renderStepsChart() {
+  const canvas = document.getElementById('stepsChart');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
   const recs = state.stepRecords || {};
-  return Object.entries(recs)
+  const entries = Object.entries(recs)
     .filter(([d]) => inRange(d, stepsRange))
     .sort((a,b) => a[0] < b[0] ? -1 : 1);
-}
-
-function buildStepsChartConfig(entries) {
   const labels = entries.map(e => e[0].slice(5));
   const data = entries.map(e => e[1]);
-  // Y 轴刻度必须为整百/整千，绝不出现小数
-  const rawMax = Math.max(1, ...(data.length ? data : [1]));
-  let step = 2000;
-  let niceMax = Math.ceil(rawMax / step) * step;
-  if (niceMax < step * 2) niceMax = step * 2;
-  if (niceMax <= 6000) step = 1000;
-  else if (niceMax <= 12000) step = 2000;
-  else step = 4000;
-  niceMax = Math.ceil(rawMax / step) * step;
-  if (niceMax < step * 2) niceMax = step * 2;
-  return {
+  const sum = data.reduce((a,b)=>a+b,0);
+  const avg = data.length ? Math.round(sum / data.length) : 0;
+  const sumEl = document.getElementById('stepsSummary');
+  if (sumEl) sumEl.textContent = '平均 ' + avg + ' 步 · 总计 ' + sum + ' 步';
+
+  if (stepsChartInst) stepsChartInst.destroy();
+  stepsChartInst = new Chart(ctx, {
     type: 'bar',
     data: {
       labels: labels,
@@ -3887,62 +3646,24 @@ function buildStepsChartConfig(entries) {
       },
       scales: {
         x: { grid: { display: false }, ticks: { maxRotation: 0, autoSkip: true, font: { size: 10 } } },
-        y: {
-          beginAtZero: true,
-          max: niceMax,
-          stepSize: step,
-          grid: { color: 'rgba(139,122,107,0.1)' },
-          ticks: { font: { size: 10 }, callback: v => Number(v).toLocaleString() }
-        }
+        y: { beginAtZero: true, grid: { color: 'rgba(139,122,107,0.1)' }, ticks: { font: { size: 10 } } }
       }
     }
-  };
+  });
 }
 
-function renderStepsChart() {
-  const canvas = document.getElementById('stepsChart');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  const entries = getStepsEntries();
-  const data = entries.map(e => e[1]);
-  const sum = data.reduce((a,b)=>a+b,0);
-  const avg = data.length ? Math.round(sum / data.length) : 0;
-  const sumEl = document.getElementById('stepsSummary');
-  if (sumEl) sumEl.textContent = '平均 ' + avg + ' 步 · 总计 ' + sum + ' 步';
-
-  if (stepsChartInst) stepsChartInst.destroy();
-  stepsChartInst = new Chart(ctx, buildStepsChartConfig(entries));
-}
-
-let stepsChartModalInst = null;
-function openStepsChartModal() {
-  const m = document.getElementById('stepsChartModal');
-  if (!m) return;
-  m.classList.add('show');
-  renderStepsChartModal();
-}
-function closeStepsChartModal() {
-  const m = document.getElementById('stepsChartModal');
-  if (m) m.classList.remove('show');
-  if (stepsChartModalInst) { stepsChartModalInst.destroy(); stepsChartModalInst = null; }
-}
-function renderStepsChartModal() {
-  const canvas = document.getElementById('stepsChartModalCanvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  const entries = getStepsEntries();
-  if (stepsChartModalInst) stepsChartModalInst.destroy();
-  stepsChartModalInst = new Chart(ctx, buildStepsChartConfig(entries));
-}
-
-function queryStepByDate() {
-  const qd = document.getElementById('stepQueryDate');
-  const qr = document.getElementById('stepQueryResult');
-  if (!qd || !qr) return;
-  const d = qd.value;
-  if (!d) { qr.value = ''; return; }
-  const s = (state.stepRecords || {})[d];
-  qr.value = (s === undefined) ? '暂无记录' : (s + ' 步');
+function renderStepsList() {
+  const recs = state.stepRecords || {};
+  const entries = Object.entries(recs).sort((a,b) => a[0] < b[0] ? 1 : -1);
+  const el = document.getElementById('stepsList');
+  if (!el) return;
+  if (entries.length === 0) {
+    el.innerHTML = '<div style="color:var(--text-muted);text-align:center;padding:12px">还没有步数记录</div>';
+    return;
+  }
+  el.innerHTML = entries.map(([d,s]) =>
+    '<div class="history-item"><span>' + d + '</span><span style="color:var(--accent-sage);font-weight:600">' + s + ' 步</span></div>'
+  ).join('');
 }
 
 function renderCalorie() {
@@ -3951,7 +3672,7 @@ function renderCalorie() {
   const todaySteps = recs[todayStr] || 0;
   const kcal = Math.round(todaySteps * 0.04);
   const todayEl = document.getElementById('todayCalorie');
-  if (todayEl) todayEl.textContent = todaySteps > 0 ? (kcal + ' 千卡') : '今日暂无步数记录';
+  if (todayEl) todayEl.textContent = kcal + ' 千卡';
 
   const entries = Object.entries(recs).sort((a,b) => a[0] < b[0] ? 1 : -1);
   const el = document.getElementById('calorieList');
@@ -4153,32 +3874,12 @@ function downloadExportData() {
 }
 
 // ==================== INIT ====================
-function applyStepsUrlParam() {
-  try {
-    const params = new URLSearchParams(location.search);
-    const v = params.get('steps');
-    if (v === null) return;
-    const s = parseInt(v.trim(), 10);
-    if (isNaN(s) || s < 0) return;
-    const di = document.getElementById('stepDateInput');
-    const si = document.getElementById('stepInput');
-    if (di) di.value = fmtDate(new Date());
-    if (si) si.value = s;
-    if (typeof addStepRecord === 'function') addStepRecord();
-    if (si) si.value = s; // 保存后重新回填，保持可见
-    showToast('已从快捷指令同步 ' + s + ' 步');
-    // 清理 URL 参数，避免重复触发
-    if (history.replaceState) history.replaceState(null, '', location.pathname + location.hash);
-  } catch (e) {}
-}
-
 function init() {
   syncSelectorUI();
   renderHome();
   renderEnglishScene();
   renderAllFolderUploads();
   loadRemoteData(); // 异步加载 data/*.json（辅食/热点/英语）
-  applyStepsUrlParam(); // 检测 ?steps= 快捷指令自动同步（覆盖当天）
 }
 
 window.addEventListener('DOMContentLoaded', init);
@@ -4207,15 +3908,6 @@ window.addEventListener('DOMContentLoaded', init);
         <span>WHO 0-5岁儿童生长标准</span><span class="check" id="stdCheck-who">✓</span>
       </button>
       <button class="sheet-cancel" onclick="closeStdSheet()">取消</button>
-    </div>
-  </div>
-
-  <!-- 步数统计图表大图弹窗 -->
-  <div class="growth-modal-overlay" id="stepsChartModal" onclick="closeStepsChartModal()">
-    <div class="growth-modal-box" onclick="event.stopPropagation()">
-      <button class="growth-modal-close" onclick="closeStepsChartModal()">✕</button>
-      <div class="modal-title">步数统计图表</div>
-      <div class="chart-container" style="height:58vh"><canvas id="stepsChartModalCanvas"></canvas></div>
     </div>
   </div>
 
