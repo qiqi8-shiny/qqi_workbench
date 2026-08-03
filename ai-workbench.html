@@ -845,6 +845,57 @@ textarea:focus { border-color: var(--accent-sage); }
   margin-right: 6px;
 }
 
+/* ============ English Scene Cards (collapsible) ============ */
+.scene-card {
+  padding: 14px;
+  background: #fdfaf6;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  border: 1px solid var(--border);
+}
+.scene-card-title {
+  font-weight: 600;
+  color: var(--accent-blue);
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+.scene-detail { display: none; }
+.scene-detail.open {
+  display: block;
+  animation: sceneFade 0.25s ease;
+}
+@keyframes sceneFade { from { opacity: 0; } to { opacity: 1; } }
+.scene-detail-label {
+  font-size: var(--font-sm);
+  font-weight: 600;
+  color: var(--accent-blue);
+  margin: 14px 0 8px;
+}
+.scene-detail-label:first-child { margin-top: 4px; }
+.scene-card-foot {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+.btn-scene-toggle {
+  border: 1px solid var(--accent-blue);
+  background: #fff;
+  color: var(--accent-blue);
+  border-radius: 14px;
+  padding: 6px 16px;
+  font-size: var(--font-xs);
+  font-weight: 600;
+  cursor: pointer;
+  line-height: 1.4;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition: background 0.15s;
+}
+.btn-scene-toggle:active { background: #eaf1f7; }
+@media (max-width: 640px) {
+  .btn-scene-toggle { padding: 7px 18px; }
+}
+
 /* ============ Percentile Badge ============ */
 .percentile-badge {
   display: inline-flex; align-items: center; gap: 4px;
@@ -3120,20 +3171,40 @@ function renderEngArchive() {
     container.innerHTML = '<div style="color:var(--text-muted);padding:12px;text-align:center">暂无存档，AI 每3天自动生成新场景并备份</div>';
     return;
   }
-  container.innerHTML = list.slice().reverse().map(s => {
+  container.innerHTML = list.slice().reverse().map((s, i) => {
     const name = s.name || (s.scene && s.scene.name) || '未知';
     const words = s.words || (s.scene && s.scene.words) || [];
     const dialogs = s.dialogs || (s.scene && s.scene.dialogs) || [];
+    const wordHtml = (words || []).map(w =>
+      `<div class="word-item"><span class="word-en">${w[0]}</span><span class="word-cn">${w[1]}</span></div>`
+    ).join('');
+    const dialogHtml = (dialogs || []).map(d =>
+      `<div class="dialog-line"><span class="speaker">${d[0]}：</span>${d[1]}</div>`
+    ).join('');
     return `
-      <div style="padding:14px;background:#fdfaf6;border-radius:8px;margin-bottom:10px;border:1px solid var(--border)">
-        <div style="font-weight:600;color:var(--accent-blue);margin-bottom:6px">🏠 ${name}场景 · ${s.date || ''}</div>
-        <div style="font-size:var(--font-xs);color:var(--text-secondary);margin-bottom:6px">
-          词汇：${words.slice(0,5).map(w => w[0]).join(', ')}...
+      <div class="scene-card" id="sceneCard-${i}">
+        <div class="scene-card-title">🏠 ${name}场景 · ${s.date || ''}</div>
+        <div class="scene-detail" id="sceneDetail-${i}">
+          <div class="scene-detail-label">📝 核心词汇（中英对照）</div>
+          <div class="word-grid">${wordHtml}</div>
+          <div class="scene-detail-label">💬 日常对话</div>
+          <div>${dialogHtml}</div>
         </div>
-        <div style="font-size:var(--font-xs);color:var(--text-muted)">共 ${words.length} 词 · ${dialogs.length} 句对话</div>
+        <div class="scene-card-foot">
+          <button class="btn-scene-toggle" onclick="toggleSceneCard(${i})">展开</button>
+        </div>
       </div>
     `;
   }).join('');
+}
+
+function toggleSceneCard(i) {
+  const card = document.getElementById('sceneCard-' + i);
+  const detail = document.getElementById('sceneDetail-' + i);
+  if (!card || !detail) return;
+  const btn = card.querySelector('.btn-scene-toggle');
+  const open = detail.classList.toggle('open');
+  if (btn) btn.textContent = open ? '收起' : '展开';
 }
 
 // ==================== FILE LISTS ====================
