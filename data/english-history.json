@@ -1,31 +1,70 @@
 {
-  "updatedAt": "2026-08-01T12:25:00+08:00",
+  "updatedAt": "2026-08-04T12:14:53+08:00",
   "source": "AI 每3天自动轮换（SSS儿歌核心）",
   "current": {
-    "name": "洗澡",
+    "name": "辅食",
     "words": [
-      ["water", "水"],
-      ["tub", "澡盆"],
-      ["soap", "肥皂"],
-      ["towel", "毛巾"],
-      ["duck", "小鸭"],
-      ["bubble", "泡泡"],
-      ["wash", "洗"],
-      ["splash", "拍水"],
-      ["pour", "倒"],
-      ["dry", "擦干"],
-      ["happy", "开心"]
+      ["bib", "围兜"],
+      ["chair", "餐椅"],
+      ["bowl", "碗"],
+      ["spoon", "勺子"],
+      ["cup", "杯子"],
+      ["food", "食物"],
+      ["rice", "米粥"],
+      ["carrot", "胡萝卜"],
+      ["pumpkin", "南瓜"],
+      ["sit", "坐"],
+      ["eat", "吃"],
+      ["open", "张嘴"],
+      ["chew", "嚼"],
+      ["taste", "尝"],
+      ["swallow", "咽"],
+      ["drink", "喝"],
+      ["feed", "喂"],
+      ["wipe", "擦"]
     ],
     "dialogs": [
-      ["Mom", "Time for a bath!"],
-      ["Baby", "Yay! Water!"],
-      ["Mom", "Let's wash your tummy."],
-      ["Baby", "Splash! Splash!"],
-      ["Mom", "Now dry with the towel."],
-      ["Baby", "I'm clean!"]
+      ["Mom", "Sit down. Bib on!"],
+      ["Baby", "Mmm! Food!"],
+      ["Mom", "Open wide. Here comes the spoon."],
+      ["Baby", "Aah! Yum yum!"],
+      ["Mom", "Chew, chew. Do you like carrot?"],
+      ["Baby", "Yes, yes! More!"]
     ]
   },
   "history": [
+    {
+      "date": "2026-08-04",
+      "name": "辅食",
+      "words": [
+        ["bib", "围兜"],
+        ["chair", "餐椅"],
+        ["bowl", "碗"],
+        ["spoon", "勺子"],
+        ["cup", "杯子"],
+        ["food", "食物"],
+        ["rice", "米粥"],
+        ["carrot", "胡萝卜"],
+        ["pumpkin", "南瓜"],
+        ["sit", "坐"],
+        ["eat", "吃"],
+        ["open", "张嘴"],
+        ["chew", "嚼"],
+        ["taste", "尝"],
+        ["swallow", "咽"],
+        ["drink", "喝"],
+        ["feed", "喂"],
+        ["wipe", "擦"]
+      ],
+      "dialogs": [
+        ["Mom", "Sit down. Bib on!"],
+        ["Baby", "Mmm! Food!"],
+        ["Mom", "Open wide. Here comes the spoon."],
+        ["Baby", "Aah! Yum yum!"],
+        ["Mom", "Chew, chew. Do you like carrot?"],
+        ["Baby", "Yes, yes! More!"]
+      ]
+    },
     {
       "date": "2026-08-01",
       "name": "洗澡",
