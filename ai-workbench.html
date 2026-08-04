@@ -1194,6 +1194,26 @@ textarea:focus { border-color: var(--accent-sage); }
 @media (max-width: 768px) {
   .search-grid, .add-entry-row { grid-template-columns: 1fr; }
 }
+
+/* ============ 步数与卡路里：新增元素 ============ */
+.tiny-hint {
+  font-size: var(--font-xs);
+  color: var(--text-muted);
+  background: #f1ece3;
+  border-radius: var(--radius-sm);
+  padding: 7px 10px;
+  line-height: 1.55;
+}
+.query-result {
+  font-size: var(--font-md);
+  color: var(--text-primary);
+  background: #f1ece3;
+  border-radius: var(--radius-sm);
+  padding: 14px 12px;
+  text-align: center;
+  min-height: 20px;
+  word-break: break-all;
+}
 </style>
 </head>
 <body>
@@ -1746,13 +1766,11 @@ textarea:focus { border-color: var(--accent-sage); }
 
         <!-- 子模块二：步数与卡路里 -->
         <div id="health-steps" style="display:none">
+
+          <!-- 卡片一：每日步数记录 -->
           <div class="card">
-            <div class="card-title" style="margin-bottom:12px"><span class="icon-dot sage"></span>步数记录</div>
-            <div class="time-range-btns">
-              <button class="range-btn" data-range="halfyear" onclick="setStepsRange('halfyear')">半年内</button>
-              <button class="range-btn" data-range="month" onclick="setStepsRange('month')">一个月内</button>
-              <button class="range-btn active" data-range="week" onclick="setStepsRange('week')">一周内</button>
-            </div>
+            <div class="card-title" style="margin-bottom:10px"><span class="icon-dot sage"></span>每日步数记录</div>
+            <div class="tiny-hint">提示：可在手机开启快捷指令，读取健康步数后，直接自动同步到工作台</div>
             <div class="input-row step-input-row" style="margin-top:12px">
               <div class="input-group" style="flex:1">
                 <label>日期</label>
@@ -1766,24 +1784,38 @@ textarea:focus { border-color: var(--accent-sage); }
             <button class="btn btn-primary btn-sm" style="width:100%;justify-content:center;text-align:center;margin-top:4px" onclick="addStepRecord()">＋ 记录步数</button>
           </div>
 
+          <!-- 卡片二：步数统计图表 -->
           <div class="card" style="margin-top:16px">
-            <div class="card-title" style="margin-bottom:6px"><span class="icon-dot blue"></span>步数统计图表</div>
+            <div class="card-title" style="margin-bottom:8px"><span class="icon-dot blue"></span>步数统计图表</div>
+            <div class="time-range-btns">
+              <button class="range-btn" data-range="halfyear" onclick="setStepsRange('halfyear')">半年内</button>
+              <button class="range-btn" data-range="month" onclick="setStepsRange('month')">一个月内</button>
+              <button class="range-btn active" data-range="week" onclick="setStepsRange('week')">一周内</button>
+            </div>
             <div class="steps-summary" id="stepsSummary"></div>
-            <div class="chart-container" style="height:300px"><canvas id="stepsChart"></canvas></div>
+            <div class="chart-container" style="height:300px;cursor:pointer" onclick="openStepsModal()" title="点击查看大图">
+              <canvas id="stepsChart"></canvas>
+            </div>
+            <div class="chart-hint" onclick="openStepsModal()">📈 点击图表查看大图</div>
           </div>
 
+          <!-- 卡片三：历史查询面板 -->
           <div class="card" style="margin-top:16px">
-            <div class="card-title" style="margin-bottom:10px"><span class="icon-dot sage"></span>每日步数记录</div>
-            <div class="history-list" id="stepsList"></div>
+            <div class="card-title" style="margin-bottom:10px"><span class="icon-dot sage"></span>历史查询</div>
+            <div class="input-group" style="margin-bottom:12px">
+              <label>查询日期</label>
+              <input type="date" id="stepQueryDate" onchange="queryStepByDate()">
+            </div>
+            <div class="query-result" id="stepQueryResult">请选择日期查看当日步数</div>
           </div>
 
+          <!-- 卡片四：今日卡路里消耗 -->
           <div class="card" style="margin-top:16px">
             <div class="card-title" style="margin-bottom:8px"><span class="icon-dot warm"></span>今日卡路里消耗</div>
             <div class="calorie-big" id="todayCalorie">0 千卡</div>
-            <div style="font-size:var(--font-xs);color:var(--text-muted);text-align:center;margin-bottom:6px">按 10000 步 ≈ 400 千卡 估算</div>
-            <div class="card-title" style="font-size:var(--font-md);margin:14px 0 8px">每日卡路里消耗</div>
-            <div class="history-list" id="calorieList"></div>
+            <div class="steps-summary" style="text-align:center">按 10000 步 ≈ 400 千卡 估算</div>
           </div>
+
         </div>
       </div>
     </div>
@@ -3758,7 +3790,6 @@ function renderHealthSteps() {
   const di = document.getElementById('stepDateInput');
   if (di && !di.value) di.value = todayStr;
   renderStepsChart();
-  renderStepsList();
   renderCalorie();
 }
 
@@ -3768,7 +3799,6 @@ function setStepsRange(r) {
   const active = document.querySelector('#health-steps .range-btn[data-range="' + r + '"]');
   if (active) active.classList.add('active');
   renderStepsChart();
-  renderStepsList();
 }
 
 function renderStepsChart() {
@@ -3809,7 +3839,7 @@ function renderStepsChart() {
       },
       scales: {
         x: { grid: { display: false }, ticks: { maxRotation: 0, autoSkip: true, font: { size: 10 } } },
-        y: { beginAtZero: true, grid: { color: 'rgba(139,122,107,0.1)' }, ticks: { font: { size: 10 } } }
+        y: { beginAtZero: true, grid: { color: 'rgba(139,122,107,0.1)' }, ticks: { font: { size: 10 }, precision: 0, callback: function(v){ return Number.isInteger(v) ? v : ''; } } }
       }
     }
   });
@@ -3835,18 +3865,7 @@ function renderCalorie() {
   const todaySteps = recs[todayStr] || 0;
   const kcal = Math.round(todaySteps * 0.04);
   const todayEl = document.getElementById('todayCalorie');
-  if (todayEl) todayEl.textContent = kcal + ' 千卡';
-
-  const entries = Object.entries(recs).sort((a,b) => a[0] < b[0] ? 1 : -1);
-  const el = document.getElementById('calorieList');
-  if (!el) return;
-  if (entries.length === 0) {
-    el.innerHTML = '<div style="color:var(--text-muted);text-align:center;padding:12px">暂无记录</div>';
-    return;
-  }
-  el.innerHTML = entries.map(([d,s]) =>
-    '<div class="history-item"><span>' + d + '</span><span style="color:var(--accent-warm);font-weight:600">' + Math.round(s * 0.04) + ' 千卡</span></div>'
-  ).join('');
+  if (todayEl) todayEl.textContent = todaySteps > 0 ? (kcal + ' 千卡') : '今日暂无步数记录';
 }
 
 function addStepRecord() {
@@ -3862,6 +3881,78 @@ function addStepRecord() {
   if (sEl) sEl.value = '';
   renderHealthSteps();
   showToast('已记录 ' + d + '：' + s + ' 步');
+}
+
+// 历史查询：选择日期后读取并显示当日步数
+function queryStepByDate() {
+  const dEl = document.getElementById('stepQueryDate');
+  const rEl = document.getElementById('stepQueryResult');
+  if (!dEl || !rEl) return;
+  const d = dEl.value;
+  if (!d) { rEl.textContent = '请选择日期查看当日步数'; return; }
+  const recs = state.stepRecords || {};
+  const s = recs[d];
+  rEl.textContent = (s != null) ? (d + '：' + s + ' 步') : '暂无记录';
+}
+
+// URL 参数自动接收：?steps=8500 → 自动填数并保存当天记录（覆盖）
+function autoFillStepsFromURL() {
+  let p = null;
+  try { p = new URLSearchParams(window.location.search).get('steps'); } catch(e) {}
+  if (p === null || p === '') return;
+  const s = parseInt(p, 10);
+  if (isNaN(s) || s < 0) return;
+  const d = fmtDate(new Date());
+  state.stepRecords = state.stepRecords || {};
+  state.stepRecords[d] = s;            // 覆盖当天，不重复
+  saveState(state);
+  const si = document.getElementById('stepInput');
+  if (si) si.value = '';
+  const hs = document.getElementById('health-steps');
+  if (hs && hs.style.display !== 'none') renderHealthSteps();
+  showToast('已自动记录 ' + d + '：' + s + ' 步');
+  // 消费参数，避免切换标签时重复触发
+  try {
+    const url = new URL(window.location.href);
+    url.searchParams.delete('steps');
+    window.history.replaceState({}, '', url.pathname + url.search + url.hash);
+  } catch(e) {}
+}
+
+// 步数图表大图弹窗
+let stepsChartModalInst = null;
+function openStepsModal() {
+  const m = document.getElementById('stepsModal');
+  if (!m) return;
+  m.classList.add('show');
+  renderStepsChartModal();
+}
+function closeStepsModal() {
+  const m = document.getElementById('stepsModal');
+  if (m) m.classList.remove('show');
+  if (stepsChartModalInst) { stepsChartModalInst.destroy(); stepsChartModalInst = null; }
+}
+function renderStepsChartModal() {
+  const canvas = document.getElementById('stepsChartModal');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const recs = state.stepRecords || {};
+  const entries = Object.entries(recs).filter(([d]) => inRange(d, stepsRange)).sort((a,b) => a[0] < b[0] ? -1 : 1);
+  const labels = entries.map(e => e[0].slice(5));
+  const data = entries.map(e => e[1]);
+  if (stepsChartModalInst) stepsChartModalInst.destroy();
+  stepsChartModalInst = new Chart(ctx, {
+    type: 'bar',
+    data: { labels: labels, datasets: [{ label: '步数', data: data, backgroundColor: 'rgba(163,181,166,0.85)', hoverBackgroundColor: 'rgba(143,165,146,0.95)', borderRadius: 6, maxBarThickness: 40 }] },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => c.parsed.y + ' 步' } } },
+      scales: {
+        x: { grid: { display: false }, ticks: { maxRotation: 0, autoSkip: true, font: { size: 10 } } },
+        y: { beginAtZero: true, grid: { color: 'rgba(139,122,107,0.1)' }, ticks: { font: { size: 10 }, precision: 0, callback: function(v){ return Number.isInteger(v) ? v : ''; } } }
+      }
+    }
+  });
 }
 
 function switchLifeTab(tab) {
@@ -4044,6 +4135,7 @@ function init() {
   renderAllFolderUploads();
   loadRemoteData(); // 异步加载 data/*.json（辅食/热点/英语）
   initSearchCenter();
+  autoFillStepsFromURL(); // ?steps= 自动填数并保存当天记录
 }
 
 // ==================== 智能检索中心 ====================
@@ -4250,6 +4342,15 @@ window.addEventListener('DOMContentLoaded', init);
       <button class="growth-modal-close" onclick="closeGrowthModal()">✕</button>
       <div class="modal-title">宝宝生长曲线</div>
       <div class="chart-container" style="height:58vh"><canvas id="growthChartModal"></canvas></div>
+    </div>
+  </div>
+
+  <!-- 步数图表大图弹窗 -->
+  <div class="growth-modal-overlay" id="stepsModal" onclick="closeStepsModal()">
+    <div class="growth-modal-box" onclick="event.stopPropagation()">
+      <button class="growth-modal-close" onclick="closeStepsModal()">✕</button>
+      <div class="modal-title">步数统计图表</div>
+      <div class="chart-container" style="height:58vh"><canvas id="stepsChartModal"></canvas></div>
     </div>
   </div>
 
