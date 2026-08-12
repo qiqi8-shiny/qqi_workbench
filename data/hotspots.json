@@ -1,7 +1,39 @@
 {
-  "updatedAt": "2026-08-06T10:48:43+08:00",
+  "updatedAt": "2026-08-13T00:00:56+08:00",
   "source": "AI 每周联网抓取（医用成像/ML可解释性）",
   "items": [
+    {
+      "tag": "政策",
+      "tagClass": "tag-policy",
+      "title": "广西印发三年行动方案，推动AI医学影像成果产业化与国际化",
+      "desc": "广西印发《关于推动全国医保影像AI识图大赛成果转化应用行动方案(2026—2028年)》，设“AI+医学影像”成果转化专项，对取得三类医疗器械注册证、突破关键核心技术并实现产业化的项目最高给予2000万元支持，并面向东盟构建“广西集成+东盟推广”应用生态，打通医学影像AI从赛场到市场的转化链条。",
+      "link": "https://gx.people.com.cn/BIG5/n2/2026/0714/c179464-41638292.html",
+      "pubDate": "2026-07-14"
+    },
+    {
+      "tag": "产业",
+      "tagClass": "tag-industry",
+      "title": "DeepHealth AI乳腺超声获FDA 510(k)许可，医学影像AI器械加速商业化",
+      "desc": "RadNet子公司DeepHealth于2026年7月30日获FDA 510(k)许可，推出AI乳腺超声解决方案，自动完成病灶检测、特征化与报告生成，病灶定位准确率>98%、阅片时间减少37%，预计年覆盖约70万例检查，标志超声影像AI从辅助测量走向直接决策支持。",
+      "link": "https://capital.com/en-int/news/deephealth-receives-fda-clearance-for-ai-powered-breast-ultrasound",
+      "pubDate": "2026-07-30"
+    },
+    {
+      "tag": "学术",
+      "tagClass": "tag-academic",
+      "title": "可解释深度学习框架用SHAP解释影像组学生物标志物（arXiv 2607.03593）",
+      "desc": "该研究提出可解释深度学习框架，融合分割、Grad-CAM与影像组学，并用SHAP解释最具判别力的生物标志物；在BUSI乳腺超声、KiTS肾CT、BraTS脑肿瘤等数据集上较全肿瘤影像组学提升判别性能，将深度学习注意力转化为可复现的定量影像标志物，服务于肿瘤无创表征与模型可信部署。",
+      "link": "https://arxiv.org/abs/2607.03593",
+      "pubDate": "2026-07-03"
+    },
+    {
+      "tag": "学术",
+      "tagClass": "tag-academic",
+      "title": "LDA主题建模绘制AI+健康研究全景，方法可迁移至器械专利分析（Technovation 2026）",
+      "desc": "研究基于60,010篇Scopus摘要，用LDA主题建模提取160个潜在主题并构建“驱动—基础设施—实施—结果”的健康技术评估框架，识别出疾病诊断（乳腺癌、心血管病）、个性化治疗等主导方向；其可扩展的LDA趋势图谱与象限分析法可迁移至医用成像器械专利的主题演化与前瞻预测。",
+      "link": "https://doi.org/10.1016/j.technovation.2025.103404",
+      "pubDate": "2026-03-01"
+    },
     {
       "tag": "产业",
       "tagClass": "tag-industry",
