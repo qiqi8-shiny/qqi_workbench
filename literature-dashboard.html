@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>毕业论文文献管理看板</title>
+<style>
+:root{
+  --bg:#0f1420; --bg2:#161d2e; --card:#1c2436; --line:#2a3550; --txt:#e6ebf5; --mut:#9aa7c2;
+  --accent:#5e8bff; --red:#ff5d6c; --yellow:#ffc24b; --green:#37d39b; --s5:#ff5d6c; --s4:#ffc24b; --s3:#5e8bff;
+}
+.light{ --bg:#f4f6fb; --bg2:#ffffff; --card:#ffffff; --line:#e2e8f3; --txt:#1c2536; --mut:#5a6b86; --accent:#2f6bff; --red:#e23b4e; --yellow:#d99100; --green:#119a6b; --s5:#e23b4e; --s4:#d99100; --s3:#2f6bff; }
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.6;font-size:15px}
+header{position:sticky;top:0;z-index:20;background:var(--bg2);border-bottom:1px solid var(--line);padding:12px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+header h1{font-size:17px;margin:0;font-weight:700;letter-spacing:.5px}
+header .sub{color:var(--mut);font-size:12px}
+.spacer{flex:1}
+.search{padding:7px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--txt);min-width:220px;font-size:13px}
+.toggle{padding:6px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--txt);cursor:pointer;font-size:13px}
+nav.tabs{display:flex;gap:4px;padding:10px 20px 0;background:var(--bg);border-bottom:1px solid var(--line);flex-wrap:wrap}
+.tab{padding:9px 16px;border:1px solid transparent;border-bottom:none;border-radius:10px 10px 0 0;cursor:pointer;color:var(--mut);font-size:14px;font-weight:600}
+.tab.active{background:var(--card);color:var(--accent);border-color:var(--line)}
+.page{display:none;padding:22px 20px 80px;max-width:1180px;margin:0 auto}
+.page.active{display:block}
+h2.page-sec{font-size:19px;margin:30px 0 12px;padding-bottom:8px;border-bottom:2px solid var(--accent)}
+h3.sec{font-size:16px;margin:22px 0 8px;color:var(--accent)}
+h3.page-sub{font-size:15px;margin:18px 0 6px;color:var(--txt);font-weight:700}
+p{margin:6px 0}
+.callout{border-left:4px solid var(--accent);background:var(--card);padding:10px 14px;border-radius:0 8px 8px 0;margin:10px 0;font-size:13.5px}
+.callout.warn{border-color:var(--yellow)}
+.callout.info{border-color:var(--green)}
+.badge-line{padding:8px 12px;border-radius:8px;font-weight:600;margin:8px 0;font-size:13.5px}
+.badge-line.red{background:rgba(255,93,108,.14);color:var(--red);border:1px solid rgba(255,93,108,.4)}
+.badge-line.yellow{background:rgba(255,194,75,.14);color:var(--yellow);border:1px solid rgba(255,194,75,.4)}
+.badge-line.gray{background:rgba(150,160,180,.14);color:var(--mut);border:1px solid var(--line)}
+.stat-line{font-size:13px;color:var(--mut);background:var(--bg2);padding:6px 12px;border-radius:6px;display:inline-block;margin:4px 0}
+.table-wrap{overflow-x:auto;margin:12px 0;border:1px solid var(--line);border-radius:10px}
+table.dt{border-collapse:collapse;width:100%;font-size:13px;background:var(--card)}
+table.dt th{background:var(--bg2);text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);position:sticky;top:0;font-weight:700;white-space:nowrap}
+table.dt td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+table.dt tbody tr:hover{background:rgba(94,139,255,.07)}
+.star{font-weight:700;white-space:nowrap}
+.star.s5{color:var(--s5)} .star.s4{color:var(--s4)}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;vertical-align:middle}
+.dot.red{background:var(--red)} .dot.yellow{background:var(--yellow)} .dot.gray{background:var(--mut)}
+.lbl{display:inline-block;background:rgba(94,139,255,.16);color:var(--accent);border-radius:5px;padding:1px 6px;font-size:12px;font-weight:700;margin-right:4px}
+.paper-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:14px 0;box-shadow:0 2px 10px rgba(0,0,0,.12)}
+.card-title{font-weight:700;font-size:15px;color:var(--accent);margin-bottom:8px;line-height:1.4}
+.card-line{padding:3px 0;font-size:13.5px}
+.label-line .lbl{margin-right:6px}
+.card-line.file{color:var(--mut);font-size:12.5px;word-break:break-all}
+.flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:16px 0;padding:16px;background:var(--card);border:1px solid var(--line);border-radius:12px}
+.node{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:10px 14px;text-align:center;font-weight:700;font-size:13px}
+.node small{display:block;color:var(--mut);font-weight:400;font-size:11px;margin-top:3px}
+.arrow{color:var(--accent);font-size:20px;font-weight:700}
+.bars{margin:10px 0 18px}
+.bar-row{display:flex;align-items:center;gap:10px;margin:6px 0}
+.bar-name{width:180px;font-size:13px;flex-shrink:0;text-align:right;color:var(--mut)}
+.bar-track{flex:1;background:var(--bg2);border-radius:6px;overflow:hidden;display:flex;height:22px}
+.bar-seg{height:100%}
+.bar-seg.s5{background:var(--s5)} .bar-seg.s4{background:var(--s4)} .bar-seg.s3{background:var(--s3)}
+.bar-num{width:150px;font-size:12px;flex-shrink:0}
+.chart-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:14px 0}
+.chart-card h4{margin:0 0 10px;font-size:14px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:780px){.grid2{grid-template-columns:1fr}.bar-name{width:110px}.bar-num{width:90px}}
+footer{text-align:center;color:var(--mut);font-size:12px;padding:20px}
+.donut-wrap{display:flex;gap:20px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>📚 毕业论文文献管理看板</h1>
+    <div class="sub">医用成像器械 · 可转化高质量专利预测（LDA + ML + SHAP）| 数据截至 2026-07-30</div>
+  </div>
+  <div class="spacer"></div>
+  <input class="search" id="search" placeholder="🔍 全文检索（文献编号 / 作者 / 方法 / 章节）">
+  <button class="toggle" id="themeBtn">🌓 切换主题</button>
+</header>
+<nav class="tabs">
+  <div class="tab active" data-page="p1">① 四五级文献分级表</div>
+  <div class="tab" data-page="p2">② 五星文献精细化归类</div>
+  <div class="tab" data-page="p3">③ 五星文献分层阅读计划</div>
+</nav>
+
+<div class="page active" id="p1">
+  <div class="chart-card">
+    <h4>各级文献分布（按文件夹，5★ / 4★）</h4>
+    <div class="bars">
+        <div class="bar-row">
+          <div class="bar-name">01_专利分析方法类</div>
+          <div class="bar-track">
+            <div class="bar-seg s5" style="width:0.0%"></div>
+            <div class="bar-seg s4" style="width:17.073170731707318%"></div>
+          </div>
+          <div class="bar-num"><span class="star s5">★5 0</span> <span class="star s4">★4 7</span></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-name">02_专利计量与专利地图</div>
+          <div class="bar-track">
+            <div class="bar-seg s5" style="width:0.0%"></div>
+            <div class="bar-seg s4" style="width:4.878048780487805%"></div>
+          </div>
+          <div class="bar-num"><span class="star s5">★5 0</span> <span class="star s4">★4 2</span></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-name">03_具体技术领域类</div>
+          <div class="bar-track">
+            <div class="bar-seg s5" style="width:0.0%"></div>
+            <div class="bar-seg s4" style="width:7.317073170731707%"></div>
+          </div>
+          <div class="bar-num"><span class="star s5">★5 0</span> <span class="star s4">★4 3</span></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-name">04_专利转化预测类</div>
+          <div class="bar-track">
+            <div class="bar-seg s5" style="width:12.195121951219512%"></div>
+            <div class="bar-seg s4" style="width:12.195121951219512%"></div>
+          </div>
+          <div class="bar-num"><span class="star s5">★5 5</span> <span class="star s4">★4 5</span></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-name">05_专利分析与ML结合</div>
+          <div class="bar-track">
+            <div class="bar-seg s5" style="width:2.4390243902439024%"></div>
+            <div class="bar-seg s4" style="width:9.75609756097561%"></div>
+          </div>
+          <div class="bar-num"><span class="star s5">★5 1</span> <span class="star s4">★4 4</span></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-name">医学影像交叉类</div>
+          <div class="bar-track">
+            <div class="bar-seg s5" style="width:0.0%"></div>
+            <div class="bar-seg s4" style="width:9.75609756097561%"></div>
+          </div>
+          <div class="bar-num"><span class="star s5">★5 0</span> <span class="star s4">★4 4</span></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-name">WOS英文文献</div>
+          <div class="bar-track">
+            <div class="bar-seg s5" style="width:48.78048780487805%"></div>
+            <div class="bar-seg s4" style="width:51.21951219512195%"></div>
+          </div>
+          <div class="bar-num"><span class="star s5">★5 20</span> <span class="star s4">★4 21</span></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-name">开题报告参考文献</div>
+          <div class="bar-track">
+            <div class="bar-seg s5" style="width:24.390243902439025%"></div>
+            <div class="bar-seg s4" style="width:0.0%"></div>
+          </div>
+          <div class="bar-num"><span class="star s5">★5 10</span> <span class="star s4">★4 0</span></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-name">知网补充文献</div>
+          <div class="bar-track">
+            <div class="bar-seg s5" style="width:9.75609756097561%"></div>
+            <div class="bar-seg s4" style="width:9.75609756097561%"></div>
+          </div>
+          <div class="bar-num"><span class="star s5">★5 4</span> <span class="star s4">★4 4</span></div>
+        </div></div>
+  </div>
+  <div class="callout info">课题方法主线：</div>
+  
+<div class="flow">
+  <div class="node">LDA 主题模型<br><small>权利要求书文本特征</small></div>
+  <div class="arrow">→</div>
+  <div class="node">4 分类器<br><small>LR / SVM / DT / XGBoost</small></div>
+  <div class="arrow">→</div>
+  <div class="node">SHAP<br><small>可解释性分析</small></div>
+  <div class="arrow">→</div>
+  <div class="node">专利转化预测<br><small>转让 / 许可 / 质押</small></div>
+</div>
+  <h3 class="sec">📊 文献分类整理：按文件夹 × 星级（评级调整后终版）</h3>
+<div class="callout info">评级依据：《文献最终纳入汇总表》第七部分的调整结果（9篇下调 + 4篇上调），以调整后评级为准。 重要提醒：您在汇总表第七部分已确认将9篇原5星中文文献降为4星（因无ML方法，仅作背景引用），并将4篇WOS四星文献升为5星（方法高度匹配）。</div>
+<h3 class="sec">一、01_专利分析方法类（医用成像器械、专利计量、技术态势）</h3>
+<div class="stat-line">文件夹实际文件数：7篇PDF | 5星：0篇 | 4星：7篇</div>
+<div class="callout warn">⚠️ 本类原含4篇5星，经评级调整后全部降为4星（原因：均为专利计量/态势分析，无ML方法，适合1.1选题背景引用）。</div>
+<div class="table-wrap"><table class="dt"><thead><tr><th>编号</th><th>文献</th><th>最终星级</th></tr></thead><tbody><tr><td>C1-1</td><td>冯文博-2024-网络视角下专利质量评价研究——以医疗器械领域为例</td><td><span class="star s4">★4</span></td></tr><tr><td>C1-2</td><td>张婷-2020-医学人工智能领域的技术创新态势研究</td><td><span class="star s4">★4</span></td></tr><tr><td>C1-3</td><td>张婷-2020-基于三方专利的医学人工智能领域技术竞争态势研究</td><td><span class="star s4">★4</span></td></tr><tr><td>C1-4</td><td>张婷-2021-我国医疗器械领域专利竞争态势研究</td><td><span class="star s4">★4</span></td></tr><tr><td>C1-5</td><td>欧阳昭连-2014-全球医用治疗设备技术专利计量分析</td><td><span class="star s4">★4</span></td></tr><tr><td>C1-6</td><td>金银雪-2022-人工智能医疗器械中国专利态势分析</td><td><span class="star s4">★4</span></td></tr><tr><td>C1-7</td><td>陈欣然-2021-基于专利计量的全球AI医疗健康应用发展态势分析</td><td><span class="star s4">★4</span></td></tr></tbody></table></div>
+<h3 class="sec">二、02_专利计量与专利地图方法类</h3>
+<div class="stat-line">文件夹实际文件数：2篇PDF | 5星：0篇 | 4星：2篇</div>
+<div class="table-wrap"><table class="dt"><thead><tr><th>编号</th><th>文献</th><th>最终星级</th></tr></thead><tbody><tr><td>C2-1</td><td>周隽如-2024-医学人工智能领域专利技术主题发展态势研究（BERTopic）</td><td><span class="star s4">★4</span></td></tr><tr><td>C2-2</td><td>琚春华-2023-核心技术发展潜力评价及国际竞争态势研判——基于医疗设备产业</td><td><span class="star s4">★4</span></td></tr></tbody></table></div>
+<h3 class="sec">三、03_具体技术领域类（CT、MRI、超声成像、PETSPECT、分子影像）</h3>
+<div class="stat-line">文件夹实际文件数：3篇PDF | 5星：0篇 | 4星：3篇</div>
+<div class="callout warn">⚠️ C3-3（沙建超2013）原为5星，因无ML方法降为4星。其三阶段生命周期模型数据仍可用于1.1背景。</div>
+<div class="table-wrap"><table class="dt"><thead><tr><th>编号</th><th>文献</th><th>最终星级</th></tr></thead><tbody><tr><td>C3-1</td><td>刘时雄-2012-国内医用CT领域专利申请现状分析</td><td><span class="star s4">★4</span></td></tr><tr><td>C3-2</td><td>张玲玲-2024-全球太赫兹近场显微成像技术发展状况分析与我国发展对策</td><td><span class="star s4">★4</span></td></tr><tr><td>C3-3</td><td>沙建超-2013-全球医用CT技术的专利计量研究</td><td><span class="star s4">★4</span></td></tr></tbody></table></div>
+<h3 class="sec">四、04_专利转化预测类（专利价值、转化潜力评估、机器学习应用）</h3>
+<div class="stat-line">文件夹实际文件数：10篇PDF | 5星：5篇 | 4星：5篇</div>
+<div class="callout warn">⚠️ C4-9（陈长益2019-CSSCI知识图谱）原为5星，因使用CiteSpace非ML方法降为4星。</div>
+<div class="badge-line red">🔴 五星（5篇）—— 方法论核心</div>
+<div class="table-wrap"><table class="dt"><thead><tr><th>编号</th><th>文献</th><th>核心方法</th></tr></thead><tbody><tr><td>C4-1</td><td>李世纪-2021-基于专利文本的手机企业创新能力评价研究</td><td>jieba+LDA(K=16)+熵值法</td></tr><tr><td>C4-2</td><td>李云-2023-基于文献计量的国内外专利价值评估研究进展与启示</td><td>VOSviewer全景分析</td></tr><tr><td>C4-5</td><td>胡正银-2014-专利文本技术挖掘研究进展综述</td><td>SAO+LDA+语义知识表示综述</td></tr><tr><td>C4-7</td><td>赵雪峰-2023-基于特征拼接标签迁移及深度学习组合的专利价值评估</td><td>BERT+LSTM+特征拼接</td></tr><tr><td>C4-8</td><td>钟炜楠-2020-基于机器学习的专利价值评估研究（硕士论文）</td><td>SVM/KNN/BP神经网络</td></tr></tbody></table></div>
+<div class="badge-line yellow">🟡 四星（5篇）—— 参考文献</div>
+<div class="table-wrap"><table class="dt"><thead><tr><th>编号</th><th>文献</th></tr></thead><tbody><tr><td>C4-3</td><td>王微-2024-我国护理核心期刊近5年预测模型研究论文分析</td></tr><tr><td>C4-4</td><td>王磊-2022-基于专利合作网络的机器学习领域知识流动研究（与C5重复）</td></tr><tr><td>C4-6</td><td>胡阿沛-2013-基于专利文献的技术演化分析方法评述</td></tr><tr><td>C4-9</td><td>陈长益-2019-基于CSSCI的专利价值研究文献的知识图谱分析（降级）</td></tr><tr><td>C4-10</td><td>陈长益-2019-基于文献共被引方法的专利价值研究热点与前沿分析</td></tr></tbody></table></div>
+<h3 class="sec">五、05_专利分析与机器学习结合类（专利信息挖掘、预测模型、智能决策）</h3>
+<div class="stat-line">文件夹实际文件数：9篇PDF（含4篇重复） | 去重后独有：5篇 | 5星：1篇 | 4星：4篇</div>
+<p>重复文献（以04为准）：王磊2022(C4-4)、胡正银2014(C4-5)、钟炜楠2020(C4-8)、陈长益2019(C4-9)</p>
+<div class="badge-line red">🔴 五星（1篇）</div>
+<div class="table-wrap"><table class="dt"><thead><tr><th>编号</th><th>文献</th><th>核心方法</th></tr></thead><tbody><tr><td>C5-1</td><td>关鹏-2020-国内外专利网络研究进展</td><td>三大方法论综述（106篇）</td></tr></tbody></table></div>
+<div class="badge-line yellow">🟡 四星（4篇）</div>
+<div class="table-wrap"><table class="dt"><thead><tr><th>编号</th><th>文献</th></tr></thead><tbody><tr><td>C5-2</td><td>张金柱-2022-颠覆性技术识别研究进展综述</td></tr><tr><td>C5-3</td><td>王诗炜-2022-基于科学论文和技术专利关联关系识别潜在知识发现方法研究综述</td></tr><tr><td>C5-4</td><td>陈利芳-2023-专利视角下的国内外机器学习技术情报研究</td></tr><tr><td>C5-5</td><td>魏红芹-2024-我国工业机器人领域技术热点及发展趋势分析</td></tr></tbody></table></div>
+<h3 class="sec">六、医学影像技术与专利分析交叉类</h3>
+<div class="stat-line">文件夹实际文件数：7篇PDF（含3篇重复） | 去重后独有：4篇 | 5星：0篇 | 4星：4篇</div>
+<div class="callout warn">⚠️ 本类原有的3篇5星全部降为4星（张丽军、戴维理、齐会娇——均为专利态势/布局分析，无ML）。 重复文献：关鹏2020(C5-1)、胡正银2014(C4-5)、陈长益2019(C4-10)</div>
+<div class="table-wrap"><table class="dt"><thead><tr><th>编号</th><th>文献</th><th>最终星级</th></tr></thead><tbody><tr><td>C6-1</td><td>张丽军-2022-磁共振成像设备专利态势分析</td><td><span class="star s4">★4</span></td></tr><tr><td>C6-2</td><td>张美云-2022-基于CiteSpace的国内专利价值评估研究知识图谱分析</td><td><span class="star s4">★4</span></td></tr><tr><td>C6-3</td><td>戴维理-2023-人工智能辅助医学影像诊断产业及专利技术分析</td><td><span class="star s4">★4</span></td></tr><tr><td>C6-4</td><td>齐会娇-2023-计算机断层扫描CT影像设备专利分析</td><td><span class="star s4">★4</span></td></tr></tbody></table></div>
+<h3 class="sec">七、WOS英文文献</h3>
+<p>文件夹结构：五星子文件夹19个文件 + 四星子文件夹27个文件 + 三星子文件夹4个文件</p>
+<div class="badge-line red">🔴 五星：实际20篇（物理位置分散在五星和四星文件夹）</div>
+<p>位于 WOS英文文献/五星/ 的五星（16篇）：</p>
+<div class="table-wrap"><table class="dt"><thead><tr><th>编号</th><th>文件名</th><th>核心方法</th></tr></thead><tbody><tr><td>W5-01</td><td>Deng-2023-Using-ML-to-Predict-Transferability</td><td>LDA+4ML+SHAP（与你几乎一致，已附翻译）</td></tr><tr><td>W5-02</td><td>CFA-CatBoost-SHAP Paradigm Regional Innovation</td><td>CatBoost+SHAP</td></tr><tr><td>W5-03</td><td>Interpretable ML Technology Convergence SHAP</td><td>可解释ML+技术融合+SHAP</td></tr><tr><td>W5-04</td><td>Predicting Patent Transaction Cycle DeepSurv SHAP</td><td>DeepSurv+SHAP→专利交易周期</td></tr><tr><td>W5-05</td><td>XGBoost SHAP IPR Outcomes Prediction</td><td>XGBoost+TF-IDF+SHAP</td></tr><tr><td>W5-06</td><td>Identification High-Value Patents RF Integrated Circuits</td><td>RF→高价值专利识别</td></tr><tr><td>W5-07</td><td>KPAS-II Patent Valuation System</td><td>专利价值评估系统框架</td></tr><tr><td>W5-08</td><td>Time Splits Model Generalization Chemistry</td><td>时间分割vs随机分割（创新点③核心支撑）</td></tr><tr><td>W5-09</td><td>MRGCE High-Value Patent Identification GNN</td><td>GNN→高价值专利识别</td></tr><tr><td>W5-10</td><td>GAN-BO-XGBoost High-Quality Patent Identification</td><td>GAN+贝叶斯优化+XGBoost</td></tr><tr><td>W5-11</td><td>Interpretable Patent Recommendation Knowledge Graph</td><td>知识图谱+可解释推荐</td></tr><tr><td>W5-12</td><td>Patent Transfer Cycle Prediction Random Survival Forest</td><td>随机生存森林→专利转让周期</td></tr><tr><td>W5-13</td><td>Valuation of University-Originated Technologies</td><td>预测分析→大学技术估值</td></tr><tr><td>W5-14</td><td>Patent value evaluation Bayesian Optimized XGBoost</td><td>贝叶斯优化+XGBoost→专利价值</td></tr><tr><td>W5-15</td><td>Dynamic technology impact analysis multi-task learning</td><td>多任务学习→专利引用预测</td></tr><tr><td>W5-16</td><td>R&amp;D partner recommendation DL+SHAP（仅摘要.md）</td><td>SBERT+DL+SHAP双场景分析</td></tr></tbody></table></div>
+<p>位于 WOS英文文献/四星/ 但已升级为五星（4篇）：</p>
+<div class="table-wrap"><table class="dt"><thead><tr><th>编号</th><th>文件名</th><th>升级原因</th></tr></thead><tbody><tr><td>W4-04↑</td><td>Marketable Value Patents LDA Ensemble Learning</td><td>LDA+集成学习组合与你一致</td></tr><tr><td>W4-17↑</td><td>SHAP Patent Grant Prediction</td><td>SHAP在专利领域的可解释性验证</td></tr><tr><td>W4-19↑</td><td>Uncovering multi technology convergence patterns (Huang 2026)</td><td>RF+SHAP AUC&gt;0.90，创新点②核心引用</td></tr><tr><td>W4-22↑</td><td>Reis_2025_RF专利许可特征（仅摘要）</td><td>RF特征重要性→专利许可，目标变量直接相关</td></tr></tbody></table></div>
+<div class="badge-line yellow">🟡 四星：实际21篇</div>
+<p>位于 WOS英文文献/四星/（17篇PDF + 4篇仅摘要）：</p>
+<p>已下载PDF（13篇，排除了4篇升级为五星的）：</p>
+<div class="table-wrap"><table class="dt"><thead><tr><th>编号</th><th>文件名</th></tr></thead><tbody><tr><td>W4-01</td><td>Predicting Technology Reuse Patterns IPC GBDT</td></tr><tr><td>W4-02</td><td>LDA RF Technological Convergence Prediction</td></tr><tr><td>W4-03</td><td>HMFM High-Value Patent Multi-Feature Fusion</td></tr><tr><td>W4-05</td><td>Time-Aware Graph Patent Impact Prediction</td></tr><tr><td>W4-06</td><td>BERTopic Patent Technology Lifecycle Prediction</td></tr><tr><td>W4-07</td><td>LDA Dynamic Topic Model Technology Prediction</td></tr><tr><td>W4-08</td><td>Valuable Patents Climate Change Adaptation ML SVM</td></tr><tr><td>W4-09</td><td>High-Value Patent Prediction Technology Component Mapping</td></tr><tr><td>W4-10</td><td>Forecasting High-Quality Patents Technology Convergence</td></tr><tr><td>W4-11</td><td>Patent Lifetime Prediction LightGBM FocalLoss</td></tr><tr><td>W4-12</td><td>Forecasting Scientific Trends Time Series</td></tr><tr><td>W4-13</td><td>Predicting Patent Life Ensemble RF DNN</td></tr><tr><td>W4-14</td><td>LDA DTM Convergence Technology Prediction</td></tr><tr><td>W4-15</td><td>Patent Quality Index ML Multidimensional FinTech</td></tr><tr><td>W4-16</td><td>Ensemble KAN Patent Grant Explainability</td></tr></tbody></table></div>
+<p>仅摘要（7篇四星，位于 四星/ 子目录的 .md 文件）：</p>
+<div class="table-wrap"><table class="dt"><thead><tr><th>编号</th><th>文献摘要文件</th></tr></thead><tbody><tr><td>W4-18*</td><td>Erdogan_2024_专利质量ML预测</td></tr><tr><td>W4-20*</td><td>Kansu_2026_专利引用预测ML</td></tr><tr><td>W4-21*</td><td>Luo_2025_VERGM随机森林技术机会</td></tr><tr><td>W4-23*</td><td>Sahiner_2026_PQI专利质量指数</td></tr><tr><td>W4-24*</td><td>Trappey_2021_DNN专利价值评估</td></tr><tr><td>W4-25*</td><td>Wang_2024_GCN链接预测技术方案</td></tr><tr><td>W4-26*</td><td>Chi_2025_91篇ML+专利系统综述</td></tr></tbody></table></div>
+<div class="badge-line gray">⚫ 三星：4篇（WOS英文文献/三星/，已排除，不纳入）</div>
+<h3 class="sec">八、开题报告参考文献</h3>
+<div class="stat-line">文件夹实际文件数：12个文件（含PDF+摘要+辅助txt） | 核心文献：10篇 | 全部5星</div>
+<p>开题报告参考文献在汇总表中全部评定为5星核心必读。</p>
+<div class="table-wrap"><table class="dt"><thead><tr><th>编号</th><th>文件</th><th>用途</th></tr></thead><tbody><tr><td>K1</td><td>01_WIPO_World_IP_Indicators_2023.pdf</td><td>5星-政策数据</td></tr><tr><td>K2</td><td>02_2022年中国专利调查报告.pdf</td><td>5星-关键数据源</td></tr><tr><td>K3</td><td>提升专利质量促进转化运用——专项行动方案解读.pdf</td><td>5星-政策依据</td></tr><tr><td>K4</td><td>Article Rank...Citation Network.pdf (Li J 2009)</td><td>5星-引文网络经典</td></tr><tr><td>K5</td><td>基于引文网络的核心专利发现研究_张欣.pdf</td><td>5星-PatentRank</td></tr><tr><td>K6</td><td>A novel approach...ML-based predictive analysis.pdf (Choi 2020)</td><td>5星-ML代表</td></tr><tr><td>K7</td><td>基于随机森林算法的潜在高价值专利预测方法研究_王思培.pdf</td><td>5星-RF方法</td></tr><tr><td>K8</td><td>[8] Choi等_2020_专利商业潜力评估_文献摘要.md</td><td>5星-ML代表</td></tr><tr><td>K9</td><td>基于机器学习的专利质量分析与分类预测研究_符川川.pdf</td><td>5星-SVM方法</td></tr><tr><td>K10</td><td>基于机器学习的专利质量评价研究_李欣.pdf</td><td>5星-四模型对比</td></tr></tbody></table></div>
+<h3 class="sec">九、知网补充文献</h3>
+<div class="stat-line">文件夹实际文件数：8篇PDF | 5星：4篇 | 4星：4篇</div>
+<div class="badge-line red">🔴 五星（4篇）</div>
+<div class="table-wrap"><table class="dt"><thead><tr><th>编号</th><th>文献</th><th>核心方法</th></tr></thead><tbody><tr><td>Z1</td><td>胡泽文-2022-基于扎根理论的高价值专利评估与识别研究综述</td><td>扎根理论综述</td></tr><tr><td>Z2</td><td>刘澄-2021-基于BP神经网络的专利价值评估方法及其应用研究</td><td>四维23指标→BPNN</td></tr><tr><td>Z3</td><td>冉从敬-2024-基于机器学习的成本法在专利价值评估中的应用</td><td>XGBoost+专利价值分类</td></tr><tr><td>Z4</td><td>王子焉-2019-基于灰色关联分析—随机森林回归的专利价值评估</td><td>GCA+RF</td></tr></tbody></table></div>
+<div class="badge-line yellow">🟡 四星（4篇）</div>
+<div class="table-wrap"><table class="dt"><thead><tr><th>编号</th><th>文献</th></tr></thead><tbody><tr><td>Z5</td><td>王子焉-2019-专利价值评估研究综述</td></tr><tr><td>Z6</td><td>徐祯虹-2023-祥生医疗超声影像设备专利组合价值评估研究</td></tr><tr><td>Z7</td><td>宋雪姣-2024-基于核心技术发展潜力的国家技术供应链竞争态势研判</td></tr><tr><td>Z8</td><td>冯文博-2024-网络视角下医疗器械领域专利质量与企业技术创新效率研究（与C1-1为同一作者，硕士版更全）</td></tr></tbody></table></div>
+<h3 class="sec">📊 汇总总表</h3>
+<div class="table-wrap"><table class="dt"><thead><tr><th>文件夹</th><th>实际PDF数</th><th><span class="dot red"></span>五星</th><th><span class="dot yellow"></span>四星</th><th>备注</th></tr></thead><tbody><tr><td>01_专利分析方法类</td><td>7</td><td>0</td><td>7</td><td>全部降为4星（无ML方法）</td></tr><tr><td>02_专利计量与专利地图方法类</td><td>2</td><td>0</td><td>2</td><td>均为4星</td></tr><tr><td>03_具体技术领域类</td><td>3</td><td>0</td><td>3</td><td>全部降为4星（无ML方法）</td></tr><tr><td>04_专利转化预测类</td><td>10</td><td>5</td><td>5</td><td>C4-9降为4星</td></tr><tr><td>05_专利分析与ML结合类</td><td>5(独有)</td><td>1</td><td>4</td><td>4篇与04重复</td></tr><tr><td>医学影像技术与专利分析交叉类</td><td>4(独有)</td><td>0</td><td>4</td><td>全部降为4星；3篇与其他类重复</td></tr><tr><td>WOS英文文献</td><td>~41(有效)</td><td>20</td><td>21</td><td>含4篇从四星升级；三星4篇已排除</td></tr><tr><td>开题报告参考文献</td><td>10</td><td>10</td><td>0</td><td>全部5星</td></tr><tr><td>知网补充文献</td><td>8</td><td>4</td><td>4</td><td>—</td></tr><tr><td>总计（去重估算）</td><td>~70</td><td>~30</td><td>~40</td><td>与汇总表一致</td></tr></tbody></table></div>
+</div>
+
+<div class="page" id="p2">
+  <div class="grid2">
+    <div class="chart-card"><h4>五星文献来源分布</h4><div class="bars">
+        <div class="bar-row">
+          <div class="bar-name">WOS英文</div>
+          <div class="bar-track"><div class="bar-seg s3" style="width:100.0%"></div></div>
+          <div class="bar-num">20</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-name">中文六大类</div>
+          <div class="bar-track"><div class="bar-seg s3" style="width:30.0%"></div></div>
+          <div class="bar-num">6</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-name">开题报告</div>
+          <div class="bar-track"><div class="bar-seg s3" style="width:50.0%"></div></div>
+          <div class="bar-num">10</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-name">知网补充</div>
+          <div class="bar-track"><div class="bar-seg s3" style="width:20.0%"></div></div>
+          <div class="bar-num">4</div>
+        </div></div></div>
+    <div class="chart-card"><h4>五星文献一致性标注分布</h4><div class="bars">
+        <div class="bar-row">
+          <div class="bar-name">★★★★★高度一致</div>
+          <div class="bar-track"><div class="bar-seg s3" style="width:54.54545454545454%"></div></div>
+          <div class="bar-num">12</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-name">部分参考</div>
+          <div class="bar-track"><div class="bar-seg s3" style="width:100.0%"></div></div>
+          <div class="bar-num">22</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-name">背景引用</div>
+          <div class="bar-track"><div class="bar-seg s3" style="width:27.27272727272727%"></div></div>
+          <div class="bar-num">6</div>
+        </div></div></div>
+  </div>
+  <h2 class="page-sec">五星文献精细化归类与用途标注（终版）</h2>
+<p>生成日期：2026-07-21</p>
+<p>核心方法：LDA(权利要求书)-&gt;LR/SVM/DT/XGBoost(4分类器)-&gt;SHAP-&gt;专利转化预测</p>
+<h2 class="page-sec">一、五星文献总览（评级调整后共约40篇，含WOS 20篇、中文6篇、开题报告10篇、知网4篇）</h2>
+<p><span class="lbl">【说明】</span>以下按WOS英文/中文/开题报告/知网分来源排列。</p>
+<p>已纳入评级调整结果：降级9篇(中文背景类)-&gt;4星，升级4篇(WOS方法类)-&gt;5星。</p>
+<p>标注规则：</p>
+<p>★★★★★高度一致 = 与你的方法(LDA+ML+SHAP+时间分割+专利转化预测)直接匹配。</p>
+<p>部分参考：领域相关但方法路线不同。</p>
+<p>背景引用：提供背景数据或领域综述。</p>
+<h3 class="page-sub">（一）WOS英文文献（20篇5星，含4篇从4星升级）</h3>
+<div class="table-wrap"><table class="dt"><thead><tr><th>序号</th><th>文献(作者+年份+标题线索)</th><th>核心方法</th><th>与我方法的一致性</th><th>所在文件夹</th></tr></thead><tbody><tr><td>序号</td><td>文献(作者+年份+标题线索)</td><td>核心方法</td><td>与我方法的一致性</td><td>所在文件夹</td></tr></tbody></table></div>
+<div class="table-wrap"><table class="dt"><thead><tr><th>W5-01</th><th>Deng 2023 Using ML to Predict Transferability of University Patents</th><th>LDA主题模型+SVM/RF/ANN/XGBoost+SHAP</th><th>★★★★★高度一致：LDA+4ML+SHAP完整框架与你几乎一致</th><th>WOS英文文献/五星/</th></tr></thead><tbody><tr><td>W5-02</td><td>Zhang 2025 CFA-CatBoost-SHAP Paradigm Regional Innovation</td><td>CatBoost+SHAP</td><td>部分参考：SHAP在创新预测中的应用先例</td><td>WOS英文文献/五星/</td></tr><tr><td>W5-03</td><td>Interpretable ML Technology Convergence SHAP</td><td>可解释ML+技术融合+SHAP</td><td>部分参考：SHAP在专利技术预测中的应用</td><td>WOS英文文献/五星/</td></tr><tr><td>W5-04</td><td>Predicting Patent Transaction Cycle DeepSurv SHAP</td><td>DeepSurv+SHAP</td><td>★★★★★高度一致：直接研究专利交易(转让)预测</td><td>WOS英文文献/五星/</td></tr><tr><td>W5-05</td><td>Sokhansanj 2022 XGBoost SHAP IPR Outcomes Prediction</td><td>XGBoost+TF-IDF+SHAP</td><td>★★★★★高度一致：XGBoost+SHAP组合直接验证</td><td>WOS英文文献/五星/</td></tr><tr><td>W5-06</td><td>Identification High-Value Patents RF Integrated Circuits</td><td>随机森林-&gt;高价值专利识别</td><td>部分参考：RF模型+RFE特征选择，领域不同</td><td>WOS英文文献/五星/</td></tr><tr><td>W5-07</td><td>KPAS-II Patent Valuation System</td><td>专利价值评估系统框架</td><td>部分参考：专利价值评估系统框架，非ML方法，可用于框架设计参考</td><td>WOS英文文献/五星/</td></tr><tr><td>W5-08</td><td>Bradshaw 2025 Time Splits Model Generalization Chemistry</td><td>随机分割vs时间分割</td><td>★★★★★高度一致：时间分割策略直接论证依据</td><td>WOS英文文献/五星/</td></tr><tr><td>W5-09</td><td>MRGCE High-Value Patent Identification GNN</td><td>GNN-&gt;高价值专利识别</td><td>部分参考：前沿方法用于第6章讨论</td><td>WOS英文文献/五星/</td></tr><tr><td>W5-10</td><td>Wu 2024 GAN-BO-XGBoost High-Quality Patent Identification</td><td>GAN+贝叶斯优化+XGBoost</td><td>★★★★★高度一致：XGBoost直接用于专利质量识别</td><td>WOS英文文献/五星/</td></tr><tr><td>W5-11</td><td>Interpretable Patent Recommendation Knowledge Graph</td><td>知识图谱+可解释推荐</td><td>部分参考：可解释性方法但路线不同(KG)</td><td>WOS英文文献/五星/</td></tr><tr><td>W5-12</td><td>Patent Transfer Cycle Prediction Random Survival Forest</td><td>随机生存森林-&gt;专利转让周期</td><td>部分参考：专利转让预测目标变量一致，但方法为随机生存森林而非XGBoost/LR/SVM/DT</td><td>WOS英文文献/五星/</td></tr><tr><td>W5-13</td><td>Valuation of University-Originated Technologies</td><td>预测分析-&gt;大学技术估值</td><td>部分参考：大学专利技术价值评估</td><td>WOS英文文献/五星/</td></tr><tr><td>W5-14</td><td>Patent Value Evaluation Bayesian Optimized XGBoost</td><td>贝叶斯优化+XGBoost</td><td>★★★★★高度一致：XGBoost直接用于专利价值</td><td>WOS英文文献/五星/</td></tr><tr><td>W5-15</td><td>Dynamic Technology Impact Multi-Task Learning</td><td>多任务学习-&gt;专利引用预测</td><td>部分参考：深度学习+专利分析</td><td>WOS英文文献/五星/</td></tr><tr><td>W5-16</td><td>Wang 2026 R&amp;D Partner Recommendation DL+SHAP（仅摘要）</td><td>SBERT+深度学习+SHAP</td><td>★★★★★高度一致：SHAP在专利分析中的直接应用先例</td><td>WOS英文文献/五星/（仅摘要）</td></tr><tr><td>W4-04升</td><td>Marketable Value Patents LDA Ensemble Learning（从4星升级）</td><td>LDA+集成学习-&gt;专利市场价值</td><td>★★★★★高度一致：LDA文本特征+集成学习组合与你一致</td><td>WOS英文文献/四星/</td></tr><tr><td>W4-17升</td><td>SHAP Patent Grant Prediction（从4星升级）</td><td>SHAP-&gt;专利授权预测</td><td>★★★★★高度一致：SHAP在专利中的可解释性验证</td><td>WOS英文文献/四星/</td></tr><tr><td>W4-19升</td><td>Huang 2026 RF+SHAP AUC&gt;0.90（从4星升级）</td><td>RF+Gini+SHAP</td><td>★★★★★高度一致：RF+SHAP在专利预测中AUC&gt;0.90，创新点②核心支撑</td><td>WOS英文文献/四星/</td></tr><tr><td>W4-22升</td><td>Reis 2025 RF Feature Importance-&gt;Patent Licensing（从4星升级，仅摘要）</td><td>RF特征重要性-&gt;专利许可因素</td><td>部分参考：直接研究专利许可影响因素</td><td>WOS英文文献/四星/九篇文献摘要/</td></tr></tbody></table></div>
+<h3 class="page-sub">（二）中文六大类（6篇5星，9篇原5星已降为4星）</h3>
+<div class="table-wrap"><table class="dt"><thead><tr><th>序号</th><th>文献</th><th>核心方法</th><th>与我方法的一致性</th><th>所在文件夹</th></tr></thead><tbody><tr><td>序号</td><td>文献</td><td>核心方法</td><td>与我方法的一致性</td><td>所在文件夹</td></tr></tbody></table></div>
+<div class="table-wrap"><table class="dt"><thead><tr><th>C4-1</th><th>李世纪 2021</th><th>jieba+LDA(K=16)+熵值法</th><th>★★★★★高度一致：你的中文NLP+LDA流程模板，直接照搬</th><th>04_专利转化预测类/</th></tr></thead><tbody><tr><td>C4-2</td><td>李云 2023</td><td>VOSviewer专利价值评估全景</td><td>背景引用：用于1.2研究现状开篇总述</td><td>04_专利转化预测类/</td></tr><tr><td>C4-5</td><td>胡正银 2014</td><td>SAO+LDA+语义知识表示综述</td><td>部分参考：LDA在专利文本挖掘中方法论综述</td><td>04_专利转化预测类/</td></tr><tr><td>C4-7</td><td>赵雪峰 2023</td><td>BERT+LSTM+特征拼接</td><td>部分参考：深度学习路线代表，第6章讨论对照</td><td>04_专利转化预测类/</td></tr><tr><td>C4-8</td><td>钟炜楠 2020</td><td>SVM/KNN/BP神经网络</td><td>部分参考：同为硕士论文层次，指标体系+模型对比可参考</td><td>04_专利转化预测类/</td></tr><tr><td>C5-1</td><td>关鹏 2020</td><td>专利网络三大方法论综述</td><td>背景引用：已用于引言[15]</td><td>05_专利分析与ML结合类/</td></tr></tbody></table></div>
+<h3 class="page-sub">（三）开题报告参考文献（10篇全部5星）</h3>
+<div class="table-wrap"><table class="dt"><thead><tr><th>K1</th><th>WIPO 2023世界知识产权报告</th><th>背景引用：专利数量全球第一</th></tr></thead><tbody><tr><td>K2</td><td>国家知识产权局2022中国专利调查报告</td><td>背景引用：产业化率35.4%/高校3%</td></tr><tr><td>K3</td><td>操秀英 2023</td><td>背景引用：政策依据</td></tr><tr><td>K4</td><td>Li J 2009 ArticleRank</td><td>背景引用：引文网络经典</td></tr><tr><td>K5</td><td>张欣 2017 PatentRank</td><td>背景引用：国内引文网络代表</td></tr><tr><td>K6</td><td>Feng Z 2018</td><td>背景引用：网络结构预测专利价值</td></tr><tr><td>K7</td><td>王思培 2020 随机森林</td><td>部分参考：RF模型选择中文支撑</td></tr><tr><td>K8</td><td>Choi J 2020 神经网络</td><td>部分参考：ML方法代表</td></tr><tr><td>K9</td><td>符川川 2021 SVM</td><td>部分参考：SVM模型选择中文支撑</td></tr><tr><td>K10 李欣 2020 四种ML对比</td><td>部分参考：多模型对比方法论</td></tr></tbody></table></div>
+<h3 class="page-sub">（四）知网补充文献（4篇5星）</h3>
+<div class="table-wrap"><table class="dt"><thead><tr><th>Z1</th><th>胡泽文 2022 扎根理论综述</th><th>背景引用：1.2综述框架</th></tr></thead><tbody><tr><td>Z2</td><td>刘澄 2021 四维23指标-&gt;BPNN</td><td>部分参考：指标体系构建思路</td></tr><tr><td>Z3</td><td>冉从敬 2024 XGBoost-&gt;专利价值分类</td><td>★★★★★高度一致：XGBoost在专利价值分类中最新(2024)中文支撑</td></tr><tr><td>Z4</td><td>王子焉 2019 GCA-&gt;RF-&gt;专利价值</td><td>部分参考：特征筛选+排序方法论</td></tr></tbody></table></div>
+<h2 class="page-sec">二、按论文章节用途分类</h2>
+<p>2.1 支撑<span class="lbl">【1.1选题背景/领域数据】</span>的五星文献</p>
+<p>注：本表格中包含部分已降为4星的文献（如张婷2021、金银雪2022、沙建超2013等），其方法虽不涉及ML，但对1.1选题背景的数据支撑价值极高，建议在引言中引用。</p>
+<div class="table-wrap"><table class="dt"><thead><tr><th>文献</th><th>核心数据/结论</th><th>具体用途</th></tr></thead><tbody><tr><td>文献</td><td>核心数据/结论</td><td>具体用途</td></tr></tbody></table></div>
+<div class="table-wrap"><table class="dt"><thead><tr><th>K1 WIPO 2023</th><th>中国专利数量全球第一</th><th>引言第1段&quot;我国专利申请量连续12年全球首位&quot;</th></tr></thead><tbody><tr><td>K2 国家知识产权局 2022</td><td>产业化率35.4%、高校3%</td><td>引言第2段&quot;产业化率低&quot;现状</td></tr><tr><td>K3 操秀英 2023</td><td>专利转化运用专项行动方案</td><td>引言第1段政策引用</td></tr><tr><td>C1-4 张婷 2021(现4星)</td><td>34万条宏观数据</td><td>引言第2段&quot;医疗器械专利竞争态势&quot;</td></tr><tr><td>C1-6 金银雪 2022(现4星)</td><td>AI+医疗器械专利态势</td><td>引言第2段&quot;医用成像专利申请趋势&quot;</td></tr><tr><td>C3-3 沙建超 2013(现4星)</td><td>14,459项CT专利三阶段</td><td>引言第2段&quot;CT专利发展三阶段&quot;</td></tr><tr><td>C6-3 戴维理 2023(现4星)</td><td>AI+医学影像产业分析</td><td>引言第2段政策论证</td></tr><tr><td>C1-1 冯文博 2024(现4星)</td><td>医学影像占医疗器械专利37%</td><td>引言第2段&quot;医学影像占比最高&quot;</td></tr><tr><td>C6-1 张丽军 2022(现4星)</td><td>MRI设备专利态势</td><td>引言第2段&quot;MRI子领域&quot;案例</td></tr><tr><td>C6-4 齐会娇 2023(现4星)</td><td>CT影像设备专利布局</td><td>引言第2段&quot;CT子领域&quot;案例</td></tr><tr><td>Z6 徐祯虹 2023(4星)</td><td>超声影像设备专利价值</td><td>引言第2段&quot;超声子领域&quot;案例</td></tr></tbody></table></div>
+<p>2.2 支撑<span class="lbl">【1.2文献综述/方法综述框架】</span>的五星文献</p>
+<div class="table-wrap"><table class="dt"><thead><tr><th>文献</th><th>综述内容</th><th>具体用途</th></tr></thead><tbody><tr><td>文献</td><td>综述内容</td><td>具体用途</td></tr></tbody></table></div>
+<div class="table-wrap"><table class="dt"><thead><tr><th>Z1 胡泽文 2022</th><th>高价值专利评估维度全景</th><th>1.2开篇总述框架</th></tr></thead><tbody><tr><td>Z5 王子焉 2019(4星)</td><td>三大传统方法-&gt;ML演进</td><td>1.2.1&quot;从传统方法到ML&quot;过渡</td></tr><tr><td>C4-2 李云 2023</td><td>VOSviewer全景</td><td>1.2方法综述文献计量视角</td></tr><tr><td>C5-1 关鹏 2020</td><td>三大方法论框架</td><td>1.2&quot;专利分析方法分类&quot;框架</td></tr><tr><td>C4-5 胡正银 2014</td><td>SAO+LDA综述</td><td>1.2&quot;专利文本挖掘&quot;方法论代表</td></tr><tr><td>W4-26 Chi 2025(4星)</td><td>91篇ML+专利系统综述</td><td>1.2系统框架引用</td></tr><tr><td>K4 Li J 2009</td><td>ArticleRank</td><td>1.2&quot;引文网络方法&quot;开篇</td></tr></tbody></table></div>
+<p>2.3 支撑<span class="lbl">【第三章特征工程/LDA方法】</span>的五星文献</p>
+<div class="table-wrap"><table class="dt"><thead><tr><th>文献</th><th>具体方法</th><th>可借鉴的具体操作</th></tr></thead><tbody><tr><td>文献</td><td>具体方法</td><td>可借鉴的具体操作</td></tr></tbody></table></div>
+<div class="table-wrap"><table class="dt"><thead><tr><th>C4-1 李世纪 2021</th><th>jieba+LDA(K=16)+熵值法</th><th>可照搬：jieba分词-&gt;自定义词典-&gt;停用词-&gt;困惑度确定K-&gt;LDA主题概率-&gt;熵值法赋权的完整流程</th></tr></thead><tbody><tr><td>C4-5 胡正银 2014</td><td>SAO+LDA综述</td><td>可引用：论证LDA适合专利文本特征提取</td></tr><tr><td>Z2 刘澄 2021</td><td>四维23指标-&gt;粗糙集约简</td><td>可参考：技术/法律/经济/市场四维指标体系构建</td></tr><tr><td>Z4 王子焉 2019</td><td>GCA筛选-&gt;RF回归</td><td>可参考：特征筛选+排序方法论</td></tr><tr><td>W4-04升 Marketable LDA</td><td>LDA+集成学习</td><td>可引用：LDA在专利价值评估中的直接应用</td></tr><tr><td>C4-8 钟炜楠 2020</td><td>三维度特征设计</td><td>可参考：专利属性+专利权人+发明人维度</td></tr></tbody></table></div>
+<p>2.4 支撑<span class="lbl">【第四章机器学习模型训练】</span>的五星文献</p>
+<div class="table-wrap"><table class="dt"><thead><tr><th>文献</th><th>所用模型</th><th>与我的模型对比意义</th></tr></thead><tbody><tr><td>文献</td><td>所用模型</td><td>与我的模型对比意义</td></tr></tbody></table></div>
+<div class="table-wrap"><table class="dt"><thead><tr><th>W5-01 Deng 2023</th><th>SVM/RF/ANN/XGBoost(与你一致)</th><th>直接作为选择4个分类器的文献依据</th></tr></thead><tbody><tr><td>W5-05 XGBoost SHAP IPR</td><td>XGBoost</td><td>XGBoost在专利文本分类中有效性证据</td></tr><tr><td>W5-10 GAN-BO-XGBoost</td><td>贝叶斯优化+XGBoost</td><td>XGBoost在专利质量识别中的应用</td></tr><tr><td>W5-14 Bayesian XGBoost</td><td>贝叶斯优化+XGBoost</td><td>XGBoost模型选择文献支撑</td></tr><tr><td>K10 李欣 2020</td><td>四种ML对比</td><td>多模型对比方法论中文支撑</td></tr><tr><td>Z3 冉从敬 2024</td><td>XGBoost</td><td>XGBoost在专利领域最新(2024)中文应用</td></tr><tr><td>K7 王思培 2020</td><td>随机森林</td><td>RF模型选择中文依据</td></tr><tr><td>W5-12 Random Survival Forest</td><td>随机生存森林</td><td>与RF同属树模型家族，专利转让预测直接相关</td></tr></tbody></table></div>
+<p>2.5 支撑<span class="lbl">【第五章SHAP可解释性分析】</span>的五星文献</p>
+<div class="table-wrap"><table class="dt"><thead><tr><th>文献</th><th>SHAP应用方式</th><th>具体可引用点</th></tr></thead><tbody><tr><td>文献</td><td>SHAP应用方式</td><td>具体可引用点</td></tr></tbody></table></div>
+<div class="table-wrap"><table class="dt"><thead><tr><th>W4-19升 Huang 2026</th><th>RF+Gini+SHAP AUC&gt;0.90</th><th>直接引用：RF+SHAP在专利预测中验证有效，支撑创新点②</th></tr></thead><tbody><tr><td>W5-05 XGBoost SHAP IPR</td><td>XGBoost+TF-IDF+SHAP</td><td>直接引用：XGBoost+SHAP组合有效性证据</td></tr><tr><td>W5-04 DeepSurv SHAP</td><td>DeepSurv+SHAP</td><td>部分引用：SHAP解释影响交易时间的因素</td></tr><tr><td>W5-16 Wang 2026</td><td>SBERT+DL+SHAP双场景</td><td>部分引用：&quot;利用型vs探索型&quot;双场景分析范式</td></tr><tr><td>W5-02 CatBoost SHAP</td><td>CatBoost+SHAP</td><td>部分引用：SHAP在创新预测中泛化能力证据</td></tr><tr><td>W4-17升 SHAP Grant</td><td>SHAP-&gt;专利授权</td><td>部分引用：SHAP可解释性价值验证</td></tr><tr><td>W5-01 Deng 2023</td><td>LDA+4ML+SHAP框架</td><td>直接引用：SHAP特征重要性和交互效应分析</td></tr></tbody></table></div>
+<p>2.6 支撑<span class="lbl">【第六章讨论/对比】</span>的五星文献</p>
+<div class="table-wrap"><table class="dt"><thead><tr><th>文献</th><th>对比价值</th><th>具体讨论切入点</th></tr></thead><tbody><tr><td>文献</td><td>对比价值</td><td>具体讨论切入点</td></tr></tbody></table></div>
+<div class="table-wrap"><table class="dt"><thead><tr><th>W5-09 MRGCE GNN</th><th>GNN前沿方法</th><th>讨论&quot;未采用GNN的局限性，但轻量级更适合实际转化评估&quot;</th></tr></thead><tbody><tr><td>C4-7 赵雪峰 2023</td><td>BERT+LSTM</td><td>讨论&quot;与深度学习方法对比：传统ML优势在可解释性强、成本低&quot;</td></tr><tr><td>W5-08 Bradshaw 2025</td><td>时间分割</td><td>讨论&quot;时间分割必要性——随机划分高估约10%&quot;</td></tr><tr><td>W4-22升 Reis 2025</td><td>RF特征重要性</td><td>讨论&quot;跨领域特征重要性对比&quot;</td></tr><tr><td>W4-19升 Huang 2026</td><td>RF+SHAP</td><td>讨论&quot;SHAP特征重要性排序一致性&quot;</td></tr><tr><td>C4-8 钟炜楠 2020</td><td>BPNN 80.2%</td><td>讨论&quot;模型性能对比&quot;</td></tr><tr><td>W5-10 GAN-BO-XGBoost</td><td>GAN处理不平衡</td><td>讨论&quot;数据不平衡处理方案&quot;</td></tr></tbody></table></div>
+<h2 class="page-sec">三、四星文献简要归类</h2>
+<div class="table-wrap"><table class="dt"><thead><tr><th>类别</th><th>代表文献</th><th>一句话说明</th></tr></thead><tbody><tr><td>类别</td><td>代表文献</td><td>一句话说明</td></tr></tbody></table></div>
+<p>领域背景类  C1-4张婷2021, C1-6金银雪2022, C3-3沙建超2013, C6-1张丽军2022, C6-4齐会娇2023, C1-1冯文博2024, C6-3戴维理2023, Z6徐祯虹2023, Z7宋雪姣2024  提供专利态势/市场数据/国产化背景，无ML但1.1不可缺</p>
+<p>方法参考类  W4-24 Trappey 2021, W4-20 Kansu 2026, W4-18 Erdogan 2024, W4-23 Sahiner 2026, C2-1周隽如2024, C5-3王诗炜2023, C2-2琚春华2023, C5-4陈利芳2023, C5-2张金柱2022  ML方法对比框架/DL基准/特征设计参考，2-4章补充引用</p>
+<p>政策/产业类  K1 WIPO 2023, K2国家知识产权局2022, K3操秀英2023, W4-26 Chi 2025  政策数据和91篇ML综述框架</p>
+<h2 class="page-sec">四、汇总表来源统计（去重估算）</h2>
+<div class="table-wrap"><table class="dt"><thead><tr><th>来源</th><th>5星</th><th>4星</th><th>合计</th></tr></thead><tbody><tr><td>来源</td><td>5星</td><td>4星</td><td>合计</td></tr></tbody></table></div>
+<p>WOS英文文献  20  17  37</p>
+<p>中文六大类  6  14  20</p>
+<p>开题报告参考文献  10  0  10</p>
+<p>知网补充文献  4  4  8</p>
+<h3 class="page-sub">合计（含跨来源重复）  40  35  75</h3>
+<p>去重后有效估计  约28-30  约35-40  约65-70</p>
+<p>WOS中仅摘要文献：W5-16(1篇5星)+W4-19/W4-22(2篇5星，从4星升级)+W4-18/20/21/23/24/25/26(7篇4星)=10篇</p>
+</div>
+
+<div class="page" id="p3">
+  <div class="chart-card"><h4>各层级阅读时间投入（小时）</h4><div class="bars">
+        <div class="bar-row">
+          <div class="bar-name">第一层·全文通读</div>
+          <div class="bar-track"><div class="bar-seg s3" style="width:71.42857142857143%"></div></div>
+          <div class="bar-num">10</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-name">第二层·方法精读</div>
+          <div class="bar-track"><div class="bar-seg s3" style="width:100.0%"></div></div>
+          <div class="bar-num">14</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-name">第三层·摘要结论</div>
+          <div class="bar-track"><div class="bar-seg s3" style="width:57.14285714285714%"></div></div>
+          <div class="bar-num">8</div>
+        </div></div></div>
+  <h2 class="page-sec">五星文献分层阅读计划（针对时间紧张、初次接触该领域的读者）</h2>
+<p>制定日期：2026-07-10</p>
+<p>制定依据：中期报告方法路线（LDA→LR/SVM/DT/XGBoost→SHAP）及PDF原文阅读分析</p>
+<p>核心原则：不需要每篇都全文读。按三层梯度分配阅读深度，总投入约25-35小时可控。</p>
+<p>阅读方法提示（新手适用）：</p>
+<div class="paper-card" data-search="1. 每篇先看摘要（Abstract），了解&quot;做了什么、用了什么方法、得出什么结论&quot;。"><div class="card-title">1. 每篇先看摘要（Abstract），了解&quot;做了什么、用了什么方法、得出什么结论&quot;。</div><div class="card-line">2. 再看图表（Figures &amp; Tables），图表通常承载最核心的信息。</div><div class="card-line">3. 方法部分不需要逐行推导公式，重点关注&quot;输入是什么→用了什么算法→输出是什么&quot;。</div><div class="card-line">4. 对自己论文有用的句子或段落，直接标记并标注&quot;可用于第X章第Y节&quot;。</div></div>
+<h2 class="page-sec">第一层：入门必读（4篇，全文通读，建立领域认知框架）</h2>
+<p>目标：理解&quot;专利价值/转化预测+机器学习&quot;这个领域在做什么、怎么做。</p>
+<p>选择标准：中文、直接相关、方法论清晰，适合新手建立整体认知。</p>
+<p>建议顺序：按编号顺序阅读，每篇2-3小时，共约10小时。</p>
+<h3 class="page-sub">第1篇：胡泽文等. 基于扎根理论的高价值专利评估与识别研究综述[J]. 2022</h3>
+<p>文件位置：知网补充文献/阅读卡/阅读卡_07_胡泽文.txt（已有详细阅读卡）</p>
+<p><span class="lbl">【为什么先读这篇】</span>这是最直接、最全面的中文综述。它用扎根理论方法系统梳理了&quot;高价值专利如何评估、如何识别&quot;的全部文献，帮你在30分钟内建立整个领域的概念地图。</p>
+<p><span class="lbl">【阅读指南】</span></p>
+<div class="paper-card" data-search="1. 重点读：第二部分（扎根理论编码结果）——这里会列出高价值专利评估的所有维度"><div class="card-title">1. 重点读：第二部分（扎根理论编码结果）——这里会列出高价值专利评估的所有维度</div><div class="card-line">2. 重点读：第三部分（研究现状分类）——了解现有研究分哪几类、各类代表文献</div><div class="card-line">3. 关注：文中提到的指标体系（哪些指标被广泛使用）</div><div class="card-line">4. 关注：文中指出的研究缺口（与你的创新点对照，看是否吻合）</div><div class="card-line">5. 可略过：扎根理论方法论细节（你不做质性研究）</div><div class="card-line label-line"><span class="lbl">【对应论文章节】</span>第1章 1.2研究现状 → 可引用其文献分类框架</div><div class="card-line label-line"><span class="lbl">【预计阅读时间】</span>2.5小时（全文通读）</div></div>
+<h3 class="page-sub">第2篇：王子焉等. 专利价值评估研究综述[J]. 2019</h3>
+<p>文件位置：知网补充文献/阅读卡/阅读卡_05_王子焉(综述).txt（已有详细阅读卡）</p>
+<p><span class="lbl">【为什么第二篇读这篇】</span>这篇综述从&quot;三大方法&quot;角度梳理专利价值评估（成本法、市场法、收益法）→ 再到机器学习方法，让你理解&quot;传统方法有什么不足、ML方法为什么更好&quot;——这正是你论文绪论的核心论证逻辑。</p>
+<p><span class="lbl">【阅读指南】</span></p>
+<div class="paper-card" data-search="1. 重点读：三大传统评估方法的介绍及局限性"><div class="card-title">1. 重点读：三大传统评估方法的介绍及局限性</div><div class="card-line">2. 重点读：机器学习方法在专利价值评估中的应用部分</div><div class="card-line">3. 关注：文中对&quot;指标选取&quot;的讨论（哪些指标与你的特征设计对应）</div><div class="card-line">4. 可略过：具体公式推导</div><div class="card-line label-line"><span class="lbl">【对应论文章节】</span>第1章 1.2.1 专利价值评估方法 → 可作为&quot;从传统方法到ML方法&quot;的过渡论述</div><div class="card-line label-line"><span class="lbl">【预计阅读时间】</span>2小时（全文通读）</div></div>
+<h3 class="page-sub">第3篇：Deng D, Chen T. Using Machine Learning With Technological Innovation Factors to Predict the Transferability of University Patents[J]. IEEE ACCESS, 2023</h3>
+<p>文件位置：WOS英文文献/五星/Deng-2023-Using-Machine-Learning-With-Technological-Innovation-Factors-to-Predict-the-Transferability-of-University-Patents-IEEE-ACCESS.pdf</p>
+<p>已有翻译：WOS英文文献/五星/翻译-Using Machine Learning With Technological/（原文译文对照版 + 仅译文版）</p>
+<p><span class="lbl">【为什么这篇是你论文的&quot;方法论模板&quot;】</span>经过PDF原文阅读分析，这篇与你论文的相似度极高：</p>
+<p>- 使用LDA主题模型从专利摘要提取技术创新特征</p>
+<p>- 使用4种ML算法（SVM、RF、ANN、XGBoost）进行对比</p>
+<p>- 使用SHAP进行特征重要性分析和交互效应分析</p>
+<p>- 目标变量：大学专利可转化性（transferability）</p>
+<p>- 数据：中国大学人工智能领域专利</p>
+<p>- 创新点：融合技术创新特征+质量特征，用SHAP解决&quot;黑箱&quot;问题</p>
+<p>**这篇论文几乎就是你论文的&quot;英文预演版本&quot;**，区别仅在于：（1）你的是医用成像器械领域；（2）你的标签是转让+许可+质押（它的是转</p>
+<p>让）；（3）你多了时间分割。这篇论文的方法框架可以直接作为你论文方法论章节的&quot;骨架&quot;参考。</p>
+<p><span class="lbl">【阅读指南（按章节）】</span></p>
+<div class="paper-card" data-search="1. Abstract：概括全文，5分钟，了解整体框架"><div class="card-title">1. Abstract：概括全文，5分钟，了解整体框架</div><div class="card-line">2. I. Introduction（引言）：30分钟精读</div><div class="card-line">- 重点关注：para 2-4 对&quot;现有研究不足&quot;的论述（忽略技术创新因素、缺乏可解释性）</div><div class="card-line">- 这恰好是你论文要解决的问题，可学习其论证逻辑</div><div class="card-line">3. II. Related Work（相关工作）：45分钟</div><div class="card-line">- A. Patent Transferability：了解专利可转化性的已有研究</div><div class="card-line">- B. Impact of Tech Innovation on Transferability：了解技术创新对转化的影响</div><div class="card-line">- C. Text-based Patent Tech Innovation Evaluation：了解LDA在专利文本中的应用</div><div class="card-line">- 可用于你论文1.2研究现状的英文文献支撑</div><div class="card-line">4. III. Materials and Methods（材料与方法）：1.5小时精读</div><div class="card-line">- A. LDA：了解LDA模型的基本原理和困惑度确定主题数的方法</div><div class="card-line">- B. Patent Tech Innovation Indicators：核心关键词+创新核心值的构建方法</div><div class="card-line">- C-F. SVM/RF/ANN/XGBoost：四种算法的基本介绍</div><div class="card-line">- G. SHAP：SHAP框架的介绍和应用方式</div><div class="card-line">- 这是你第二章&quot;理论与方法&quot;最直接的参考模板</div><div class="card-line">5. IV. Results（结果）：1小时精读</div><div class="card-line">- 重点关注：四个模型的性能对比表、SHAP特征重要性排序图</div><div class="card-line">- 学习如何呈现模型对比结果和SHAP分析结果</div><div class="card-line">- 关注XGBoost为何最优的讨论</div><div class="card-line">6. V. Discussion &amp; VI. Conclusion：30分钟</div><div class="card-line">- 关注对特征重要性和交互效应的讨论方式</div><div class="card-line label-line"><span class="lbl">【对应论文章节】</span>第2章（理论与方法）+ 第4章（模型训练与结果）+ 第5章（SHAP分析）</div><div class="card-line label-line"><span class="lbl">【预计阅读时间】</span>3小时（建议先读仅译文版，需要核对原文时再看原文译文对照版）</div></div>
+<h3 class="page-sub">第4篇：李世纪等. 基于专利文本的手机企业创新能力评价研究[J]. 科技创新与应用, 2021</h3>
+<p>文件位置：04_专利转化预测类/李世纪-2021-基于专利文本的手机企业创新能力评价研究-专利数据_手机行业_LDA_熵值法_技术创新能力评估.pdf</p>
+<p><span class="lbl">【为什么读这篇】</span>这是一篇短小精悍的中文期刊论文（正文仅5页），完整展示了&quot;jieba分词→LDA主题聚类→困惑度确定主题数→熵值法赋权&quot;的完整中文NLP处理流程，是你做中文专利文本处理的最直接参考。</p>
+<p><span class="lbl">【阅读指南】</span></p>
+<div class="paper-card" data-search="1. 摘要：了解整体框架（专利计量+专利内容双维度）"><div class="card-title">1. 摘要：了解整体框架（专利计量+专利内容双维度）</div><div class="card-line">2. 1.2 LDA主题模型的发展：了解LDA的基本原理，30分钟</div><div class="card-line">3. 2.2 研究方法 + 3.2 LDA主题模型：1小时精读</div><div class="card-line">- 这是核心——jieba分词、自定义词典、停用词表、困惑度曲线、主题数确定</div><div class="card-line">- 你的文本处理流程几乎完全参照这个流程</div><div class="card-line">- 关注图2（研究框架图）和图3（文本处理流程图）</div><div class="card-line">4. 3.3 熵值法权重计算：了解客观赋权方法，30分钟</div><div class="card-line">- 可以作为你论文中指标权重的参考方法</div><div class="card-line">5. 可略过：手机行业的具体实证结果（与你领域不同）</div><div class="card-line label-line"><span class="lbl">【对应论文章节】</span>第3章（特征工程）→ jieba分词+LDA的流程模板</div><div class="card-line label-line"><span class="lbl">【预计阅读时间】</span>1.5小时（全文通读，论文较短）</div></div>
+<h2 class="page-sec">第二层：方法论核心（8篇，读摘要+方法+结果+讨论，不逐行通读引论）</h2>
+<p>目标：为论文具体章节提供方法论依据、模型设计参考、结果对比素材。</p>
+<p>阅读策略：每篇先读摘要(5分钟)，然后跳到方法(Methods)+结果(Results)精读(1小时)，</p>
+<p>再扫读讨论(Discussion)找可引用的论点(30分钟)。每篇1.5-2小时，共约14小时。</p>
+<h3 class="page-sub">第5篇：冉从敬等. 基于机器学习的成本法在专利价值评估中的应用研究——以&quot;新能源汽车&quot;为例[J]. 2024</h3>
+<p>文件位置：知网补充文献/阅读卡/阅读卡_03_冉从敬.txt（已有详细阅读卡）</p>
+<p><span class="lbl">【为什么读】</span>使用XGBoost进行专利价值分类，是你模型选择（XGBoost）的中文文献直接支撑。2024年发表，时效性好。</p>
+<p><span class="lbl">【怎么读】</span>精读方法部分（XGBoost的参数设置、特征处理方式）和结果部分（性能评估指标）。</p>
+<p><span class="lbl">【对应章节】</span>第4章（模型训练）→ XGBoost选择的文献依据</p>
+<p><span class="lbl">【预计时间】</span>1.5小时</p>
+<h3 class="page-sub">第6篇：刘澄等. 基于BP神经网络的专利价值评估方法及其应用研究[J]. 2021</h3>
+<p>文件位置：知网补充文献/阅读卡/阅读卡_02_刘澄.txt（已有详细阅读卡）</p>
+<p><span class="lbl">【为什么读】</span>构建了四维23指标的专利价值评估体系→粗糙集约简→BP神经网络。指标体系构建思路直接可参考。</p>
+<p><span class="lbl">【怎么读】</span>精读指标体系的四个维度（技术、法律、经济、市场）和各指标的定义，以及粗糙集约简的逻辑。</p>
+<p><span class="lbl">【对应章节】</span>第3章（特征工程）→ 指标体系构建的方法论参考</p>
+<p><span class="lbl">【预计时间】</span>1.5小时</p>
+<h3 class="page-sub">第7篇：王子焉等. 基于灰色关联分析—随机森林回归的网络平台专利价值评估方法研究[J]. 2019</h3>
+<p>文件位置：知网补充文献/阅读卡/阅读卡_04_王子焉(GCA-RFR).txt（已有详细阅读卡）</p>
+<p><span class="lbl">【为什么读】</span>&quot;灰色关联分析筛选特征→随机森林回归&quot;的完整流程，RF特征重要性与你的SHAP分析有直接可比性。</p>
+<p><span class="lbl">【怎么读】</span>精读特征筛选方法（GCA）和RF模型的构建过程；对比其RF重要性排序与SHAP的差异。</p>
+<p><span class="lbl">【对应章节】</span>第3章（特征工程）+ 第5章（SHAP分析对比）</p>
+<p><span class="lbl">【预计时间】</span>1.5小时</p>
+<h3 class="page-sub">第8篇：Bradshaw J, et al. Challenging Reaction Prediction Models to Generalize to Novel Chemistry[J]. ACS Central Science, 2025</h3>
+<p>文件位置：WOS英文文献/五星/Time Splits Model Generalization Chemistry.pdf</p>
+<p><span class="lbl">【为什么读——你的创新点③最直接支撑】</span>这篇的核心论点：随机划分（random split）的模型性能过于乐观，时间分割（time split）才是真实世界部署的更严格测试。作者通过实验证明随机划分比时间分割高估约10%准确率。这直接论证了你第三</p>
+<p>个创新点&quot;时间分割避免数据泄露&quot;的必要性。</p>
+<p><span class="lbl">【阅读指南】</span></p>
+<div class="paper-card" data-search="1. Abstract + Introduction：20分钟，理解&quot;in-distribution vs out-of-distribution&quot;的核心概念"><div class="card-title">1. Abstract + Introduction：20分钟，理解&quot;in-distribution vs out-of-distribution&quot;的核心概念</div><div class="card-line">2. Results - &quot;Random Splits Are Overoptimistic&quot;：30分钟精读</div><div class="card-line">- Figure 2 是最重要的一张图——展示random/document/author split的准确率差异</div><div class="card-line">- 这是你在论文中论证&quot;为何要时间分割&quot;的核心论据</div><div class="card-line">3. Results - &quot;Time-Based Splits Enable Prospective Evaluation&quot;：30分钟精读</div><div class="card-line">- Figure 3 是关键——展示模型随时间外推的性能下降趋势</div><div class="card-line">- 理解&quot;interpolative regime&quot;（内推）vs &quot;extrapolative regime&quot;（外推）</div><div class="card-line">4. 其余化学领域具体内容可略过</div><div class="card-line label-line"><span class="lbl">【对应论文章节】</span>第3章（数据划分策略）+ 第6章（讨论：时间分割必要性的论据）</div><div class="card-line label-line"><span class="lbl">【预计时间】</span>1.5小时</div></div>
+<h3 class="page-sub">第9篇：Huang Y, et al. Uncovering Multi-Technology Convergence Patterns with Hypergraphs: Evolution and Prediction Using Patent Data[J]. Physica A, 2026</h3>
+<p>文件位置：WOS英文文献/四星/Uncovering multi technology convergence patterns with.pdf</p>
+<p><span class="lbl">【为什么读——你的创新点②最直接支撑】</span>这篇同时使用Gini重要性和SHAP进行模型可解释性分析，在专利预测任务中验证了SHAP的适用性（AUC&gt;0.90）。是你论文中使用SHAP的关键先例文献。</p>
+<p><span class="lbl">【阅读指南】</span></p>
+<div class="paper-card" data-search="1. Abstract + Introduction：30分钟，了解超图建模的基本概念"><div class="card-title">1. Abstract + Introduction：30分钟，了解超图建模的基本概念</div><div class="card-line">2. Section 4（Hyperedge Prediction Framework）→ 预测方法：45分钟</div><div class="card-line">- 重点是两类特征（similarity features + intrinsic features）如何构建</div><div class="card-line">- 随机森林分类器的具体设置</div><div class="card-line">3. Section 5.4-5.5（Feature importance analysis + SHAP results）：45分钟精读</div><div class="card-line">- Gini重要性排序 vs SHAP值的对比分析</div><div class="card-line">- 这是你论文最直接可引用的方法论依据</div><div class="card-line">- 关注SHAP summary plot和feature dependence plot的呈现方式</div><div class="card-line">4. 可略过：Section 3（超图构建的具体数学细节）、Section 5.1-5.3（演化分析）</div><div class="card-line label-line"><span class="lbl">【对应论文章节】</span>第5章（SHAP可解释性分析）——最关键的方法论文献</div><div class="card-line label-line"><span class="lbl">【预计时间】</span>2小时</div></div>
+<h3 class="page-sub">第10篇：Wu Z, et al. A GAN-BO-XGBoost Model for High-Quality Patents Identification[J]. Scientific Reports, 2024</h3>
+<p>文件位置：WOS英文文献/五星/GAN-BO-XGBoost High-Quality Patent Identification.pdf</p>
+<p><span class="lbl">【为什么读】</span>使用XGBoost（贝叶斯优化调参）识别高质量专利，目标变量与你相似（高价值/高质量专利）。还涉及不平衡数据处理（GAN生成少数类样本）——如果你的正负样本不平衡可参考。</p>
+<p><span class="lbl">【阅读指南】</span></p>
+<div class="paper-card" data-search="1. Abstract + Introduction：20分钟，了解高质量专利识别的背景"><div class="card-title">1. Abstract + Introduction：20分钟，了解高质量专利识别的背景</div><div class="card-line">2. Literature Review（文献综述）：30分钟，了解高质量专利的定义和识别方法的演变</div><div class="card-line">3. Methodology：45分钟精读</div><div class="card-line">- 指标体系构建（Table 1）：4个新增特征——专利权人技术实力</div><div class="card-line">- GAN用于不平衡数据处理</div><div class="card-line">- 贝叶斯优化XGBoost超参数</div><div class="card-line">4. Empirical Analysis：30分钟，关注模型性能对比（Table 2-4）</div><div class="card-line">5. 可略过：GAN的生成器/判别器具体结构（你不一定用GAN）</div><div class="card-line label-line"><span class="lbl">【对应论文章节】</span>第4章（模型训练——XGBoost方法论支撑）</div><div class="card-line label-line"><span class="lbl">【预计时间】</span>2小时</div></div>
+<h3 class="page-sub">第11篇：Sokhansanj BA, Rosen GL. Predicting Institution Outcomes for Inter Partes Review (IPR) Proceedings... by Deep Learning of Patent Owner Preliminary Response Briefs[J]. Applied Sciences, 2022</h3>
+<p>文件位置：WOS英文文献/五星/XGBoost SHAP IPR Outcomes Prediction.pdf</p>
+<p><span class="lbl">【为什么读】</span>使用&quot;XGBoost+TF-IDF+SHAP&quot;与&quot;CNN+Attention+LIME&quot;两条路径对比，验证了XGBoost+SHAP组合在专利法律文本分析中的有效性。为你的XGBoost+SHAP方法论选择提供文献支撑。</p>
+<p><span class="lbl">【阅读指南】</span></p>
+<div class="paper-card" data-search="1. Abstract + Introduction（1-3页）：30分钟，了解IPR法律程序背景（可略过法律细节）"><div class="card-title">1. Abstract + Introduction（1-3页）：30分钟，了解IPR法律程序背景（可略过法律细节）</div><div class="card-line">2. Section 3（Methods）：1小时精读</div><div class="card-line">- 3.1-3.2：文本预处理和数据划分</div><div class="card-line">- 3.3：XGBoost + TF-IDF + SHAP的具体实现</div><div class="card-line">- 3.4：CNN + Attention + LIME的具体实现</div><div class="card-line">- 重点关注两种方法的对比设计逻辑</div><div class="card-line">3. Section 4（Results）：30分钟，关注XGBoost vs CNN的性能对比</div><div class="card-line">4. Section 5（Discussion）：30分钟，关注&quot;interpretability vs performance&quot;的讨论</div><div class="card-line">5. 可略过：Section 2（美国法律程序背景）</div><div class="card-line label-line"><span class="lbl">【对应论文章节】</span>第2章（模型选择方法论）+ 第4章（XGBoost+SHAP组合的文献支撑）+ 第6章（ML vs DL讨论）</div><div class="card-line label-line"><span class="lbl">【预计时间】</span>2小时</div></div>
+<h3 class="page-sub">第12篇：钟炜楠. 基于机器学习的专利价值评估研究[D]. 福建师范大学, 2020</h3>
+<p>文件位置：04_专利转化预测类/钟炜楠-2020-基于机器学习的专利价值评估研究-专利价值评估_数据挖掘_BP神经网络_网络爬虫.pdf</p>
+<p><span class="lbl">【为什么读】</span>中文硕士论文，与你的论文最相似（同为硕士层次、同为ML+专利价值评估）。使用SVM/KNN/BP神经网络三种算法对比，44002件电学专利，准确率80.2%。其论文结构、指标体系、实验设计都可作为你的参考。</p>
+<p><span class="lbl">【阅读指南】</span></p>
+<div class="paper-card" data-search="1. 第一章 绪论：30分钟，学习硕士论文的绪论结构和论述逻辑"><div class="card-title">1. 第一章 绪论：30分钟，学习硕士论文的绪论结构和论述逻辑</div><div class="card-line">2. 第二章 理论知识：45分钟，专利价值理论+算法介绍，可用于你的第二章</div><div class="card-line">3. 第三章 数据集制作：1小时精读——指标体系构建（专利属性+专利权人+发明人三维度）</div><div class="card-line">4. 第四章 实验：1小时——三种模型的对比实验设计</div><div class="card-line">5. 可略过：爬虫实现细节、代码部分</div><div class="card-line label-line"><span class="lbl">【对应论文章节】</span>论文结构参考 + 第3章（指标体系）+ 第4章（模型对比设计）</div><div class="card-line label-line"><span class="lbl">【预计时间】</span>2小时（60页但可跳读）</div></div>
+<h3 class="page-sub">第13篇（二选一，优先这篇）：赵雪峰等. 一种基于特征拼接、标签迁移及深度学习组合的专利价值评估方法[J]. 情报学报, 2023</h3>
+<p>文件位置：04_专利转化预测类/赵雪峰-2023-基于特征拼接标签迁移及深度学习组合的专利价值评估方法-特征拼接_BERT_标签迁移_专利_深度学习.pdf</p>
+<p><span class="lbl">【为什么读】</span>提出&quot;特征拼接（著录事项+文本）→标签迁移（法律视角量化价值标签）→BERT+LSTM深度学习&quot;框架。中文核心期刊（情报学报），方法论深度好。</p>
+<p><span class="lbl">【阅读指南】</span></p>
+<div class="paper-card" data-search="1. 引言（0-2节）：45分钟精读"><div class="card-title">1. 引言（0-2节）：45分钟精读</div><div class="card-line">- 对&quot;离散型评估 vs 连续型评估&quot;的分类非常清晰</div><div class="card-line">- 指出的三个问题（研究对象技术特征不足、标签不准、特征提取能力不足）可用于你的1.2研究现状</div><div class="card-line">2. 研究方法：1小时</div><div class="card-line">- 特征拼接的构建逻辑（2.1）</div><div class="card-line">- 标签迁移的价值标签体系（2.2）</div><div class="card-line">- BERT+LSTM模型架构（2.3）</div><div class="card-line">3. 实验与结果：45分钟</div><div class="card-line">4. 可在讨论中作为&quot;更先进的深度学习方法&quot;对照</div><div class="card-line label-line"><span class="lbl">【对应论文章节】</span>第1章（研究现状）+ 第6章（讨论：深度学习vs传统ML对照）</div><div class="card-line label-line"><span class="lbl">【预计时间】</span>1.5小时</div></div>
+<h2 class="page-sec">第三层：补充阅读（约15篇，只读摘要+结论+扫图表，每篇20-40分钟）</h2>
+<p>目标：了解领域概况，能准确引用，不需要深入理解每个方法细节。</p>
+<p>阅读策略：摘要(5分钟) → 跳转到结论/讨论(10分钟) → 扫读图表(5-10分钟)。</p>
+<p>每篇30分钟左右，共约7-8小时。</p>
+<h3 class="page-sub">一、SHAP可解释性相关（创新点②文献集群，3篇）</h3>
+<div class="paper-card" data-search="14. Zhang et al. CFA-CatBoost-SHAP Paradigm Regional Innovation.pdf"><div class="card-title">14. Zhang et al. CFA-CatBoost-SHAP Paradigm Regional Innovation.pdf</div><div class="card-line label-line"><span class="lbl">【核心内容】</span>CatBoost + SHAP → 区域创新能力分析</div><div class="card-line label-line"><span class="lbl">【怎么用】</span>SHAP在创新相关预测中的另一个应用先例，与Huang 2026、Wang 2026构成SHAP文献集群</div><div class="card-line label-line"><span class="lbl">【引用位置】</span>第5章（SHAP分析的文献集群支撑）</div><div class="card-line label-line"><span class="lbl">【时间】</span>30分钟</div></div>
+<div class="paper-card" data-search="15. Predicting Patent Transaction Cycle DeepSurv SHAP.pdf (W5-04)"><div class="card-title">15. Predicting Patent Transaction Cycle DeepSurv SHAP.pdf (W5-04)</div><div class="card-line label-line"><span class="lbl">【核心内容】</span>DeepSurv（深度生存分析）+ SHAP → 专利交易周期预测</div><div class="card-line label-line"><span class="lbl">【怎么用】</span>直接研究专利交易（转让）预测，目标变量与你高度相关。SHAP用于解释影响交易时间的因素</div><div class="card-line label-line"><span class="lbl">【引用位置】</span>第1章（研究现状）+ 第5章（SHAP应用扩展引用）</div><div class="card-line label-line"><span class="lbl">【时间】</span>40分钟</div></div>
+<div class="paper-card" data-search="16. SHAP Patent Grant Prediction.pdf (W4-17, 建议升级为5星)"><div class="card-title">16. SHAP Patent Grant Prediction.pdf (W4-17, 建议升级为5星)</div><div class="card-line label-line"><span class="lbl">【核心内容】</span>SHAP → 专利授权预测，验证了SHAP在专利结果预测中的可解释性价值</div><div class="card-line label-line"><span class="lbl">【怎么用】</span>与Huang 2026、XGBoost SHAP IPR构成SHAP在专利分析中的应用证据链</div><div class="card-line label-line"><span class="lbl">【引用位置】</span>第5章（SHAP文献集群）</div><div class="card-line label-line"><span class="lbl">【时间】</span>35分钟</div></div>
+<h3 class="page-sub">二、专利转化/交易预测直接相关（目标变量文献支撑，3篇）</h3>
+<div class="paper-card" data-search="17. Patent Transfer Cycle Prediction Random Survival Forest.pdf (W5-12)"><div class="card-title">17. Patent Transfer Cycle Prediction Random Survival Forest.pdf (W5-12)</div><div class="card-line label-line"><span class="lbl">【核心内容】</span>随机生存森林 → 专利转让周期预测</div><div class="card-line label-line"><span class="lbl">【怎么用】</span>直接研究专利转让（你的标签之一），提供专利转让预测的方法论文献</div><div class="card-line label-line"><span class="lbl">【引用位置】</span>第1章（研究现状：专利转化预测）+ 第4章（模型选择讨论）</div><div class="card-line label-line"><span class="lbl">【时间】</span>35分钟</div></div>
+<div class="paper-card" data-search="18. Reis et al. (2025) - 仅摘要（W4-22*，建议升级为5星）"><div class="card-title">18. Reis et al. (2025) - 仅摘要（W4-22*，建议升级为5星）</div><div class="card-line label-line"><span class="lbl">【文件】</span>WOS英文文献/四星/九篇文献摘要/Reis_2025_RF专利许可特征_文献摘要.md</div><div class="card-line label-line"><span class="lbl">【核心内容】</span>随机森林特征重要性排序→确定专利许可的三大关键因素（专利范围&gt;生命周期&gt;权利要求）</div><div class="card-line label-line"><span class="lbl">【怎么用】</span>直接研究专利许可影响因素，与你的&quot;许可&quot;标签一致。讨论中可对比你的SHAP分析发现了哪些重要特征</div><div class="card-line label-line"><span class="lbl">【引用位置】</span>第1章（研究现状）+ 第6章（讨论：跨领域特征重要性对比）</div><div class="card-line label-line"><span class="lbl">【时间】</span>20分钟（读摘要即可）</div></div>
+<div class="paper-card" data-search="19. Valuation of University-Originated Technologies A Predictive Analytics Approach.pdf (W5-13)"><div class="card-title">19. Valuation of University-Originated Technologies A Predictive Analytics Approach.pdf (W5-13)</div><div class="card-line label-line"><span class="lbl">【核心内容】</span>预测分析 → 大学技术估值</div><div class="card-line label-line"><span class="lbl">【怎么用】</span>大学专利/技术价值评估的英文文献支撑</div><div class="card-line label-line"><span class="lbl">【引用位置】</span>第1章（研究现状）</div><div class="card-line label-line"><span class="lbl">【时间】</span>30分钟</div></div>
+<h3 class="page-sub">三、专利分析与机器学习结合方法论（方法对比与讨论素材，4篇）</h3>
+<div class="paper-card" data-search="20. Marketable Value Patents LDA Ensemble Learning.pdf (W4-04, 建议升级为5星)"><div class="card-title">20. Marketable Value Patents LDA Ensemble Learning.pdf (W4-04, 建议升级为5星)</div><div class="card-line label-line"><span class="lbl">【核心内容】</span>LDA + 集成学习 → 专利市场价值评估</div><div class="card-line label-line"><span class="lbl">【怎么用】</span>LDA在专利价值评估中的直接应用，与你使用LDA提取文本特征的方法一致</div><div class="card-line label-line"><span class="lbl">【引用位置】</span>第3章（LDA特征构建的方法论文献支撑）</div><div class="card-line label-line"><span class="lbl">【时间】</span>35分钟</div></div>
+<div class="paper-card" data-search="21. 胡正银,方曙. 专利文本技术挖掘研究进展综述[J]. 2014 (C4-5)"><div class="card-title">21. 胡正银,方曙. 专利文本技术挖掘研究进展综述[J]. 2014 (C4-5)</div><div class="card-line label-line"><span class="lbl">【核心内容】</span>SAO三元组+LDA+语义知识表示综述，专利文本挖掘的经典中文综述</div><div class="card-line label-line"><span class="lbl">【怎么用】</span>LDA在专利文本挖掘中应用的方法论综述支撑</div><div class="card-line label-line"><span class="lbl">【引用位置】</span>第2章（文献综述）+ 第3章（LDA方法选择依据）</div><div class="card-line label-line"><span class="lbl">【时间】</span>30分钟</div></div>
+<div class="paper-card" data-search="22. 李欣等. 基于机器学习的专利质量评价研究[J]. 2020 (K10)"><div class="card-title">22. 李欣等. 基于机器学习的专利质量评价研究[J]. 2020 (K10)</div><div class="card-line label-line"><span class="lbl">【文件】</span>开题报告参考文献/</div><div class="card-line label-line"><span class="lbl">【核心内容】</span>四种ML模型对比（KNN/RF/SVM/BPNN），方法论与你最接近的开题报告文献</div><div class="card-line label-line"><span class="lbl">【怎么用】</span>&quot;多模型对比&quot;方法论的中文文献直接支撑</div><div class="card-line label-line"><span class="lbl">【引用位置】</span>第4章（模型对比实验设计的文献依据）</div><div class="card-line label-line"><span class="lbl">【时间】</span>30分钟</div></div>
+<div class="paper-card" data-search="23. 王思培,韩涛. 基于随机森林算法的潜在高价值专利预测方法研究[J]. 2020 (K7)"><div class="card-title">23. 王思培,韩涛. 基于随机森林算法的潜在高价值专利预测方法研究[J]. 2020 (K7)</div><div class="card-line label-line"><span class="lbl">【文件】</span>开题报告参考文献/</div><div class="card-line label-line"><span class="lbl">【核心内容】</span>随机森林→高价值专利预测，国内RF+专利预测的代表文献</div><div class="card-line label-line"><span class="lbl">【怎么用】</span>RF模型选择的中文文献支撑</div><div class="card-line label-line"><span class="lbl">【引用位置】</span>第4章（RF模型选择依据）</div><div class="card-line label-line"><span class="lbl">【时间】</span>30分钟</div></div>
+<h3 class="page-sub">四、领域背景（医用成像器械/医疗器械，用于1.1选题背景，3篇）</h3>
+<div class="paper-card" data-search="24. 金银雪等. 人工智能医疗器械中国专利态势分析[J]. 2022 (C1-6)"><div class="card-title">24. 金银雪等. 人工智能医疗器械中国专利态势分析[J]. 2022 (C1-6)</div><div class="card-line label-line"><span class="lbl">【核心内容】</span>AI+医疗器械专利态势，与你的领域重合度最高</div><div class="card-line label-line"><span class="lbl">【怎么用】</span>1.1选题背景的核心数据来源：&quot;AI医疗器械是专利申请热点&quot;</div><div class="card-line label-line"><span class="lbl">【时间】</span>25分钟（扫读图表+关键数据）</div></div>
+<div class="paper-card" data-search="25. 张婷等. 我国医疗器械领域专利竞争态势研究[J]. 2021 (C1-4)"><div class="card-title">25. 张婷等. 我国医疗器械领域专利竞争态势研究[J]. 2021 (C1-4)</div><div class="card-line label-line"><span class="lbl">【核心内容】</span>34万条专利宏观数据，诊断仪器第一热点</div><div class="card-line label-line"><span class="lbl">【怎么用】</span>1.1选题背景：&quot;医疗器械是中国专利竞争最激烈的领域之一&quot;</div><div class="card-line label-line"><span class="lbl">【时间】</span>25分钟（扫读图表+关键数据）</div></div>
+<div class="paper-card" data-search="26. 冯文博等. 网络视角下专利质量评价研究——以医疗器械领域为例[J]. 2024 (C1-1)"><div class="card-title">26. 冯文博等. 网络视角下专利质量评价研究——以医疗器械领域为例[J]. 2024 (C1-1)</div><div class="card-line label-line"><span class="lbl">【核心内容】</span>医疗器械SNA+DEA→专利质量评价，医学影像专利占样本37%</div><div class="card-line label-line"><span class="lbl">【怎么用】</span>&quot;医学影像在医疗器械专利中占比最高&quot;的数据来源</div><div class="card-line label-line"><span class="lbl">【时间】</span>25分钟</div></div>
+<h2 class="page-sec">阅读计划总时间估算</h2>
+<p>| 层级 | 篇数 | 每篇时间 | 小计 |</p>
+<p>|------|------|---------|------|</p>
+<p>| 第一层（全文通读） | 4篇 | 2-3h | ~10h |</p>
+<p>| 第二层（方法精读） | 8篇 | 1.5-2h | ~14h |</p>
+<p>| 第三层（摘要+结论） | 15篇 | 0.3-0.7h | ~8h |</p>
+<p>| **合计** | **27篇** | | **~32h** |</p>
+<p>如果每天2小时，约16天可完成全部阅读。第一层必须在写方法论章节前完成，第二层边写边读，第三层可在写作间隙穿插。</p>
+<h3 class="page-sub">建议阅读顺序（按时间线）</h3>
+<p>第一周（入门打基础）：</p>
+<p>第1天：胡泽文（综述）——建立概念地图</p>
+<p>第2-3天：Deng 2023（方法论模板）——理解完整流程</p>
+<p>第4天：王子焉（综述）——了解三大传统方法到ML的演进</p>
+<p>第5天：李世纪（LDA中文模板）——熟悉中文文本处理流程</p>
+<p>第二周（方法论深入）：</p>
+<p>第6天：冉从敬（XGBoost+专利） + 刘澄（BP神经网络+专利）</p>
+<p>第7天：王子焉-GCA（RF+专利） + 钟炜楠（硕士论文参考）</p>
+<p>第8-9天：Huang 2026（SHAP）+ Bradshaw 2025（时间分割）</p>
+<p>第三周（补充与整合）：</p>
+<p>第10-14天：第三层补充阅读，每天2-3篇，穿插进行</p>
+<p>第15-16天：回顾第一层笔记，整理可用于各章节的引用素材</p>
+<h2 class="page-sec">特别说明</h2>
+<div class="paper-card" data-search="1. 关于英文论文：第一层的Deng 2023有完整中英对照翻译版，直接读译文即可。第二层的英文论文建议先扫读摘要和图表，方法部分对照中文翻译理解。"><div class="card-title">1. 关于英文论文：第一层的Deng 2023有完整中英对照翻译版，直接读译文即可。第二层的英文论文建议先扫读摘要和图表，方法部分对照中文翻译理解。</div></div>
+<div class="paper-card" data-search="2. 关于Wang 2026 (R&amp;D Partner Recommendation DL+SHAP)：这篇仅摘要、无PDF。其SHAP分析范式（利用型vs探索型双场景分析）可作为第5章引用素材，但不需要读全文——已有摘要笔记足够。"><div class="card-title">2. 关于Wang 2026 (R&amp;D Partner Recommendation DL+SHAP)：这篇仅摘要、无PDF。其SHAP分析范式（利用型vs探索型双场景分析）可作为第5章引用素材，但不需要读全文——已有摘要笔记足够。</div></div>
+<div class="paper-card" data-search="3. 关于Reis 2025 (RF→许可特征重要性)：这篇因价格太贵没有下载PDF，但摘要笔记已包含完整的方法描述和结果数据，可正常引用。"><div class="card-title">3. 关于Reis 2025 (RF→许可特征重要性)：这篇因价格太贵没有下载PDF，但摘要笔记已包含完整的方法描述和结果数据，可正常引用。</div></div>
+<div class="paper-card" data-search="4. 评级调整确认：以下WOS四星论文建议在论文中作为5星级别使用："><div class="card-title">4. 评级调整确认：以下WOS四星论文建议在论文中作为5星级别使用：</div><div class="card-line">- Huang et al. 2026 (Physica A): RF+SHAP → 第5章核心引用</div><div class="card-line">- Marketable Value LDA Ensemble: LDA+集成学习 → 第3章核心引用</div><div class="card-line">- SHAP Patent Grant Prediction: SHAP+专利授权 → 第5章补充引用</div><div class="card-line">- Reis et al. 2025 (Expert Systems): RF→专利许可 → 第6章讨论引用</div></div>
+<div class="paper-card" data-search="5. 如果时间极度紧张（每周不足5小时），仅完成第一层4篇+第二层中的第8篇（Time Splits）、第9篇（Huang SHAP）、第12篇（钟炜楠硕士论文），其余在写论文时按需查阅即可。"><div class="card-title">5. 如果时间极度紧张（每周不足5小时），仅完成第一层4篇+第二层中的第8篇（Time Splits）、第9篇（Huang SHAP）、第12篇（钟炜楠硕士论文），其余在写论文时按需查阅即可。</div></div>
+</div>
+
+<footer>数据来源：四五级文献分级表.docx · 五星文献精细化归类.txt · 五星文献分层阅读计划.txt ｜ 由 WorkBuddy 自动生成并部署至个人工作台</footer>
+
+<script>
+const tabs=document.querySelectorAll('.tab');
+tabs.forEach(t=>t.onclick=()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  t.classList.add('active');
+  document.getElementById(t.dataset.page).classList.add('active');
+});
+document.getElementById('themeBtn').onclick=()=>{
+  document.body.classList.toggle('light');
+  localStorage.setItem('litheme', document.body.classList.contains('light')?'light':'dark');
+};
+if(localStorage.getItem('litheme')==='light') document.body.classList.add('light');
+const s=document.getElementById('search');
+s.oninput=()=>{
+  const q=s.value.trim().toLowerCase();
+  document.querySelectorAll('.page').forEach(pg=>{
+    pg.querySelectorAll('tr').forEach(tr=>{
+      tr.style.display = (!q || tr.textContent.toLowerCase().includes(q))?'':'none';
+    });
+    pg.querySelectorAll('.paper-card').forEach(c=>{
+      c.style.display = (!q || c.textContent.toLowerCase().includes(q))?'':'none';
+    });
+    pg.querySelectorAll('p,h2,h3,.callout,.badge-line,.stat-line').forEach(el=>{
+      if(el.dataset.nofilter) return;
+      el.style.display = (!q || el.textContent.toLowerCase().includes(q))?'':'none';
+    });
+  });
+};
+</script>
+</body>
+</html>
