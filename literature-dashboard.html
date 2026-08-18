@@ -9,7 +9,17 @@
   --bg:#0f1420; --bg2:#161d2e; --card:#1c2436; --line:#2a3550; --txt:#e6ebf5; --mut:#9aa7c2;
   --accent:#5e8bff; --red:#ff5d6c; --yellow:#ffc24b; --green:#37d39b; --s5:#ff5d6c; --s4:#ffc24b; --s3:#5e8bff;
 }
-.light{ --bg:#f4f6fb; --bg2:#ffffff; --card:#ffffff; --line:#e2e8f3; --txt:#1c2536; --mut:#5a6b86; --accent:#2f6bff; --red:#e23b4e; --yellow:#d99100; --green:#119a6b; --s5:#e23b4e; --s4:#d99100; --s3:#2f6bff; }
+/* ===== 多主题：通过 body[data-theme] 切换 ===== */
+body[data-theme="light"]{ --bg:#f4f6fb; --bg2:#ffffff; --card:#ffffff; --line:#e2e8f3; --txt:#1c2536; --mut:#5a6b86; --accent:#2f6bff; --red:#e23b4e; --yellow:#d99100; --green:#119a6b; --s5:#e23b4e; --s4:#d99100; --s3:#2f6bff; }
+body[data-theme="morandi"]{ --bg:#e9e4dd; --bg2:#f0ebe4; --card:#f6f2ec; --line:#d8cfc4; --txt:#574e45; --mut:#9a8f82; --accent:#a98b8b; --red:#b98077; --yellow:#bfa268; --green:#8fa58c; --s5:#b98077; --s4:#bfa268; --s3:#a98b8b; }
+body[data-theme="powder"]{ --bg:#fdeef3; --bg2:#fff5f8; --card:rgba(255,255,255,.72); --line:#f3d4e0; --txt:#7a4a5e; --mut:#b08399; --accent:#e88aae; --red:#e0608a; --yellow:#e8a86b; --green:#8fbf9a; --s5:#e0608a; --s4:#e8a86b; --s3:#e88aae; }
+body[data-theme="cream"]{ --bg:#f5f0eb; --bg2:#faf7f2; --card:#faf7f2; --line:#e0d5c7; --txt:#5c4a3d; --mut:#b0a090; --accent:#c4a8a2; --red:#b5604f; --yellow:#c9b99a; --green:#a3b5a6; --s5:#b5604f; --s4:#c9b99a; --s3:#c4a8a2; }
+body[data-theme="pingu"]{ --bg:#0e0e10; --bg2:#161618; --card:#1c1c1f; --line:#33333a; --txt:#f2f2f2; --mut:#9a9aa2; --accent:#ffffff; --red:#ff5d6c; --yellow:#ffc24b; --green:#37d39b; --s5:#ff5d6c; --s4:#ffc24b; --s3:#ffffff; }
+body[data-theme="leola"]{ --bg:#fff0f5; --bg2:#ffe3ee; --card:#fff7fb; --line:#f6cdda; --txt:#8a4a63; --mut:#c08aa0; --accent:#f48fb8; --red:#ef6f9e; --yellow:#f3b35a; --green:#8fcf9e; --s5:#ef6f9e; --s4:#f3b35a; --s3:#f48fb8; }
+body[data-theme="bartholomew"]{ --bg:#f3e7d3; --bg2:#faf0e0; --card:#fff8ee; --line:#e6d3b8; --txt:#6b5238; --mut:#a98c6a; --accent:#c79a5e; --red:#c25b4a; --yellow:#d9a85a; --green:#8aa56a; --s5:#c25b4a; --s4:#d9a85a; --s3:#c79a5e; }
+/* 渐变背景：粉透 / 粉嫩莱奥拉 更通透 */
+body[data-theme="powder"]{background:linear-gradient(160deg,#fdeef3 0%,#fbe3ee 50%,#f3e8f6 100%)}
+body[data-theme="leola"]{background:linear-gradient(160deg,#fff0f5 0%,#ffe3ee 55%,#fff4e0 100%)}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--txt);font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.6;font-size:15px}
 header{position:sticky;top:0;z-index:20;background:var(--bg2);border-bottom:1px solid var(--line);padding:12px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
@@ -18,6 +28,11 @@ header .sub{color:var(--mut);font-size:12px}
 .spacer{flex:1}
 .search{padding:7px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--txt);min-width:220px;font-size:13px}
 .toggle{padding:6px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--txt);cursor:pointer;font-size:13px}
+.theme-label{font-size:13px;color:var(--mut);display:flex;align-items:center;gap:6px}
+.theme-select{padding:6px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--txt);font-size:13px;cursor:pointer;outline:none}
+.theme-select:focus{border-color:var(--accent)}
+.mascot{position:fixed;right:16px;bottom:14px;font-size:44px;z-index:30;pointer-events:none;animation:floaty 3.6s ease-in-out infinite;user-select:none;line-height:1}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
 nav.tabs{display:flex;gap:4px;padding:10px 20px 0;background:var(--bg);border-bottom:1px solid var(--line);flex-wrap:wrap}
 .tab{padding:9px 16px;border:1px solid transparent;border-bottom:none;border-radius:10px 10px 0 0;cursor:pointer;color:var(--mut);font-size:14px;font-weight:600}
 .tab.active{background:var(--card);color:var(--accent);border-color:var(--line)}
@@ -77,7 +92,19 @@ footer{text-align:center;color:var(--mut);font-size:12px;padding:20px}
   </div>
   <div class="spacer"></div>
   <input class="search" id="search" placeholder="🔍 全文检索（文献编号 / 作者 / 方法 / 章节）">
-  <button class="toggle" id="themeBtn">🌓 切换主题</button>
+  <label class="theme-label">🎨 主题
+    <select class="theme-select" id="themeSel">
+      <option value="dark">🌙 暗夜蓝</option>
+      <option value="light">☀️ 晨光白</option>
+      <option value="morandi">🍃 莫兰迪</option>
+      <option value="powder">🌸 粉透</option>
+      <option value="cream">🐰 AI日报奶油</option>
+      <option value="pingu">🐧🐧 黑白企鹅</option>
+      <option value="leola">🧸 粉嫩莱奥拉</option>
+      <option value="bartholomew">🐻 焦糖巴塞罗</option>
+    </select>
+  </label>
+  <div class="mascot" id="mascot">🌙</div>
 </header>
 <nav class="tabs">
   <div class="tab active" data-page="p1">① 四五级文献分级表</div>
@@ -497,11 +524,17 @@ tabs.forEach(t=>t.onclick=()=>{
   t.classList.add('active');
   document.getElementById(t.dataset.page).classList.add('active');
 });
-document.getElementById('themeBtn').onclick=()=>{
-  document.body.classList.toggle('light');
-  localStorage.setItem('litheme', document.body.classList.contains('light')?'light':'dark');
-};
-if(localStorage.getItem('litheme')==='light') document.body.classList.add('light');
+const MASCOT={'dark':'🌙','light':'☀️','morandi':'🍃','powder':'🌸','cream':'🐰','pingu':'🐧🐧','leola':'🧸','bartholomew':'🐻'};
+const themeSel=document.getElementById('themeSel');
+const mascotEl=document.getElementById('mascot');
+function applyTheme(t){
+  document.body.dataset.theme=t;
+  themeSel.value=t;
+  mascotEl.textContent=MASCOT[t]||'🌙';
+  localStorage.setItem('litheme',t);
+}
+themeSel.onchange=()=>applyTheme(themeSel.value);
+applyTheme(localStorage.getItem('litheme')||'dark');
 const s=document.getElementById('search');
 s.oninput=()=>{
   const q=s.value.trim().toLowerCase();
