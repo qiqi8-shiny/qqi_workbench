@@ -1,110 +1,230 @@
 {
-  "updatedAt": "2026-08-20T14:33:04+08:00",
+  "updatedAt": "2026-08-22T23:56:04.125673+08:00",
   "source": "AI 每3天自动轮换（SSS儿歌核心）",
   "current": {
-    "name": "居家",
+    "name": "看图书",
     "words": [
-      [
-        "ball",
-        "球"
-      ],
-      [
-        "block",
-        "积木"
-      ],
       [
         "book",
         "书"
       ],
       [
-        "toy",
-        "玩具"
+        "page",
+        "书页"
       ],
       [
-        "box",
-        "盒子"
+        "picture",
+        "图画"
       ],
       [
-        "sofa",
-        "沙发"
+        "cat",
+        "小猫"
       ],
       [
-        "mat",
-        "地垫"
+        "dog",
+        "小狗"
       ],
       [
-        "lamp",
-        "灯"
+        "bear",
+        "小熊"
       ],
       [
-        "door",
-        "门"
+        "color",
+        "颜色"
       ],
       [
-        "car",
-        "小汽车"
+        "red",
+        "红色"
       ],
       [
-        "play",
-        "玩"
+        "blue",
+        "蓝色"
       ],
       [
-        "roll",
-        "滚"
+        "baby",
+        "宝宝"
+      ],
+      [
+        "read",
+        "读"
+      ],
+      [
+        "look",
+        "看"
       ],
       [
         "open",
-        "打开"
+        "翻开"
       ],
       [
-        "close",
-        "关上"
+        "point",
+        "指"
+      ],
+      [
+        "turn",
+        "翻页"
       ],
       [
         "clap",
         "拍手"
       ],
       [
-        "peek",
-        "躲猫猫"
+        "say",
+        "说"
       ],
       [
-        "sit",
-        "坐"
+        "smile",
+        "微笑"
       ],
       [
-        "hide",
-        "藏"
+        "hug",
+        "抱抱"
+      ],
+      [
+        "find",
+        "找"
       ]
     ],
     "dialogs": [
       [
         "Mom",
-        "Let's play! Sit on the mat."
+        "Let's read a book! Open the book, baby."
       ],
       [
         "Baby",
-        "Mat! Play!"
+        "Book! Book!"
       ],
       [
         "Mom",
-        "Roll the ball. Open the box, peekaboo!"
+        "Look, a cat and a dog. Point to the red ball."
       ],
       [
         "Baby",
-        "Peek! Ha ha!"
+        "Red! Cat!"
       ],
       [
         "Mom",
-        "Clap your hands. Hide the toy in the box."
+        "Turn the page. The little bear says hi! Clap your hands."
       ],
       [
         "Baby",
-        "Bye-bye, toys!"
+        "Yay! Read more!"
       ]
     ]
   },
   "history": [
+    {
+      "date": "2026-08-22",
+      "name": "看图书",
+      "words": [
+        [
+          "book",
+          "书"
+        ],
+        [
+          "page",
+          "书页"
+        ],
+        [
+          "picture",
+          "图画"
+        ],
+        [
+          "cat",
+          "小猫"
+        ],
+        [
+          "dog",
+          "小狗"
+        ],
+        [
+          "bear",
+          "小熊"
+        ],
+        [
+          "color",
+          "颜色"
+        ],
+        [
+          "red",
+          "红色"
+        ],
+        [
+          "blue",
+          "蓝色"
+        ],
+        [
+          "baby",
+          "宝宝"
+        ],
+        [
+          "read",
+          "读"
+        ],
+        [
+          "look",
+          "看"
+        ],
+        [
+          "open",
+          "翻开"
+        ],
+        [
+          "point",
+          "指"
+        ],
+        [
+          "turn",
+          "翻页"
+        ],
+        [
+          "clap",
+          "拍手"
+        ],
+        [
+          "say",
+          "说"
+        ],
+        [
+          "smile",
+          "微笑"
+        ],
+        [
+          "hug",
+          "抱抱"
+        ],
+        [
+          "find",
+          "找"
+        ]
+      ],
+      "dialogs": [
+        [
+          "Mom",
+          "Let's read a book! Open the book, baby."
+        ],
+        [
+          "Baby",
+          "Book! Book!"
+        ],
+        [
+          "Mom",
+          "Look, a cat and a dog. Point to the red ball."
+        ],
+        [
+          "Baby",
+          "Red! Cat!"
+        ],
+        [
+          "Mom",
+          "Turn the page. The little bear says hi! Clap your hands."
+        ],
+        [
+          "Baby",
+          "Yay! Read more!"
+        ]
+      ]
+    },
     {
       "date": "2026-08-20",
       "name": "居家",
