@@ -1,118 +1,214 @@
 {
-  "updatedAt": "2026-08-22T23:56:04.125673+08:00",
+  "updatedAt": "2026-08-24T23:56:12.513065+08:00",
   "source": "AI 每3天自动轮换（SSS儿歌核心）",
   "current": {
-    "name": "看图书",
+    "name": "音乐",
     "words": [
       [
-        "book",
-        "书"
+        "drum",
+        "鼓"
       ],
       [
-        "page",
-        "书页"
+        "shaker",
+        "沙锤"
       ],
       [
-        "picture",
-        "图画"
+        "bell",
+        "铃铛"
       ],
       [
-        "cat",
-        "小猫"
+        "song",
+        "歌"
       ],
       [
-        "dog",
-        "小狗"
+        "music",
+        "音乐"
       ],
       [
-        "bear",
-        "小熊"
+        "hands",
+        "小手"
       ],
       [
-        "color",
-        "颜色"
+        "tummy",
+        "肚子"
       ],
       [
-        "red",
-        "红色"
-      ],
-      [
-        "blue",
-        "蓝色"
+        "foot",
+        "小脚"
       ],
       [
         "baby",
         "宝宝"
       ],
       [
-        "read",
-        "读"
-      ],
-      [
-        "look",
-        "看"
-      ],
-      [
-        "open",
-        "翻开"
-      ],
-      [
-        "point",
-        "指"
-      ],
-      [
-        "turn",
-        "翻页"
+        "band",
+        "乐队"
       ],
       [
         "clap",
         "拍手"
       ],
       [
-        "say",
-        "说"
+        "sing",
+        "唱"
       ],
       [
-        "smile",
-        "微笑"
+        "dance",
+        "跳舞"
       ],
       [
-        "hug",
-        "抱抱"
+        "shake",
+        "摇"
       ],
       [
-        "find",
-        "找"
+        "play",
+        "敲"
+      ],
+      [
+        "pat",
+        "拍"
+      ],
+      [
+        "listen",
+        "听"
+      ],
+      [
+        "stop",
+        "停"
       ]
     ],
     "dialogs": [
       [
         "Mom",
-        "Let's read a book! Open the book, baby."
+        "Music time! Listen to the song. Clap your hands!"
       ],
       [
         "Baby",
-        "Book! Book!"
+        "Clap! Clap!"
       ],
       [
         "Mom",
-        "Look, a cat and a dog. Point to the red ball."
+        "Play the drum. Shake the shaker, baby."
       ],
       [
         "Baby",
-        "Red! Cat!"
+        "Drum! Boom boom!"
       ],
       [
         "Mom",
-        "Turn the page. The little bear says hi! Clap your hands."
+        "Pat your tummy. Dance, dance, dance!"
       ],
       [
         "Baby",
-        "Yay! Read more!"
+        "Yay! Music!"
       ]
     ]
   },
   "history": [
+    {
+      "date": "2026-08-24",
+      "name": "音乐",
+      "words": [
+        [
+          "drum",
+          "鼓"
+        ],
+        [
+          "shaker",
+          "沙锤"
+        ],
+        [
+          "bell",
+          "铃铛"
+        ],
+        [
+          "song",
+          "歌"
+        ],
+        [
+          "music",
+          "音乐"
+        ],
+        [
+          "hands",
+          "小手"
+        ],
+        [
+          "tummy",
+          "肚子"
+        ],
+        [
+          "foot",
+          "小脚"
+        ],
+        [
+          "baby",
+          "宝宝"
+        ],
+        [
+          "band",
+          "乐队"
+        ],
+        [
+          "clap",
+          "拍手"
+        ],
+        [
+          "sing",
+          "唱"
+        ],
+        [
+          "dance",
+          "跳舞"
+        ],
+        [
+          "shake",
+          "摇"
+        ],
+        [
+          "play",
+          "敲"
+        ],
+        [
+          "pat",
+          "拍"
+        ],
+        [
+          "listen",
+          "听"
+        ],
+        [
+          "stop",
+          "停"
+        ]
+      ],
+      "dialogs": [
+        [
+          "Mom",
+          "Music time! Listen to the song. Clap your hands!"
+        ],
+        [
+          "Baby",
+          "Clap! Clap!"
+        ],
+        [
+          "Mom",
+          "Play the drum. Shake the shaker, baby."
+        ],
+        [
+          "Baby",
+          "Drum! Boom boom!"
+        ],
+        [
+          "Mom",
+          "Pat your tummy. Dance, dance, dance!"
+        ],
+        [
+          "Baby",
+          "Yay! Music!"
+        ]
+      ]
+    },
     {
       "date": "2026-08-22",
       "name": "看图书",
