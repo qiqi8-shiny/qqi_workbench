@@ -1,110 +1,214 @@
 {
-  "updatedAt": "2026-08-24T23:56:12.513065+08:00",
+  "updatedAt": "2026-08-31T12:15:23.575393+08:00",
   "source": "AI 每3天自动轮换（SSS儿歌核心）",
   "current": {
-    "name": "音乐",
+    "name": "抱抱亲亲",
     "words": [
       [
-        "drum",
-        "鼓"
-      ],
-      [
-        "shaker",
-        "沙锤"
-      ],
-      [
-        "bell",
-        "铃铛"
-      ],
-      [
-        "song",
-        "歌"
-      ],
-      [
-        "music",
-        "音乐"
-      ],
-      [
-        "hands",
-        "小手"
-      ],
-      [
-        "tummy",
-        "肚子"
-      ],
-      [
-        "foot",
-        "小脚"
+        "mommy",
+        "妈妈"
       ],
       [
         "baby",
         "宝宝"
       ],
       [
-        "band",
-        "乐队"
+        "cheek",
+        "脸颊"
       ],
       [
-        "clap",
-        "拍手"
+        "nose",
+        "鼻子"
       ],
       [
-        "sing",
-        "唱"
+        "heart",
+        "爱心"
       ],
       [
-        "dance",
-        "跳舞"
+        "arms",
+        "胳膊"
       ],
       [
-        "shake",
-        "摇"
+        "smile",
+        "微笑"
       ],
       [
-        "play",
-        "敲"
+        "love",
+        "爱"
+      ],
+      [
+        "hug",
+        "抱抱"
+      ],
+      [
+        "kiss",
+        "亲亲"
+      ],
+      [
+        "cuddle",
+        "依偎"
+      ],
+      [
+        "squeeze",
+        "紧紧抱"
+      ],
+      [
+        "tickle",
+        "胳肢"
+      ],
+      [
+        "hold",
+        "抱住"
       ],
       [
         "pat",
-        "拍"
+        "拍拍"
       ],
       [
-        "listen",
-        "听"
+        "snuggle",
+        "贴贴"
       ],
       [
-        "stop",
-        "停"
+        "giggle",
+        "咯咯笑"
+      ],
+      [
+        "point",
+        "指"
       ]
     ],
     "dialogs": [
       [
         "Mom",
-        "Music time! Listen to the song. Clap your hands!"
+        "Come here, baby! Mommy gives you a big hug."
       ],
       [
         "Baby",
-        "Clap! Clap!"
+        "Hug! Hug!"
       ],
       [
         "Mom",
-        "Play the drum. Shake the shaker, baby."
+        "Kiss your cheek. Mua! I love you."
       ],
       [
         "Baby",
-        "Drum! Boom boom!"
+        "Mua! Mommy!"
       ],
       [
         "Mom",
-        "Pat your tummy. Dance, dance, dance!"
+        "Cuddle close. Squeeze, squeeze, giggle!"
       ],
       [
         "Baby",
-        "Yay! Music!"
+        "Hehe! Love you!"
       ]
     ]
   },
   "history": [
+    {
+      "date": "2026-08-31",
+      "name": "抱抱亲亲",
+      "words": [
+        [
+          "mommy",
+          "妈妈"
+        ],
+        [
+          "baby",
+          "宝宝"
+        ],
+        [
+          "cheek",
+          "脸颊"
+        ],
+        [
+          "nose",
+          "鼻子"
+        ],
+        [
+          "heart",
+          "爱心"
+        ],
+        [
+          "arms",
+          "胳膊"
+        ],
+        [
+          "smile",
+          "微笑"
+        ],
+        [
+          "love",
+          "爱"
+        ],
+        [
+          "hug",
+          "抱抱"
+        ],
+        [
+          "kiss",
+          "亲亲"
+        ],
+        [
+          "cuddle",
+          "依偎"
+        ],
+        [
+          "squeeze",
+          "紧紧抱"
+        ],
+        [
+          "tickle",
+          "胳肢"
+        ],
+        [
+          "hold",
+          "抱住"
+        ],
+        [
+          "pat",
+          "拍拍"
+        ],
+        [
+          "snuggle",
+          "贴贴"
+        ],
+        [
+          "giggle",
+          "咯咯笑"
+        ],
+        [
+          "point",
+          "指"
+        ]
+      ],
+      "dialogs": [
+        [
+          "Mom",
+          "Come here, baby! Mommy gives you a big hug."
+        ],
+        [
+          "Baby",
+          "Hug! Hug!"
+        ],
+        [
+          "Mom",
+          "Kiss your cheek. Mua! I love you."
+        ],
+        [
+          "Baby",
+          "Mua! Mommy!"
+        ],
+        [
+          "Mom",
+          "Cuddle close. Squeeze, squeeze, giggle!"
+        ],
+        [
+          "Baby",
+          "Hehe! Love you!"
+        ]
+      ]
+    },
     {
       "date": "2026-08-24",
       "name": "音乐",
