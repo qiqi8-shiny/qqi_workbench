@@ -1,7 +1,39 @@
 {
-  "updatedAt": "2026-08-20T14:39:32+08:00",
+  "updatedAt": "2026-09-03T11:24:13+08:00",
   "source": "AI 每周联网抓取（医用成像/ML可解释性）",
   "items": [
+    {
+      "tag": "政策",
+      "tagClass": "tag-policy",
+      "title": "国家药监局器审中心就《人工智能辅助诊断医疗器械临床评价注册审查指导原则（征求意见稿）》公开征求意见",
+      "desc": "国家药监局医疗器械技术审评中心（CMDE）于2026年6月17日发布《人工智能辅助诊断医疗器械临床评价注册审查指导原则（征求意见稿）》并公开征求意见（截止2026年7月10日），明确AI辅助诊断定义为基于算法对影像占位性病变进行分析、给出肿瘤类型/良恶性/分期分型建议的III类器械，核心算法须以临床试验证据为支撑，标志医用成像AI器械注册转化路径进一步规范化。",
+      "link": "https://www.ydcmdei.org.cn/article/881",
+      "pubDate": "2026-06-17"
+    },
+    {
+      "tag": "产业",
+      "tagClass": "tag-industry",
+      "title": "FDA AI医疗器械授权清单持续扩容，医学影像（放射）类占比约76%",
+      "desc": "FDA AI-Enabled Medical Devices 清单显示，截至2026年Q1全美累计1,524项AI医疗器械获授权，其中影像（放射）类约1,164项、占比76%；2026年3月27日飞利浦Spectral CT Verida、Butterfly孕周估算工具等多款AI影像产品密集获510(k)许可，影像AI从单病种检测加速走向工作流与多病种融合。",
+      "link": "https://www.fda.gov/medical-devices/software-medical-device-samd/artificial-intelligence-enabled-medical-devices",
+      "pubDate": "2026-03-27"
+    },
+    {
+      "tag": "学术",
+      "tagClass": "tag-academic",
+      "title": "BMC Medical Imaging：增强CT影像组学结合SHAP预测嗜铬细胞瘤与肾上腺腺瘤（2026-02-26）",
+      "desc": "研究基于增强CT构建融合临床特征的影像组学模型，并采用SHAP解释各特征贡献，鉴别嗜铬细胞瘤（PHEO）与肾上腺腺瘤；临床-影像组学模型AUC达0.938，SHAP识别出log-sigma-1-mm-3D_glszm_GLNU为最重要特征，为肾上腺肿瘤的可解释AI辅助诊断提供方法范例。",
+      "link": "https://link.springer.com/article/10.1186/s12880-026-02238-x",
+      "pubDate": "2026-02-26"
+    },
+    {
+      "tag": "学术",
+      "tagClass": "tag-academic",
+      "title": "arXiv：Latent Dirichlet-Tree Allocation——LDA主题模型的层次化推广（2026-02-21）",
+      "desc": "arXiv论文提出Latent Dirichlet-Tree Allocation（LDTA），以任意Dirichlet-Tree分布替代LDA的Dirichlet先验，在保留生成结构的同时刻画主题间层次与相关，并给出向量化GPU加速的变分推断与期望传播算法；在文档、图像与scRNA-seq任务上主题一致性与分类精度优于标准LDA，为专利/文献主题建模等下游任务提供更强的层次化主题发现能力。",
+      "link": "https://www.arxiv.org/abs/2602.18795",
+      "pubDate": "2026-02-21"
+    },
     {
       "tag": "政策",
       "tagClass": "tag-policy",
