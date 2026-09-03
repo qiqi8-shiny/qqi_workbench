@@ -1,110 +1,214 @@
 {
-  "updatedAt": "2026-08-31T12:15:23.575393+08:00",
+  "updatedAt": "2026-09-03T11:12:25.464586+08:00",
   "source": "AI 每3天自动轮换（SSS儿歌核心）",
   "current": {
-    "name": "抱抱亲亲",
+    "name": "玩具",
     "words": [
       [
-        "mommy",
-        "妈妈"
+        "toy",
+        "玩具"
       ],
       [
-        "baby",
-        "宝宝"
+        "ball",
+        "球"
       ],
       [
-        "cheek",
-        "脸颊"
+        "block",
+        "积木"
       ],
       [
-        "nose",
-        "鼻子"
+        "bear",
+        "小熊"
       ],
       [
-        "heart",
-        "爱心"
+        "rattle",
+        "摇铃"
       ],
       [
-        "arms",
-        "胳膊"
+        "ring",
+        "套圈"
       ],
       [
-        "smile",
-        "微笑"
+        "car",
+        "小汽车"
       ],
       [
-        "love",
-        "爱"
+        "duck",
+        "小鸭"
       ],
       [
-        "hug",
-        "抱抱"
+        "box",
+        "盒子"
       ],
       [
-        "kiss",
-        "亲亲"
+        "cube",
+        "方块"
       ],
       [
-        "cuddle",
-        "依偎"
+        "play",
+        "玩"
       ],
       [
-        "squeeze",
-        "紧紧抱"
+        "shake",
+        "摇"
       ],
       [
-        "tickle",
-        "胳肢"
+        "roll",
+        "滚"
       ],
       [
-        "hold",
-        "抱住"
+        "drop",
+        "掉"
       ],
       [
-        "pat",
-        "拍拍"
+        "pick",
+        "捡"
       ],
       [
-        "snuggle",
-        "贴贴"
+        "stack",
+        "叠"
       ],
       [
-        "giggle",
-        "咯咯笑"
+        "grab",
+        "抓"
       ],
       [
-        "point",
-        "指"
+        "bang",
+        "敲"
       ]
     ],
     "dialogs": [
       [
         "Mom",
-        "Come here, baby! Mommy gives you a big hug."
+        "Toy time! Let's play with the ball."
       ],
       [
         "Baby",
-        "Hug! Hug!"
+        "Ball! Ball!"
       ],
       [
         "Mom",
-        "Kiss your cheek. Mua! I love you."
+        "Shake the rattle. Roll the car!"
       ],
       [
         "Baby",
-        "Mua! Mommy!"
+        "Vroom! Go, car!"
       ],
       [
         "Mom",
-        "Cuddle close. Squeeze, squeeze, giggle!"
+        "Stack the blocks. Drop the duck in the box."
       ],
       [
         "Baby",
-        "Hehe! Love you!"
+        "Bang! Bang! More toys!"
       ]
     ]
   },
   "history": [
+    {
+      "date": "2026-09-03",
+      "name": "玩具",
+      "words": [
+        [
+          "toy",
+          "玩具"
+        ],
+        [
+          "ball",
+          "球"
+        ],
+        [
+          "block",
+          "积木"
+        ],
+        [
+          "bear",
+          "小熊"
+        ],
+        [
+          "rattle",
+          "摇铃"
+        ],
+        [
+          "ring",
+          "套圈"
+        ],
+        [
+          "car",
+          "小汽车"
+        ],
+        [
+          "duck",
+          "小鸭"
+        ],
+        [
+          "box",
+          "盒子"
+        ],
+        [
+          "cube",
+          "方块"
+        ],
+        [
+          "play",
+          "玩"
+        ],
+        [
+          "shake",
+          "摇"
+        ],
+        [
+          "roll",
+          "滚"
+        ],
+        [
+          "drop",
+          "掉"
+        ],
+        [
+          "pick",
+          "捡"
+        ],
+        [
+          "stack",
+          "叠"
+        ],
+        [
+          "grab",
+          "抓"
+        ],
+        [
+          "bang",
+          "敲"
+        ]
+      ],
+      "dialogs": [
+        [
+          "Mom",
+          "Toy time! Let's play with the ball."
+        ],
+        [
+          "Baby",
+          "Ball! Ball!"
+        ],
+        [
+          "Mom",
+          "Shake the rattle. Roll the car!"
+        ],
+        [
+          "Baby",
+          "Vroom! Go, car!"
+        ],
+        [
+          "Mom",
+          "Stack the blocks. Drop the duck in the box."
+        ],
+        [
+          "Baby",
+          "Bang! Bang! More toys!"
+        ]
+      ]
+    },
     {
       "date": "2026-08-31",
       "name": "抱抱亲亲",
