@@ -1,1432 +1,475 @@
 {
-  "updatedAt": "2026-09-03T11:12:25.464586+08:00",
+  "updatedAt": "2026-09-05T23:56:26+08:00",
   "source": "AI 每3天自动轮换（SSS儿歌核心）",
   "current": {
-    "name": "玩具",
+    "name": "藏猫猫",
     "words": [
-      [
-        "toy",
-        "玩具"
-      ],
-      [
-        "ball",
-        "球"
-      ],
-      [
-        "block",
-        "积木"
-      ],
-      [
-        "bear",
-        "小熊"
-      ],
-      [
-        "rattle",
-        "摇铃"
-      ],
-      [
-        "ring",
-        "套圈"
-      ],
-      [
-        "car",
-        "小汽车"
-      ],
-      [
-        "duck",
-        "小鸭"
-      ],
-      [
-        "box",
-        "盒子"
-      ],
-      [
-        "cube",
-        "方块"
-      ],
-      [
-        "play",
-        "玩"
-      ],
-      [
-        "shake",
-        "摇"
-      ],
-      [
-        "roll",
-        "滚"
-      ],
-      [
-        "drop",
-        "掉"
-      ],
-      [
-        "pick",
-        "捡"
-      ],
-      [
-        "stack",
-        "叠"
-      ],
-      [
-        "grab",
-        "抓"
-      ],
-      [
-        "bang",
-        "敲"
-      ]
+      ["hands", "小手"],
+      ["face", "脸"],
+      ["eyes", "眼睛"],
+      ["blanket", "小毯子"],
+      ["book", "书"],
+      ["pillow", "枕头"],
+      ["mommy", "妈妈"],
+      ["baby", "宝宝"],
+      ["hide", "藏"],
+      ["find", "找"],
+      ["peek", "露脸"],
+      ["cover", "捂住"],
+      ["open", "张开"],
+      ["look", "看"],
+      ["clap", "拍手"],
+      ["laugh", "笑"],
+      ["point", "指"]
     ],
     "dialogs": [
-      [
-        "Mom",
-        "Toy time! Let's play with the ball."
-      ],
-      [
-        "Baby",
-        "Ball! Ball!"
-      ],
-      [
-        "Mom",
-        "Shake the rattle. Roll the car!"
-      ],
-      [
-        "Baby",
-        "Vroom! Go, car!"
-      ],
-      [
-        "Mom",
-        "Stack the blocks. Drop the duck in the box."
-      ],
-      [
-        "Baby",
-        "Bang! Bang! More toys!"
-      ]
+      ["Mom", "Peekaboo! Where is baby? Cover your eyes!"],
+      ["Baby", "Boo! I'm here!"],
+      ["Mom", "Hide behind the book. Open your hands, peek!"],
+      ["Baby", "Peek! Ha ha!"],
+      ["Mom", "Find the pillow. Cover your face, boo!"],
+      ["Baby", "Boo! Again, again!"]
     ]
   },
   "history": [
     {
+      "date": "2026-09-05",
+      "name": "藏猫猫",
+      "words": [
+        ["hands", "小手"],
+        ["face", "脸"],
+        ["eyes", "眼睛"],
+        ["blanket", "小毯子"],
+        ["book", "书"],
+        ["pillow", "枕头"],
+        ["mommy", "妈妈"],
+        ["baby", "宝宝"],
+        ["hide", "藏"],
+        ["find", "找"],
+        ["peek", "露脸"],
+        ["cover", "捂住"],
+        ["open", "张开"],
+        ["look", "看"],
+        ["clap", "拍手"],
+        ["laugh", "笑"],
+        ["point", "指"]
+      ],
+      "dialogs": [
+        ["Mom", "Peekaboo! Where is baby? Cover your eyes!"],
+        ["Baby", "Boo! I'm here!"],
+        ["Mom", "Hide behind the book. Open your hands, peek!"],
+        ["Baby", "Peek! Ha ha!"],
+        ["Mom", "Find the pillow. Cover your face, boo!"],
+        ["Baby", "Boo! Again, again!"]
+      ]
+    },
+    {
       "date": "2026-09-03",
       "name": "玩具",
       "words": [
-        [
-          "toy",
-          "玩具"
-        ],
-        [
-          "ball",
-          "球"
-        ],
-        [
-          "block",
-          "积木"
-        ],
-        [
-          "bear",
-          "小熊"
-        ],
-        [
-          "rattle",
-          "摇铃"
-        ],
-        [
-          "ring",
-          "套圈"
-        ],
-        [
-          "car",
-          "小汽车"
-        ],
-        [
-          "duck",
-          "小鸭"
-        ],
-        [
-          "box",
-          "盒子"
-        ],
-        [
-          "cube",
-          "方块"
-        ],
-        [
-          "play",
-          "玩"
-        ],
-        [
-          "shake",
-          "摇"
-        ],
-        [
-          "roll",
-          "滚"
-        ],
-        [
-          "drop",
-          "掉"
-        ],
-        [
-          "pick",
-          "捡"
-        ],
-        [
-          "stack",
-          "叠"
-        ],
-        [
-          "grab",
-          "抓"
-        ],
-        [
-          "bang",
-          "敲"
-        ]
+        ["toy", "玩具"],
+        ["ball", "球"],
+        ["block", "积木"],
+        ["bear", "小熊"],
+        ["rattle", "摇铃"],
+        ["ring", "套圈"],
+        ["car", "小汽车"],
+        ["duck", "小鸭"],
+        ["box", "盒子"],
+        ["cube", "方块"],
+        ["play", "玩"],
+        ["shake", "摇"],
+        ["roll", "滚"],
+        ["drop", "掉"],
+        ["pick", "捡"],
+        ["stack", "叠"],
+        ["grab", "抓"],
+        ["bang", "敲"]
       ],
       "dialogs": [
-        [
-          "Mom",
-          "Toy time! Let's play with the ball."
-        ],
-        [
-          "Baby",
-          "Ball! Ball!"
-        ],
-        [
-          "Mom",
-          "Shake the rattle. Roll the car!"
-        ],
-        [
-          "Baby",
-          "Vroom! Go, car!"
-        ],
-        [
-          "Mom",
-          "Stack the blocks. Drop the duck in the box."
-        ],
-        [
-          "Baby",
-          "Bang! Bang! More toys!"
-        ]
+        ["Mom", "Toy time! Let's play with the ball."],
+        ["Baby", "Ball! Ball!"],
+        ["Mom", "Shake the rattle. Roll the car!"],
+        ["Baby", "Vroom! Go, car!"],
+        ["Mom", "Stack the blocks. Drop the duck in the box."],
+        ["Baby", "Bang! Bang! More toys!"]
       ]
     },
     {
       "date": "2026-08-31",
       "name": "抱抱亲亲",
       "words": [
-        [
-          "mommy",
-          "妈妈"
-        ],
-        [
-          "baby",
-          "宝宝"
-        ],
-        [
-          "cheek",
-          "脸颊"
-        ],
-        [
-          "nose",
-          "鼻子"
-        ],
-        [
-          "heart",
-          "爱心"
-        ],
-        [
-          "arms",
-          "胳膊"
-        ],
-        [
-          "smile",
-          "微笑"
-        ],
-        [
-          "love",
-          "爱"
-        ],
-        [
-          "hug",
-          "抱抱"
-        ],
-        [
-          "kiss",
-          "亲亲"
-        ],
-        [
-          "cuddle",
-          "依偎"
-        ],
-        [
-          "squeeze",
-          "紧紧抱"
-        ],
-        [
-          "tickle",
-          "胳肢"
-        ],
-        [
-          "hold",
-          "抱住"
-        ],
-        [
-          "pat",
-          "拍拍"
-        ],
-        [
-          "snuggle",
-          "贴贴"
-        ],
-        [
-          "giggle",
-          "咯咯笑"
-        ],
-        [
-          "point",
-          "指"
-        ]
+        ["mommy", "妈妈"],
+        ["baby", "宝宝"],
+        ["cheek", "脸颊"],
+        ["nose", "鼻子"],
+        ["heart", "爱心"],
+        ["arms", "胳膊"],
+        ["smile", "微笑"],
+        ["love", "爱"],
+        ["hug", "抱抱"],
+        ["kiss", "亲亲"],
+        ["cuddle", "依偎"],
+        ["squeeze", "紧紧抱"],
+        ["tickle", "胳肢"],
+        ["hold", "抱住"],
+        ["pat", "拍拍"],
+        ["snuggle", "贴贴"],
+        ["giggle", "咯咯笑"],
+        ["point", "指"]
       ],
       "dialogs": [
-        [
-          "Mom",
-          "Come here, baby! Mommy gives you a big hug."
-        ],
-        [
-          "Baby",
-          "Hug! Hug!"
-        ],
-        [
-          "Mom",
-          "Kiss your cheek. Mua! I love you."
-        ],
-        [
-          "Baby",
-          "Mua! Mommy!"
-        ],
-        [
-          "Mom",
-          "Cuddle close. Squeeze, squeeze, giggle!"
-        ],
-        [
-          "Baby",
-          "Hehe! Love you!"
-        ]
+        ["Mom", "Come here, baby! Mommy gives you a big hug."],
+        ["Baby", "Hug! Hug!"],
+        ["Mom", "Kiss your cheek. Mua! I love you."],
+        ["Baby", "Mua! Mommy!"],
+        ["Mom", "Cuddle close. Squeeze, squeeze, giggle!"],
+        ["Baby", "Hehe! Love you!"]
       ]
     },
     {
       "date": "2026-08-24",
       "name": "音乐",
       "words": [
-        [
-          "drum",
-          "鼓"
-        ],
-        [
-          "shaker",
-          "沙锤"
-        ],
-        [
-          "bell",
-          "铃铛"
-        ],
-        [
-          "song",
-          "歌"
-        ],
-        [
-          "music",
-          "音乐"
-        ],
-        [
-          "hands",
-          "小手"
-        ],
-        [
-          "tummy",
-          "肚子"
-        ],
-        [
-          "foot",
-          "小脚"
-        ],
-        [
-          "baby",
-          "宝宝"
-        ],
-        [
-          "band",
-          "乐队"
-        ],
-        [
-          "clap",
-          "拍手"
-        ],
-        [
-          "sing",
-          "唱"
-        ],
-        [
-          "dance",
-          "跳舞"
-        ],
-        [
-          "shake",
-          "摇"
-        ],
-        [
-          "play",
-          "敲"
-        ],
-        [
-          "pat",
-          "拍"
-        ],
-        [
-          "listen",
-          "听"
-        ],
-        [
-          "stop",
-          "停"
-        ]
+        ["drum", "鼓"],
+        ["shaker", "沙锤"],
+        ["bell", "铃铛"],
+        ["song", "歌"],
+        ["music", "音乐"],
+        ["hands", "小手"],
+        ["tummy", "肚子"],
+        ["foot", "小脚"],
+        ["baby", "宝宝"],
+        ["band", "乐队"],
+        ["clap", "拍手"],
+        ["sing", "唱"],
+        ["dance", "跳舞"],
+        ["shake", "摇"],
+        ["play", "敲"],
+        ["pat", "拍"],
+        ["listen", "听"],
+        ["stop", "停"]
       ],
       "dialogs": [
-        [
-          "Mom",
-          "Music time! Listen to the song. Clap your hands!"
-        ],
-        [
-          "Baby",
-          "Clap! Clap!"
-        ],
-        [
-          "Mom",
-          "Play the drum. Shake the shaker, baby."
-        ],
-        [
-          "Baby",
-          "Drum! Boom boom!"
-        ],
-        [
-          "Mom",
-          "Pat your tummy. Dance, dance, dance!"
-        ],
-        [
-          "Baby",
-          "Yay! Music!"
-        ]
+        ["Mom", "Music time! Listen to the song. Clap your hands!"],
+        ["Baby", "Clap! Clap!"],
+        ["Mom", "Play the drum. Shake the shaker, baby."],
+        ["Baby", "Drum! Boom boom!"],
+        ["Mom", "Pat your tummy. Dance, dance, dance!"],
+        ["Baby", "Yay! Music!"]
       ]
     },
     {
       "date": "2026-08-22",
       "name": "看图书",
       "words": [
-        [
-          "book",
-          "书"
-        ],
-        [
-          "page",
-          "书页"
-        ],
-        [
-          "picture",
-          "图画"
-        ],
-        [
-          "cat",
-          "小猫"
-        ],
-        [
-          "dog",
-          "小狗"
-        ],
-        [
-          "bear",
-          "小熊"
-        ],
-        [
-          "color",
-          "颜色"
-        ],
-        [
-          "red",
-          "红色"
-        ],
-        [
-          "blue",
-          "蓝色"
-        ],
-        [
-          "baby",
-          "宝宝"
-        ],
-        [
-          "read",
-          "读"
-        ],
-        [
-          "look",
-          "看"
-        ],
-        [
-          "open",
-          "翻开"
-        ],
-        [
-          "point",
-          "指"
-        ],
-        [
-          "turn",
-          "翻页"
-        ],
-        [
-          "clap",
-          "拍手"
-        ],
-        [
-          "say",
-          "说"
-        ],
-        [
-          "smile",
-          "微笑"
-        ],
-        [
-          "hug",
-          "抱抱"
-        ],
-        [
-          "find",
-          "找"
-        ]
+        ["book", "书"],
+        ["page", "书页"],
+        ["picture", "图画"],
+        ["cat", "小猫"],
+        ["dog", "小狗"],
+        ["bear", "小熊"],
+        ["color", "颜色"],
+        ["red", "红色"],
+        ["blue", "蓝色"],
+        ["baby", "宝宝"],
+        ["read", "读"],
+        ["look", "看"],
+        ["open", "翻开"],
+        ["point", "指"],
+        ["turn", "翻页"],
+        ["clap", "拍手"],
+        ["say", "说"],
+        ["smile", "微笑"],
+        ["hug", "抱抱"],
+        ["find", "找"]
       ],
       "dialogs": [
-        [
-          "Mom",
-          "Let's read a book! Open the book, baby."
-        ],
-        [
-          "Baby",
-          "Book! Book!"
-        ],
-        [
-          "Mom",
-          "Look, a cat and a dog. Point to the red ball."
-        ],
-        [
-          "Baby",
-          "Red! Cat!"
-        ],
-        [
-          "Mom",
-          "Turn the page. The little bear says hi! Clap your hands."
-        ],
-        [
-          "Baby",
-          "Yay! Read more!"
-        ]
+        ["Mom", "Let's read a book! Open the book, baby."],
+        ["Baby", "Book! Book!"],
+        ["Mom", "Look, a cat and a dog. Point to the red ball."],
+        ["Baby", "Red! Cat!"],
+        ["Mom", "Turn the page. The little bear says hi! Clap your hands."],
+        ["Baby", "Yay! Read more!"]
       ]
     },
     {
       "date": "2026-08-20",
       "name": "居家",
       "words": [
-        [
-          "ball",
-          "球"
-        ],
-        [
-          "block",
-          "积木"
-        ],
-        [
-          "book",
-          "书"
-        ],
-        [
-          "toy",
-          "玩具"
-        ],
-        [
-          "box",
-          "盒子"
-        ],
-        [
-          "sofa",
-          "沙发"
-        ],
-        [
-          "mat",
-          "地垫"
-        ],
-        [
-          "lamp",
-          "灯"
-        ],
-        [
-          "door",
-          "门"
-        ],
-        [
-          "car",
-          "小汽车"
-        ],
-        [
-          "play",
-          "玩"
-        ],
-        [
-          "roll",
-          "滚"
-        ],
-        [
-          "open",
-          "打开"
-        ],
-        [
-          "close",
-          "关上"
-        ],
-        [
-          "clap",
-          "拍手"
-        ],
-        [
-          "peek",
-          "躲猫猫"
-        ],
-        [
-          "sit",
-          "坐"
-        ],
-        [
-          "hide",
-          "藏"
-        ]
+        ["ball", "球"],
+        ["block", "积木"],
+        ["book", "书"],
+        ["toy", "玩具"],
+        ["box", "盒子"],
+        ["sofa", "沙发"],
+        ["mat", "地垫"],
+        ["lamp", "灯"],
+        ["door", "门"],
+        ["car", "小汽车"],
+        ["play", "玩"],
+        ["roll", "滚"],
+        ["open", "打开"],
+        ["close", "关上"],
+        ["clap", "拍手"],
+        ["peek", "躲猫猫"],
+        ["sit", "坐"],
+        ["hide", "藏"]
       ],
       "dialogs": [
-        [
-          "Mom",
-          "Let's play! Sit on the mat."
-        ],
-        [
-          "Baby",
-          "Mat! Play!"
-        ],
-        [
-          "Mom",
-          "Roll the ball. Open the box, peekaboo!"
-        ],
-        [
-          "Baby",
-          "Peek! Ha ha!"
-        ],
-        [
-          "Mom",
-          "Clap your hands. Hide the toy in the box."
-        ],
-        [
-          "Baby",
-          "Bye-bye, toys!"
-        ]
+        ["Mom", "Let's play! Sit on the mat."],
+        ["Baby", "Mat! Play!"],
+        ["Mom", "Roll the ball. Open the box, peekaboo!"],
+        ["Baby", "Peek! Ha ha!"],
+        ["Mom", "Clap your hands. Hide the toy in the box."],
+        ["Baby", "Bye-bye, toys!"]
       ]
     },
     {
       "date": "2026-08-17",
       "name": "哄睡",
       "words": [
-        [
-          "bed",
-          "小床"
-        ],
-        [
-          "blanket",
-          "小被子"
-        ],
-        [
-          "pillow",
-          "枕头"
-        ],
-        [
-          "light",
-          "灯"
-        ],
-        [
-          "star",
-          "星星"
-        ],
-        [
-          "moon",
-          "月亮"
-        ],
-        [
-          "teddy",
-          "泰迪熊"
-        ],
-        [
-          "lullaby",
-          "摇篮曲"
-        ],
-        [
-          "night",
-          "夜晚"
-        ],
-        [
-          "eye",
-          "眼睛"
-        ],
-        [
-          "sleep",
-          "睡觉"
-        ],
-        [
-          "close",
-          "闭上"
-        ],
-        [
-          "hug",
-          "抱抱"
-        ],
-        [
-          "kiss",
-          "亲亲"
-        ],
-        [
-          "rock",
-          "摇"
-        ],
-        [
-          "sing",
-          "唱"
-        ],
-        [
-          "pat",
-          "拍"
-        ],
-        [
-          "turn off",
-          "关掉"
-        ]
+        ["bed", "小床"],
+        ["blanket", "小被子"],
+        ["pillow", "枕头"],
+        ["light", "灯"],
+        ["star", "星星"],
+        ["moon", "月亮"],
+        ["teddy", "泰迪熊"],
+        ["lullaby", "摇篮曲"],
+        ["night", "夜晚"],
+        ["eye", "眼睛"],
+        ["sleep", "睡觉"],
+        ["close", "闭上"],
+        ["hug", "抱抱"],
+        ["kiss", "亲亲"],
+        ["rock", "摇"],
+        ["sing", "唱"],
+        ["pat", "拍"],
+        ["turn off", "关掉"]
       ],
       "dialogs": [
-        [
-          "Mom",
-          "Bedtime! Turn off the light. Night-night."
-        ],
-        [
-          "Baby",
-          "Moon! Star!"
-        ],
-        [
-          "Mom",
-          "Yes, the moon is up. Hug your teddy bear."
-        ],
-        [
-          "Baby",
-          "Teddy! Hug!"
-        ],
-        [
-          "Mom",
-          "Close your eyes. Mommy rocks you. Sing, sing."
-        ],
-        [
-          "Baby",
-          "La... la... sleep."
-        ]
+        ["Mom", "Bedtime! Turn off the light. Night-night."],
+        ["Baby", "Moon! Star!"],
+        ["Mom", "Yes, the moon is up. Hug your teddy bear."],
+        ["Baby", "Teddy! Hug!"],
+        ["Mom", "Close your eyes. Mommy rocks you. Sing, sing."],
+        ["Baby", "La... la... sleep."]
       ]
     },
     {
       "date": "2026-08-12",
       "name": "户外",
       "words": [
-        [
-          "stroller",
-          "推车"
-        ],
-        [
-          "hat",
-          "帽子"
-        ],
-        [
-          "sun",
-          "太阳"
-        ],
-        [
-          "tree",
-          "树"
-        ],
-        [
-          "bird",
-          "小鸟"
-        ],
-        [
-          "dog",
-          "小狗"
-        ],
-        [
-          "flower",
-          "花"
-        ],
-        [
-          "grass",
-          "草"
-        ],
-        [
-          "leaf",
-          "叶子"
-        ],
-        [
-          "wind",
-          "风"
-        ],
-        [
-          "go",
-          "走"
-        ],
-        [
-          "walk",
-          "走路"
-        ],
-        [
-          "push",
-          "推"
-        ],
-        [
-          "look",
-          "看"
-        ],
-        [
-          "wave",
-          "挥手"
-        ],
-        [
-          "point",
-          "指"
-        ],
-        [
-          "touch",
-          "摸"
-        ],
-        [
-          "ride",
-          "坐车"
-        ]
+        ["stroller", "推车"],
+        ["hat", "帽子"],
+        ["sun", "太阳"],
+        ["tree", "树"],
+        ["bird", "小鸟"],
+        ["dog", "小狗"],
+        ["flower", "花"],
+        ["grass", "草"],
+        ["leaf", "叶子"],
+        ["wind", "风"],
+        ["go", "走"],
+        ["walk", "走路"],
+        ["push", "推"],
+        ["look", "看"],
+        ["wave", "挥手"],
+        ["point", "指"],
+        ["touch", "摸"],
+        ["ride", "坐车"]
       ],
       "dialogs": [
-        [
-          "Mom",
-          "Let's go outside! Hat on your head."
-        ],
-        [
-          "Baby",
-          "Go! Go!"
-        ],
-        [
-          "Mom",
-          "Walking, walking. Mommy pushes the stroller."
-        ],
-        [
-          "Baby",
-          "Bird! Bird!"
-        ],
-        [
-          "Mom",
-          "Yes, a bird in the tree. Wave bye-bye!"
-        ],
-        [
-          "Baby",
-          "Bye-bye! Bye-bye!"
-        ]
+        ["Mom", "Let's go outside! Hat on your head."],
+        ["Baby", "Go! Go!"],
+        ["Mom", "Walking, walking. Mommy pushes the stroller."],
+        ["Baby", "Bird! Bird!"],
+        ["Mom", "Yes, a bird in the tree. Wave bye-bye!"],
+        ["Baby", "Bye-bye! Bye-bye!"]
       ]
     },
     {
       "date": "2026-08-10",
       "name": "穿衣",
       "words": [
-        [
-          "shirt",
-          "上衣"
-        ],
-        [
-          "pants",
-          "裤子"
-        ],
-        [
-          "socks",
-          "袜子"
-        ],
-        [
-          "shoes",
-          "鞋子"
-        ],
-        [
-          "hat",
-          "帽子"
-        ],
-        [
-          "diaper",
-          "尿布"
-        ],
-        [
-          "arm",
-          "胳膊"
-        ],
-        [
-          "foot",
-          "小脚"
-        ],
-        [
-          "head",
-          "头"
-        ],
-        [
-          "button",
-          "扣子"
-        ],
-        [
-          "put on",
-          "穿上"
-        ],
-        [
-          "pull",
-          "拉"
-        ],
-        [
-          "push",
-          "伸"
-        ],
-        [
-          "zip",
-          "拉拉链"
-        ],
-        [
-          "snap",
-          "扣上"
-        ],
-        [
-          "stand",
-          "站"
-        ],
-        [
-          "lift",
-          "抬"
-        ],
-        [
-          "wear",
-          "穿着"
-        ]
+        ["shirt", "上衣"],
+        ["pants", "裤子"],
+        ["socks", "袜子"],
+        ["shoes", "鞋子"],
+        ["hat", "帽子"],
+        ["diaper", "尿布"],
+        ["arm", "胳膊"],
+        ["foot", "小脚"],
+        ["head", "头"],
+        ["button", "扣子"],
+        ["put on", "穿上"],
+        ["pull", "拉"],
+        ["push", "伸"],
+        ["zip", "拉拉链"],
+        ["snap", "扣上"],
+        ["stand", "站"],
+        ["lift", "抬"],
+        ["wear", "穿着"]
       ],
       "dialogs": [
-        [
-          "Mom",
-          "Time to get dressed! Arms up, baby."
-        ],
-        [
-          "Baby",
-          "Up! Up!"
-        ],
-        [
-          "Mom",
-          "Put on your shirt. Pull, pull, pull!"
-        ],
-        [
-          "Baby",
-          "Head out! Peekaboo!"
-        ],
-        [
-          "Mom",
-          "Socks on your feet. Shoes on, too."
-        ],
-        [
-          "Baby",
-          "Shoes! My shoes!"
-        ]
+        ["Mom", "Time to get dressed! Arms up, baby."],
+        ["Baby", "Up! Up!"],
+        ["Mom", "Put on your shirt. Pull, pull, pull!"],
+        ["Baby", "Head out! Peekaboo!"],
+        ["Mom", "Socks on your feet. Shoes on, too."],
+        ["Baby", "Shoes! My shoes!"]
       ]
     },
     {
       "date": "2026-08-07",
       "name": "洗漱",
       "words": [
-        [
-          "water",
-          "水"
-        ],
-        [
-          "soap",
-          "肥皂"
-        ],
-        [
-          "bubbles",
-          "泡泡"
-        ],
-        [
-          "towel",
-          "毛巾"
-        ],
-        [
-          "toothbrush",
-          "牙刷"
-        ],
-        [
-          "teeth",
-          "牙齿"
-        ],
-        [
-          "hands",
-          "小手"
-        ],
-        [
-          "face",
-          "脸"
-        ],
-        [
-          "mouth",
-          "嘴巴"
-        ],
-        [
-          "mirror",
-          "镜子"
-        ],
-        [
-          "wash",
-          "洗"
-        ],
-        [
-          "rub",
-          "搓"
-        ],
-        [
-          "splash",
-          "拍水"
-        ],
-        [
-          "brush",
-          "刷"
-        ],
-        [
-          "open",
-          "张开"
-        ],
-        [
-          "wipe",
-          "擦"
-        ],
-        [
-          "dry",
-          "擦干"
-        ],
-        [
-          "look",
-          "看"
-        ]
+        ["water", "水"],
+        ["soap", "肥皂"],
+        ["bubbles", "泡泡"],
+        ["towel", "毛巾"],
+        ["toothbrush", "牙刷"],
+        ["teeth", "牙齿"],
+        ["hands", "小手"],
+        ["face", "脸"],
+        ["mouth", "嘴巴"],
+        ["mirror", "镜子"],
+        ["wash", "洗"],
+        ["rub", "搓"],
+        ["splash", "拍水"],
+        ["brush", "刷"],
+        ["open", "张开"],
+        ["wipe", "擦"],
+        ["dry", "擦干"],
+        ["look", "看"]
       ],
       "dialogs": [
-        [
-          "Mom",
-          "Wash your hands! The water is warm."
-        ],
-        [
-          "Baby",
-          "Splash! Splash!"
-        ],
-        [
-          "Mom",
-          "Soap on. Rub, rub, rub. Look, bubbles!"
-        ],
-        [
-          "Baby",
-          "Bubbles! Wow!"
-        ],
-        [
-          "Mom",
-          "Open your mouth. Brush your teeth."
-        ],
-        [
-          "Baby",
-          "Towel! Dry! Clean baby!"
-        ]
+        ["Mom", "Wash your hands! The water is warm."],
+        ["Baby", "Splash! Splash!"],
+        ["Mom", "Soap on. Rub, rub, rub. Look, bubbles!"],
+        ["Baby", "Bubbles! Wow!"],
+        ["Mom", "Open your mouth. Brush your teeth."],
+        ["Baby", "Towel! Dry! Clean baby!"]
       ]
     },
     {
       "date": "2026-08-04",
       "name": "辅食",
       "words": [
-        [
-          "bib",
-          "围兜"
-        ],
-        [
-          "chair",
-          "餐椅"
-        ],
-        [
-          "bowl",
-          "碗"
-        ],
-        [
-          "spoon",
-          "勺子"
-        ],
-        [
-          "cup",
-          "杯子"
-        ],
-        [
-          "food",
-          "食物"
-        ],
-        [
-          "rice",
-          "米粥"
-        ],
-        [
-          "carrot",
-          "胡萝卜"
-        ],
-        [
-          "pumpkin",
-          "南瓜"
-        ],
-        [
-          "sit",
-          "坐"
-        ],
-        [
-          "eat",
-          "吃"
-        ],
-        [
-          "open",
-          "张嘴"
-        ],
-        [
-          "chew",
-          "嚼"
-        ],
-        [
-          "taste",
-          "尝"
-        ],
-        [
-          "swallow",
-          "咽"
-        ],
-        [
-          "drink",
-          "喝"
-        ],
-        [
-          "feed",
-          "喂"
-        ],
-        [
-          "wipe",
-          "擦"
-        ]
+        ["bib", "围兜"],
+        ["chair", "餐椅"],
+        ["bowl", "碗"],
+        ["spoon", "勺子"],
+        ["cup", "杯子"],
+        ["food", "食物"],
+        ["rice", "米粥"],
+        ["carrot", "胡萝卜"],
+        ["pumpkin", "南瓜"],
+        ["sit", "坐"],
+        ["eat", "吃"],
+        ["open", "张嘴"],
+        ["chew", "嚼"],
+        ["taste", "尝"],
+        ["swallow", "咽"],
+        ["drink", "喝"],
+        ["feed", "喂"],
+        ["wipe", "擦"]
       ],
       "dialogs": [
-        [
-          "Mom",
-          "Sit down. Bib on!"
-        ],
-        [
-          "Baby",
-          "Mmm! Food!"
-        ],
-        [
-          "Mom",
-          "Open wide. Here comes the spoon."
-        ],
-        [
-          "Baby",
-          "Aah! Yum yum!"
-        ],
-        [
-          "Mom",
-          "Chew, chew. Do you like carrot?"
-        ],
-        [
-          "Baby",
-          "Yes, yes! More!"
-        ]
+        ["Mom", "Sit down. Bib on!"],
+        ["Baby", "Mmm! Food!"],
+        ["Mom", "Open wide. Here comes the spoon."],
+        ["Baby", "Aah! Yum yum!"],
+        ["Mom", "Chew, chew. Do you like carrot?"],
+        ["Baby", "Yes, yes! More!"]
       ]
     },
     {
       "date": "2026-08-01",
       "name": "洗澡",
       "words": [
-        [
-          "water",
-          "水"
-        ],
-        [
-          "tub",
-          "澡盆"
-        ],
-        [
-          "soap",
-          "肥皂"
-        ],
-        [
-          "towel",
-          "毛巾"
-        ],
-        [
-          "duck",
-          "小鸭"
-        ],
-        [
-          "bubble",
-          "泡泡"
-        ],
-        [
-          "wash",
-          "洗"
-        ],
-        [
-          "splash",
-          "拍水"
-        ],
-        [
-          "pour",
-          "倒"
-        ],
-        [
-          "dry",
-          "擦干"
-        ],
-        [
-          "happy",
-          "开心"
-        ]
+        ["water", "水"],
+        ["tub", "澡盆"],
+        ["soap", "肥皂"],
+        ["towel", "毛巾"],
+        ["duck", "小鸭"],
+        ["bubble", "泡泡"],
+        ["wash", "洗"],
+        ["splash", "拍水"],
+        ["pour", "倒"],
+        ["dry", "擦干"],
+        ["happy", "开心"]
       ],
       "dialogs": [
-        [
-          "Mom",
-          "Time for a bath!"
-        ],
-        [
-          "Baby",
-          "Yay! Water!"
-        ],
-        [
-          "Mom",
-          "Let's wash your tummy."
-        ],
-        [
-          "Baby",
-          "Splash! Splash!"
-        ],
-        [
-          "Mom",
-          "Now dry with the towel."
-        ],
-        [
-          "Baby",
-          "I'm clean!"
-        ]
+        ["Mom", "Time for a bath!"],
+        ["Baby", "Yay! Water!"],
+        ["Mom", "Let's wash your tummy."],
+        ["Baby", "Splash! Splash!"],
+        ["Mom", "Now dry with the towel."],
+        ["Baby", "I'm clean!"]
       ]
     },
     {
       "date": "2026-07-28",
       "name": "农场",
       "words": [
-        [
-          "cow",
-          "奶牛"
-        ],
-        [
-          "pig",
-          "猪"
-        ],
-        [
-          "sheep",
-          "绵羊"
-        ],
-        [
-          "horse",
-          "马"
-        ],
-        [
-          "chicken",
-          "鸡"
-        ],
-        [
-          "duck",
-          "鸭子"
-        ],
-        [
-          "tractor",
-          "拖拉机"
-        ],
-        [
-          "barn",
-          "谷仓"
-        ],
-        [
-          "fence",
-          "栅栏"
-        ],
-        [
-          "hay",
-          "干草"
-        ],
-        [
-          "farmer",
-          "农夫"
-        ],
-        [
-          "egg",
-          "鸡蛋"
-        ],
-        [
-          "milk",
-          "牛奶"
-        ],
-        [
-          "field",
-          "田野"
-        ],
-        [
-          "scarecrow",
-          "稻草人"
-        ],
-        [
-          "goat",
-          "山羊"
-        ],
-        [
-          "rooster",
-          "公鸡"
-        ],
-        [
-          "pond",
-          "池塘"
-        ]
+        ["cow", "奶牛"],
+        ["pig", "猪"],
+        ["sheep", "绵羊"],
+        ["horse", "马"],
+        ["chicken", "鸡"],
+        ["duck", "鸭子"],
+        ["tractor", "拖拉机"],
+        ["barn", "谷仓"],
+        ["fence", "栅栏"],
+        ["hay", "干草"],
+        ["farmer", "农夫"],
+        ["egg", "鸡蛋"],
+        ["milk", "牛奶"],
+        ["field", "田野"],
+        ["scarecrow", "稻草人"],
+        ["goat", "山羊"],
+        ["rooster", "公鸡"],
+        ["pond", "池塘"]
       ],
       "dialogs": [
-        [
-          "Mom",
-          "Look, there's a cow! Can you say \"moo\"?"
-        ],
-        [
-          "Baby",
-          "Moo! Moo!"
-        ],
-        [
-          "Mom",
-          "Yes! The cow says moo. What color is the cow?"
-        ],
-        [
-          "Baby",
-          "White... and black!"
-        ],
-        [
-          "Mom",
-          "Great job! Let's go see the chickens now."
-        ]
+        ["Mom", "Look, there's a cow! Can you say \"moo\"?"],
+        ["Baby", "Moo! Moo!"],
+        ["Mom", "Yes! The cow says moo. What color is the cow?"],
+        ["Baby", "White... and black!"],
+        ["Mom", "Great job! Let's go see the chickens now."]
       ]
     },
     {
       "date": "2026-07-31",
       "name": "超市",
       "words": [
-        [
-          "cart",
-          "购物车"
-        ],
-        [
-          "apple",
-          "苹果"
-        ],
-        [
-          "banana",
-          "香蕉"
-        ],
-        [
-          "bread",
-          "面包"
-        ],
-        [
-          "milk",
-          "牛奶"
-        ],
-        [
-          "egg",
-          "鸡蛋"
-        ],
-        [
-          "cashier",
-          "收银员"
-        ],
-        [
-          "aisle",
-          "过道"
-        ],
-        [
-          "shelf",
-          "货架"
-        ],
-        [
-          "bag",
-          "袋子"
-        ],
-        [
-          "price",
-          "价格"
-        ],
-        [
-          "vegetable",
-          "蔬菜"
-        ],
-        [
-          "fruit",
-          "水果"
-        ],
-        [
-          "checkout",
-          "结账台"
-        ],
-        [
-          "receipt",
-          "小票"
-        ],
-        [
-          "scale",
-          "秤"
-        ],
-        [
-          "coupon",
-          "优惠券"
-        ],
-        [
-          "freezer",
-          "冰柜"
-        ]
+        ["cart", "购物车"],
+        ["apple", "苹果"],
+        ["banana", "香蕉"],
+        ["bread", "面包"],
+        ["milk", "牛奶"],
+        ["egg", "鸡蛋"],
+        ["cashier", "收银员"],
+        ["aisle", "过道"],
+        ["shelf", "货架"],
+        ["bag", "袋子"],
+        ["price", "价格"],
+        ["vegetable", "蔬菜"],
+        ["fruit", "水果"],
+        ["checkout", "结账台"],
+        ["receipt", "小票"],
+        ["scale", "秤"],
+        ["coupon", "优惠券"],
+        ["freezer", "冰柜"]
       ],
       "dialogs": [
-        [
-          "Mom",
-          "Let's get a shopping cart. Can you help me push it?"
-        ],
-        [
-          "Baby",
-          "Push! Push!"
-        ],
-        [
-          "Mom",
-          "We need some apples. How many should we get?"
-        ],
-        [
-          "Baby",
-          "One, two, three!"
-        ],
-        [
-          "Mom",
-          "Three apples! Good counting. Now let's find the bread."
-        ]
+        ["Mom", "Let's get a shopping cart. Can you help me push it?"],
+        ["Baby", "Push! Push!"],
+        ["Mom", "We need some apples. How many should we get?"],
+        ["Baby", "One, two, three!"],
+        ["Mom", "Three apples! Good counting. Now let's find the bread."]
       ]
     }
   ]
