@@ -1,0 +1,806 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="powder"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CT设备召回风险预测 · 研究框架与执行路线</title><style>
+:root{
+  --bg:#0f1420; --panel:#161d2e; --card:#1b2540; --ink:#e8eefb; --muted:#93a1bd;
+  --accent:#5b8def; --accent2:#7c5cff; --line:#26324f; --good:#34d399; --warn:#fbbf24; --bad:#f87171;
+  --title:#ff7eb3; --title-deep:#ff4d8d;
+}
+[data-theme="light"]{ --bg:#eef2f9; --panel:#ffffff; --card:#f6f9ff; --ink:#1b2540; --muted:#5b6678; --line:#dde4f0; --accent:#3b6fd4; --title:#d43b6d; --title-deep:#b01e52; }
+[data-theme="powder"]{
+  --bg:#fdeef3; --panel:#fff5f8; --card:#ffffff; --ink:#7a4a5e; --muted:#b08399;
+  --line:#f3d4e0; --accent:#e88aae; --accent2:#e0608a;
+  --good:#8fbf9a; --warn:#e8a86b; --bad:#e0608a;
+  --title:#e0608a; --title-deep:#c73e72;
+  background:linear-gradient(160deg,#fdeef3 0%,#fbe3ee 50%,#f3e8f6 100%);
+  min-height:100vh;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,"PingFang SC","Microsoft YaHei",Segoe UI,sans-serif;line-height:1.7}
+header{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:14px;padding:12px 18px;background:var(--panel);border-bottom:1px solid var(--line);flex-wrap:wrap}
+header h1{font-size:17px;margin:0;flex:0 0 auto;color:var(--title-deep)}
+header .spacer{flex:1}
+.search-wrap{position:relative;flex:1 1 220px;max-width:360px}
+.search-wrap input{width:100%;padding:8px 12px 8px 34px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font-size:14px}
+.search-wrap::before{content:"🔍";position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:13px;opacity:.7}
+select,input{background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:9px;padding:7px 10px;font-size:13px}
+nav.tabs{display:flex;flex-wrap:wrap;gap:8px;padding:12px 18px 0;background:var(--bg);position:sticky;top:54px;z-index:20}
+.tab{background:var(--card);color:var(--muted);border:1px solid var(--line);border-radius:20px;padding:8px 16px;font-size:14px;cursor:pointer;transition:.15s;display:flex;align-items:center;gap:6px}
+.tab.active{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border-color:transparent;box-shadow:0 3px 10px rgba(224,96,138,.25)}
+.page{max-width:1080px;margin:0 auto;padding:18px 16px 90px}
+.jump-bar{display:flex;flex-wrap:wrap;gap:8px;padding:10px 0 6px;align-items:center}
+.jump-label{font-size:13px;color:var(--muted);font-weight:600}
+.jump-chip{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:5px 12px;font-size:13px;cursor:pointer;transition:.15s;color:var(--ink)}
+.jump-chip:hover{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border-color:transparent}
+.selector-bar{display:flex;align-items:center;gap:10px;padding:12px 0 4px;position:sticky;top:100px;z-index:10;background:var(--bg)}
+.sel-label{font-size:13px;color:var(--muted);font-weight:600}
+.selector-bar select{min-width:230px;font-size:14px}
+details.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:0;margin:14px 0;box-shadow:0 2px 10px rgba(0,0,0,.18);overflow:hidden}
+details.card[open]{padding-bottom:16px}
+details.card summary{cursor:pointer;list-style:none;display:block}
+details.card summary::-webkit-details-marker{display:none}
+details.card .card-h{display:flex;align-items:center;gap:10px;padding:14px 18px;margin:0;position:relative}
+details.card .card-h::after{content:"▾";margin-left:auto;color:var(--accent);font-size:14px;transition:.15s;min-width:18px;text-align:center}
+details.card:not([open]) .card-h::after{content:"▸"}
+details.card .card-h h3{margin:0;font-size:17px;font-weight:700;letter-spacing:.2px;color:var(--title-deep)}
+details.card .card-body{padding:0 18px}
+.badge{font-size:11px;padding:3px 9px;border-radius:20px;background:var(--accent);color:#fff;font-weight:600;white-space:nowrap}
+.b-sev{background:var(--bad)} .b-st{background:var(--good)} .b-opt{background:var(--muted)}
+.tbl{overflow-x:auto;margin-top:6px}
+.tbl table{width:100%;border-collapse:collapse;font-size:14px;table-layout:auto}
+.tbl th,.tbl td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top;white-space:nowrap}
+.tbl th{background:rgba(91,141,239,.14);color:var(--ink);font-weight:700}
+.tbl td{white-space:normal}
+.tbl th:first-child,.tbl td:first-child{white-space:nowrap;min-width:120px;font-weight:600}
+.tbl tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+.flow-list{list-style:none;padding:0;margin:6px 0}
+.flow-list li{margin:7px 0}
+.flow.chain{background:rgba(91,141,239,.08);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:8px 14px;line-height:1.7;list-style:none}
+.flow.single{list-style:none;color:var(--muted);margin-left:0;padding:6px 14px}
+.arr{display:inline-block;color:var(--accent);font-weight:700;margin:0 6px}
+.flow-header{display:flex;align-items:center;gap:8px;margin-top:10px;margin-bottom:4px;font-weight:600;color:var(--ink)}
+.flow-header .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex:0 0 auto}
+.flow-sub{list-style:none;padding-left:18px;margin:4px 0 8px;color:var(--muted);font-size:12.5px}
+.flow-sub li{margin:3px 0;list-style:none}
+.step-row{display:flex;gap:10px;align-items:flex-start;padding:4px 0}
+.step-num{font-weight:700;color:var(--accent);min-width:54px}
+.step-text{flex:1}
+.code-block{border:1px solid var(--line);border-radius:12px;margin:8px 0;overflow:hidden;background:var(--card)}
+.code-head{display:flex;align-items:center;gap:8px;padding:9px 14px;background:rgba(224,96,138,.08);border-bottom:1px solid var(--line);cursor:pointer;user-select:none}
+.code-head .code-icon{font-size:15px}
+.code-head .code-title{font-size:13px;font-weight:700;color:var(--title-deep);flex:1}
+.code-head .code-toggle{font-size:12px;color:var(--muted);white-space:nowrap}
+.code-head .copy-btn{margin-left:auto;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:5px 10px;font-size:12px;color:var(--ink);cursor:pointer;transition:.15s}
+.code-head .copy-btn:hover{background:var(--accent);color:#fff;border-color:transparent}
+.code-body{display:none;background:#0b0f1a;color:#cfe3ff;padding:12px 14px;font-family:"Cascadia Code",Consolas,monospace;font-size:12.5px;overflow-x:auto;white-space:pre}
+.code-block[open] .code-body{display:block}
+.code-block[open] .code-head .code-icon::before{content:"📂"}
+.code-block:not([open]) .code-head .code-icon::before{content:"📁"}
+[data-theme="powder"] .code-block .code-body{background:#fff0f5;color:#5a2d42}
+[data-theme="powder"] .code-head{background:rgba(224,96,138,.12)}
+.bullets,.kv,.chips,.steps{margin:6px 0;padding-left:20px}
+.bullets li,.steps li{margin:5px 0}
+.kv li{margin:6px 0}.kv code{color:var(--accent)}
+.chips{list-style:none;display:flex;flex-wrap:wrap;gap:8px;padding:0}
+.chips li{background:rgba(124,92,255,.16);border:1px solid var(--line);border-radius:8px;padding:5px 10px;font-size:12.5px}
+.chip{display:inline-block;background:rgba(91,141,239,.14);border:1px solid var(--line);border-radius:8px;padding:6px 11px;font-size:12.5px;margin:4px}
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:10px;margin:10px 0}
+.feat{background:rgba(91,141,239,.07);border:1px solid var(--line);border-radius:10px;padding:11px 13px}
+.feat .k{font-size:12px;color:var(--muted);margin-bottom:4px;font-weight:700;letter-spacing:.3px}
+.feat .v{font-size:13px;color:var(--ink);line-height:1.5}
+.feat.hl{background:linear-gradient(135deg,rgba(224,96,138,.12),rgba(124,92,255,.12));border-color:var(--accent)}
+.muted{color:var(--muted);font-size:12.5px}
+.qa{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin:8px 0}
+.qa summary{cursor:pointer;font-size:13.5px;font-weight:600;list-style:none}
+.qa summary::before{content:'▶';margin-right:6px;color:var(--accent);display:inline-block;transition:transform .15s}
+.qa[open] summary::before{transform:rotate(90deg)}
+.qa div{padding:8px 0 2px;font-size:13px;color:var(--muted);white-space:pre-wrap}
+.note{background:rgba(251,191,36,.08);border:1px solid var(--warn);border-radius:10px;padding:10px 14px;margin:8px 0;font-size:13px;color:var(--ink)}
+.note.bad{background:rgba(248,113,113,.1);border-color:var(--bad)}
+.note b{color:var(--warn)}
+.note.bad b{color:var(--bad)}
+.flow-overview{display:flex;align-items:stretch;gap:0;margin:18px 0 6px;flex-wrap:wrap;justify-content:center}
+.flow-step{flex:1 1 0;min-width:110px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 10px;text-align:center;position:relative;transition:.2s;margin:0 6px 8px}
+.flow-step .ic{font-size:20px;display:block;margin-bottom:4px}
+.flow-step .lbl{font-size:13px;font-weight:600}
+.flow-step .sub{font-size:11px;color:var(--muted);margin-top:2px}
+.flow-step::after{content:"→";position:absolute;right:-16px;top:50%;transform:translateY(-50%);color:var(--accent);font-size:18px;font-weight:700;z-index:1}
+.flow-step:last-child::after{display:none}
+.branch{display:flex;gap:14px;flex-wrap:wrap;margin:10px 0}
+.branch .bcard{flex:1 1 240px;background:rgba(91,141,239,.07);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.branch .bcard h4{margin:0 0 6px;font-size:14px;color:var(--accent)}
+.branch .bcard.static{border-left:4px solid var(--accent)}
+.branch .bcard.temporal{border-left:4px solid var(--accent2)}
+.step-title{font-size:14px;font-weight:700;color:var(--title-deep);margin:10px 0 6px;display:flex;align-items:center;gap:8px}
+.step-title .num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-size:13px}
+.step-body{margin-left:34px;color:var(--muted);font-size:13px}
+.back-to-top{position:fixed;right:18px;bottom:18px;z-index:40;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:50%;width:46px;height:46px;font-size:18px;cursor:pointer;box-shadow:0 3px 12px rgba(224,96,138,.35);opacity:0;pointer-events:none;transition:.2s}
+.back-to-top.show{opacity:1;pointer-events:auto}
+.no-match{padding:20px;text-align:center;color:var(--muted);font-size:14px;display:none}
+[data-theme="powder"] .tbl th{background:rgba(224,96,138,.12)}
+@media(max-width:640px){
+  .page{padding:14px 10px 80px}
+  header h1{font-size:15px}
+  .search-wrap{flex:1 1 100%;max-width:none;order:3;margin-top:6px}
+  nav.tabs{top:90px}
+  .selector-bar{top:140px}
+  .tbl th,.tbl td{padding:7px 9px;font-size:13px}
+  .code-head{padding:8px 10px}
+}
+</style></head>
+<body>
+<header>
+  <h1>🩻 CT设备召回风险预测 · 研究框架与执行路线</h1>
+  <div class="spacer"></div>
+  <div class="search-wrap"><input type="text" id="globalSearch" placeholder="搜索卡片标题或关键词…" oninput="filterCards()"></div>
+  <select onchange="setTheme(this.value)">
+    <option value="dark">🌑 暗夜</option>
+    <option value="light">☀️ 浅色</option>
+    <option value="powder">🌸 粉透</option>
+  </select>
+</header>
+<nav class="tabs">
+  <button class="tab active" onclick="showPage('overview')">🧭 总览</button>
+  <button class="tab" onclick="showPage('data')">📦 数据处理</button>
+  <button class="tab" onclick="showPage('modeling')">📊 建模</button>
+</nav>
+
+<!-- ============ 总览 ============ -->
+<div class="page" id="overview" style="display:block">
+  <div class="jump-bar">
+    <span class="jump-label">快速跳转：</span>
+    <button class="jump-chip" onclick="jumpTo('ov-baseline')">执行基线</button>
+    <button class="jump-chip" onclick="jumpTo('ov-route')">技术路线</button>
+    <button class="jump-chip" onclick="jumpTo('ov-static-flow')">静态流程</button>
+    <button class="jump-chip" onclick="jumpTo('ov-temporal-flow')">时序流程</button>
+    <button class="jump-chip" onclick="jumpTo('ov-full-flow')">完整流程图</button>
+  </div>
+
+  <details class="card" open id="ov-baseline">
+    <summary><div class="card-h"><h3>📌 执行基线</h3><span class="badge">口径</span></div></summary>
+    <div class="card-body">
+      <div class="feat-grid">
+        <div class="feat"><div class="k">产品代码</div><div class="v">JAK（CT 扫描仪）</div></div>
+        <div class="feat"><div class="k">数据源</div><div class="v">FDA MAUDE</div></div>
+        <div class="feat"><div class="k">文本特征</div><div class="v">BioBERT / ClinicalBERT 取 [CLS] → 768 维句向量</div></div>
+        <div class="feat"><div class="k">结构化特征</div><div class="v">厂商 Top15 独热 + 事件类型独热 + 年份 / 文本长度</div></div>
+        <div class="feat"><div class="k">特征融合</div><div class="v">768 维 BERT ⊕ 结构化 → 多模态融合特征</div></div>
+        <div class="feat"><div class="k">算法</div><div class="v">RF / XGBoost / LR / SVM / DT / MLP</div></div>
+        <div class="feat"><div class="k">解释</div><div class="v">SHAP：测试集随机无放回抽 1500 条（不足全取）</div></div>
+      </div>
+    </div>
+  </details>
+
+  <details class="card" open id="ov-route">
+    <summary><div class="card-h"><h3>🧭 整体技术路线（主干）</h3></div></summary>
+    <div class="card-body">
+      <div class="flow-overview">
+        <div class="flow-step"><div class="ic">🗃️</div><div class="lbl">A 数据准备</div><div class="sub">关联6表·打标</div></div>
+        <div class="flow-step"><div class="ic">🧠</div><div class="lbl">B 文本BERT</div><div class="sub">[CLS] 768维</div></div>
+        <div class="flow-step"><div class="ic">🔗</div><div class="lbl">C 融合+划分</div><div class="sub">⊕结构化·80/20</div></div>
+        <div class="flow-step"><div class="ic">📊</div><div class="lbl">D 静态建模</div><div class="sub">6算法·网格搜索</div></div>
+        <div class="flow-step"><div class="ic">🔍</div><div class="lbl">E/Z 解释对照</div><div class="sub">SHAP·时间稳健</div></div>
+      </div>
+      <p class="muted">两支路最终输出「静态 vs 时序 × 随机 vs 时间」四格对比。</p>
+    </div>
+  </details>
+
+  <details class="card" open id="ov-static-flow">
+    <summary><div class="card-h"><h3>📊 静态支路建模流程与顺序</h3></div></summary>
+    <div class="card-body">
+      <div class="feat hl" style="margin:2px 0 12px"><div class="k">范围说明</div><div class="v">本节只讲「从 C 脚本划分之后」到 D 脚本训练结束的建模流程；前面的数据清洗、特征融合见「数据处理」页。</div></div>
+      <div class="feat-grid">
+        <div class="feat"><div class="k">① 划分</div><div class="v">随机 80/20（stratify, seed=42），C 脚本完成</div></div>
+        <div class="feat"><div class="k">② SMOTE</div><div class="v">训练集过采样（仅训练集，防泄漏）</div></div>
+        <div class="feat"><div class="k">③ 标准化</div><div class="v">StandardScaler，fit 仅训练集</div></div>
+        <div class="feat"><div class="k">④ 代价敏感</div><div class="v">class_weight='balanced'，写进每个算法自己的模型构造（D 内，先于 GridSearchCV）</div></div>
+        <div class="feat"><div class="k">⑤ 训练</div><div class="v">GridSearchCV(cv=3) → 选最优；D 内先从训练集再切 15% 早停监控集，六算法统一在切后 85% 上训练（对比公平）；XGBoost 用监控集做早停</div></div>
+        <div class="feat"><div class="k">⑥ 时间分割</div><div class="v">仅作 Z 稳健性对照：静态走 Z 脚本，时序走 H 内，cut-off 年份待定</div></div>
+      </div>
+    </div>
+  </details>
+
+  <details class="card" open id="ov-temporal-flow">
+    <summary><div class="card-h"><h3>🕒 时序支路建模流程与关键参数（H 脚本）</h3></div></summary>
+    <div class="card-body">
+      <div class="feat hl" style="margin:2px 0 12px"><div class="k">输入来源</div><div class="v">从 C 融合特征分叉</div></div>
+      <div class="code-block">
+        <div class="code-head" onclick="this.parentElement.toggleAttribute('open')">
+          <span class="code-icon"></span>
+          <span class="code-title">点击查看 A → B → C → H 各脚本含义</span>
+          <span class="code-toggle">点击打开代码</span>
+          <button class="copy-btn" onclick="copyCode(event,this)">复制</button>
+        </div>
+        <div class="code-body">A：数据准备（A_data_prepare.py）—— 6表合并、清洗、厂商名归一化、按"厂商+±3年窗"打标（当前占位；理想按"型号+批号"，待数据后改）
+B：文本特征（B_text_preprocess.py）—— 轻量清洗后用 BioBERT/ClinicalBERT 取 [CLS] 768 维句向量
+C：结构化特征 + 多模态融合（C_build_features.py）—— BERT ⊕ 结构化特征，随机 80/20 划分，落盘 X_all.npy
+H：时序建模（H_temporal_transformer.py）—— 同一型号+批号按 date_received 排序 → 滑动窗口 → Transformer/LSTM 训练</div>
+      </div>
+      <div class="feat-grid" style="margin-top:12px">
+        <div class="feat"><div class="k">滑动窗口</div><div class="v">SEQ_LEN=10, STRIDE=1（按 date_received 排序）</div></div>
+        <div class="feat"><div class="k">算法</div><div class="v">TransformerEncoder / LSTM + 代价敏感（损失函数）</div></div>
+        <div class="feat"><div class="k">划分</div><div class="v">随机按组 + 时间，一次跑完，不做 SMOTE</div></div>
+        <div class="feat"><div class="k">训练</div><div class="v">EPOCHS=100 上限；训练序列再切 15% 监控集 → 按验证 AUC 早停（patience=10）→ 恢复最佳权重</div></div>
+      </div>
+      <div class="note" style="margin-top:10px"><b>训练数据占比：</b>原始训练集 = 80%；从中再切 15% 作早停监控集，剩余 <b>85% × 80%</b> 才是真正喂给网络的训练数据。监控集只用来判断「要不要早停」，测试集全程不参与。</div>
+    </div>
+  </details>
+
+  <details class="card" open id="ov-full-flow">
+    <summary><div class="card-h"><h3>📐 完整流程图</h3></div></summary>
+    <div class="card-body">
+      <div class="code-block">
+        <div class="code-head" onclick="this.parentElement.toggleAttribute('open')">
+          <span class="code-icon"></span>
+          <span class="code-title">完整流程代码级描述</span>
+          <span class="code-toggle">点击打开代码</span>
+          <button class="copy-btn" onclick="copyCode(event,this)">复制</button>
+        </div>
+        <div class="code-body">原始 MAUDE 6 表
+   │  A_data_prepare.py  （6表按 MDR_REPORT_KEY 关联成宽表 → 清洗/缺失值处理
+   │                       → 厂商名归一化 → 按"厂商+±3年窗"打标 label=召回0/1
+   │                         （当前占位；理想按"型号+批号"对齐召回，待数据后改））
+   ▼
+B_text_preprocess.py  （文本轻量清洗：去控制字符/非字母数字；
+   │                    BioBERT/ClinicalBERT 取 [CLS]，输出 768 维句向量）
+   │  〔可选〕I_medical_ontology.py  （UMLS 医学本体归一化，默认关闭）
+   ▼
+C_build_features.py  （融合特征 = 768维BERT向量 ⊕ 结构化特征：
+   │                    厂商Top15独热 + 事件类型独热 + year + text_length；
+   │                    划分：随机 80/20 stratify；训练集 fit StandardScaler）
+   │
+   ├─▶ 静态支路：D_train_models.py（LR/SVM/DT/RF/XGBoost/MLP；
+   │        │              C 内：随机 80/20 划分 → 训练集 SMOTE → 训练集 fit StandardScaler；
+   │        │              D 内：先再切 15% 早停监控集（六算法统一在切后 85%
+   │        │              训练，保证对比公平）→ GridSearchCV cv=3
+   │        │              + 固定 class_weight='balanced'；
+   │        │              XGBoost：n_estimators=2000 上限，rounds=50 早停
+   │        │              （eval_set=监控集，避免与网格搜索重复定轮数）
+   │        │              最后评估测试集）
+   │        ├─ Z_random_vs_time_split.py（时间分割稳健性对照）
+   │        └─ E_shap_analysis.py（SHAP 解释：测试集随机无放回抽 1500 条）
+   │
+   └─▶ 时序支路：H_temporal_transformer.py（同一型号+批号按 date_received 排序 →
+                                            滑动窗口（≤SEQ_LEN=10, STRIDE=1, MIN_REPORTS=2）；
+                                            Transformer/LSTM + 代价敏感；
+                                            训练序列再切 15% 监控集 → 按验证 AUC
+                                            早停（patience=10，EPOCHS=100 上限）→
+                                            恢复最佳轮次权重；
+                                            随机/时间两种划分一次跑完，不做 SMOTE）</div>
+      </div>
+    </div>
+  </details>
+
+</div>
+
+<!-- ============ 数据处理 ============ -->
+<div class="page" id="data" style="display:none">
+  <div class="jump-bar">
+    <span class="jump-label">快速跳转：</span>
+    <button class="jump-chip" onclick="jumpTo('d-a')">📦 A 数据准备</button>
+    <button class="jump-chip" onclick="jumpTo('d-b')">🧠 B 文本特征</button>
+    <button class="jump-chip" onclick="jumpTo('d-i')">🔗 I 医学本体</button>
+    <button class="jump-chip" onclick="jumpTo('d-c')">🔀 C 融合</button>
+    <button class="jump-chip" onclick="jumpTo('d-split')">✂️ 划分</button>
+    <button class="jump-chip" onclick="jumpTo('d-eda')">📊 EDA</button>
+    <button class="jump-chip" onclick="jumpTo('d-exp')">🔍 解释</button>
+  </div>
+
+  <details class="card" open id="d-a">
+    <summary><div class="card-h"><h3>📦 数据准备（A_data_prepare.py）</h3></div></summary>
+    <div class="card-body">
+      <ul class="bullets">
+        <li><b>源</b>：FDA MAUDE 6 表，唯一键 <code>MDR_REPORT_KEY</code>；产品码筛选 <code>["JAK"]</code>（CT 设备）。</li>
+        <li><b>「关联」</b> = 将 6 张分表按主键<b>合并成一张宽表</b>，再做清洗/缺失值处理。</li>
+        <li><b>字段自动定位</b>（<code>_pick_col</code>）：日期列/厂商列/分组键不硬编码（大小写不敏感，先精确后包含）；找不到时报错并打印真实列名。</li>
+        <li><b>打标</b> <code>label_recalls()</code>：按"厂商 + ±3 年窗"匹配召回库，命中→1，否则→0。（CT 课题打标<b>统一在 A 步完成</b>；专利项目曾后置，此处不同。）</li>
+        <li><b>厂商名归一化</b> <code>normalize_name()</code>：规则标准化（小写 / 去标点 / 去公司后缀 inc|corp|medical|health|systems…）。</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="card" open id="d-b">
+    <summary><div class="card-h"><h3>🧠 文本特征（B_text_preprocess.py）</h3></div></summary>
+    <div class="card-body">
+      <ul class="bullets">
+        <li>BERT 系（BioBERT / ClinicalBERT，<b>具体型号待与导师确认</b>）取 <code>[CLS]</code> 句向量，batch 推理，落盘 <code>text_embeddings.npy</code> + <code>cleaned_text.csv</code>。</li>
+        <li>不引入停用词（BERT 不需分词停用词）；<code>clean_text()</code> 仅 <code>re.sub</code> 去控制字符/非字母数字。</li>
+        <li>文本预处理：输入 BERT 前<b>只需轻量清洗</b>——<code>clean_text()</code> 去控制字符/非字母数字，<b>不做停用词、不做分词</b>；BERT 自带 tokenizer 完成 tokenization/子词切分。清洗后可直接喂入 BERT。</li>
+      </ul>
+      <div class="note bad"><b>⚠️ 待确认</b>：开题报告 P46 写 ClinicalBERT、P68 写 BioBERT，两处未统一；代码当前默认 PubMedBERT，<b>与 P68 不符</b>，确认后改 <code>BIOBERT_MODEL</code>。</div>
+    </div>
+  </details>
+
+  <details class="card" open id="d-i">
+    <summary><div class="card-h"><h3>🔗 〔可选〕医学本体归一化（I_medical_ontology.py）</h3><span class="badge b-opt">默认关闭</span></div></summary>
+    <div class="card-body">
+      <ul class="bullets">
+        <li><b>目的</b>：将自由文本中的同义医学术语归一化到标准概念（如 "wire broke" = "cable fracture"）。</li>
+        <li>默认 <code>USE_UMLS=False</code>（本地同义词表顶着）；申请 UTS 账号后填 API Key、<code>USE_UMLS=True</code> 走在线接口（免整包下载）。</li>
+        <li><b>MedDRA 商业授权，学生不引</b>；落地用 UMLS。<b>非主线必备</b>。</li>
+        <li>厂商名归一化（A 步）与医学本体归一化（B 前）对象/阶段/是否必须均不同，分开两个脚本。</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="card" open id="d-c">
+    <summary><div class="card-h"><h3>🔀 结构化特征 + 多模态融合（C_build_features.py）</h3></div></summary>
+    <div class="card-body">
+      <ul class="bullets">
+        <li><code>encode_struct()</code>：厂商 Top15 独热(prefix=<code>mfr</code>) + 事件类型独热(prefix=<code>evt</code>) + 年份(数值) + 文本长度(数值)。</li>
+        <li><code>np.hstack([bert_vec, struct_vec])</code> → <code>StandardScaler</code> 统一尺度。</li>
+        <li>缺失值：year→中位数，event_type→"Unknown"。</li>
+        <li><b>落盘 <code>X_all.npy</code> 为未经 SMOTE / 标准化的原始融合特征</b>（供 H、Z 各自在划分后处理，防泄漏）。</li>
+        <li>⚠️ 融合特征里虽含 <code>year</code> 数值，但那是"每条报告静态年份"，<b>不含时间顺序/演变</b>；时序演变由 H 用 <code>date_received</code> 排序序列补。</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="card" open id="d-split">
+    <summary><div class="card-h"><h3>✂️ 划分</h3></div></summary>
+    <div class="card-body">
+      <ul class="bullets">
+        <li><b>静态支路</b>：随机 80/20（random_state=42, stratify=y），在 C 内完成；验证集由 D 内 CV 充当。</li>
+        <li><b>时间分割对照</b>：静态走 <code>Z_random_vs_time_split.py</code>；时序走 H 内 <code>SPLITS_TO_RUN=["random","temporal"]</code>。</li>
+        <li><b>关键纪律</b>：标准化 / SMOTE 必须在划分之后、仅用训练集 fit，防泄漏（Z、H 均读取 C 的 <code>X_all.npy</code> 原始特征再各自处理）。</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="card" open id="d-eda">
+    <summary><div class="card-h"><h3>📊 EDA（F_eda_analysis.py）</h3></div></summary>
+    <div class="card-body">
+      <ul class="bullets">
+        <li><b>目的</b>：在建模前/后展示数据分布与不平衡性，为论文第 3 章提供图 3-X 系列。</li>
+        <li><b>内容</b>：标签分布、召回率年份趋势、Top 厂商/事件类型占比、字段缺失率、文本长度分布。</li>
+        <li><b>输出</b>：5 张图存 <code>output/eda_figures/</code>；可直接嵌入第 3 章 EDA 节。</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="card" open id="d-exp">
+    <summary><div class="card-h"><h3>🔍 解释（E_shap_analysis.py / G_gini_importance.py）</h3></div></summary>
+    <div class="card-body">
+      <ul class="bullets">
+        <li><b>SHAP</b> 针对<b>测试集</b>；主模型取 <code>min(1500, 测试集)</code> 条，<b>从测试集随机无放回抽样</b>（<code>np.random.choice(..., replace=False)</code>），建议加固定 random_state 保证可复现（稳定性检验可 500/1000/1500/2000 都跑，论文只写"1500 条已趋稳"）。</li>
+        <li><b>树模型用 TreeExplainer</b>（RF/XGBoost 快）、线性/MLP 用 KernelExplainer（慢但通用）；最终输出全局重要性 Top10 与 summary plot。</li>
+        <li><b>Gini</b>：D 最优模型的 Gini 重要性 Top5 与 SHAP Top5 对照，作为特征解释稳健性检查。</li>
+        <li>时序支路 SHAP 暂缓（可后续用 DeepExplainer / GradientExplainer）。</li>
+        <li>SHAP 是训练后解释器、不学东西；"模型学关系 → SHAP 后解释"是先后两道工序。</li>
+      </ul>
+    </div>
+  </details>
+</div>
+
+<!-- ============ 建模 ============ -->
+<div class="page" id="modeling" style="display:none">
+
+  <div class="selector-bar">
+    <span class="sel-label">选择建模视图：</span>
+    <select onchange="showSub(this.value)">
+      <option value="sub-static">📊 静态建模（D 脚本）</option>
+      <option value="sub-temporal">🕒 时序建模（H 脚本）</option>
+      <option value="sub-compare">⚖️ 静态与时序比较</option>
+    </select>
+  </div>
+
+  <!-- 子页1：静态建模 -->
+  <div class="subpage" id="sub-static" style="display:block">
+
+    <div class="jump-bar">
+      <span class="jump-label">快速跳转：</span>
+      <button class="jump-chip" onclick="jumpTo('m-static-flow')">建模流程</button>
+      <button class="jump-chip" onclick="jumpTo('m-static-steps')">完整工序</button>
+      <button class="jump-chip" onclick="jumpTo('m-static-code')">代码逻辑</button>
+      <button class="jump-chip" onclick="jumpTo('m-static-points')">设计要点</button>
+    </div>
+
+    <details class="card" open id="m-static-flow">
+      <summary><div class="card-h"><h3>📊 静态支路建模流程与顺序</h3></div></summary>
+      <div class="card-body">
+        <div class="feat hl" style="margin:2px 0 12px"><div class="k">范围说明</div><div class="v">本节只讲「从 C 脚本划分之后」到 D 脚本训练结束的建模流程；前面的数据清洗、特征融合见「数据处理」页。</div></div>
+        <div class="feat-grid">
+          <div class="feat"><div class="k">① 划分</div><div class="v">随机 80/20（stratify, seed=42），C 脚本完成、前置</div></div>
+          <div class="feat"><div class="k">② SMOTE</div><div class="v">训练集过采样（仅训练集，防泄漏）</div></div>
+          <div class="feat"><div class="k">③ 标准化</div><div class="v">StandardScaler，fit 仅训练集</div></div>
+          <div class="feat"><div class="k">④ 代价敏感</div><div class="v">class_weight='balanced'，写进每个算法自己的模型构造（D 内，先于 GridSearchCV）</div></div>
+          <div class="feat"><div class="k">⑤ 训练</div><div class="v">GridSearchCV(cv=3) → 选最优；D 内先从训练集再切 15% 早停监控集，六算法统一在切后 85% 上训练（对比公平）；XGBoost 用监控集做早停</div></div>
+          <div class="feat"><div class="k">⑥ 时间分割</div><div class="v">仅作 Z 稳健性对照：静态走 Z 脚本，时序走 H 内，cut-off 年份待定</div></div>
+        </div>
+      </div>
+    </details>
+
+    <details class="card" open id="m-static-steps">
+      <summary><div class="card-h"><h3>完整工序（按代码执行顺序，不可颠倒）</h3></div></summary>
+      <div class="card-body">
+        <div class="tbl"><table>
+          <tr><th>顺序</th><th>步骤</th><th>在哪做</th><th>关键纪律</th></tr>
+          <tr><td>1</td><td>构造融合特征矩阵 X、标签 y</td><td>C</td><td>BERT 向量 ⊕ 结构化特征</td></tr>
+          <tr><td>2</td><td>随机划分 80/20（stratify, seed=42）</td><td>C</td><td><b>划分必须先做</b>，否则 SMOTE/标准化会泄漏</td></tr>
+          <tr><td>3</td><td>SMOTE 过采样</td><td>C</td><td><b>只在训练集</b>上做</td></tr>
+          <tr><td>4</td><td>StandardScaler 标准化</td><td>C</td><td>fit 只用训练集；保存 scaler.pkl</td></tr>
+          <tr><td>5</td><td>D 读取 X_train/X_test，随即再切 15% 早停监控集</td><td>D</td><td>六算法统一在切后 85% 上训练（对比公平）；监控集仅供 XGBoost/MLP 早停，测试集不参与</td></tr>
+          <tr><td>6</td><td>定义模型 + 固定代价敏感权重</td><td>D</td><td>权重在模型对象里预先设好</td></tr>
+          <tr><td>7</td><td>GridSearchCV 网格搜索 cv=3</td><td>D</td><td>在<b>训练集</b>内部做 3 折 CV 找最优参数</td></tr>
+          <tr><td>8</td><td>用最优参数重新 fit 整个训练集</td><td>D</td><td>GridSearchCV 已自动完成</td></tr>
+          <tr><td>9</td><td>在测试集上评估 AUC/F1/混淆矩阵</td><td>D</td><td>测试集全程不参与训练调参</td></tr>
+        </table></div>
+      </div>
+    </details>
+
+    <details class="card" open id="m-static-code">
+      <summary><div class="card-h"><h3>静态支路代码逻辑（四段顺序 A+C → 列算法 → 设权重 → 网格搜索 → 训练）</h3></div></summary>
+      <div class="card-body">
+        <div class="step-title"><span class="num">①</span>列算法 + 列参数</div>
+        <div class="step-body"><code>models</code> 大字典，D 脚本中段；每个算法一项，括号内 <code>params</code> 是它要试的<b>全部参数组合</b>。</div>
+        <div class="code-block">
+          <div class="code-head" onclick="this.parentElement.toggleAttribute('open')">
+            <span class="code-icon"></span>
+            <span class="code-title">models 字典示例</span>
+            <span class="code-toggle">点击打开代码</span>
+            <button class="copy-btn" onclick="copyCode(event,this)">复制</button>
+          </div>
+          <div class="code-body">models = {
+    "LogisticRegression": {
+        "model": LogisticRegression(max_iter=1000, random_state=42, class_weight="balanced"),
+        "params": {"C": [0.1, 1.0, 10.0]}},
+    "DecisionTree": {
+        "model": DecisionTreeClassifier(random_state=42, class_weight="balanced"),
+        "params": {"max_depth": [10, 15, 20, 25], "min_samples_split": [2, 5]}},
+    # ... RandomForest / SVM_Linear / MLP 同理（都带 class_weight="balanced"）
+    # XGBoost 特殊：无 class_weight 参数 → 用 scale_pos_weight=正负样本比；
+    #   且 n_estimators 已从网格移出（固定 2000 上限）+ early_stopping_rounds=50
+    #   + fit_params 传 eval_set=（15% 监控集）→ 网格搜索里触发早停
+}</div>
+        </div>
+        <div class="step-title"><span class="num">②</span>代价敏感</div>
+        <div class="step-body">就写在第①步建模型对象时，<b>不是</b> GridSearchCV 里、<b>不是</b>训练后。</div>
+        <div class="note bad"><b>class_weight="balanced"</b>（每个模型构造时写入；权重在模型对象里预先设好，是模型自带属性，不进网格搜索参数表）</div>
+        <div class="step-title"><span class="num">③</span>开启网格搜索</div>
+        <div class="step-body">把①里建好的模型〔已含②权重〕和参数表一起交给网格搜索。</div>
+        <div class="code-block">
+          <div class="code-head" onclick="this.parentElement.toggleAttribute('open')">
+            <span class="code-icon"></span>
+            <span class="code-title">GridSearchCV 调用</span>
+            <span class="code-toggle">点击打开代码</span>
+            <button class="copy-btn" onclick="copyCode(event,this)">复制</button>
+          </div>
+          <div class="code-body">grid = GridSearchCV(cfg["model"], cfg["params"], cv=3,
+                    scoring="f1_macro", n_jobs=1, verbose=0)</div>
+        </div>
+        <div class="step-title"><span class="num">④</span>开始训练</div>
+        <div class="step-body">"列出最优参数 → 写 model=某算法(最优参数) → 训练"三步在 sklearn 里由 GridSearchCV 内部自动完成；训练数据是<b>切掉 15% 监控集后的 X_tr</b>（XGBoost 通过 <code>fit_params</code> 额外把监控集作为 <code>eval_set</code> 传给 <code>early_stopping_rounds</code> 触发早停）。</div>
+        <div class="code-block">
+          <div class="code-head" onclick="this.parentElement.toggleAttribute('open')">
+            <span class="code-icon"></span>
+            <span class="code-title">fit 与预测</span>
+            <span class="code-toggle">点击打开代码</span>
+            <button class="copy-btn" onclick="copyCode(event,this)">复制</button>
+          </div>
+          <div class="code-body">grid.fit(X_tr, y_tr, **cfg.get("fit_params", {}))   # XGBoost 的 fit_params = {"eval_set":[(X_val, y_val)]}
+y_pred = grid.best_estimator_.predict(X_test)   # 测试集预测</div>
+        </div>
+        <p class="muted">注：sklearn 省掉了手动 <code>model = RandomForest(best_params); model.fit(...)</code> 那两行，但本质就是 ②设权重 → ③网格搜索 → ④训练 这条链。</p>
+      </div>
+    </details>
+
+    <details class="card" open id="m-static-points">
+      <summary><div class="card-h"><h3>📋 设计要点</h3></div></summary>
+      <div class="card-body">
+        <div class="feat-grid">
+          <div class="feat"><div class="k">模型定位</div><div class="v"><b>集成学习为主</b>：RF / XGBoost 对 BERT 高维大样本特征更稳，预期更优；LR / SVM / DT / MLP 作对照</div></div>
+          <div class="feat"><div class="k">超参调优</div><div class="v"><b>GridSearchCV cv=3</b>：在训练集内做 3 折交叉验证选最优超参（不碰测试集）</div></div>
+          <div class="feat"><div class="k">基线划分</div><div class="v">随机 <b>80/20</b>（stratify, seed=42），C 脚本完成；时间分割作对照放 Z</div></div>
+          <div class="feat"><div class="k">不平衡处理</div><div class="v"><b>SMOTE（过采样）</b> + <b>代价敏感 class_weight='balanced'</b>，二者互补（一个改数据分布、一个改损失权重）</div></div>
+          <div class="feat"><div class="k">网格搜索规则</div><div class="v"><b>只搜</b>结构超参（C / max_depth / learning_rate …）；<b>不搜</b> class_weight（全部固定 'balanced'）；<b>XGBoost 的 n_estimators 也移出网格</b>（固定 2000 上限，让早停定轮数）—— 避免"网格搜索定轮数"和"早停定轮数"打架</div></div>
+          <div class="feat"><div class="k">早停</div><div class="v"><b>训练时监控验证集，连续 N 轮不改善就停</b>，省时间、防过拟合。MLP（max_iter=500 + early_stopping=True）和 XGBoost（rounds=50 + eval_set=监控集）都已启用</div></div>
+          <div class="feat"><div class="k">公平性</div><div class="v"><b>85% 的来源</b>：C 已做随机 80/20 得到 X_train；D 一上来再从 X_train <b>切 15% 作监控集</b>（只给 XGBoost/MLP 做早停用），剩 85%（=80%×85%）作为六算法的共同训练基底 —— 保证对比公平（同算法不同算法谁都不能多看/少看数据）</div></div>
+        </div>
+      </div>
+    </details>
+
+  </div>
+
+  <!-- 子页2：时序建模 -->
+  <div class="subpage" id="sub-temporal" style="display:none">
+
+    <div class="jump-bar">
+      <span class="jump-label">快速跳转：</span>
+      <button class="jump-chip" onclick="jumpTo('m-temporal-params')">关键参数</button>
+      <button class="jump-chip" onclick="jumpTo('m-temporal-buildseq')">构造序列</button>
+      <button class="jump-chip" onclick="jumpTo('m-temporal-flow2')">全流程</button>
+      <button class="jump-chip" onclick="jumpTo('m-temporal-head')">分类头</button>
+    </div>
+
+    <details class="card" open id="m-temporal-params">
+      <summary><div class="card-h"><h3>🕒 时序支路建模流程与关键参数（H 脚本）</h3></div></summary>
+      <div class="card-body">
+        <div class="feat hl" style="margin:2px 0 12px"><div class="k">输入来源</div><div class="v">从 C 融合特征分叉</div></div>
+        <div class="code-block">
+          <div class="code-head" onclick="this.parentElement.toggleAttribute('open')">
+            <span class="code-icon"></span>
+            <span class="code-title">点击查看 A → B → C → H 各脚本含义</span>
+            <span class="code-toggle">点击打开代码</span>
+            <button class="copy-btn" onclick="copyCode(event,this)">复制</button>
+          </div>
+          <div class="code-body">A：数据准备（A_data_prepare.py）—— 6表合并、清洗、厂商名归一化、按"厂商+±3年窗"打标（当前占位；理想按"型号+批号"，待数据后改）
+B：文本特征（B_text_preprocess.py）—— 轻量清洗后用 BioBERT/ClinicalBERT 取 [CLS] 768 维句向量
+C：结构化特征 + 多模态融合（C_build_features.py）—— BERT ⊕ 结构化特征，随机 80/20 划分，落盘 X_all.npy
+H：时序建模（H_temporal_transformer.py）—— 同一型号+批号按 date_received 排序 → 滑动窗口 → Transformer/LSTM 训练</div>
+        </div>
+        <div class="feat-grid" style="margin-top:12px">
+          <div class="feat"><div class="k">滑动窗口</div><div class="v">SEQ_LEN=10（上限）, STRIDE=1, MIN_REPORTS=2（纳入门槛）；按 date_received 排序</div></div>
+          <div class="feat"><div class="k">算法</div><div class="v">TransformerEncoder / LSTM + 代价敏感（损失函数）</div></div>
+          <div class="feat"><div class="k">划分</div><div class="v">随机按组 + 时间，一次跑完，不做 SMOTE</div></div>
+          <div class="feat"><div class="k">训练</div><div class="v">EPOCHS=100 上限；训练序列再切 15% 监控集 → 按验证 AUC 早停（patience=10）→ 恢复最佳权重</div></div>
+        </div>
+        <div class="note" style="margin-top:10px"><b>训练数据占比：</b>原始训练集 = 80%；从中再切 15% 作早停监控集，剩余 <b>85% × 80%</b> 才是真正喂给网络的训练数据。监控集只用来判断「要不要早停」，测试集全程不参与。</div>
+        <div class="note bad" style="margin-top:10px"><b>⚠️ 当前代码占位说明：</b>H 脚本里 <code>GROUP_KEY="manufacturer_norm"</code> 仍是"按厂商"，原因只是 A 脚本目前没带下更细的型号/批号字段。等 MAUDE 数据下下来、算完填充率后，分组键应改到<b>型号+批号</b>（见"构造序列"卡片）。</div>
+      </div>
+    </details>
+
+    <details class="card" open id="m-temporal-buildseq">
+      <summary><div class="card-h"><h3>🔗 构造序列（核心步骤）</h3></div></summary>
+      <div class="card-body">
+        <p class="muted">下面用你最熟的例子讲：某型号+某批号（简称"CT机 ABC批"）有 3 份不良事件报告，分别是 1月、2月、3 月，3 月这次被召回。</p>
+        <div class="tbl"><table>
+          <tr><th>步骤</th><th>做什么</th><th>例子（1月 / 2月 / 3月）</th></tr>
+          <tr><td><b>① 找同一批</b></td><td>在清洗好的 CSV 里，按<b>型号 + 批号</b>相同把报告归成一堆</td><td>搜出 3 份报告，型号+批号都是"CT机 ABC批"</td></tr>
+          <tr><td><b>② 查时间排队</b></td><td>看这堆里每份的 <code>date_received</code>，按时间从早到晚排</td><td>1月 → 2月 → 3月</td></tr>
+          <tr><td><b>③ 滑动窗口截取</b></td><td>在排好队的这列报告里，按"窗口长度 SEQ_LEN、步长 STRIDE=1"连续截取成若干段；每段错开 1 条、高度重叠</td><td>12 条报告满窗后截成 <b>[1–10]、[2–11]、[3–12]</b> 等段；3 条报告截成 <b>[1–2]、[1–3]</b> 两段（每段即一个训练样本）</td></tr>
+          <tr><td><b>④ 打标签</b></td><td>去召回库按型号+批号查：这批什么时候召回？（标签实际在 A 脚本已打好，H 只读取）</td><td>召回发生在 3 月 → 这 3 份报告的标签<b>全 = 1</b></td></tr>
+          <tr><td><b>⑤ 取特征</b></td><td>每份报告的特征早在 C 脚本就融合好了；动态<b>不再做新融合</b>，只把窗口内已融合向量按时间顺序排成一列</td><td><code>[ 1月融合向量 , 2月融合向量 , 3月融合向量 ]</code></td></tr>
+          <tr><td><b>⑥ 定序列标签</b></td><td>这条时序序列的标签 = 窗口内<b>最后一条</b>（3月）的标签</td><td>序列标签 = 召回（1）</td></tr>
+          <tr><td><b>⑦ 喂模型</b></td><td>模型学"这三次怎么演变到最后一次召回"</td><td>预测：给定前两次 + 第三次，这次会不会召回？</td></tr>
+        </table></div>
+
+        <div class="code-block" style="margin-top:12px">
+          <div class="code-head" onclick="this.parentElement.toggleAttribute('open')">
+            <span class="code-icon"></span>
+            <span class="code-title">点击查看构造序列的核心代码（简化版）</span>
+            <span class="code-toggle">点击打开代码</span>
+            <button class="copy-btn" onclick="copyCode(event,this)">复制</button>
+          </div>
+          <div class="code-body"># 输入
+#   clean_csv : 清洗好的报告表（含 型号/批号/date_received/label）
+#   X_all     : C 脚本已融合好的特征矩阵（每行 = 一份报告的融合向量）
+
+df = read_csv(clean_csv)
+# groupby：一次扫描按「型号+批号」把相同报告归成一堆（哈希分桶，不是逐条去全表搜）
+for (model, lot), grp in df.groupby(["型号", "批号"]):
+    grp = grp.sort_values("date_received")   # ② 排队：1月 → 2月 → 3月
+    if len(grp) < MIN_REPORTS:               # MIN_REPORTS=2，少于2条才跳过
+        continue
+    # ③ 滑动窗口：从排好队的这批里，步长=1 连续截取成若干段
+    #   e = 每段窗口的【末端位置】，每段长度不超过 SEQ_LEN=10
+    #   每一段同时完成：⑤取特征 / ⑥定序列标签 / ⑦输出序列
+    for e in range(MIN_REPORTS, len(grp) + 1, STRIDE):
+        s = max(0, e - SEQ_LEN)              # 窗口起点
+        win = X_all[grp.index[s:e]]          # 这段的融合特征（≤10 行）
+        label = grp["label"].iloc[e - 1]     # 这段【最后一条】报告的 label
+        输出 win(前面补零到 SEQ_LEN 长度), label</div>
+        </div>
+
+        <div class="note" style="margin-top:10px"><b>关键澄清 1：SEQ_LEN=10 不是最低要求。</b>同一批只有 3 条报告时，窗口就只取这 3 条，前面补 7 个"空位"（mask 标记忽略）——<b>不会被踢掉</b>。真正会踢掉的是报告数 < MIN_REPORTS=2 的批。</div>
+        <div class="note" style="margin-top:10px"><b>关键澄清 2：月份不写进特征。</b>序列里只放融合向量，"1月/2月/3月"只用于排队；模型靠"第 1 个位置、第 2 个位置、第 3 个位置"知道先后。</div>
+        <div class="note" style="margin-top:10px"><b>关键澄清 3：动态不再做特征融合。</b>融合在 C 脚本里逐条做完了，H 只是重新排列。</div>
+        <div class="note" style="margin-top:10px"><b>关键澄清 4：分组用 groupby，不是逐条全表搜。</b>代码里 <code>df.groupby(["型号","批号"])</code> 是一次性哈希分桶——把相同"型号+批号"的行归到同一堆，再逐个堆处理。你理解的"分堆"本质对，只是底层是哈希分桶、不是每来一个 key 就全表扫一遍。</div>
+        <div class="note" style="margin-top:10px"><b>关键澄清 5：滑动窗口是独立的第③步，位于②排队之后、④打标签/⑥定序列标签之前。</b>同一批排好队后，按"窗口长度 SEQ_LEN、步长 STRIDE=1"从前往后滑，每段错开 1 条、高度重叠。例：12 条报告会滑出 <b>[1–10]、[2–11]、[3–12]</b> 等典型窗口；3 条报告会滑出 <b>[1–2]、[1–3]</b>。每段即一个训练样本，标签取该段"末条"报告。它让一个批能贡献多条序列，样本量得以提升。</div>
+      </div>
+    </details>
+
+    <details class="card" open id="m-temporal-flow2">
+      <summary><div class="card-h"><h3>时序支路全流程</h3></div></summary>
+      <div class="card-body">
+        <div class="tbl"><table>
+          <tr><th>环节</th><th>做法</th></tr>
+          <tr><td><b>构造序列</b></td><td>见上方「构造序列」卡片：同一<b>型号+批号</b>按 <code>date_received</code> 排序 → 滑动窗口（STRIDE=1）取最近 ≤SEQ_LEN=10 条 → 每条=该报告融合特征 → 序列标签=<b>末条报告 label</b></td></tr>
+          <tr><td><b>排序职责</b></td><td>100% 由本脚本预处理完成，下游 Transformer/LSTM <b>只消费已排好序的序列，不负责排序</b></td></tr>
+          <tr><td><b>不平衡</b></td><td>仅代价敏感（<code>CrossEntropyLoss(weight)</code>），<b>不做 SMOTE</b>——SMOTE 插值会破坏时间结构 / mask</td></tr>
+          <tr><td><b>标准化</b></td><td>仅在训练集上 fit（防泄漏），已补</td></tr>
+          <tr><td><b>划分</b></td><td>随机（<b>按组分组</b> GroupShuffleSplit，防重叠窗口泄漏）+ 时间，一次跑完出对比表</td></tr>
+          <tr><td><b>早停</b></td><td>训练序列再切 15% 监控集，按<b>验证集 AUC</b> 早停（PATIENCE=10，EPOCHS=100 上限）；触发后<b>恢复最佳轮次的权重</b>再测测试集。测试集全程不参与早停判定（防泄漏）</td></tr>
+          <tr><td><b>超参</b></td><td>除早停（监控集动态定轮数）外其余固定（神经网络网格搜索代价极高）；如需可选少量预设组合按验证集筛选</td></tr>
+        </table></div>
+        <div class="note" style="margin-top:10px"><b>为什么序列标签取「末条报告的 label」？</b> 把同一批的多次报告看成一个<b>整体输入</b>，这个整体该打什么标签？用最后那条（最新）报告的 label 最自然——因为它反映的是"看到这段历史后，最新这次是否被召回"。训练时模型学的是"给定这几次报告的演化模式，预测最新这次是否召回"；测试时也这样：喂入一段历史，预测最新 1 条。</div>
+        <div class="note" style="margin-top:10px"><b>为什么数据量会减少 / "第一次发生"被剃掉？</b> 滑动窗口要"同一批里至少 MIN_REPORTS=2 条报告"才生成序列；只有 1 条的批会被跳过。对于能用的批，前几条报告因为"前面凑不够窗口"也不单独成序列（比如 3 条报告、SEQ_LEN=10 时，只产生 1 条以第 3 条为结尾的序列）。所以总序列数一定比原始报告数少。这不是 bug，而是时序建模的代价：用"能构成一段有效历史的序列"训练。</div>
+      </div>
+    </details>
+
+    <details class="card" open id="m-temporal-head">
+      <summary><div class="card-h"><h3>分类头（classification head）· 组件与作用</h3></div></summary>
+      <div class="card-body">
+        <div class="tbl"><table>
+          <tr><th>组件</th><th>作用</th></tr>
+          <tr><td><b>proj（降维层）</b></td><td><code>Linear(feat_dim → d_model=64)</code>：把 BERT 768 + 结构化维度压到 64 维，再送主干</td></tr>
+          <tr><td><b>enc（主干 / backbone）</b></td><td>TransformerEncoder 或 LSTM：提取序列特征，输出高维向量（<b>本身无分类 / 概率功能</b>）</td></tr>
+          <tr><td><b>cls（分类头）</b></td><td><code>Linear(d_model → 2)</code> + Softmax：把向量映射成"召回 / 非召回"概率</td></tr>
+        </table></div>
+        <div class="note"><b>写在哪</b>：分类头 = 接在 backbone 上的<b>外接附件</b>（Dense+Sigmoid/Softmax），<b>不是</b> Transformer 内部。传统分类器（RF/LR/SVM/DT）出厂即带分类功能，<b>故静态支路不用写、动态支路要写</b>。它在<b>定义模型时（训练前）</b>与 backbone 同属一个模型类写好——不是训练后、也不是网格搜索后（动态本无网格搜索）。</div>
+      </div>
+    </details>
+
+  </div>
+
+  <!-- 子页3：静态与时序比较 -->
+  <div class="subpage" id="sub-compare" style="display:none">
+
+    <div class="jump-bar">
+      <span class="jump-label">快速跳转：</span>
+      <button class="jump-chip" onclick="jumpTo('m-compare-map')">执行地图</button>
+      <button class="jump-chip" onclick="jumpTo('m-compare-diff')">差异速查</button>
+      <button class="jump-chip" onclick="jumpTo('m-compare-cost')">代价敏感</button>
+      <button class="jump-chip" onclick="jumpTo('m-compare-full')">完整流程图</button>
+    </div>
+
+    <details class="card" open id="m-compare-map">
+      <summary><div class="card-h"><h3>两支路脚本执行地图</h3></div></summary>
+      <div class="card-body">
+        <div class="tbl"><table>
+          <tr><th>支路</th><th>运行顺序</th><th>随机划分位置</th><th>每步职责</th></tr>
+          <tr><td><b>静态</b></td><td><b>A → B → C → D → E → Z</b></td><td>C 脚本内完成 80/20</td><td>A 数据准备+打标；B 文本 BERT 句向量；<b>C 融合特征 + 随机 80/20 划分 + SMOTE + 标准化</b>（落盘 X_train/X_test）；<b>D 网格搜索 + 训练（含 XGBoost 早停）+ 按 AUC 选最优</b>；E SHAP 解释；Z 时间分割稳健性对照</td></tr>
+          <tr><td><b>动态</b></td><td><b>A → B → C → H</b></td><td>C 脚本内完成 80/20；H 内再按组/时间切序列训练集/测试集</td><td>A/B/C 与静态同（<b>C 只取 X_all 融合特征，本支路 H 内再自行标准化</b>）；<b>H 滑动窗口 → 划分（随机按组 + 时间两种） → 代价敏感（损失函数） → 定义模型（TemporalModel） → 训练（再切 15% 监控集早停，恢复最佳权重）</b>，两种划分一次跑完</td></tr>
+        </table></div>
+        <div class="note"><b>三条纪律：</b>
+          <ol class="bullets" style="margin-top:6px">
+            <li><b>随机划分在 C 脚本完成</b>，静态/动态都依赖 C 的 80/20 结果；D 只是 <code>np.load</code> 载入（行号随脚本版本会漂移，一律以代码注释定位）。</li>
+            <li><b>动态跳过 D（网格搜索）和 E（SHAP），但必须跑 C</b>——H 的 main 调用 <code>build_sequences(clean_csv, X_all)</code>，依赖 C 产出的 <code>X_all.npy</code>。</li>
+            <li><b>"网格搜索脚本"是 D_train_models.py</b>（GridSearchCV 那一行），不是"C"；C 是"特征融合 + 划分"。</li>
+          </ol>
+        </div>
+      </div>
+    </details>
+
+    <details class="card" open id="m-compare-diff">
+      <summary><div class="card-h"><h3>静态 vs 时序 关键差异速查</h3></div></summary>
+      <div class="card-body">
+        <div class="tbl"><table>
+          <tr><th>维度</th><th>静态（D）</th><th>时序（H）</th></tr>
+          <tr><td>输入</td><td>每条报告独立融合特征</td><td>按厂商排序的序列（窗口=10）</td></tr>
+          <tr><td>算法</td><td>LR/SVM/DT/RF/XGBoost/MLP</td><td>TransformerEncoder 或 LSTM</td></tr>
+          <tr><td>代价敏感落点</td><td>模型对象 class_weight</td><td>损失函数 CrossEntropyLoss(weight)</td></tr>
+          <tr><td>SMOTE</td><td>做（仅训练集）</td><td>不做（破坏时间结构）</td></tr>
+          <tr><td>网格搜索</td><td>有（GridSearchCV cv=3）</td><td>无（其余超参固定，轮数交给早停）</td></tr>
+          <tr><td>早停</td><td>XGBoost：监控集 15%、rounds=50（n_estimators 2000 上限）；MLP：max_iter=500 + early_stopping=True</td><td>有：训练序列再切 15% 监控集，按验证 AUC 早停（patience=10），恢复最佳权重</td></tr>
+          <tr><td>划分</td><td>随机 80/20</td><td>随机按组 + 时间，一次跑完</td></tr>
+          <tr><td>SHAP</td><td>E_shap_analysis（1500条）</td><td>暂缓（DeepExplainer/GradientExplainer）</td></tr>
+        </table></div>
+      </div>
+    </details>
+
+    <details class="card" open id="m-compare-cost">
+      <summary><div class="card-h"><h3>代价敏感在两支路的落点对比</h3></div></summary>
+      <div class="card-body">
+        <div class="tbl"><table>
+          <tr><th></th><th>静态支路（D）</th><th>动态支路（H）</th></tr>
+          <tr><td><b>落点</b></td><td>D 的 <code>models</code> 大字典里（与"列算法 + 列参数"同属一个字典结构）</td><td>H 的 <code>run_one_split</code> 里，<b>写进损失函数</b>（<code>CrossEntropyLoss</code> 权重处）</td></tr>
+          <tr><td><b>写法</b></td><td><code>class_weight='balanced'</code>（焊进模型对象）</td><td><code>nn.CrossEntropyLoss(weight=[1, w1])</code>（焊进损失函数）</td></tr>
+          <tr><td><b>时机</b></td><td>划分之后、GridSearchCV 之前</td><td>划分之后、训练循环之前</td></tr>
+          <tr><td><b>共同点</b></td><td colspan="2">都在「划分之后、训练之前」设定；差异仅在于 <b>静态贴模型对象、动态贴损失函数</b></td></tr>
+        </table></div>
+        <p class="muted">记忆点：静态把代价敏感"写进算法本身"，动态把代价敏感"写进算损失的公式"——位置不同，但都是训练前就定好、训练时生效。</p>
+      </div>
+    </details>
+
+    <details class="card" open id="m-compare-full">
+      <summary><div class="card-h"><h3>完整流程图</h3></div></summary>
+      <div class="card-body">
+        <div class="code-block">
+          <div class="code-head" onclick="this.parentElement.toggleAttribute('open')">
+            <span class="code-icon"></span>
+            <span class="code-title">完整流程代码级描述</span>
+            <span class="code-toggle">点击打开代码</span>
+            <button class="copy-btn" onclick="copyCode(event,this)">复制</button>
+          </div>
+          <div class="code-body">原始 MAUDE 6 表
+   │  A_data_prepare.py  （6表按 MDR_REPORT_KEY 关联成宽表 → 清洗/缺失值处理
+   │                       → 厂商名归一化 → 按"厂商+±3年窗"打标 label=召回0/1
+   │                         （当前占位；理想按"型号+批号"对齐召回，待数据后改））
+   ▼
+B_text_preprocess.py  （文本轻量清洗：去控制字符/非字母数字；
+   │                    BioBERT/ClinicalBERT 取 [CLS]，输出 768 维句向量）
+   │  〔可选〕I_medical_ontology.py  （UMLS 医学本体归一化，默认关闭）
+   ▼
+C_build_features.py  （融合特征 = 768维BERT向量 ⊕ 结构化特征：
+   │                    厂商Top15独热 + 事件类型独热 + year + text_length；
+   │                    划分：随机 80/20 stratify；训练集 fit StandardScaler）
+   │
+   ├─▶ 静态支路：D_train_models.py（LR/SVM/DT/RF/XGBoost/MLP；
+   │        │              C 内：随机 80/20 划分 → 训练集 SMOTE → 训练集 fit StandardScaler；
+   │        │              D 内：先再切 15% 早停监控集（六算法统一在切后 85%
+   │        │              训练，保证对比公平）→ GridSearchCV cv=3
+   │        │              + 固定 class_weight='balanced'；
+   │        │              XGBoost：n_estimators=2000 上限，rounds=50 早停
+   │        │              （eval_set=监控集，避免与网格搜索重复定轮数）
+   │        │              最后评估测试集）
+   │        ├─ Z_random_vs_time_split.py（时间分割稳健性对照）
+   │        └─ E_shap_analysis.py（SHAP 解释：测试集随机无放回抽 1500 条）
+   │
+   └─▶ 时序支路：H_temporal_transformer.py（同一型号+批号按 date_received 排序 →
+                                            滑动窗口（≤SEQ_LEN=10, STRIDE=1, MIN_REPORTS=2）；
+                                            Transformer/LSTM + 代价敏感；
+                                            训练序列再切 15% 监控集 → 按验证 AUC
+                                            早停（patience=10，EPOCHS=100 上限）→
+                                            恢复最佳轮次权重；
+                                            随机/时间两种划分一次跑完，不做 SMOTE）</div>
+        </div>
+      </div>
+    </details>
+
+  </div>
+
+</div>
+
+<button class="back-to-top" id="backTop" onclick="scrollToTop()">↑</button>
+
+<script>
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.style.display='none');
+  var pg=document.getElementById(id); if(pg) pg.style.display='block';
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  var bt=document.querySelector('.tab[onclick*="'+id+'"]'); if(bt) bt.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function showSub(id){
+  document.querySelectorAll('.subpage').forEach(p=>p.style.display='none');
+  var pg=document.getElementById(id); if(pg) pg.style.display='block';
+  var sel=document.querySelector('.selector-bar select');
+  if(sel) sel.value=id;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function setTheme(t){document.documentElement.setAttribute('data-theme',t);try{localStorage.setItem('theme',t);}catch(e){}}
+(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+function jumpTo(id){
+  var el=document.getElementById(id);
+  if(!el) return;
+  var par=el.closest('.page') || el.closest('.subpage');
+  if(par && par.classList.contains('subpage')){
+    var allSubs=document.querySelectorAll('.subpage');
+    allSubs.forEach(s=>s.style.display='none');
+    par.style.display='block';
+    var sel=document.querySelector('.selector-bar select');
+    if(sel) sel.value=par.id;
+  }
+  el.setAttribute('open','');
+  el.scrollIntoView({behavior:'smooth',block:'start'});
+}
+function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'});}
+var backTop=document.getElementById('backTop');
+window.addEventListener('scroll',function(){
+  if(window.scrollY>300) backTop.classList.add('show');
+  else backTop.classList.remove('show');
+});
+function filterCards(){
+  var q=document.getElementById('globalSearch').value.trim().toLowerCase();
+  document.querySelectorAll('.page').forEach(function(page){
+    var cards=page.querySelectorAll('details.card');
+    var any=false;
+    cards.forEach(function(card){
+      var txt=(card.innerText||'').toLowerCase();
+      var match=!q || txt.indexOf(q)!==-1;
+      card.style.display=match?'':'none';
+      if(match) any=true;
+    });
+    var noMatch=page.querySelector('.no-match');
+    if(!noMatch){noMatch=document.createElement('div');noMatch.className='no-match';noMatch.textContent='无匹配卡片';page.appendChild(noMatch);}
+    noMatch.style.display=(q && !any)?'block':'none';
+  });
+}
+function copyCode(ev,btn){
+  ev.stopPropagation();
+  var block=btn.closest('.code-block').querySelector('.code-body');
+  var text=block.textContent||'';
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(function(){var old=btn.textContent;btn.textContent='已复制';setTimeout(function(){btn.textContent=old;},1200);},function(){fallbackCopy(text,btn);});
+  }else{fallbackCopy(text,btn);}
+}
+function fallbackCopy(text,btn){
+  var ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();
+  try{document.execCommand('copy');btn.textContent='已复制';setTimeout(function(){btn.textContent='复制';},1200);}catch(e){btn.textContent='复制失败';}
+  document.body.removeChild(ta);
+}
+// update toggle label on open/close
+(function(){function updateLabel(cb){var t=cb.querySelector('.code-toggle');if(!t)return;t.textContent=cb.hasAttribute('open')?'点击合上代码':'点击打开代码';} var obs=new MutationObserver(function(muts){muts.forEach(function(m){if(m.type==='attributes'&&m.attributeName==='open')updateLabel(m.target);});}); document.querySelectorAll('.code-block').forEach(function(cb){obs.observe(cb,{attributes:true});updateLabel(cb);});})();
+</script>
+</body></html>
