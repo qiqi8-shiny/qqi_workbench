@@ -1,37 +1,70 @@
 {
-  "updatedAt": "2026-09-05T23:56:26+08:00",
+  "updatedAt": "2026-09-08T12:53:20+08:00",
   "source": "AI 每3天自动轮换（SSS儿歌核心）",
   "current": {
-    "name": "藏猫猫",
+    "name": "身体部位",
     "words": [
-      ["hands", "小手"],
-      ["face", "脸"],
+      ["head", "头"],
+      ["shoulders", "肩膀"],
+      ["knees", "膝盖"],
+      ["toes", "脚趾"],
       ["eyes", "眼睛"],
-      ["blanket", "小毯子"],
-      ["book", "书"],
-      ["pillow", "枕头"],
-      ["mommy", "妈妈"],
-      ["baby", "宝宝"],
-      ["hide", "藏"],
-      ["find", "找"],
-      ["peek", "露脸"],
-      ["cover", "捂住"],
-      ["open", "张开"],
-      ["look", "看"],
+      ["ears", "耳朵"],
+      ["nose", "鼻子"],
+      ["mouth", "嘴巴"],
+      ["hands", "小手"],
+      ["tummy", "肚子"],
+      ["touch", "摸"],
+      ["point", "指"],
       ["clap", "拍手"],
-      ["laugh", "笑"],
-      ["point", "指"]
+      ["wave", "挥手"],
+      ["dance", "跳舞"],
+      ["wiggle", "扭动"],
+      ["find", "找"],
+      ["look", "看"]
     ],
     "dialogs": [
-      ["Mom", "Peekaboo! Where is baby? Cover your eyes!"],
-      ["Baby", "Boo! I'm here!"],
-      ["Mom", "Hide behind the book. Open your hands, peek!"],
-      ["Baby", "Peek! Ha ha!"],
-      ["Mom", "Find the pillow. Cover your face, boo!"],
-      ["Baby", "Boo! Again, again!"]
+      ["Mom", "Touch your head! Head, shoulders, knees, and toes!"],
+      ["Baby", "Head! Head!"],
+      ["Mom", "Point to your nose. Where are your ears?"],
+      ["Baby", "Ears! Here!"],
+      ["Mom", "Clap your hands. Wiggle, wiggle, dance!"],
+      ["Baby", "Yay! Body! Fun!"]
     ]
   },
   "history": [
+    {
+      "date": "2026-09-08",
+      "name": "身体部位",
+      "words": [
+        ["head", "头"],
+        ["shoulders", "肩膀"],
+        ["knees", "膝盖"],
+        ["toes", "脚趾"],
+        ["eyes", "眼睛"],
+        ["ears", "耳朵"],
+        ["nose", "鼻子"],
+        ["mouth", "嘴巴"],
+        ["hands", "小手"],
+        ["tummy", "肚子"],
+        ["touch", "摸"],
+        ["point", "指"],
+        ["clap", "拍手"],
+        ["wave", "挥手"],
+        ["dance", "跳舞"],
+        ["wiggle", "扭动"],
+        ["find", "找"],
+        ["look", "看"]
+      ],
+      "dialogs": [
+        ["Mom", "Touch your head! Head, shoulders, knees, and toes!"],
+        ["Baby", "Head! Head!"],
+        ["Mom", "Point to your nose. Where are your ears?"],
+        ["Baby", "Ears! Here!"],
+        ["Mom", "Clap your hands. Wiggle, wiggle, dance!"],
+        ["Baby", "Yay! Body! Fun!"]
+      ]
+    },
     {
       "date": "2026-09-05",
       "name": "藏猫猫",
