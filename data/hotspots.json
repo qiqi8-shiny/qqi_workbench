@@ -1,7 +1,39 @@
 {
-  "updatedAt": "2026-09-03T11:24:13+08:00",
+  "updatedAt": "2026-09-10T12:47:49+08:00",
   "source": "AI 每周联网抓取（医用成像/ML可解释性）",
   "items": [
+    {
+      "tag": "政策",
+      "tagClass": "tag-policy",
+      "title": "北京市印发医疗器械临床创新成果转化\"春雨行动\"实施方案",
+      "desc": "北京市药监局等四部门联合发布《北京市推进医疗器械临床创新成果转化\"春雨行动\"实施方案》(京药监发〔2026〕92号)，建立\"征集筛选—对接匹配—辅导培育—转化落地\"全链条机制，依托国家药监局器审中心及京津冀分中心，推动医工融合标志性产品加速上市。",
+      "link": "https://yjj.beijing.gov.cn/yjj/zwgk20/tz7/744008062/index.html",
+      "pubDate": "2026-05-12"
+    },
+    {
+      "tag": "产业",
+      "tagClass": "tag-industry",
+      "title": "FDA 510(k) 批准 Crescom MediAI-OA 骨科 AI 影像处理软件",
+      "desc": "韩国 Crescom 的 MediAI-OA 通过传统 510(k) 路径获 FDA 许可(2026-06-15，K253172)，属放射科自动化影像处理软件(QIH)，用于骨关节炎影像分析；反映 AI 影像器械在骨科细分场景持续获批、监管路径趋于成熟。",
+      "link": "https://www.510kdatabase.net/k253172",
+      "pubDate": "2026-06-15"
+    },
+    {
+      "tag": "学术",
+      "tagClass": "tag-academic",
+      "title": "可解释 3D-CNN 结合遗传算法与 SHAP 预测阿尔茨海默病(MRI)",
+      "desc": "PLoS One 提出 GASHAP 框架，将遗传算法与 SHAP 结合增强 3D-CNN 对 MRI 脑影像的透明性，输出关键脑区掩码以区分阿尔茨海默病与正常对照，为医学影像黑箱模型提供解剖区域级可解释证据(2026-01-16 发表)。",
+      "link": "https://dx.plos.org/10.1371/journal.pone.0337800",
+      "pubDate": "2026-01-16"
+    },
+    {
+      "tag": "学术",
+      "tagClass": "tag-academic",
+      "title": "AI 甲状腺结节诊断文献计量与 LDA 主题建模揭示研究前沿",
+      "desc": "Frontiers in Endocrinology 基于 WoS 与 PubMed 821 篇文献(2006–2025)做文献计量+LDA 主题建模，发现该领域年复合增长率 24.1%，核心热点为超声影像分析、深度学习优化与恶性风险分层，新兴前沿含可解释 AI 与多模态融合(2026-08-28 接收)。",
+      "link": "https://www.frontiersin.org/journals/endocrinology/articles/10.3389/fendo.2026.1932519/full",
+      "pubDate": "2026-08-28"
+    },
     {
       "tag": "政策",
       "tagClass": "tag-policy",
