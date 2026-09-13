@@ -1,110 +1,214 @@
 {
-  "updatedAt": "2026-09-10T23:56:14+08:00",
+  "updatedAt": "2026-09-13T17:50:51.469791+08:00",
   "source": "AI 每3天自动轮换（SSS儿歌核心）",
   "current": {
-    "name": "打招呼",
+    "name": "数数",
     "words": [
       [
-        "hello",
-        "你好"
+        "one",
+        "一"
       ],
       [
-        "morning",
-        "早晨"
+        "two",
+        "二"
       ],
       [
-        "friend",
-        "朋友"
+        "three",
+        "三"
       ],
       [
-        "baby",
-        "宝宝"
-      ],
-      [
-        "mommy",
-        "妈妈"
+        "finger",
+        "手指"
       ],
       [
         "hand",
         "小手"
       ],
       [
-        "name",
-        "名字"
+        "block",
+        "积木"
       ],
       [
-        "bye",
-        "再见"
+        "star",
+        "星星"
       ],
       [
-        "face",
-        "脸"
+        "duck",
+        "小鸭"
       ],
       [
-        "tummy",
-        "肚子"
+        "cookie",
+        "饼干"
       ],
       [
-        "wave",
-        "挥手"
+        "baby",
+        "宝宝"
       ],
       [
-        "say",
-        "说"
+        "count",
+        "数"
       ],
       [
-        "hug",
-        "抱抱"
+        "show",
+        "比画"
       ],
       [
         "clap",
         "拍手"
       ],
       [
-        "shake",
-        "摇"
+        "hold",
+        "举起"
       ],
       [
-        "smile",
-        "微笑"
+        "point",
+        "指"
       ],
       [
-        "meet",
-        "见面"
+        "tap",
+        "点"
       ],
       [
-        "greet",
-        "打招呼"
+        "hop",
+        "跳"
+      ],
+      [
+        "wave",
+        "挥手"
       ]
     ],
     "dialogs": [
       [
         "Mom",
-        "Hello, baby! Good morning!"
+        "Let's count! One, two, three!"
       ],
       [
         "Baby",
-        "Hello! Hello!"
+        "One! Two!"
       ],
       [
         "Mom",
-        "Say hi to your friend. Wave your hand!"
+        "Hold up your fingers. Show me three!"
       ],
       [
         "Baby",
-        "Hi! Friend!"
+        "Three! Fingers!"
       ],
       [
         "Mom",
-        "Give mommy a hug. Smile, smile!"
+        "Count the blocks. Clap, clap, clap!"
       ],
       [
         "Baby",
-        "Bye-bye! See you!"
+        "More! Again!"
       ]
     ]
   },
   "history": [
+    {
+      "date": "2026-09-13",
+      "name": "数数",
+      "words": [
+        [
+          "one",
+          "一"
+        ],
+        [
+          "two",
+          "二"
+        ],
+        [
+          "three",
+          "三"
+        ],
+        [
+          "finger",
+          "手指"
+        ],
+        [
+          "hand",
+          "小手"
+        ],
+        [
+          "block",
+          "积木"
+        ],
+        [
+          "star",
+          "星星"
+        ],
+        [
+          "duck",
+          "小鸭"
+        ],
+        [
+          "cookie",
+          "饼干"
+        ],
+        [
+          "baby",
+          "宝宝"
+        ],
+        [
+          "count",
+          "数"
+        ],
+        [
+          "show",
+          "比画"
+        ],
+        [
+          "clap",
+          "拍手"
+        ],
+        [
+          "hold",
+          "举起"
+        ],
+        [
+          "point",
+          "指"
+        ],
+        [
+          "tap",
+          "点"
+        ],
+        [
+          "hop",
+          "跳"
+        ],
+        [
+          "wave",
+          "挥手"
+        ]
+      ],
+      "dialogs": [
+        [
+          "Mom",
+          "Let's count! One, two, three!"
+        ],
+        [
+          "Baby",
+          "One! Two!"
+        ],
+        [
+          "Mom",
+          "Hold up your fingers. Show me three!"
+        ],
+        [
+          "Baby",
+          "Three! Fingers!"
+        ],
+        [
+          "Mom",
+          "Count the blocks. Clap, clap, clap!"
+        ],
+        [
+          "Baby",
+          "More! Again!"
+        ]
+      ]
+    },
     {
       "date": "2026-09-10",
       "name": "打招呼",
