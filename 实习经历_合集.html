@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>实习经历 · 合集（诺华 MIC 助理）</title>
+<style>
+:root{
+  --bg:#0f1420; --bg2:#161d2e; --card:#1c2436; --line:#2a3550; --txt:#e6ebf5; --mut:#9aa7c2;
+  --accent:#5e8bff; --red:#ff5d6c; --yellow:#ffc24b; --green:#37d39b; --s5:#ff5d6c; --s4:#ffc24b; --s3:#5e8bff;
+}
+body[data-theme="powder"]{
+  --bg:#fdeef3; --bg2:#fff5f8; --card:rgba(255,255,255,.72); --line:#f3d4e0; --txt:#7a4a5e; --mut:#b08399;
+  --accent:#e88aae; --red:#e0608a; --yellow:#e8a86b; --green:#8fbf9a; --s5:#e0608a; --s4:#e8a86b; --s3:#e88aae;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.65;font-size:15px}
+header{position:sticky;top:0;z-index:20;background:var(--bg2);border-bottom:1px solid var(--line);padding:12px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+header h1{font-size:17px;margin:0;font-weight:700;letter-spacing:.5px}
+header .sub{color:var(--mut);font-size:12px}
+.spacer{flex:1}
+.theme-label{font-size:13px;color:var(--mut);display:flex;align-items:center;gap:6px}
+.theme-select{padding:6px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--txt);font-size:13px;cursor:pointer;outline:none}
+nav.tabs{display:flex;gap:4px;padding:10px 20px 0;background:var(--bg);border-bottom:1px solid var(--line);flex-wrap:wrap}
+.tab{padding:9px 16px;border:1px solid transparent;border-bottom:none;border-radius:10px 10px 0 0;cursor:pointer;color:var(--mut);font-size:14px;font-weight:600}
+.tab.active{background:var(--card);color:var(--accent);border-color:var(--line)}
+.page{display:none;padding:22px 20px 80px;max-width:1180px;margin:0 auto}
+.page.active{display:block}
+h2.page-sec{font-size:19px;margin:30px 0 12px;padding-bottom:8px;border-bottom:2px solid var(--accent)}
+h2.page-sec:first-child{margin-top:6px}
+h3.sec{font-size:16px;margin:22px 0 8px;color:var(--accent)}
+h4.sub{font-size:14px;margin:16px 0 6px;color:var(--txt);font-weight:700}
+p{margin:6px 0}
+.callout{border-left:4px solid var(--accent);background:var(--card);padding:10px 14px;border-radius:0 8px 8px 0;margin:10px 0;font-size:13.5px}
+.callout.warn{border-color:var(--yellow)}
+.callout.info{border-color:var(--green)}
+.callout.red{border-color:var(--red)}
+.badge-line{padding:8px 12px;border-radius:8px;font-weight:600;margin:8px 0;font-size:13.5px}
+.badge-line.red{background:rgba(255,93,108,.14);color:var(--red);border:1px solid rgba(255,93,108,.4)}
+.badge-line.yellow{background:rgba(255,194,75,.14);color:var(--yellow);border:1px solid rgba(255,194,75,.4)}
+.badge-line.green{background:rgba(55,211,155,.14);color:var(--green);border:1px solid rgba(55,211,155,.4)}
+.badge-line.gray{background:rgba(150,160,180,.14);color:var(--mut);border:1px solid var(--line)}
+.stat-line{font-size:13px;color:var(--mut);background:var(--bg2);padding:6px 12px;border-radius:6px;display:inline-block;margin:4px 0}
+.table-wrap{overflow-x:auto;margin:12px 0;border:1px solid var(--line);border-radius:10px}
+table.dt{border-collapse:collapse;width:100%;font-size:13px;background:var(--card)}
+table.dt th{background:var(--bg2);text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);font-weight:700;white-space:nowrap}
+table.dt td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+table.dt tbody tr:hover{background:rgba(94,139,255,.07)}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;vertical-align:middle}
+.dot.red{background:var(--red)} .dot.yellow{background:var(--yellow)} .dot.gray{background:var(--mut)} .dot.green{background:var(--green)}
+.lbl{display:inline-block;background:rgba(94,139,255,.16);color:var(--accent);border-radius:5px;padding:1px 6px;font-size:12px;font-weight:700;margin-right:4px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:14px 0;box-shadow:0 2px 10px rgba(0,0,0,.12)}
+.card-title{font-weight:700;font-size:15px;color:var(--accent);margin-bottom:8px;line-height:1.4}
+.flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:16px 0;padding:16px;background:var(--card);border:1px solid var(--line);border-radius:12px}
+.node{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:10px 14px;text-align:center;font-weight:700;font-size:13px}
+.node small{display:block;color:var(--mut);font-weight:400;font-size:11px;margin-top:3px}
+.arrow{color:var(--accent);font-size:20px;font-weight:700}
+.bars{margin:10px 0 18px}
+.bar-row{display:flex;align-items:center;gap:10px;margin:6px 0}
+.bar-name{width:210px;font-size:13px;flex-shrink:0;text-align:right;color:var(--mut)}
+.bar-track{flex:1;background:var(--bg2);border-radius:6px;overflow:hidden;display:flex;height:22px;min-width:120px}
+.bar-seg{height:100%}
+.bar-seg.s5{background:var(--s5)} .bar-seg.s4{background:var(--s4)} .bar-seg.s3{background:var(--s3)}
+.bar-num{width:150px;font-size:12px;flex-shrink:0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media(max-width:560px){.grid2,.grid3{grid-template-columns:1fr}.bar-name{width:110px}.bar-num{width:90px}}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:9px 8px;text-align:center}
+.kpi .num{font-size:20px;font-weight:800;line-height:1.2}
+.kpi .cap{font-size:11px;color:var(--mut);margin-top:3px;line-height:1.35}
+.kpi.red .num{color:var(--red)} .kpi.yellow .num{color:var(--yellow)} .kpi.blue .num{color:var(--accent)} .kpi.green .num{color:var(--green)}
+details.quote{margin:6px 0}
+details.quote>summary{cursor:pointer;list-style:none;color:var(--accent);font-weight:600;font-size:13px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+details.quote>summary::-webkit-details-marker{display:none}
+details.quote>summary::after{content:" ▸";color:var(--mut);font-size:12px}
+details.quote[open]>summary::after{content:" ▾";color:var(--mut);font-size:12px}
+details.quote .quote-text{margin-top:6px;padding:10px 12px;background:var(--bg2);border-left:3px solid var(--accent);border-radius:6px;font-size:13px;line-height:1.7;color:var(--txt)}
+.mono{font-family:Consolas,Monaco,monospace;font-size:12.5px}
+.pill{display:inline-block;padding:2px 8px;border-radius:6px;font-size:12px;font-weight:700;margin:2px 4px 2px 0}
+.pill.r{background:rgba(255,93,108,.16);color:var(--red)}
+.pill.y{background:rgba(255,194,75,.16);color:var(--yellow)}
+.pill.b{background:rgba(94,139,255,.16);color:var(--accent)}
+.pill.g{background:rgba(55,211,155,.16);color:var(--green)}
+.pill.n{background:rgba(150,160,180,.16);color:var(--mut)}
+.step{display:flex;gap:12px;align-items:flex-start;margin:10px 0}
+.step .n{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:var(--accent);color:#fff;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center}
+.step .tx{flex:1;font-size:13.5px}
+footer{text-align:center;color:var(--mut);font-size:12px;padding:20px}
+ul.tight{margin:6px 0;padding-left:20px}
+ul.tight li{margin:3px 0;font-size:13.5px}
+
+/* ===== 本页章节跳转（锚点映射） ===== */
+.toc{display:flex;flex-wrap:wrap;gap:7px;align-items:center;padding:10px 14px;background:var(--bg2);border:1px solid var(--line);border-radius:10px;margin:6px 0 20px;font-size:13px}
+.toc .toc-h{color:var(--mut);font-weight:700;margin-right:2px;white-space:nowrap}
+.toc a{color:var(--accent);text-decoration:none;padding:4px 11px;border:1px solid var(--line);border-radius:20px;background:var(--card);transition:.15s;white-space:nowrap}
+.toc a:hover{border-color:var(--accent);background:rgba(94,139,255,.12)}
+html{scroll-behavior:smooth}
+.page-sec, details.sec-fold>summary{scroll-margin-top:86px}
+/* ===== 章节折叠（三角号） ===== */
+details.sec-fold{margin:24px 0}
+details.sec-fold>summary{cursor:pointer;list-style:none;font-size:18.5px;font-weight:700;margin:0;padding:0 0 9px;border-bottom:2px solid var(--accent);color:var(--txt);display:flex;align-items:center;gap:8px;line-height:1.35}
+details.sec-fold>summary::-webkit-details-marker{display:none}
+details.sec-fold>summary::after{content:"▸";color:var(--mut);font-size:15px;margin-left:auto;font-weight:400;transition:.15s}
+details.sec-fold[open]>summary::after{content:"▾"}
+details.sec-fold .badge-line{margin-left:8px;padding:4px 10px;font-size:12px}
+
+/* ===== 右侧跳转坞 ===== */
+.dock{position:fixed;right:14px;top:50%;transform:translateY(-50%);z-index:40;display:flex;flex-direction:column;gap:8px}
+.dock button{width:38px;height:38px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--mut);font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 3px 10px rgba(0,0,0,.18);transition:.15s}
+.dock button:hover{color:var(--accent);border-color:var(--accent);transform:translateX(-2px)}
+.dock button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.dock .top{margin-top:6px;background:var(--bg2)}
+#toTop{position:fixed;right:16px;bottom:16px;z-index:41;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--accent);font-size:18px;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.22);display:none;align-items:center;justify-content:center}
+#toTop.show{display:flex}
+#toTop:hover{background:var(--accent);color:#fff}
+.btn-mini{padding:6px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--txt);cursor:pointer;font-size:13px}
+.btn-mini:hover{border-color:var(--accent);color:var(--accent)}
+@media(max-width:900px){.dock{display:none}}
+</style>
+</head>
+<body data-theme="dark">
+
+<header>
+  <h1>实习经历 · 合集</h1>
+  <span class="sub">诺华 MIC 助理 ｜ 北京诺华 ｜ 2022.03–2023.03 ｜ 表格清单 / 报销流程 / 面试话术</span>
+  <span class="spacer"></span>
+  <button class="btn-mini" id="toggleAll">全部展开</button>
+  <span class="theme-label">主题
+    <select class="theme-select" id="themeSel">
+      <option value="dark">深蓝</option>
+      <option value="powder">粉透</option>
+    </select>
+  </span>
+</header>
+
+<nav class="tabs" id="tabs">
+  <div class="tab active" data-p="p1">① 表格清单与临床材料</div>
+  <div class="tab" data-p="p2">② 报销购药流程</div>
+  <div class="tab" data-p="p3">③ 面试话术 7 模块</div>
+  <div class="tab" data-p="p4">④ 概括 / role play / JD 映射</div>
+</nav>
+
+<!-- ============ 第 1 页：表格清单与临床材料 ============ -->
+<div class="page active" id="p1">
+  <nav class="toc two">
+    <div class="toc-grp"><span class="toc-h">本页跳转：</span>
+      <a href="#p1_role">简历定位</a>
+      <a href="#p1_a">七院患者库</a>
+      <a href="#p1_b">跨院区</a>
+      <a href="#p1_c">临床材料</a>
+    </div>
+  </nav>
+
+  <h2 class="page-sec" id="p1_role">实习定位（简历可粘段）</h2>
+  <div class="card">
+    <div class="card-title">医学信息沟通（MIC）助理 ｜ 北京诺华制药有限公司</div>
+    <p>2022.03 – 2023.03 ｜ 本科</p>
+  </div>
+
+  <div class="callout info">
+    <b>名词解释 · 用药可及性（drug accessibility）</b><br>
+    指患者能不能真正"用得上、用得起"这个药，通常拆成四层：<br>
+    ① <b>供应可及</b>——医院 / 药房进没进这个药，能否院外药房或双通道取到；<br>
+    ② <b>经济可及</b>——是否进医保、报销多少、患者自付多少、有没有援助项目；<br>
+    ③ <b>流程可及</b>——特药审批要哪些材料、跑几个窗口、能不能顺利办下来；<br>
+    ④ <b>认知可及</b>——医生和患者知不知道、会不会用。<br>
+    我在诺华的活，本质就是帮患者扫清"想用 → 真正用上"之间的材料、流程、医保、院区障碍。
+  </div>
+
+  <h2 class="page-sec" id="sec2">我维护过的所有表格清单（被问"你具体管什么数据"就按这个说）</h2>
+
+  <h3 class="sec" id="p1_a">A. 七院患者数据库（核心，我自己建并持续更新）</h3>
+  <div class="table-wrap">
+    <table class="dt">
+      <thead><tr><th style="width:180px">表格</th><th>内容</th><th style="width:150px">规模 / 备注</th></tr></thead>
+      <tbody>
+        <tr><td><b>七院总患者表</b></td><td>全周期档案（入组跨度 2020–2022），含转院 / 停药 / 高值药品标注</td><td>800+ 条</td></tr>
+        <tr><td><b>七院医保患者表</b></td><td>备注记录"已走医保 / 特困报销后 200 多 / 阿达木转可善挺（竞品转换）"等</td><td>250 名</td></tr>
+        <tr><td><b>七院自费患者表</b></td><td>购药流程独立</td><td>343 名</td></tr>
+        <tr><td><b>七院 2022 年入组表</b></td><td>逐条标"医保 / 自费 / 药房（院外）"</td><td>56 名新入组</td></tr>
+        <tr><td><b>七院入组分层表</b><br><span style="color:var(--mut);font-size:12px">（多版迭代）</span></td><td>2021 年 3 月前 / 后入组分层，按月滚动更新（1月→2月→4月→5月）</td><td>多版迭代</td></tr>
+        <tr><td><b>七院月度流向表</b></td><td>如"七院流向可善挺 7 月"，逐条记录购药时间 / 数量 / 医生 / 单价</td><td>逐条流向记录</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="stat-line">时间跨度：2022.04 接手 → 2023.03 实习结束，跨约 11 个月、20+ 文件版本</div>
+
+  <h3 class="sec" id="p1_b">B. 跨院区</h3>
+  <div class="table-wrap">
+    <table class="dt">
+      <thead><tr><th style="width:250px">院区</th><th>表格 / 内容</th><th style="width:210px">规模</th></tr></thead>
+      <tbody>
+        <tr><td><b>东北国际医院</b></td><td>纳入患者库</td><td>—</td></tr>
+        <tr><td><b>省人民</b><br><span style="color:var(--mut);font-size:12px">辽宁省人民医院</span></td><td>流向表</td><td>两月合计 160 支<br>（8月 42 + 6-7月 118）</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="sec" id="p1_c">C. 临床支持材料（我整理 / 编制）</h3>
+  <div class="table-wrap">
+    <table class="dt">
+      <thead><tr><th style="width:260px">材料</th><th>内容 / 关键信息</th></tr></thead>
+      <tbody>
+        <tr><td><b>《可善挺患者工具书》</b><br><span style="color:var(--mut);font-size:12px">一页式参考卡</span></td><td>3 适应症、自费 / 活动后双价格（1188→800 元/支）、注射 logistics、购药地址</td></tr>
+        <tr><td><b>《可善挺 50 问》</b><br><span style="color:var(--mut);font-size:12px">54 页临床 Q&A</span></td><td>机制 / 疗效 / 安全性 / 特殊人群 / 竞品对比 5 大类 52 问</td></tr>
+        <tr><td><b>自费 vs 医保费用对比</b></td><td>自费首年密集期 8000 元 / 全年 32000 元</td></tr>
+        <tr><td><b>《七院、大皮应对策略》PPT</b></td><td>区域市场策略（详见第三节）</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ============ 第 2 页：报销购药结构化流程 ============ -->
+<div class="page" id="p2">
+  <nav class="toc two">
+    <div class="toc-grp"><span class="toc-h">本页跳转：</span>
+      <a href="#p2_price">价格锚点</a>
+      <a href="#p2_logic">报销逻辑</a>
+      <a href="#p2_why">痛点</a>
+      <a href="#p2_dim">覆盖维度</a>
+      <a href="#p2_time">时间锚点</a>
+      <a href="#p2_qa">常见 Q&A</a>
+    </div>
+  </nav>
+
+  <h2 class="page-sec" id="sec3">报销与购药 · 结构化流程（"沉淀为可复用结构化流程"到底是什么）</h2>
+
+  <h3 class="sec" id="p2_price">价格锚点</h3>
+  <div class="grid2">
+    <div class="badge-line red">上市刚进国内（未医保）：<b>2998 元 / 150mg / 支</b></div>
+    <div class="badge-line yellow">2021–2025 国家医保谈判支付价：<b>1188 元 / 150mg 每支</b></div>
+    <div class="badge-line green">职工医保：报销后单支患者自付约 <b>200–280 元</b></div>
+    <div class="badge-line gray">城乡居民医保：报销后单支患者自付约 <b>450–480 元</b></div>
+  </div>
+
+  <h3 class="sec" id="p2_logic">1. 高值药品报销的底层逻辑</h3>
+  <p>可善挺是生物制剂（高值药），患者不能药店直接刷医保买，必须走"特药 / 双通道"流程：</p>
+  <div class="flow">
+    <div class="node">申请<small>患者提交</small></div><span class="arrow">→</span>
+    <div class="node">医保科录入系统</div><span class="arrow">→</span>
+    <div class="node">审核<small>材料 + 病情</small></div><span class="arrow">→</span>
+    <div class="node">获批</div><span class="arrow">→</span>
+    <div class="node">按医保价购药</div>
+  </div>
+
+  <h3 class="sec" id="p2_why">2. 为什么需要"结构化流程"（痛点）</h3>
+  <div class="card">
+    <ul class="tight">
+      <li>每家医院：所需材料清单不同、审核标准不同、办理窗口不同</li>
+      <li>每种医保：报销比例 / 起付线 / 是否需转诊证明 都不同</li>
+      <li>部分医院还要求皮损照片作为病情证明</li>
+      <li>患者常因"缺材料一趟白跑"，销售 / 医生也被反复问</li>
+    </ul>
+  </div>
+
+  <h3 class="sec" id="p2_dim">3. 流程覆盖了哪些维度（这就是"结构化"的体现）</h3>
+  <div class="table-wrap">
+    <table class="dt">
+      <thead><tr><th>维度</th><th>细分</th></tr></thead>
+      <tbody>
+        <tr><td><span class="pill b">按医院</span></td><td>七院（含院外药房）/ 省人民（双通道）/ 东北国际</td></tr>
+        <tr><td><span class="pill b">按医保类型</span></td><td>职工 / 居民 / 城乡居民 / 铁路 / 离休</td></tr>
+        <tr><td><span class="pill b">按购药路径</span></td><td>院内医保购药 / 院外药房购药 / 双通道</td></tr>
+        <tr><td><span class="pill b">按流转状态</span></td><td>自费→医保（2021.12 入医保潮）/ 医保→自费（换工作停缴，转京东大药房）/ 转院 / 竞品转换（阿达木→可善挺）</td></tr>
+        <tr><td><span class="pill b">特殊材料</span></td><td>皮损照片、转诊证明等</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="sec" id="p2_time">4. 时间锚点（被问"为什么有自费转医保"）</h3>
+  <div class="card">
+    <ul class="tight">
+      <li>可善挺 2019.03 中国上市（自费 2998 元/支）</li>
+      <li>2020.12.28 谈入国家医保 → 2021.03.01 执行（医保价 1118 元/支）</li>
+      <li>所以 2021 下半年起大量患者从自费转医保，我的数据库里那批"2021.12 办理医保"就是证据</li>
+    </ul>
+  </div>
+
+  <h3 class="sec" id="p2_qa">常见 Q&A（点三角展开）</h3>
+  <details class="quote">
+    <summary>Q：可善挺是什么药，作用机理简单说一下？</summary>
+    <div class="quote-text">A：可善挺（司库奇尤单抗），是诺华的<b>全人源 IL‑17A 单克隆抗体</b>。IL‑17A 是银屑病发病关键致炎因子，药物结合 IL‑17A，阻断炎症信号通路，控制皮肤皮损；全人源结构，产生抗药抗体概率低，整体安全性不错。</div>
+  </details>
+  <details class="quote">
+    <summary>Q：成人常规怎么用药？</summary>
+    <div class="quote-text">A：体重 60 公斤以上成人中重度斑块银屑病，诱导期第 0、1、2、3、4 周，每周皮下注射，每次 300mg 也就是两支；诱导结束进入维持，<b>每四周给药一次，每次依旧两支</b>；体重偏低的患者医生会酌情减到 150mg 一支。用药前要筛查结核、肝功。</div>
+  </details>
+  <details class="quote">
+    <summary>Q：沈阳这边医保大概多少钱？</summary>
+    <div class="quote-text">A：国家医保支付价是 1188 元每支，医院药占比就按这个原价考核。办理银屑病特药病种之后，沈阳职工医保单支自付两百多，城乡居民医保四百多，受起付线会有小幅浮动；另外有一路挺你企业援助项目做二次报销。</div>
+  </details>
+  <details class="quote">
+    <summary>Q：为什么办特药审批一定要结核报告？</summary>
+    <div class="quote-text">A：IL‑17 抑制剂这类生物制剂，有激活潜伏结核的风险，用药前必须排查结核，沈阳这边标本统一送到沈阳第十人民医院做结核筛查，没有阴性结果，医保科不会通过特药申请。</div>
+  </details>
+</div>
+
+<!-- ============ 第 3 页：面试话术 7 模块 ============ -->
+<div class="page" id="p3">
+  <nav class="toc two">
+    <div class="toc-grp"><span class="toc-h">7 大模块跳转：</span>
+      <a href="#m1">框一 · 3分钟自我介绍</a>
+      <a href="#m2">框二 · 基地专项</a>
+      <a href="#m3">框三 · 特药审批</a>
+      <a href="#m4">框四 · 专家/会议</a>
+      <a href="#m5">框五 · 旁听门诊</a>
+      <a href="#m6">框六 · 抖音科普</a>
+      <a href="#m7">框七 · 压力&合规</a>
+    </div>
+  </nav>
+
+  <h2 class="page-sec" id="sec4">面试话术合集（诺华 MIC 实习 · 修正完整版）</h2>
+  <div class="callout red">🔴 合规红线：不聊灰色变通操作，只讲制度、材料、归档、学术沟通。</div>
+
+  <!-- 模块一 -->
+  <details class="sec-fold" id="m1" open>
+    <summary>一、3 分钟实习开篇总述<span class="badge-line gray">核心开场</span></summary>
+    <details class="quote">
+      <summary>Q：简单讲下你诺华 MIC 助理这段实习都做了什么？</summary>
+      <div class="quote-text">A：我本科在诺华做 MIC 助理，实习将近一整年，核心围绕可善挺的用药可及性工作。前期主要在七院皮肤科，患者体量很大；中期有一阶段 base 在辽宁省人民医院。<br><br>
+      <b>【主线一 · 用药可及性与医保特药流程】</b>中期七院药占比考核压力很高，可善挺医保支付价 1188 元一支，常规一次两支。七院制度要求想要办理本院特药医保，必须先有本院 1 个月传统药物治疗病历记录。受药占比限制，老患者开药被严格限制，很多东北患者冬天要去海南，想多携带药品，七院满足不了，团队就把存量患者分流到辽宁省人民医院、东北国际医院。<br><br>
+      三家医院审批模式差别很大。七院有独立医保科办公室，材料多、流程复杂；省人民、东北国际是门诊大厅的医保窗口，类似银行窗口，递交材料后内部办理，返回特药备案卡片，整体审核速度快。<br><br>
+      医保有硬性标准，皮损面积要大于等于三个手掌大小，才符合可善挺医保报销条件。省人民卡点在前端：需要采集皮损照片，由大主任评估皮损面积之后，才开具<b>特药使用审批表</b>；东北国际不卡皮损评估，材料简单，仅四项基础资料，当天审核完成。七院除特药审批表，还需要一个月传统治疗的病历、用药清单甚至缴费明细。<br><br>
+      铁路医保流程最特殊，除常规材料，还需要到铁路局线下医保窗口盖章认证，3 位带教老师大多处理不来，遇到这类患者，哪怕我白天常驻省人民，也需要折返七院对接处理。自费转医保的患者，不用重复做一个月传统治疗，但是要提供近半年可善挺自费购药发票，再配上特药审批表、用药协议，才可以走医保。<br><br>
+      <b>【主线二 · 省人民国家级诊疗基地专项】</b>我有一两个月主要待在省人民。一方面处理新入医保、分流过来的患者，和科室研究生配合，完成皮损照片采集归档、资料整理；<b>下午会到住院部办公室，参与辽宁省人民医院国家级银屑病规范化诊疗基地的专病数据库录入。国家这套登记系统字段非常繁杂，要录入患者基础信息、遗传史、烟酒嗜好、既往治疗史、全套检验报告、皮损评分、治疗方案、不良事件、随访计划还有多套评估量表，缺字段就无法提交。我完成一部分录入核对，大部分录入工作由科室研究生承担。基地现场认证当天，到场有中国医科大学肖汀教授、省人民医院院长以及本院皮肤科祝立丽主任，我负责归档材料整理、现场资料核对。</b>基地认证落地之后，会配套开展面向银屑病患者的社区科普患教讲座，我负责前期科普材料整理、手册核对以及现场资料分发。<br><br>
+      <b>【主线三 · 专家学术对接】</b>另一方面做专家对接：3 位带教各有退休返聘老专家客户，医院制度下他们不能参与药企主办会议，对新型生物制剂也存在临床顾虑。我没有销售指标，主要承接分属不同带教的两位返聘专家。我学习过公司 MIC 的 Role‑play 拜访方法论，<b>主战场是利用门诊碎片化间隙做合规学术拜访，提前梳理专家学术关注点；院内其他主任举办公开科室学术会时，陪同两位专家到场旁听并记录临床疑问；遇到周末行业公开学术会议，也抓住中场、会后机会继续学术交流</b>，整理用药反馈清单回传带教与医学部。<br><br>
+      <b>【主线四 · 旁听在职大主任门诊 · 患者分群与需求预判框架】</b>在职大主任，我在征得许可之后旁听门诊，重点观察门诊号源结构，区分银屑病初诊、复诊开药老患者以及其他皮肤病就诊人群；同时观察医生针对不同患者的治疗方案取舍，包括传统外用 / 系统药物、竞品生物制剂以及可善挺的选择逻辑，结合皮损、经济、医保条件综合判断；抓取患者医保报销、外出开药等现实痛点，门诊结束后复盘提炼标签，完善患者分群与需求预判框架，同步更新患者档案标签。<br><br>
+      <b>【结果沉淀】</b>日常维护 800+ 患者标签档案，梳理三家医院全套特药流程差异，沉淀内部可复用清单，带教遇到拿不准的医保流程经常打电话咨询我。一路挺你二次报销项目，我只提前告知患者留存发票、处方等全部凭证，整理材料清单，不会替患者线上提交。<br><br>
+      <b>【附加 · 抖音科普账号】</b>另外接手过一位主任的抖音科普账号，前后写脚本剪辑十多条，受平台审核规则限制，最终 6 条视频成功上线。</div>
+    </details>
+  </details>
+
+  <!-- 模块二 -->
+  <details class="sec-fold" id="m2" open>
+    <summary>二、银屑病规范化诊疗基地专项深挖问答<span class="badge-line gray">面试官爱追问</span></summary>
+    <details class="quote">
+      <summary>Q：你在省人民参与的国家级银屑病规范化诊疗基地，数据库录入具体是干什么，麻烦吗？</summary>
+      <div class="quote-text">A：这是国家皮肤与免疫疾病临床医学研究中心统一的银屑病专病登记系统，专门用于全国各中心做真实世界病例采集，字段和必填量表非常多，很繁琐。<br><br>
+      需要录入的内容包含：患者基础人口学信息、银屑病家族遗传史、烟酒等生活嗜好；既往全部治疗、过敏史；全套检验报告，血常规、肝功，还有送到沈阳十院的结核筛查结果；皮损 BSA、PASI 严重程度评分，还要上传皮损照片；本次给到的治疗方案、有没有药物不良事件；后续随访时间与随访计划，还要填写好几套标准化评估问卷，<b>任意一项缺填，整套记录就提交不上去</b>。<br><br>
+      我一般下午到住院部办公室做这块工作，我主要做：资料完整性核对、部分病例信息录入，检查检验报告、皮损照片有没有归档到位；整套录入工作量大，大部分主体录入工作还是科室研究生完成。</div>
+    </details>
+    <details class="quote">
+      <summary>Q：基地认证当天你做了哪些工作？</summary>
+      <div class="quote-text">A：现场线下核查认证，到场专家包括中国医科大学肖汀教授、省人民医院院长、本院皮肤科祝立丽主任。我主要提前整理部分患者统计汇总材料、专病归档病案，现场做材料调取、核对，保障专家组查阅资料可以快速拿到。</div>
+    </details>
+    <details class="quote">
+      <summary>Q：简历写"现场支持基地落地后的社区科普讲座"，这个科普讲座是什么？你做了什么？</summary>
+      <div class="quote-text">A：按照国家银屑病规范化诊疗中心的建设要求，基地通过认证之后，要配套做患者健康教育、科普患教活动，面向银屑病患者做疾病科普，纠正认知误区，讲规范治疗、日常护理、长期慢病管理，属于基地的固定配套工作。<br><br>
+      我不上台主讲。我的工作是前期整理银屑病科普宣教手册、核对科普物料；讲座现场做资料分发，旁听学习患教的表达方式。我不做讲课，全部是物料和现场辅助工作。</div>
+    </details>
+  </details>
+
+  <!-- 模块三 -->
+  <details class="sec-fold" id="m3" open>
+    <summary>三、各家医院特药审批深度问答<span class="badge-line gray">保留 · 微调</span></summary>
+    <details class="quote">
+      <summary>Q：七院、省人民、东北国际，递交医保材料的方式有什么不一样？</summary>
+      <div class="quote-text">A：七院是独立的医保科办公室，不是门诊窗口，所有纸质材料要对接医保科办公人员核对。省人民和东北国际是门诊大厅专门的医保窗口，就和银行办事窗口差不多，把整套材料递交进去，窗口内部完成审核，全部办好之后，会返回一张特药备案卡片给患者。后两者整体处理速度快很多。</div>
+    </details>
+    <details class="quote">
+      <summary>Q：办理可善挺医保特药，核心都需要哪些基础材料？</summary>
+      <div class="quote-text">A：每家医院细节有差异，但必备的核心材料是这几样：第一，<b>特药使用审批表</b>，医生开具，证明患者符合用药指征，这个是最重要的；第二，患者签署高值药品知情用药协议；第三，身份证、医保卡；第四，检验报告：血常规、尿常规、肝功，还有结核筛查报告，标本统一送沈阳十院，血常规当天出结果，结核报告一般下午才拿到。<br><br>
+      七院额外要求本院 1 个月传统药物治疗的病历记录、用药清单，病历要明确写明中重度斑块状银屑病，写明具体用药；病历记录不全，还需要去打印用药明细、缴费单据。<br><br>
+      省人民额外硬性要求皮损照片，用来评估皮损面积；东北国际材料最简单，一共四项基础资料，不额外卡皮损评估环节。</div>
+    </details>
+    <details class="quote">
+      <summary>Q：省人民为什么前期门槛更高？</summary>
+      <div class="quote-text">A：医保有明确要求，皮损面积要大于等于三个手掌大小，才满足可善挺医保报销条件。省人民皮肤科大主任把控很严格，不会直接就开特药审批表。我们会在诊室合规采集患者皮损照片，我和科室研究生先整理，给到主任审核评估皮损是否达标，主任确认符合条件之后，才会开具特药使用审批表，走完这一步，后面递交医保窗口审核就很快。</div>
+    </details>
+    <details class="quote">
+      <summary>Q：那七院这边皮损评估怎么做？</summary>
+      <div class="quote-text">A：七院是医生在诊室现场直接查看患者皮损，有时候我会在诊室协助拍摄皮损照片归档，形成患者皮损资料合集，作为病历配套材料留存，辅助医保科复核。七院最大难点不在皮损拍照，而是必须要有本院一个月传统药物治疗的病历记录，病历写得不完整，还要打印用药明细、缴费记录补充佐证。</div>
+    </details>
+    <details class="quote">
+      <summary>Q：自费转医保是什么场景，需要什么条件？</summary>
+      <div class="quote-text">A：有一部分患者之前一直在自费打可善挺，后续医保落地，想要转成医保结算。这种情况，不需要重复做一个月传统药物治疗，但有硬性条件：必须提供<b>近半年之内可善挺自费购药发票</b>，证明近半年确实在使用这个药。再配上医生开具的特药审批表、患者签署的知情用药协议，全套资料齐全才可以申请特药。如果近半年完全没有用药记录，就不能直接自费转医保。</div>
+    </details>
+    <details class="quote">
+      <summary>Q：铁路医保麻烦点具体在哪？</summary>
+      <div class="quote-text">A：铁路医保不属于普通职工或者城乡居民医保，是独立的医保体系。除了全部常规特药材料，还必须额外去铁路局专属医保窗口线下盖章做认证，才可以享受它的报销待遇。很多铁路系统的患者年纪偏大，对流程完全不熟悉，很容易带错材料白跑一趟。三位带教对这套流程接触很少，遇到铁路医保的 case，就算我人在省人民，也要赶回七院，梳理完整材料清单，告知患者到窗口办理的全部要点。</div>
+    </details>
+  </details>
+
+  <!-- 模块四 -->
+  <details class="sec-fold" id="m4" open>
+    <summary>四、退休返聘专家 · 拜访沟通专项<span class="badge-line gray">已更新</span></summary>
+    <details class="quote">
+      <summary>Q：为什么退休返聘专家这块客户交到你手上？你日常是怎么做拜访沟通的？</summary>
+      <div class="quote-text">A：我们一共 3 位销售带教，每个人手上都有退休返聘的老专家。医院制度明确返聘专家不能参加药企主办的科室会，传统会务拜访走不通，销售上门很容易引起对方警惕。我主要承接<b>分属两位不同带教的两位返聘老专家</b>，我本身没有任何销售指标，核心只做双向学术沟通、收集临床用药反馈。<br><br>
+      我虽然没有输出正式的客户 SWOT 评估表，但跟着带教平板完整学习过公司 MIC 培训的医生画像评估、Role‑play 全套合规拜访方法论，并且把这套逻辑用到实际沟通。<br><br>
+      拜访前提前做功课：研读产品资料、查阅银屑病最新文献，梳理两位专家接诊人群、学术关注点。<br><br>
+      <b>日常主战场就是门诊碎片化间隙做简短拜访</b>：合规自我介绍破冰，先倾听专家临床遇到的真实病例，做需求探询。这两位老专家接触新型生物制剂比较少，内心有顾虑，不敢轻易在临床使用。<br><br>
+      受医院规定他们不能参与药企主办会议，所以院内有其他主任举办公开科室学术会的时候，我会陪同两位专家到场旁听，让他们听同行分享真实世界用药经验，消解安全性方面的顾虑，我在旁边记录专家现场提出的疑问。<br><br>
+      <b>除此之外，遇到周末行业公开学术会议，两位专家以听众身份参会，我也会到场，利用中场休息、散会后的碎片时间继续做学术交流</b>。<br><br>
+      门诊、院内科室会、周末学术会上收集到的所有临床顾虑、病例观察，我逐条整理成反馈清单，同步给到带教以及医学部。</div>
+    </details>
+    <details class="quote">
+      <summary>Q：你拜访退休返聘专家，和销售拜访在职医生最大区别是什么？</summary>
+      <div class="quote-text">A：第一，我没有处方销售指标，完全不追求处方产出，核心两件事：递送合规学术资料，收集一线临床真实顾虑与反馈。<br><br>
+      第二，受医院制度限制，不能开展药企主办会议，沟通场景都是门诊碎片时间、院内公开学术活动、周末行业会议会后，沟通时间有限。<br><br>
+      第三，老专家对生物制剂认知有信息差，我的工作不是说服开药，而是补齐同行临床数据信息，再把专家的疑问向上反馈。</div>
+    </details>
+    <details class="quote">
+      <summary>Q：会碰到专家比较冷淡、不想多聊的情况吗，你怎么处理？</summary>
+      <div class="quote-text">A：门诊患者多的时候专家会很赶，我不会纠缠。留下整理好的文献资料，说明我主要来收集临床用药疑问，不做产品推销就离开；后续线上推送电子文献摘要，不频繁上门打扰。</div>
+    </details>
+    <details class="quote">
+      <summary>Q：那另外那几位返聘专家呢？</summary>
+      <div class="quote-text">A：还有几位返聘专家，大多只是简单递送资料，偶尔有些跑腿琐事、家常闲聊，不会开展深度学术沟通，不属于我重点维护对象，我主要深度对接就是分属两个带教的那两位。</div>
+    </details>
+  </details>
+
+  <!-- 模块五 -->
+  <details class="sec-fold" id="m5" open>
+    <summary>五、旁听在职大主任门诊<span class="badge-line gray">坚持不说陪诊</span></summary>
+    <details class="quote">
+      <summary>Q：你旁听在职大主任门诊，主要观察什么？收获是什么？</summary>
+      <div class="quote-text">A：征得带教和主任本人允许之后才旁听，我不介入医患沟通，不在诊室现场记笔记，全部等门诊结束之后复盘整理。<br><br>
+      我重点观察几类维度：<br>
+      第一，主任全天出诊的号源结构，区分银屑病初诊、复诊开药老患者，还有大量其他皮肤病就诊的患者；<br>
+      第二，看医生针对不同银屑病患者给出的治疗方案：有的患者选择传统外用激素、传统系统药物；一部分会考虑其他厂家生物制剂竞品；符合指征的中重度患者才会选用可善挺。我能看到医生是结合皮损严重程度、患者家庭经济、医保报销条件综合权衡选方案；<br>
+      第三，捕捉患者现实痛点：受医院药占比、医保政策带来的开药限制，还有东北患者冬天去海南外出用药的诉求，以及大家对自付费用的顾虑。<br><br>
+      我不做当日精确数字统计，更多抓取群体层面现象。把这些一线临床的方案选择逻辑、患者痛点提炼标签，用来完善简历写的<b>患者分群与需求预判框架</b>，同步更新到 800 多份患者档案标签，让我整理的多院区医保流程清单不是纸上谈兵，贴合真实门诊临床场景。</div>
+    </details>
+    <details class="quote">
+      <summary>Q：那复诊老患者占比大概多少？<span style="color:var(--mut);font-weight:400">（被逼问才说，不要主动讲）</span></summary>
+      <div class="quote-text">A：印象里面银屑病复诊老患者占比整体偏高，毕竟属于慢病需要长期随访。但是时隔时间比较久，精确的比例我记不太清，我当时重点观察的是医生的方案选择逻辑和患者业务卡点，没有专门做每日数字统计。</div>
+    </details>
+  </details>
+
+  <!-- 模块六 -->
+  <details class="sec-fold" id="m6" open>
+    <summary>六、抖音科普账号运营<span class="badge-line gray">还原真实情况</span></summary>
+    <details class="quote">
+      <summary>Q：讲讲你接手的医生抖音科普账号，为什么拍了十多条，只有 6 条上线？</summary>
+      <div class="quote-text">A：这位大主任原本有外部专业运营团队在维护账号，后来团队人员变动，合作终止，没有人继续承接。带教就把这个工作交给我。我独立完成全部脚本撰写、视频剪辑、后期维护。前后产出十多条视频，但是医疗类短视频平台审核规则非常严格，对疾病表述、用药相关内容管控很严，有好几条因为平台审核规则没有通过，无法上架，最终一共 6 条成功发布，后台我也会看播放、互动数据，做简单记录。当时七院像韩宪伟主任这类医生，科普账号运营做得很好，科室整体也有做医学科普的氛围。</div>
+    </details>
+  </details>
+
+  <!-- 模块七 -->
+  <details class="sec-fold" id="m7" open>
+    <summary>七、压力 & 合规类问答<span class="badge-line gray">收尾必答</span></summary>
+    <details class="quote">
+      <summary>Q：三家医院规则这么复杂，还有铁路医保这种特殊情况，还有基地大量繁杂录入，你觉得你的核心价值是什么？</summary>
+      <div class="quote-text">A：一方面，各家医院窗口要求、特殊医保的办理细节，之前大多是销售靠脑子记，很容易记混，给患者传递错误信息。我把全部材料清单、每个审批环节卡点、不同医保特殊要求，全部沉淀成书面流程文档。另一方面，银屑病规范化诊疗基地，系统录入字段细碎，很容易漏项，我做资料核对、部分录入，分担研究生的工作量。就算后续更换实习生接手，文档和归档资料都可以直接复用，把零散一线经验标准化就是我的价值。</div>
+    </details>
+    <details class="quote">
+      <summary>Q：有哪些合规的边界你会特别注意？</summary>
+      <div class="quote-text">A：拿不准的事情我不会自己做主，第一时间咨询带教，参考公司实习生合规手册。皮损照片全部是诊室临床场景下采集，只用于特药审批、专病数据库归档；我不收集、留存患者身份证等隐私信息；一路挺你援助项目，只做凭证留存的告知和清单给到患者，绝不登录账号代患者提交申请；不会向患者、医生许诺超出政策范围的待遇。超出我权限的诉求全部向上反馈。</div>
+    </details>
+  </details>
+</div>
+
+<!-- ============ 第 4 页：4.1 / 4.2 / 4.3 ============ -->
+<div class="page" id="p4">
+  <nav class="toc two">
+    <div class="toc-grp"><span class="toc-h">本页跳转：</span>
+      <a href="#p4_1">4.1 一句话概括</a>
+      <a href="#p4_2">4.2 role play 流程</a>
+      <a href="#p4_3">4.3 东软 JD 映射</a>
+    </div>
+  </nav>
+
+  <h2 class="page-sec" id="sec5">补充话术（概括 / role play / JD 映射）</h2>
+
+  <h3 class="sec" id="p4_1">4.1 一句话概括（被问"实习期间做了什么"）</h3>
+  <div class="card">
+    <div class="quote-text">"我在诺华做 MIC 助理实习，一年里主要做三块——学术拜访的 role play 训练、跨部门协调把用药可及性流程跑通、再加上科室会和专家会的材料支持。"</div>
+    <p style="margin-top:10px"><b>展开顺序建议：</b>先 role play（方法论）→ 再跨部门协调（最亮，用具体动作）→ 科室会 PPT / 抖音轻带。别一上来堆量。</p>
+  </div>
+
+  <h3 class="sec" id="p4_2">4.2 role play 完整流程（系统掌握合规拜访方法论）</h3>
+  <div class="card">
+    <div class="step"><div class="n">1</div><div class="tx"><b>准备</b>：研读产品资料（适应症、机制、循证、医保/价格），梳理目标医生画像（科室、学术偏好、潜在顾虑），明确本次拜访目标。</div></div>
+    <div class="step"><div class="n">2</div><div class="tx"><b>开场破冰</b>：合规自我介绍，建立信任，自然切入主题。</div></div>
+    <div class="step"><div class="n">3</div><div class="tx"><b>需求探询</b>：用开放式问题摸清医生临床痛点、用药顾虑、患者群特征。</div></div>
+    <div class="step"><div class="n">4</div><div class="tx"><b>学术价值传递</b>：基于医生需求，用循证数据讲差异化价值（FAB/循证），对接临床场景。</div></div>
+    <div class="step"><div class="n">5</div><div class="tx"><b>异议处理</b>：识别价格/竞品/安全性/合规类异议，用数据+话术化解，不硬推。</div></div>
+    <div class="step"><div class="n">6</div><div class="tx"><b>跟进闭环</b>：确认共识、约定下次触点/资料推送/会务邀请，形成拜访记录与数据沉淀。</div></div>
+    <div class="callout warn" style="margin-top:12px">合规边界（可顺带提一句显专业）：不承诺回扣、不超适应症推荐，遵守药企合规准则与《反不正当竞争法》。</div>
+    <div class="callout info">真实补充：role play 不止流程训练——正因为日常与多位客户（含退休返聘老专家）关系亲近，我的拜访模拟才更贴近真实场景。</div>
+  </div>
+
+  <h3 class="sec" id="p4_3">4.3 东软 JD 话术映射（诺华实习版 · 可选，贴合"医药数据服务"岗）</h3>
+  <div class="card">
+    <p>导师发的东软《医药数据服务业务分析师》JD，本质是"把零散业务沉淀成结构化数据服务"。你诺华实习的真实动作（对接患者/医生/医保、收零散材料、跑通报销流程）恰好能用这套话术"翻译"——既显专业、又不点破合规灰区。</p>
+    <ul class="tight">
+      <li><b>用户画像分析</b> → "我面向的是终端患者用户，实质在做患者画像与需求洞察。"</li>
+      <li><b>业务痛点识别</b> → "我先做痛点识别——常见卡点是材料不全、流程不清、情绪焦虑。"</li>
+      <li><b>需求调研 / 数据收集</b> → "我做的是需求调研与数据收集——把碎片信息主动补全成完整数据集。"</li>
+      <li><b>需求拆解 / 结构化</b> → "我把分散规则拆解、沉淀为结构化流程清单与标准化话术体系，相当于搭了一套小指标体系。"</li>
+      <li><b>指标体系 / 分析框架</b> → "我搭了覆盖多院区多医保类型的流程追踪框架，用数据看效率。"</li>
+      <li><b>跨部门协同落地</b> → "联动医生端、医保部门、内部带教推动落地。"</li>
+    </ul>
+    <div class="callout red">⚠️ 合规边界：纸面简历仍用"用药可及性 / 报销流程 / 跨部门协调"措辞；口述话术可放开用"用户画像 / 需求洞察 / 指标体系"，本质属实、不造假。避免直接说"我对接患者办医保材料"。</div>
+  </div>
+</div>
+
+<div class="dock" id="dock">
+  <button data-go="p1" title="表格清单与临床材料">①</button>
+  <button data-go="p2" title="报销购药流程">②</button>
+  <button data-go="p3" title="面试话术 7 模块">③</button>
+  <button data-go="p4" title="概括 / role play / JD 映射">④</button>
+  <button class="top" id="dockTop" title="回到开头">↑</button>
+</div>
+<button id="toTop" title="回到开头">↑</button>
+
+<script>
+function go(pid){
+  document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('active')});
+  document.querySelectorAll('.page').forEach(function(x){x.classList.remove('active')});
+  document.querySelector('.tab[data-p="'+pid+'"]').classList.add('active');
+  document.getElementById(pid).classList.add('active');
+  document.querySelectorAll('.dock button').forEach(function(b){
+    b.classList.toggle('on', b.dataset.go===pid);
+  });
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.getElementById('tabs').addEventListener('click', function(e){
+  var t=e.target.closest('.tab'); if(t) go(t.dataset.p);
+});
+document.getElementById('dock').addEventListener('click', function(e){
+  var b=e.target.closest('button'); if(b && b.dataset.go) go(b.dataset.go);
+});
+function toTop(){window.scrollTo({top:0,behavior:'smooth'})}
+document.getElementById('toTop').addEventListener('click', toTop);
+document.getElementById('dockTop').addEventListener('click', toTop);
+window.addEventListener('scroll', function(){
+  document.getElementById('toTop').classList.toggle('show', window.scrollY>320);
+});
+document.getElementById('themeSel').addEventListener('change', function(e){
+  document.body.setAttribute('data-theme', e.target.value);
+});
+var allOpen=false;
+document.getElementById('toggleAll').addEventListener('click', function(){
+  allOpen=!allOpen;
+  document.querySelectorAll('details').forEach(function(d){d.open=allOpen});
+  this.textContent = allOpen ? '全部收起' : '全部展开';
+});
+document.querySelector('.dock button[data-go="p1"]').classList.add('on');
+</script>
+</body>
+</html>
