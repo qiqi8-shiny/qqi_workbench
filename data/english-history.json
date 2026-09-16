@@ -1,110 +1,230 @@
 {
-  "updatedAt": "2026-09-13T17:50:51.469791+08:00",
+  "updatedAt": "2026-09-16T12:45:18.029593+08:00",
   "source": "AI 每3天自动轮换（SSS儿歌核心）",
   "current": {
-    "name": "数数",
+    "name": "动物叫声",
     "words": [
       [
-        "one",
-        "一"
+        "cow",
+        "奶牛"
       ],
       [
-        "two",
-        "二"
+        "pig",
+        "小猪"
       ],
       [
-        "three",
-        "三"
+        "dog",
+        "小狗"
       ],
       [
-        "finger",
-        "手指"
-      ],
-      [
-        "hand",
-        "小手"
-      ],
-      [
-        "block",
-        "积木"
-      ],
-      [
-        "star",
-        "星星"
+        "cat",
+        "小猫"
       ],
       [
         "duck",
         "小鸭"
       ],
       [
-        "cookie",
-        "饼干"
+        "sheep",
+        "绵羊"
+      ],
+      [
+        "horse",
+        "小马"
       ],
       [
         "baby",
         "宝宝"
       ],
       [
-        "count",
-        "数"
+        "mommy",
+        "妈妈"
       ],
       [
-        "show",
-        "比画"
+        "picture",
+        "图片"
       ],
       [
-        "clap",
-        "拍手"
+        "moo",
+        "哞"
       ],
       [
-        "hold",
-        "举起"
+        "oink",
+        "哼哼"
+      ],
+      [
+        "bark",
+        "汪汪"
+      ],
+      [
+        "meow",
+        "喵"
+      ],
+      [
+        "quack",
+        "嘎嘎"
+      ],
+      [
+        "baa",
+        "咩"
+      ],
+      [
+        "neigh",
+        "咴咴"
+      ],
+      [
+        "listen",
+        "听"
+      ],
+      [
+        "say",
+        "说"
       ],
       [
         "point",
         "指"
-      ],
-      [
-        "tap",
-        "点"
-      ],
-      [
-        "hop",
-        "跳"
-      ],
-      [
-        "wave",
-        "挥手"
       ]
     ],
     "dialogs": [
       [
         "Mom",
-        "Let's count! One, two, three!"
+        "Listen! The cow says moo. Moo, moo!"
       ],
       [
         "Baby",
-        "One! Two!"
+        "Moo! Moo!"
       ],
       [
         "Mom",
-        "Hold up your fingers. Show me three!"
+        "The little dog says woof. Can you bark?"
       ],
       [
         "Baby",
-        "Three! Fingers!"
+        "Woof! Woof!"
       ],
       [
         "Mom",
-        "Count the blocks. Clap, clap, clap!"
+        "The duck says quack. Listen to the cat. Meow!"
       ],
       [
         "Baby",
-        "More! Again!"
+        "Meow! Kitty!"
       ]
     ]
   },
   "history": [
+    {
+      "date": "2026-09-16",
+      "name": "动物叫声",
+      "words": [
+        [
+          "cow",
+          "奶牛"
+        ],
+        [
+          "pig",
+          "小猪"
+        ],
+        [
+          "dog",
+          "小狗"
+        ],
+        [
+          "cat",
+          "小猫"
+        ],
+        [
+          "duck",
+          "小鸭"
+        ],
+        [
+          "sheep",
+          "绵羊"
+        ],
+        [
+          "horse",
+          "小马"
+        ],
+        [
+          "baby",
+          "宝宝"
+        ],
+        [
+          "mommy",
+          "妈妈"
+        ],
+        [
+          "picture",
+          "图片"
+        ],
+        [
+          "moo",
+          "哞"
+        ],
+        [
+          "oink",
+          "哼哼"
+        ],
+        [
+          "bark",
+          "汪汪"
+        ],
+        [
+          "meow",
+          "喵"
+        ],
+        [
+          "quack",
+          "嘎嘎"
+        ],
+        [
+          "baa",
+          "咩"
+        ],
+        [
+          "neigh",
+          "咴咴"
+        ],
+        [
+          "listen",
+          "听"
+        ],
+        [
+          "say",
+          "说"
+        ],
+        [
+          "point",
+          "指"
+        ]
+      ],
+      "dialogs": [
+        [
+          "Mom",
+          "Listen! The cow says moo. Moo, moo!"
+        ],
+        [
+          "Baby",
+          "Moo! Moo!"
+        ],
+        [
+          "Mom",
+          "The little dog says woof. Can you bark?"
+        ],
+        [
+          "Baby",
+          "Woof! Woof!"
+        ],
+        [
+          "Mom",
+          "The duck says quack. Listen to the cat. Meow!"
+        ],
+        [
+          "Baby",
+          "Meow! Kitty!"
+        ]
+      ]
+    },
     {
       "date": "2026-09-13",
       "name": "数数",
