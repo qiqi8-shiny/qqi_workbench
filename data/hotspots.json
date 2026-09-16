@@ -1,7 +1,39 @@
 {
-  "updatedAt": "2026-09-10T12:47:49+08:00",
+  "updatedAt": "2026-09-16T23:58:01+08:00",
   "source": "AI 每周联网抓取（医用成像/ML可解释性）",
   "items": [
+    {
+      "tag": "政策",
+      "tagClass": "tag-policy",
+      "title": "政策持续发力：审评审批、临床转化与招采入院多维助推医疗器械创新升级",
+      "desc": "健康界综述指出，以国办发〔2024〕53号与2026年“春雨行动”为纲领，CMDE持续输出注册指导原则、新版生产质量管理规范将于2026年11月实施；医保端推行创新耗材优先赋码与医疗服务价格预立项、乙类大型设备实施省级集采，财政端多地对创新三类器械给予专项奖励。政策端打通“临床创意—专利—注册上市—入院”全链条，影像/AI器械企业可借创新通道与医工转化工具把握国产替代机遇。",
+      "link": "https://www.cn-healthcare.com/articlewm/20260821/content-1676509.html",
+      "pubDate": "2026-08-21"
+    },
+    {
+      "tag": "产业",
+      "tagClass": "tag-industry",
+      "title": "NMPA 批准 GE 核医学图像处理软件进口医疗器械注册（2026-09-11 送达）",
+      "desc": "国家药监局2026-09-11医疗器械批准证明文件送达信息显示，以色列 GE Medical Systems 的“核医学图像处理软件（Nuclear medical image processing software）”通过进口医疗器械注册（受理号 JQJ2600168）。作为医学影像处理类软件获 NMPA 准入，反映核医学影像后处理软件在华商业化通道持续开放，为进口影像器械本土落地提供样本。",
+      "link": "https://www.nmpa.gov.cn/zwfw/sdxx/sdxxylqx/qxpjfb/20260911153927195.html",
+      "pubDate": "2026-09-11"
+    },
+    {
+      "tag": "学术",
+      "tagClass": "tag-academic",
+      "title": "可解释机器学习整合多模态 CT 灌注预测急性缺血性卒中 9 月功能预后（Frontiers in Neurology 2026-08-26）",
+      "desc": "研究整合基线多模态 CT 灌注与临床数据，经 LASSO 初筛 + SHAP 精炼特征，构建 XGBoost 模型预测急性缺血性卒中患者血管内治疗后 9 月不良功能预后（mRS 3–6），测试集 AUC 达 0.956；SHAP 显示 Door-to-intervention interval、患侧 Hounsfield 单位与 CBV<42% 为最主要预测因子，将 SHAP 可解释性用于急性期卒中风险分层与个体化康复规划。",
+      "link": "https://www.frontiersin.org/journals/neurology/articles/10.3389/fneur.2026.1877613/full",
+      "pubDate": "2026-08-26"
+    },
+    {
+      "tag": "专利",
+      "tagClass": "tag-patent",
+      "title": "印度公布混合神经机器翻译与主题建模框架专利申请，LDA 与 BERTopic 直接对比",
+      "desc": "印度专利局公布专利申请 202641087023 A（2026-07-24 公开），提出融合神经机器翻译与主题建模的多语言社媒趋势发现框架，并系统对比 LDA 与 BERTopic 两类主题模型在主题一致性、多样性与覆盖度上的权衡。该专利用 LDA 的可解释概率主题结构支撑低资源跨语言内容分析，为专利文本主题建模方法提供可借鉴范式。",
+      "link": "https://www.indiagovnews.com/patentwipo/intellectual-property-india-publishes-patent-application-for-a-hybrid-neural-machine-translation-and-topic-modeling-framework-for-multilingual-social-media-trend-discovery-and-content-analysis/22215235539",
+      "pubDate": "2026-07-24"
+    },
     {
       "tag": "政策",
       "tagClass": "tag-policy",
