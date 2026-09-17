@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>科研板块 · 面试话术库（两课题合集）</title>
+<style>
+:root{
+  --bg:#0f1420; --bg2:#161d2e; --card:#1c2436; --line:#2a3550; --txt:#e6ebf5; --mut:#9aa7c2;
+  --accent:#5e8bff; --red:#ff5d6c; --yellow:#ffc24b; --green:#37d39b; --s5:#ff5d6c; --s4:#ffc24b; --s3:#5e8bff;
+}
+body[data-theme="powder"]{
+  --bg:#fdeef3; --bg2:#fff5f8; --card:rgba(255,255,255,.72); --line:#f3d4e0; --txt:#7a4a5e; --mut:#b08399;
+  --accent:#e88aae; --red:#e0608a; --yellow:#e8a86b; --green:#8fbf9a; --s5:#e0608a; --s4:#e8a86b; --s3:#e88aae;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.65;font-size:15px}
+header{position:sticky;top:0;z-index:20;background:var(--bg2);border-bottom:1px solid var(--line);padding:12px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+header h1{font-size:17px;margin:0;font-weight:700;letter-spacing:.5px}
+header .sub{color:var(--mut);font-size:12px}
+.spacer{flex:1}
+.theme-label{font-size:13px;color:var(--mut);display:flex;align-items:center;gap:6px}
+.theme-select{padding:6px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--txt);font-size:13px;cursor:pointer;outline:none}
+nav.tabs{display:flex;gap:4px;padding:10px 20px 0;background:var(--bg);border-bottom:1px solid var(--line);flex-wrap:wrap}
+.tab{padding:9px 16px;border:1px solid transparent;border-bottom:none;border-radius:10px 10px 0 0;cursor:pointer;color:var(--mut);font-size:14px;font-weight:600}
+.tab.active{background:var(--card);color:var(--accent);border-color:var(--line)}
+.page{display:none;padding:22px 20px 80px;max-width:1180px;margin:0 auto}
+.page.active{display:block}
+h2.page-sec{font-size:19px;margin:30px 0 12px;padding-bottom:8px;border-bottom:2px solid var(--accent)}
+h3.sec{font-size:16px;margin:22px 0 8px;color:var(--accent)}
+h4.sub{font-size:14px;margin:16px 0 6px;color:var(--txt);font-weight:700}
+p{margin:6px 0}
+.callout{border-left:4px solid var(--accent);background:var(--card);padding:10px 14px;border-radius:0 8px 8px 0;margin:10px 0;font-size:13.5px}
+.callout.warn{border-color:var(--yellow)}
+.callout.info{border-color:var(--green)}
+.callout.red{border-color:var(--red)}
+.badge-line{padding:8px 12px;border-radius:8px;font-weight:600;margin:8px 0;font-size:13.5px}
+.badge-line.red{background:rgba(255,93,108,.14);color:var(--red);border:1px solid rgba(255,93,108,.4)}
+.badge-line.yellow{background:rgba(255,194,75,.14);color:var(--yellow);border:1px solid rgba(255,194,75,.4)}
+.badge-line.green{background:rgba(55,211,155,.14);color:var(--green);border:1px solid rgba(55,211,155,.4)}
+.badge-line.gray{background:rgba(150,160,180,.14);color:var(--mut);border:1px solid var(--line)}
+.stat-line{font-size:13px;color:var(--mut);background:var(--bg2);padding:6px 12px;border-radius:6px;display:inline-block;margin:4px 0}
+.table-wrap{overflow-x:auto;margin:12px 0;border:1px solid var(--line);border-radius:10px}
+table.dt{border-collapse:collapse;width:100%;font-size:13px;background:var(--card)}
+table.dt th{background:var(--bg2);text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);font-weight:700;white-space:nowrap}
+table.dt td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+table.dt tbody tr:hover{background:rgba(94,139,255,.07)}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;vertical-align:middle}
+.dot.red{background:var(--red)} .dot.yellow{background:var(--yellow)} .dot.gray{background:var(--mut)} .dot.green{background:var(--green)}
+.lbl{display:inline-block;background:rgba(94,139,255,.16);color:var(--accent);border-radius:5px;padding:1px 6px;font-size:12px;font-weight:700;margin-right:4px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:14px 0;box-shadow:0 2px 10px rgba(0,0,0,.12)}
+.card-title{font-weight:700;font-size:15px;color:var(--accent);margin-bottom:8px;line-height:1.4}
+.flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:16px 0;padding:16px;background:var(--card);border:1px solid var(--line);border-radius:12px}
+.node{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:10px 14px;text-align:center;font-weight:700;font-size:13px}
+.node small{display:block;color:var(--mut);font-weight:400;font-size:11px;margin-top:3px}
+.arrow{color:var(--accent);font-size:20px;font-weight:700}
+.bars{margin:10px 0 18px}
+.bar-row{display:flex;align-items:center;gap:10px;margin:6px 0}
+.bar-name{width:210px;font-size:13px;flex-shrink:0;text-align:right;color:var(--mut)}
+.bar-track{flex:1;background:var(--bg2);border-radius:6px;overflow:hidden;display:flex;height:22px;min-width:120px}
+.bar-seg{height:100%}
+.bar-seg.s5{background:var(--s5)} .bar-seg.s4{background:var(--s4)} .bar-seg.s3{background:var(--s3)}
+.bar-num{width:150px;font-size:12px;flex-shrink:0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media(max-width:560px){.grid2,.grid3{grid-template-columns:1fr}.bar-name{width:110px}.bar-num{width:90px}}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:9px 8px;text-align:center}
+.kpi .num{font-size:20px;font-weight:800;line-height:1.2}
+.kpi .cap{font-size:11px;color:var(--mut);margin-top:3px;line-height:1.35}
+.kpi.red .num{color:var(--red)} .kpi.yellow .num{color:var(--yellow)} .kpi.blue .num{color:var(--accent)} .kpi.green .num{color:var(--green)}
+details.quote{margin:6px 0}
+details.quote>summary{cursor:pointer;list-style:none;color:var(--accent);font-weight:600;font-size:13px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+details.quote>summary::-webkit-details-marker{display:none}
+details.quote>summary::after{content:" ▸";color:var(--mut);font-size:12px}
+details.quote[open]>summary::after{content:" ▾";color:var(--mut);font-size:12px}
+details.quote .quote-text{margin-top:6px;padding:10px 12px;background:var(--bg2);border-left:3px solid var(--accent);border-radius:6px;font-size:13px;line-height:1.7;color:var(--txt)}
+.mono{font-family:Consolas,Monaco,monospace;font-size:12.5px}
+.pill{display:inline-block;padding:2px 8px;border-radius:6px;font-size:12px;font-weight:700;margin:2px 4px 2px 0}
+.pill.r{background:rgba(255,93,108,.16);color:var(--red)}
+.pill.y{background:rgba(255,194,75,.16);color:var(--yellow)}
+.pill.b{background:rgba(94,139,255,.16);color:var(--accent)}
+.pill.g{background:rgba(55,211,155,.16);color:var(--green)}
+.pill.n{background:rgba(150,160,180,.16);color:var(--mut)}
+.step{display:flex;gap:12px;align-items:flex-start;margin:10px 0}
+.step .n{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:var(--accent);color:#fff;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center}
+.step .tx{flex:1;font-size:13.5px}
+footer{text-align:center;color:var(--mut);font-size:12px;padding:20px}
+ul.tight{margin:6px 0;padding-left:20px}
+ul.tight li{margin:3px 0;font-size:13.5px}
+
+/* ===== 本页章节跳转（锚点映射） ===== */
+.toc{display:flex;flex-wrap:wrap;gap:7px;align-items:center;padding:10px 14px;background:var(--bg2);border:1px solid var(--line);border-radius:10px;margin:6px 0 20px;font-size:13px}
+.toc .toc-h{color:var(--mut);font-weight:700;margin-right:2px;white-space:nowrap}
+.toc a{color:var(--accent);text-decoration:none;padding:4px 11px;border:1px solid var(--line);border-radius:20px;background:var(--card);transition:.15s;white-space:nowrap}
+.toc a:hover{border-color:var(--accent);background:rgba(94,139,255,.12)}
+html{scroll-behavior:smooth}
+.page-sec, details.sec-fold>summary{scroll-margin-top:86px}
+/* ===== 章节折叠（三角号） ===== */
+details.sec-fold{margin:24px 0}
+details.sec-fold>summary{cursor:pointer;list-style:none;font-size:18.5px;font-weight:700;margin:0;padding:0 0 9px;border-bottom:2px solid var(--accent);color:var(--txt);display:flex;align-items:center;gap:8px;line-height:1.35}
+details.sec-fold>summary::-webkit-details-marker{display:none}
+details.sec-fold>summary::after{content:"▸";color:var(--mut);font-size:15px;margin-left:auto;font-weight:400;transition:.15s}
+details.sec-fold[open]>summary::after{content:"▾"}
+details.sec-fold .badge-line{margin-left:8px;padding:4px 10px;font-size:12px}
+
+/* ===== 右侧跳转坞 ===== */
+.dock{position:fixed;right:14px;top:50%;transform:translateY(-50%);z-index:40;display:flex;flex-direction:column;gap:8px}
+.dock button{width:38px;height:38px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--mut);font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 3px 10px rgba(0,0,0,.18);transition:.15s}
+.dock button:hover{color:var(--accent);border-color:var(--accent);transform:translateX(-2px)}
+.dock button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.dock .top{margin-top:6px;background:var(--bg2)}
+#toTop{position:fixed;right:16px;bottom:16px;z-index:41;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--accent);font-size:18px;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.22);display:none;align-items:center;justify-content:center}
+#toTop.show{display:flex}
+#toTop:hover{background:var(--accent);color:#fff}
+.btn-mini{padding:6px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--txt);cursor:pointer;font-size:13px}
+.btn-mini:hover{border-color:var(--accent);color:var(--accent)}
+/* ===== 就地编辑（背诵时自行改写，存在本机浏览器） ===== */
+.ebar{display:flex;justify-content:flex-end;align-items:center;gap:6px;margin-top:10px;user-select:none}
+.ebar button{font-family:inherit;font-size:11.5px;line-height:1.2;padding:5px 11px;border-radius:14px;border:1px dashed var(--line);background:transparent;color:var(--mut);cursor:pointer;transition:.15s}
+.ebar button:hover{border-color:var(--accent);color:var(--accent)}
+.ebar button.ed.on{background:rgba(94,139,255,.16);border-style:solid;border-color:var(--accent);color:var(--accent);font-weight:700}
+.ebar button.ed.done{border-style:solid;border-color:var(--green);color:var(--green)}
+.ebar button.undo{border-style:dotted}
+.ebar button.undo:hover{border-color:var(--red);color:var(--red)}
+[contenteditable="true"]{outline:2px dashed var(--accent);outline-offset:5px;border-radius:8px;cursor:text}
+[contenteditable="true"]:focus{outline-style:solid}
+.edited-flag{display:inline-block;font-size:11px;color:var(--green);border:1px solid var(--green);border-radius:10px;padding:1px 7px;margin-left:6px;vertical-align:middle}
+#resetAll{font-family:inherit;font-size:12px;padding:6px 10px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--mut);cursor:pointer}
+#resetAll:hover{border-color:var(--red);color:var(--red)}
+@media(max-width:900px){.dock{display:none}}
+@media(max-width:640px){.ebar button{font-size:12px;padding:6px 12px}}
+</style>
+</head>
+<body data-theme="dark">
+
+<header>
+  <h1>科研板块 · 面试话术库</h1>
+  <span class="sub">两课题合集 ｜ 医用成像器械专利预测 ＋ CT 设备召回风险预测 ｜ 话术 / 数据 / 方法 / 防御 Q&amp;A</span>
+  <span class="spacer"></span>
+  <button class="btn-mini" id="toggleAll">全部展开</button>
+  <button id="resetAll" title="把编辑过的内容还原成最初版本" style="display:none">↺ 还原全部修改</button>
+  <button class="btn-mini" id="exportEdit" title="把你改过的内容导出成文字，方便发给助理写进文件">📋 导出我的修改</button>
+  <span class="theme-label">主题
+    <select class="theme-select" id="themeSel">
+      <option value="dark">深蓝</option>
+      <option value="powder">粉透</option>
+    </select>
+  </span>
+</header>
+
+<nav class="tabs" id="tabs">
+  <div class="tab active" data-p="p1">① 专利课题</div>
+  <div class="tab" data-p="p2">② CT 设备召回</div>
+  <div class="tab" data-p="p3">③ 共性 · 人设 · 总原则</div>
+  <div class="tab" data-p="p4">④ 文献计量板块</div>
+  <div class="tab" data-p="p5">⑤ 网络药理学大创</div>
+</nav>
+
+<!-- ============ 第 1 页：专利课题 ============ -->
+<div class="page active" id="p1">
+
+  <div class="toc"><span class="toc-h">本页跳转：</span>
+    <a href="#p1_s1">电梯陈述</a><a href="#p1_s2">背景动机</a><a href="#p1_s3">数据</a>
+    <a href="#p1_s4">方法</a><a href="#p1_s5">结果</a><a href="#p1_s6">业务价值</a>
+    <a href="#p1_s7">技术 Q&amp;A</a><a href="#p1_s8">分步话术</a>
+  </div>
+
+  <details class="sec-fold" id="p1_s1" open>
+    <summary>一、电梯陈述（三种长度）</summary>
+    <div class="card"><div class="card-title">30 秒版</div>
+      <div class="quote-text">"我做过一个基于可解释 AI 的医用成像器械专利转化预测项目。我先用智慧芽的小样本把整套'检索-清洗-标签-防泄露'流程跑通验证，再把它迁移到知网（AI Pat+）这个大数据平台——知网原始导出 66,082 条，二次查准保留 43,463 条，去重后建模样本 42,849 条（约 4.3 万）——用 LDA 挖技术主题、用 SHAP 解释哪些因素驱动高转化。核心亮点是我系统性防了数据泄露、而且模型结论是可解释的。"</div>
+    </div>
+    <div class="card"><div class="card-title">1 分钟版</div>
+      <div class="quote-text">"基于医用成像器械专利的可转化预测。数据处理分两阶段：先在 大为+智慧芽（3.4 万条）上把检索式、IPC 筛选、种子专利、去重、标签查准、防泄露这套方法跑通验证；验证扎实后直接迁移到 知网（AI Pat+），知网是大数据主体——原始 66,082 → 二次查准 43,463 → 去重后建模样本 42,849 条（约 4.3 万）。方法上 LDA(K=15) 提主题、主动移除含未来信息的字段防泄露、多模型比 F1、SHAP 解释。价值是不仅给分数，还能说清'为什么'，对应商业分析里'数据→洞察→决策'的闭环。"</div>
+    </div>
+    <div class="card"><div class="card-title">2 分钟版</div>
+      <div class="quote-text" style="color:var(--mut)">（= 下面「背景 + 数据 + 方法 + 价值」四节合起来讲，不用另背。）</div>
+    </div>
+  </details>
+
+  <details class="sec-fold" id="p1_s2" open>
+    <summary>二、项目背景与动机<span class="badge-line gray">讲给业务方 / 非技术面试官</span></summary>
+    <div class="card">
+      <div class="quote-text">"专利数量爆炸，但真正转化（被转让、许可、质押）的只是少数。企业研发和 IP 部门最缺的不是'有多少专利'，而是'哪些值得投'。"</div>
+      <div class="quote-text" style="margin-top:8px">"传统做法是专家人工判断，慢、主观、不可规模化。我想用数据驱动的方式，给每条专利一个'转化潜力'信号，并且能解释原因。"</div>
+    </div>
+  </details>
+
+  <details class="sec-fold" id="p1_s3" open>
+    <summary>三、数据部分<span class="badge-line red">你实际做的，重点讲，这是真活</span></summary>
+    <div class="card">
+      <div class="card-title">来源与演进（两阶段，最关键）</div>
+      <div class="quote-text">这个课题的数据处理不是一步到位。<b>第一阶段</b>，我先用 大为、智慧芽两个库（合计 3.4 万条题录，21 字段）把整套方法——检索式 + 关键词扩充 + IPC 筛选 + 种子专利、去重、标签体系、防泄露审计——完整跑通并验证；<b>第二阶段</b>，把这套已验证的流程直接迁移到知网（AI PAS），知网才是真正的大数据主体。</div>
+    </div>
+    <div class="card">
+      <div class="card-title">检索策略</div>
+      <div class="quote-text">检索式构建 + 关键词扩充 + IPC 分类号筛选 + 种子专利策略四件套，不是随便导出。</div>
+    </div>
+    <div class="card">
+      <div class="card-title">规模（知网大数据主体）</div>
+      <div class="flow">
+        <div class="node">知网原始导出<br><small>66,082 条</small></div><div class="arrow">→</div>
+        <div class="node">脚本二次查准<br><small>43,463 条</small></div><div class="arrow">→</div>
+        <div class="node">去重后建模样本<br><small>42,849 条（约 4.3 万）</small></div>
+      </div>
+      <div class="quote-text">后续所有数据处理细节都以知网这 42,849 为主体（28 字段）。</div>
+    </div>
+    <div class="card">
+      <div class="card-title">标签质量背书</div>
+      <div class="quote-text">标签以"转让/许可/质押"三类真实转化事件构建，<b>固定种子抽 400 件人工核对，查准率 ≈97%</b>——说明我的建模口径是可靠的、可追溯的，不是拍脑袋。</div>
+    </div>
+  </details>
+
+  <details class="sec-fold" id="p1_s4" open>
+    <summary>四、方法部分</summary>
+    <div class="card">
+      <ul class="tight">
+        <li><b>文本</b>：文本源扩展至权利要求书，jieba 分词 + 停用词 + 词性筛选，LDA(K=15)（困惑度 + 一致性 c_v 双指标网格搜索，K=5–31、seed=42），不是瞎设 K。</li>
+        <li><b>结构化</b>：技术/主体/经济/法律多维特征工程 + LDA 主题 + K-Means(K=5) 聚类特征。</li>
+        <li><b>防泄露（最硬的方法严谨点）</b>：主动识别并移除"专利维持年限"等含未来信息的特征，并采用时间分割——杜绝用未来信息预测过去。</li>
+        <li><b>模型</b>：LR / SVM / RF / XGBoost 等多模型横向对比，GridSearchCV 调优，按 F1-macro 评估（因为类别不平衡，不用准确率糊弄）。</li>
+        <li><b>可解释（SHAP）</b>：从测试集抽取 1500 条代表性样本（seed=42）开展 SHAP 分析——树模型用 TreeExplainer、线性模型用 KernelExplainer，量化每个特征对预测的贡献，回溯驱动高转化的关键因素，把黑盒模型变成能解释的白盒。</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="sec-fold" id="p1_s5" open>
+    <summary>五、结果 / 阶段成果</summary>
+    <div class="card">
+      <div class="quote-text">随机森林最优，<b>F1-macro 0.6606、F1-weighted 0.8780</b>（数字来自实际模型对比，可放心讲）。</div>
+      <div class="quote-text" style="margin-top:8px">建立"医用成像器械专利可转化预测框架"：LDA 揭示技术主题分布 + SHAP 回溯驱动高转化的关键因素 → 转化为可解释的专利布局建议。</div>
+    </div>
+  </details>
+
+  <details class="sec-fold" id="p1_s6" open>
+    <summary>六、业务价值<span class="badge-line green">BA / 市场洞察岗视角，重点</span></summary>
+    <div class="card">
+      <div class="quote-text">"我不是只给个黑盒分数，而是能说清'为什么这条专利高转化'——这就是把模型输出变成可执行的专利布局建议。"</div>
+      <div class="quote-text" style="margin-top:8px">"对应商业分析的核心闭环：数据 → 洞察 → 决策。我能把非结构化的专利文本，变成业务能直接用的人口级信号。"</div>
+      <div class="quote-text" style="margin-top:8px">"而且我对数据质量有洁癖——查准率 97%、系统性防泄露，意味着我给老板的结论是经得起追问的，不是调包跑出来的。"</div>
+    </div>
+  </details>
+
+  <details class="sec-fold" id="p1_s7" open>
+    <summary>七、技术深挖 Q&amp;A 防御库</summary>
+    <details class="quote"><summary>Q：LDA 和 BERT 类模型比，是不是太老？</summary>
+      <div class="quote-text">A：课题目标是可解释的主题分布，LDA 的主题词人是能直接读的，比嵌入向量更适合给业务方讲；而且我们用困惑度+一致性双指标调优，不是拍 K。如果追求语义深度可以上 BioBERT，但可解释性会牺牲。</div></details>
+    <details class="quote"><summary>Q：F1-macro 0.66 不算高吧？</summary>
+      <div class="quote-text">A：这是类别不平衡下的 macro 均值，且数据本身噪声大（专利文本）。我的贡献重点在数据质控和可解释，不是刷分；0.66 在同类专利转化预测里是合理水平。</div></details>
+    <details class="quote"><summary>Q：为什么用 F1-macro 不用 AUC？</summary>
+      <div class="quote-text">A：多类别下 macro-F1 对少数类更敏感，能暴露不平衡问题；AUC 在类别不平衡时容易虚高。两者都看，汇报用 F1-macro 更诚实。</div></details>
+    <details class="quote"><summary>Q：你说的"防泄露"具体指什么？</summary>
+      <div class="quote-text">A：最典型是"专利维持年限"——一条专利如果已经维持了很多年，本身就意味着它活下来了、转化概率高，但这个信息是申请之后才有的未来信号，拿来当特征就是作弊。我把它和这类字段全移除，并用时间分割训练/测试，保证测试集时间上严格晚于训练集。</div></details>
+    <details class="quote"><summary>Q：SHAP 是什么？你为什么一定要做模型可解释？</summary>
+      <div class="quote-text">A：传统机器学习/深度学习模型常是"黑盒"——只输出预测结果，说不清"为什么判它高转化"。SHAP 基于博弈论的特征归因，能对每一个样本量化"每个特征把预测往正类推了多少"，把黑盒变成白盒。我坚持做可解释，一是因为我的核心价值不是给个分数，而是给业务方能直接用的"为什么"；二是可解释能反过来验证特征工程有没有泄露、有没有荒谬驱动——它是我这套框架里和"防泄露"并列的另一块严谨招牌。</div></details>
+    <details class="quote"><summary>Q：全部样本做 SHAP 算力很大吧？你怎么做？</summary>
+      <div class="quote-text">A：对，全量 SHAP 在树模型上要算每个样本每个特征的边际贡献，算力开销很大。所以我从测试集随机抽取 1500 条代表性样本（固定随机种子 seed=42，保证可复现）开展 SHAP 分析；树模型（随机森林）用 TreeExplainer、线性模型用 KernelExplainer。1500 条足以稳定估计特征重要性排序，且结论可复现——这也是我对算力/质量权衡的一个务实处理。</div></details>
+    <details class="quote"><summary>Q：你的 SHAP 得出了什么结论？哪些因素真正驱动高转化？</summary>
+      <div class="quote-text">A：SHAP 平均重要性显示，驱动预测的因素是"法律强度 + 核心成像 IPC + LDA 文本主题"三类互补，不是单一来源：
+      <ul class="tight">
+        <li><b>法律强度类最突出</b>：简单同族专利申请数量（同族规模，反映布局广度与稳定性）贡献最高，权利要求近似数量（权项数，反映技术保护厚度）次之；申请人类型里"高校"明显靠前——说明高校/科研主体的专利更易被许可、转让。</li>
+        <li><b>核心成像 IPC</b>：G06T（图像数据处理，医用成像核心赛道）、A61B（诊断/外科器械）贡献显著，正好印证课题聚焦"医用成像器械"这个细分赛道。</li>
+        <li><b>文本语义类</b>：多个 LDA 技术主题（主题_3/4/2/8/1 等）进入 Top 特征，说明权利要求书的文本本身携带可转化信号，不是只靠结构字段硬凑。</li>
+      </ul>
+      这三点可直接转成专利布局建议——扩同族、补权项、盯核心 IPC、优先看高校来源——这就是可解释带来的业务落地价值，也是我比起同方向黑盒研究多出来的一块。</div></details>
+    <details class="quote"><summary>Q：为什么先用大为智慧芽小样本、再换知网？</summary>
+      <div class="quote-text">A：先小样本把方法验证扎实，调参快、成本低；验证稳了再迁移到知网大数据（66,082 条，约为智慧芽 2 倍），避免在大库上反复试错。迁移时我还重新对齐了字段 schema（知网 28 列 vs 小库 21 列），按法律唯一号去重，保证方法在大数据上仍可靠。</div></details>
+    <details class="quote"><summary>Q：知网 66,082、你建模才 42,849，中间怎么筛的？</summary>
+      <div class="quote-text">A：66,082 是知网按检索式（6 个 IPC + 中英关键词）原始导出的医用成像器械领域总量；先 Python 脚本二次查准（保留/排除词表）保留 43,463 条，再去重（按公开号）得 42,849 条建模样本。每步可解释、可复核，不是随便砍。</div></details>
+    <details class="quote"><summary>Q：多分类还是二分类？标签到底怎么定的？</summary>
+      <div class="quote-text">A：我把"标签怎么定"当成独立子任务，在约 4.3 万条样本上对二分类和 7 种三分类方案（按"转移3/许可2/质押1"加权、转移中心、事件计数、不同阈值等）做了系统对比。结论很明确——三分类无论怎么分都高度不均衡，数据里其实只有两种结构：要么"中类坍缩"（M1/M1b/M3 里"只许可或只质押"的中类仅占 2.8%），要么"高类压到极稀疏"（M4/M5/M2b 里高类 ≤0.7%，M2 高类甚至只有 9 件，而 SHAP 每类至少需数百样本才稳，解释力根本不可靠）。最理想的 M1 方案（转移3/许可2/质押1，≥3 为高 / 1~2 为中 / 0 为低）高类 16%，基本就等于二分类正类 18.8% 减去那 2.8% 的"仅许可/质押"——三分类相对二分类几乎没有增益。所以我最终定的是<b>二分类作主结果</b>，同时用 <b>M1 三分类做敏感性 / 鲁棒性分析</b>（同一套特征重跑一次三分类标签，单独一小节报告"换标签后结论是否稳健、中类稀疏如何限制三分类"）。这样既拿到最稳的主结论，又诚实地把方法边界交代清楚——比硬做三分类虚报精度更经得起答辩追问。</div></details>
+    <details class="quote"><summary>Q：做标签划分的时候有没有遇到什么问题？</summary>
+      <div class="quote-text">A：有，最棘手的是"多分类划不准"。三分类无论怎么加权都高度不均衡——数据里其实只有两种结构：要么中类坍缩（"只许可或只质押"的中类仅 2.8%），要么高类压到极稀疏（M4/M5/M2b 高类 ≤0.7%，M2 高类甚至只有 9 件，而 SHAP 每类至少需数百样本才稳，解释力根本不可靠）。所以我没有硬上三分类，而是退回二分类这个最稳的口径。</div></details>
+    <details class="quote"><summary>Q：如何保证你的标签划分结果是稳健可靠的？</summary>
+      <div class="quote-text">A：两道防线。一是"查准背书"——标签来自转让/许可/质押三类真实法律事件，固定随机种子抽 400 件人工核对，查准率 ≈97%，不是拍脑袋打标；二是"敏感性 / 鲁棒性分析"——我保留了一套相对理想的三分类方案（转移3/许可2/质押1），用同一套特征重跑一次三分类标签，单独看"换标签粒度后结论是否还稳"，确认主结果不因标签定义方式而漂移。这比只报一个数更诚实。</div></details>
+    <details class="quote"><summary>Q：样本量够吗？</summary>
+      <div class="quote-text">A：医用成像器械是细分领域，知网原始 66,082、二次查准 43,463、建模样本 42,849（约 4.3 万），是合理规模；且我有"先小样本验证再迁移"的流程控制和 97% 查准背书，质量重于数量。</div></details>
+  </details>
+
+  <details class="sec-fold" id="p1_s8" open>
+    <summary>八、数据处理分步话术<span class="badge-line yellow">5 个子任务，以知网为主体</span></summary>
+    <div class="card"><div class="card-title">子任务 1｜小样本验证方法 → 迁移知网大数据（先小后大）</div>
+      <div class="quote-text">动作：先在 智慧芽（34,123 条，约 3.4 万，21字段；检索式最初由大为辅助确定）把检索式/IPC/种子专利/去重/标签查准/防泄露 全跑通验证；方法钉死后，整套流程迁移到 知网（AI Pat+，66,082 原始→43,463 二次查准→42,849 去重建模样本，28字段）。<br>
+      <b>分任务点</b>：先小后大——小样本验证成本低，验证稳了再上大库，避免在大库反复试错。<br>
+      <b>细心点</b>：迁移不是复制粘贴——知网 28 列 vs 小库 21 列 schema 不同，我重新对齐字段、按法律唯一号去重，保证大数据上方法仍可靠。</div>
+    </div>
+    <div class="card"><div class="card-title">子任务 2｜去重与字段对齐（知网 28 字段）</div>
+      <div class="quote-text">动作：按"公开号"法律唯一键去重（不按标题，避免家族专利误杀/误并）；去重后 42,849。<br>
+      <b>细心点</b>：跨库字段命名不同，先统一 schema 再 merge。</div>
+    </div>
+    <div class="card"><div class="card-title">子任务 3｜标签体系构建（抽样查准，知网 42,849）</div>
+      <div class="quote-text">动作：标签从"转让/许可/质押"三类真实法律转化事件抽取；固定种子抽 400 件人工核对，查准率 ≈97%。<br>
+      <b>细心点（最关键）</b>：用抽样给标签质量背书，而不是"标完就信"。这步是大多数做预测的人会跳过的，我专门留了。</div>
+    </div>
+    <div class="card"><div class="card-title">子任务 4｜防泄露字段审计（逐列审查，知网）</div>
+      <div class="quote-text">动作：逐列审计是否含未来信息，识别并移除"专利维持年限"等作弊字段 + 时间分割训练/测试。<br>
+      <b>细心点</b>：这是整个课题最容易翻车的坑，我主动堵了。</div>
+    </div>
+    <div class="card"><div class="card-title">子任务 5｜文本预处理 + 多维特征工程（知网）</div>
+      <div class="quote-text">动作：权利要求书 jieba 分词 + LDA(K=15) 双指标调优；技术/主体/经济/法律四维特征独立构造、独立查缺失率。<br>
+      <b>细心点</b>：K 不是拍脑袋，用两个指标交叉验证；四维独立构造，哪个维度缺字段一眼能定位。</div>
+    </div>
+    <div class="callout info">👉 <b>一句话总结（专利）</b>："我先把方法在智慧芽小样本上跑通验证，再迁移到知网 66,082 大数据——数据处理大头都在知网；从检索、去重、抽样查准标签、逐列审计防泄露到分维度特征，每一步单独质检，所以最后敢说数据是干净的。"</div>
+  </details>
+
+</div>
+
+<!-- ============ 第 2 页：CT 设备召回 ============ -->
+<div class="page" id="p2">
+
+  <div class="toc"><span class="toc-h">本页跳转：</span>
+    <a href="#p2_s1">电梯陈述</a><a href="#p2_s2">背景动机</a><a href="#p2_s3">数据</a>
+    <a href="#p2_s4">标签构建</a><a href="#p2_s5">方法</a><a href="#p2_s6">业务价值</a>
+    <a href="#p2_s7">技术 Q&amp;A</a><a href="#p2_s8">身份/进度</a><a href="#p2_s9">弱点圆场</a><a href="#p2_s10">分步话术</a>
+  </div>
+
+  <details class="sec-fold" id="p2_s1" open>
+    <summary>一、电梯陈述</summary>
+    <div class="card"><div class="card-title">30 秒版</div>
+      <div class="quote-text">"我做了一个基于 FDA 千万级不良事件报告的 CT 设备召回风险预测模型，用预训练语言模型 + 集成学习，把'出了事再召回'变成'事前预警'，而且能解释哪些因素推高风险。"</div>
+    </div>
+    <div class="card"><div class="card-title">1 分钟版</div>
+      <div class="quote-text">"基于 FDA MAUDE 数据库（CT 设备产品码 JAK），我从 2149 万行里筛出四千多份 CT 报告，但 MAUDE 厂商填报极不规范、产品码不可靠，我建了四重判据+文本复核剔除误报、去重，得到两千多份干净样本。标签上我用'报告接收日为锚点的前向时间窗'杜绝前视泄漏。方法是 BioBERT 句向量 + 结构化特征融合 + 集成学习 + SHAP 解释。价值是把千万条投诉文本变成可量化的设备风险信号。"</div>
+    </div>
+    <div class="card"><div class="card-title">2 分钟版</div>
+      <div class="quote-text" style="color:var(--mut)">（背景 + 数据 + 方法 + 价值 四节合起来讲。）</div>
+    </div>
+  </details>
+
+  <details class="sec-fold" id="p2_s2" open>
+    <summary>二、项目背景与动机</summary>
+    <div class="card">
+      <div class="quote-text">"医疗设备召回往往是'出了事故才被动召回'，代价极高。如果能从 FDA 收到的不良事件报告里提前预测'这台设备会不会被召回'，企业质量部门和监管都能事前介入。"</div>
+      <div class="quote-text" style="margin-top:8px">"难点在于：数据是千万级非结构化文本 + 厂商填报极不规范。"</div>
+    </div>
+  </details>
+
+  <details class="sec-fold" id="p2_s3" open>
+    <summary>三、数据部分<span class="badge-line red">重点，真落地</span></summary>
+    <div class="card">
+      <div class="card-title">来源</div>
+      <div class="quote-text">FDA MAUDE 公开数据库，CT 类设备产品码 JAK。</div>
+    </div>
+    <div class="card">
+      <div class="card-title">漏斗（四重判据 + 复合键去重）</div>
+      <div class="flow">
+        <div class="node">device 表全量<br><small>2149 万行</small></div><div class="arrow">→</div>
+        <div class="node">初筛 JAK<br><small>4227 份</small></div><div class="arrow">→</div>
+        <div class="node">四重判据剔除<br><small>−1567（95.7% 呼吸介入误填）</small></div><div class="arrow">→</div>
+        <div class="node">同文去重<br><small>−453（17.0%）</small></div><div class="arrow">→</div>
+        <div class="node">高质量样本<br><small>2208 份<br>召回 613 / 未召回 1272</small></div>
+      </div>
+      <div class="quote-text">针对"厂商填报不规范导致产品码不可靠"，建<b>"器械名称为主、事件文本为辅、型号与产品谱系兜底"的多重核验（四重判据）</b>，剔除 1567 份非目标器械（95.7% 是呼吸介入导航类错填成 CT，迭代 5 轮捞回 8 份真 CT）；"归一化文本+型号+接收月份"复合键同文去重 −453 份（17.0%）→ 2208 份高质量样本（约 1:2.1）。</div>
+    </div>
+    <div class="card">
+      <div class="card-title">扩窗</div>
+      <div class="quote-text">数据窗口由 2012–2025 扩到 2005–2025，样本 2208 → 2582 份（阳性 670），兼顾时效跨度与覆盖。</div>
+    </div>
+  </details>
+
+  <details class="sec-fold" id="p2_s4" open>
+    <summary>四、标签构建<span class="badge-line yellow">最硬的方法严谨点，必讲</span></summary>
+    <div class="card">
+      <div class="quote-text">"召回标签最容易翻车：召回库填报滞后，如果直接用'是否已召回'当标签，会偷偷用未来信息预测过去（前视泄漏）。"</div>
+      <div class="quote-text" style="margin-top:8px">我的做法：<b>以报告接收日为锚点，设计前向时间窗（0–2 年）</b>匹配召回库——报告日后 2 年内发生的召回才算正样本，从根上杜绝泄漏。<br>
+      型号级 / 厂名级双标签：型号缺失时以厂名级兜底，提升召回敏感性（宁漏勿错配）。</div>
+    </div>
+  </details>
+
+  <details class="sec-fold" id="p2_s5" open>
+    <summary>五、方法部分</summary>
+    <div class="card">
+      <ul class="tight">
+        <li><b>文本</b>：BioBERT / ClinicalBERT 提取 [CLS] 768 维句向量作语义特征。</li>
+        <li><b>融合</b>：与厂商/事件类型独热、年份、文本长度等结构化特征多模态拼接（768 维 + 结构化）。</li>
+        <li><b>模型</b>：LR / SVM / DT / RF / XGBoost / MLP 集成横向对比，GridSearchCV 调优，<b>SMOTE + 代价敏感（class_weight='balanced'）</b>处理不平衡。</li>
+        <li><b>时序（设计）</b>：Transformer / LSTM 时序支路（滑动窗口 SEQ_LEN=10）捕捉同型号故障时间演变。</li>
+        <li><b>防泄漏</b>：按器械型号分组交叉验证（GroupKFold）——同型号不跨训练/测试，防信息泄漏。</li>
+        <li><b>可解释</b>：SHAP 量化特征贡献。</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="sec-fold" id="p2_s6" open>
+    <summary>六、业务价值<span class="badge-line green">BA / 市场洞察岗视角</span></summary>
+    <div class="card">
+      <div class="quote-text">"本质是把千万条非结构化投诉文本，变成可量化的设备风险信号。"</div>
+      <div class="quote-text" style="margin-top:8px">"而且我能解释'哪些因素推高风险'——企业质量部门和监管都能直接用，不是只报警。"</div>
+    </div>
+  </details>
+
+  <details class="sec-fold" id="p2_s7" open>
+    <summary>七、技术深挖 Q&amp;A 防御库</summary>
+    <details class="quote"><summary>Q：为什么用 MAUDE 不用国内数据？</summary>
+      <div class="quote-text">A：国内自发报告数据库不完整、字段缺失，MAUDE 是唯一大体量公开源；这是课题明确边界，论文里写了局限。</div></details>
+    <details class="quote"><summary>Q：产品码 JAK 不可靠，你咋保证筛对？</summary>
+      <div class="quote-text">A：正因产品码不可靠，我才没只靠码——建了"器械名称 + 事件文本 + 型号 + 产品谱系"四重判据，文本只用于事后抽查举证，主体靠设备表三列名称判定；剔除池 95.7% 是呼吸介入导航类误报，说明判据有效。</div></details>
+    <details class="quote"><summary>Q：BioBERT 和通用 BERT 区别？</summary>
+      <div class="quote-text">A：BioBERT 在生物医学语料上继续预训练，对医学术语（如 CT 机型、并发症名）语义捕捉更好；[CLS] 向量是整段文本的句级摘要，768 维直接进模型。</div></details>
+    <details class="quote"><summary>Q：前向窗为什么是 2 年不是 3 年？</summary>
+      <div class="quote-text">A：召回填报滞后通常 1–2 年，2 年窗覆盖绝大多数真实召回又不泄露未来；过长会混入无关事件、过短会漏掉滞后召回。这是基于召回库填报周期定的。</div></details>
+    <details class="quote"><summary>Q：为什么你的召回匹配是按型号（model number），而不是批号（lot）或序列号（serial number）？</summary>
+      <div class="quote-text">A：理想状态下，精准匹配当然应该用批号甚至序列号——召回本身就是"某一型号下的若干批号/序列号段"，粒度越细越准。但 MAUDE 的数据维护质量较差，很多报告的批号、序列号字段是缺失的：我实际查过字段填充率，model_number（型号）约 89%（最完整、可作分组键），lot_number（批号）只有约 16%，序列号基本不存。如果硬要做批号级匹配，会直接丢掉八成以上样本，建模根本跑不起来。<br><br>
+      所以退而求其次，我用型号做匹配键，型号缺失时再用厂名级（manufacturer-level）兜底，尽量把召回样本抓全。代价是型号级匹配会比批号级粗，会带来一定假阳性——这个我会在论文里明确写成局限性，不讳言方法边界。这也正好呼应我方法里"按型号做 GroupKFold 分组交叉验证"：同型号不跨训练/测试，既防泄漏、又和召回的物理单元一致。</div></details>
+  </details>
+
+  <details class="sec-fold" id="p2_s8" open>
+    <summary>八、身份 / 进度防御</summary>
+    <div class="card">
+      <div class="quote-text"><b>Q：模型跑完没？结果多少？</b><br>
+      A：数据管道和标签体系已经建成落地，BioBERT 句向量（B 阶段）已跑完，建模对比是下一步。但数据质控流程（四重判据 + 前向窗标签）本身就是可复用的方法论贡献，不依赖模型出数——这点我能在白板上讲清楚。</div>
+    </div>
+  </details>
+
+  <details class="sec-fold" id="p2_s9" open>
+    <summary>九、弱点圆场</summary>
+    <details class="quote"><summary>Q：样本才两千多，少不少？</summary>
+      <div class="quote-text">A：CT 是细分器械，MAUDE 里 JAK 码就这些；我靠四重判据保证"少而干净"，且扩窗到 2005 后到 2582 份。质量 > 数量，而且对标文献（如 Santiago-Pérez 呼吸机 3992 条）我的规模是合理量级。</div></details>
+    <details class="quote"><summary>Q：类别不平衡 1:2.1 怎么处理？</summary>
+      <div class="quote-text">A：SMOTE 过采样 + class_weight='balanced' 代价敏感双保险，评估看 F1 而不是准确率。</div></details>
+  </details>
+
+  <details class="sec-fold" id="p2_s10" open>
+    <summary>十、数据处理分步话术<span class="badge-line yellow">5 个子任务</span></summary>
+    <div class="card"><div class="card-title">子任务 1｜产品码初筛（不盲信官方码）</div>
+      <div class="quote-text">动作：从 FDA MAUDE 的 device 表全量 2149 万行初筛 CT 产品码 JAK，得 4227 份。<br>
+      <b>细心点</b>：我知道 JAK 码不可靠（厂商填报不规范），所以初筛完不急着用，而是进下一层人工规则复核——"先粗筛、再精校"的分层思路。</div>
+    </div>
+    <div class="card"><div class="card-title">子任务 2｜器械名义复核（四重判据 + 分层兜底，最核心的细心活）</div>
+      <div class="quote-text">动作：建"器械名称为主、事件文本为辅、型号与产品谱系兜底"的多重核验，拆成四重判据 + 名称缺失兜底：
+      <ul class="tight">
+        <li>① 名称负面词优先否决（名字里写明了不是 CT 的直接剔）</li>
+        <li>② 厂商否决（SUPERDIMENSION / MEDTRONIC 呼吸介入厂等）</li>
+        <li>③ 正向白名单（CT 词 / 品牌 / 产品谱系才留）</li>
+        <li>④ 名称缺失兜底（凭 JAK 码保留、不误杀）</li>
+        <li>⑤ 无 CT 证据剔除</li>
+      </ul>
+      <b>分任务点</b>：把"判定一台设备是不是 CT"拆成 5 层独立规则，每层可单独调、可解释，不像别人一句"关键词匹配"糊弄。<br>
+      <b>细心点（两个硬证据）</b>：迭代 5 轮捞回 8 份真 CT——初筛错杀的我逐轮回头捞，不轻易放过；剔除池 1567 份里 95.7% 是呼吸介入导航类错填成 CT——证明我的判据打得准，没误伤真 CT。</div>
+    </div>
+    <div class="card"><div class="card-title">子任务 3｜同文去重（复合键，防厂商重复提交）</div>
+      <div class="quote-text">动作：用"归一化文本 + 型号 + 接收月份"复合键去重，−453 份（17.0%）。<br>
+      <b>细心点</b>：不只按报告号去重——厂商常把同一事件重复提交不同报告号，我用"文本内容+型号+时间"三重交叉才认定重复，避免虚高样本量。</div>
+    </div>
+    <div class="card"><div class="card-title">子任务 4｜标签构建（前向时间窗 + 双标签，堵前视泄漏）</div>
+      <div class="quote-text">动作：召回标签最容易翻车（召回库填报滞后），我用<b>报告接收日为锚点的前向时间窗（0–2 年）</b>匹配召回库——报告日后 2 年内发生的召回才算正样本。<br>
+      <b>细心点</b>：识别并堵住"用未来信息预测过去"这个坑；再建型号级 / 厂名级双标签，型号缺失时退到厂名级兜底，尽量把召回样本抓全（不强行归并不同型号，避免跨型号污染）。选型号作匹配键是数据约束下的务实选择——我查过 MAUDE 字段填充率：model_number 约 89%（最完整、可作分组键），lot_number 仅约 16%，序列号基本不存；硬做批号级会丢掉八成以上样本。代价是型号级比批号级粗、有一定假阳性，这点我会在论文里作为局限性说明。<br>
+      <b>结果</b>：2208 份样本，召回 613 / 未召回 1272（约 1:2.1）。</div>
+    </div>
+    <div class="card"><div class="card-title">子任务 5｜样本扩展（扩窗口，兼顾覆盖）</div>
+      <div class="quote-text">动作：把数据窗口由 2012–2025 扩到 2005–2025，建模样本 2208 → 2582 份（阳性 670）。<br>
+      <b>分任务点</b>：扩窗是独立子任务，单独验证跨窗口 KEY 无重叠、标签分布合理，不污染原 12–25 数据。</div>
+    </div>
+    <div class="callout info">👉 <b>一句话总结（CT）</b>："2149 万行到 2582 份干净样本，我拆成初筛→四重判据复核→复合键去重→前向窗标签→扩窗 5 步，每步独立留痕；光'是不是 CT'就用了 5 层规则 + 5 轮捞回，才能保证数据没掺假。"</div>
+  </details>
+
+</div>
+
+<!-- ============ 第 3 页：共性 · 人设 · 总原则 ============ -->
+<div class="page" id="p3">
+
+  <div class="toc"><span class="toc-h">本页跳转：</span>
+    <a href="#p3_s1">共性提炼</a><a href="#p3_s2">BA 技术翻译总原则</a><a href="#p3_s3">人设锚点</a><a href="#p3_s4">串讲（钩子/中间/收尾）</a>
+  </div>
+
+  <details class="sec-fold" id="p3_s1" open>
+    <summary>一、两项目共性提炼<span class="badge-line gray">面试收尾 / 综合能力用</span></summary>
+    <div class="callout info">"我两个项目串起来看，体现的是三种能力：
+      <ul class="tight">
+        <li><b>数据质控的洁癖</b>——专利里移除未来字段、CT 里前向窗防泄漏，我都把'数据干不干净'当第一优先级；</li>
+        <li><b>可解释闭环</b>——两个项目都用 SHAP，结论能说清'为什么'，不是黑盒；</li>
+        <li><b>业务翻译</b>——我能把千万行文本/专利变成业务能用的风险信号和布局建议，这正是商业分析要的'数据→洞察→决策'。"</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="sec-fold" id="p3_s2" open>
+    <summary>二、针对 BA / 市场洞察岗的"技术翻译"总原则<span class="badge-line green">背这条</span></summary>
+    <div class="card">
+      <div class="quote-text">"面试官不是考你建模，是看你能不能把数据变成老板能用的结论。所以我讲项目永远三句：① 数据怎么来的、干不干净（查准率/防泄露）；② 用了什么方法、为什么可信（可解释）；③ 业务能拿去干什么（风险预警/专利布局）。分数只是副产品，口径可靠才是真本事。"</div>
+    </div>
+  </details>
+
+  <details class="sec-fold" id="p3_s3" open>
+    <summary>三、面试人设锚点<span class="badge-line yellow">先记住这句，面试开头就抛</span></summary>
+    <div class="card">
+      <div class="quote-text">"我做事的习惯是：先把一个模糊的大问题拆成几个能独立验证的子任务，每个子任务单独留痕、单独质检，而不是一把梭。两个科研课题的数据处理最能体现这点——数据脏、来源杂，但我靠'分步 + 抽样核验'把质量控制住了。"</div>
+    </div>
+  </details>
+
+  <details class="sec-fold" id="p3_s4" open>
+    <summary>四、面试怎么把这两段"串"成人设<span class="badge-line gray">直接背</span></summary>
+    <div class="card"><div class="card-title">钩子（开头用）</div>
+      <div class="quote-text">"我面试最想讲的不是模型多花哨，而是我怎么把脏数据收拾干净——因为商业分析里，老板要的结论经不经得起推敲，全看数据底子。我两个课题的数据处理都挺'磨'的。"</div>
+    </div>
+    <div class="card"><div class="card-title">串讲（中间用）</div>
+      <div class="quote-text">"专利那个课题，我先在大为+智慧芽小样本上把方法跑通验证，再迁移到知网 66,082 大数据——数据处理大头都在知网；光'查准率 97%'这一项就是抽样 400 件人工核出来的。CT 那个更狠，2149 万行到两千多份样本，光'是不是 CT'我就用了四重判据加五轮捞回。两边共同点是——我习惯把模糊问题拆开、每步单独质检，不靠感觉。"</div>
+    </div>
+    <div class="card"><div class="card-title">收尾（结尾用）</div>
+      <div class="quote-text">"所以如果说我有什么优势，就是细心 + 会拆任务：给我一个乱的数据问题，我能把它变成一串可验证、可解释的小步骤，最后交出来的东西你随便问、我都能讲清每一步为什么这么定。"</div>
+    </div>
+  </details>
+
+</div>
+
+<!-- ============ 第 4 页：文献计量板块 ============ -->
+<div class="page" id="p4">
+
+  <div class="toc"><span class="toc-h">本页跳转：</span>
+    <a href="#p4_q1">文献计量是什么</a><a href="#p4_q2">信息表怎么归纳</a><a href="#p4_q3">全流程难点</a>
+  </div>
+
+  <details class="sec-fold" id="p4_s1" open>
+    <summary>文献计量板块 · 面试问答<span class="badge-line green">开场点题 · 背这条</span></summary>
+
+    <details class="quote" id="p4_q1">
+      <summary>Q：文献计量是什么？</summary>
+      <div class="quote-text">A：文献计量学，简单来说，就是以海量文献数据为基础，用量化统计和可视化的方法，客观梳理一个研究领域的发展脉络、研究热点、合作网络和前沿趋势。<br><br>
+      它和普通文献综述最大的区别是：普通综述偏主观归纳总结，而文献计量是数据驱动量化分析。统计文献的作者、机构、关键词、被引，做图谱；但图谱只是结果，必须结合人工读文献去解读背后的研究逻辑，不能只看图表。<br><br>
+      具体实操逻辑分为两步：<br><br>
+      <b>第一是人工精读筛选</b>。批量检索领域文献，剔除无效文献，人工梳理每篇文章的研究对象、研究方法、应用场景、核心关键词、作者和机构信息，建立标准化文献信息表，吃透领域真实研究内容，避免机器统计的片面性。<br><br>
+      <b>第二是数据可视化与专业解读</b>。将清洗后的文献数据导入分析软件，生成关键词聚类、作者合作、机构合作、前沿演进等知识图谱。图谱只是可视化结果，真正的核心是结合我前期精读的文献内容，去解释图谱背后的学术逻辑，解读领域的研究热点、主流方向、合作规律和未来前沿，而不是单纯看图说话。</div>
+    </details>
+
+    <details class="quote" id="p4_q2">
+      <summary>Q：这个信息表是怎么归纳的？</summary>
+      <div class="quote-text">A：我做信息表主要归纳两件事：<br><br>
+      一是<b>客观的基本信息</b>（标题、作者、年份、DOI）；<br><br>
+      二是<b>靠精读提炼的文章内容</b>——因为课题是 XAI 在药物研发，我会重点记它的药物分类（化药 / 生物药 / 中成药）、研究方向（是药代动力学还是药物作用机制）、用了什么机器学习方法、模型 / 技术、以及最关键的有没有用可解释技术、用了哪一种（比如 SHAP、LIME）、是全局的还是局部的、它的优缺点以及用在了药物研发的哪个环节。</div>
+    </details>
+
+    <details class="quote" id="p4_q3">
+      <summary>Q：你完整走完检索‑清洗‑筛选‑绘图全流程，遇到最大的难点是什么？</summary>
+      <div class="quote-text">难点主要有两点：<br><br>
+      <b>难点 1：数据清洗</b>——同名作者、机构名称不统一（比如同一个机构不同写法），需要人工统一；WOS 中作者名字可能有好几个。<br><br>
+      <b>难点 2：整理文献信息表的过程繁琐漫长</b>——每篇文章都要精读、逐字段填表，是体力活也是细活。</div>
+    </details>
+  </details>
+
+</div>
+
+<div class="page" id="p5">
+  <div class="hero">
+    <h1>⑤ 本科国家级大创 · 网络药理学</h1>
+    <p class="sub">新冠肺炎普通型 · 两个中医证型 · 官方推荐中药方剂的作用机制解析</p>
+  </div>
+
+  <div class="toc"><span class="toc-h">本页跳转：</span>
+    <a href="#p5_q1">项目概况与职责</a><a href="#p5_s2">名词解释</a>
+  </div>
+
+  <details class="sec-fold" id="p5_m1" open>
+    <summary>一、项目概况 · 我负责什么<span class="badge-line green">开场点题 · 背这段</span></summary>
+    <details class="quote" id="p5_q1" open>
+      <summary>Q：你本科的国家级大创项目是什么？你具体负责什么？</summary>
+      <div class="quote-text">A：这是我本科的<b>国家级大学生创新创业训练计划（大创）项目</b>，课题方向是<b>网络药理学</b>，研究<b>新冠肺炎普通型两个中医证型</b>各自对应的<b>官方推荐中药方剂</b>。<br><br>
+      我主要负责整条分析链路：先<b>从数据库检索、筛选药材的活性成分和疾病的潜在靶点，并做靶点标准化</b>；再用 <b>Cytoscape 构建蛋白互作网络（PPI）</b>，还<b>创新性地搭建了"功效 - 药材 - 化合物 - 靶点"网络</b>，从中<b>筛选核心靶点、核心化合物</b>；之后做 <b>GO、KEGG 通路富集</b>，<b>按中药功效分类解析通路</b>，结合文献解读<b>黄酮类化合物抗炎、抑制细胞因子风暴</b>的药理机制；最后<b>参与文章撰写</b>。</div>
+    </details>
+  </details>
+
+  <details class="sec-fold" id="p5_s2" open>
+    <summary>二、名词解释 · 网络药理学<span class="badge-line info">被追问时答得出</span></summary>
+    <div class="callout info">网络药理学 = 用数据库 + 计算网络，从"<b>药材 - 成分 - 靶点 - 通路</b>"系统层面，揭示中药"多成分、多靶点、协同作用"的机制——区别于传统"一个靶点对应一个药"的研发思路。本项目以<b>新冠普通型两个中医证型对应的官方推荐方剂</b>为切入点，先用计算网络找出核心化合物 / 核心靶点，再用富集分析和文献去验证药理逻辑。</div>
+  </details>
+</div>
+
+<div class="dock" id="dock">
+  <button data-go="p1" title="专利课题">①</button>
+  <button data-go="p2" title="CT 设备召回">②</button>
+  <button data-go="p3" title="共性 · 人设 · 总原则">③</button>
+  <button data-go="p4" title="文献计量板块">④</button>
+  <button data-go="p5" title="网络药理学大创">⑤</button>
+  <button class="top" id="dockTop" title="回到开头">↑</button>
+</div>
+<button id="toTop" title="回到开头">↑</button>
+
+<script>
+function go(pid){
+  document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('active')});
+  document.querySelectorAll('.page').forEach(function(x){x.classList.remove('active')});
+  document.querySelector('.tab[data-p="'+pid+'"]').classList.add('active');
+  document.getElementById(pid).classList.add('active');
+  document.querySelectorAll('.dock button').forEach(function(b){
+    b.classList.toggle('on', b.dataset.go===pid);
+  });
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.getElementById('tabs').addEventListener('click', function(e){
+  var t=e.target.closest('.tab'); if(t) go(t.dataset.p);
+});
+document.getElementById('dock').addEventListener('click', function(e){
+  var b=e.target.closest('button'); if(b && b.dataset.go) go(b.dataset.go);
+});
+function toTop(){window.scrollTo({top:0,behavior:'smooth'})}
+document.getElementById('toTop').addEventListener('click', toTop);
+document.getElementById('dockTop').addEventListener('click', toTop);
+window.addEventListener('scroll', function(){
+  document.getElementById('toTop').classList.toggle('show', window.scrollY>320);
+});
+document.getElementById('themeSel').addEventListener('change', function(e){
+  document.body.setAttribute('data-theme', e.target.value);
+});
+var allOpen=false;
+document.getElementById('toggleAll').addEventListener('click', function(){
+  allOpen=!allOpen;
+  document.querySelectorAll('details').forEach(function(d){d.open=allOpen});
+  this.textContent = allOpen ? '全部收起' : '全部展开';
+});
+document.querySelector('.dock button[data-go="p1"]').classList.add('on');
+
+/* =========================================================
+   就地编辑：点「✎ 点击编辑」改字 → 点「✔ 编辑完成」锁定
+   改动保存在本机浏览器（localStorage），刷新不丢；不改文件源码
+   存储 key 用「原文内容哈希」生成 → 文件一旦被更新，旧草稿自动失效
+   ========================================================= */
+(function(){
+  var KEY='qx_edit_research', store={};
+  try{ store=JSON.parse(localStorage.getItem(KEY)||'{}') }catch(e){ store={} }
+  function hash(s){ var h=5381; for(var i=0;i<s.length;i++){ h=((h<<5)+h+s.charCodeAt(i))|0 } return (h>>>0).toString(36) }
+  function clean(el){ var c=el.cloneNode(true), b=c.querySelector('.ebar'); if(b) b.parentNode.removeChild(b); return c.innerHTML }
+  function save(){ try{ localStorage.setItem(KEY, JSON.stringify(store)) }catch(e){} refreshReset() }
+  function refreshReset(){
+    var b=document.getElementById('resetAll'); if(!b) return;
+    b.style.display = Object.keys(store).length ? '' : 'none';
+  }
+  function labelOf(el){
+    var n=el, txt='';
+    while(n && n!==document.body){
+      var s=n.querySelector && n.querySelector(':scope > summary, :scope > .card-title');
+      if(s && s.textContent.trim()){ txt=s.textContent.trim(); break; }
+      var h=n.querySelector && n.querySelector(':scope > .sec');
+      if(h && h.textContent.trim()){ txt=h.textContent.trim(); break; }
+      n=n.parentElement;
+    }
+    if(!txt){
+      var prev=el.previousElementSibling;
+      while(prev){ if(prev.matches && (prev.matches('h3')||prev.matches('.sec')||prev.querySelector('summary'))){ txt=(prev.matches('h3')||prev.matches('.sec')?prev.textContent:prev.querySelector('summary').textContent).trim(); break } prev=prev.previousElementSibling; }
+    }
+    return (txt||'未命名段落').replace(/\s+/g,' ').slice(0,40);
+  }
+  var SEL='div.quote-text, div.card, div.callout';
+  function nested(el){
+    var p=el.parentElement;
+    while(p){ if(p.matches && p.matches(SEL)) return true; p=p.parentElement }
+    return false;
+  }
+  var list=[];
+  Array.prototype.forEach.call(document.querySelectorAll(SEL), function(el){ if(!nested(el)) list.push(el) });
+  var used={}, keysByEl={};
+  list.forEach(function(el){
+    var orig=el.innerHTML;
+    var base='e'+hash(orig.replace(/\s+/g,' ')), key=base, n=1;
+    while(used[key]){ key=base+'_'+(n++) }
+    used[key]=1; keysByEl[list.indexOf(el)]=key;
+
+    if(store[key]!=null) el.innerHTML=store[key];
+
+    var bar=document.createElement('div');
+    bar.className='ebar';
+    bar.setAttribute('contenteditable','false');
+    bar.innerHTML='<button type="button" class="undo">↺ 还原原文</button><button type="button" class="ed">✎ 点击编辑</button>';
+    el.appendChild(bar);
+
+    var ed=bar.querySelector('.ed'), un=bar.querySelector('.undo');
+    un.style.display = (store[key]!=null) ? '' : 'none';
+
+    function lock(){
+      el.setAttribute('contenteditable','false');
+      ed.classList.remove('on');
+      var v=clean(el);
+      if(v===orig){ delete store[key] } else { store[key]=v }
+      un.style.display = (store[key]!=null) ? '' : 'none';
+      ed.textContent='✎ 点击编辑';
+      save();
+    }
+
+    ed.addEventListener('click', function(){
+      if(el.getAttribute('contenteditable')==='true'){
+        lock();
+        ed.classList.add('done'); ed.textContent='✓ 已保存';
+        setTimeout(function(){ ed.classList.remove('done'); ed.textContent='✎ 点击编辑' }, 1300);
+      }else{
+        el.setAttribute('contenteditable','true');
+        ed.classList.add('on'); ed.textContent='✔ 编辑完成';
+        el.focus();
+        try{
+          var r=document.createRange(), s=window.getSelection();
+          r.selectNodeContents(el); r.collapse(false);
+          s.removeAllRanges(); s.addRange(r);
+        }catch(e){}
+      }
+    });
+
+    un.addEventListener('click', function(){
+      if(!confirm('还原这一段到最初版本？你改的内容会丢失。')) return;
+      delete store[key];
+      el.setAttribute('contenteditable','false');
+      el.innerHTML=orig; el.appendChild(bar);
+      un.style.display='none'; ed.classList.remove('on','done'); ed.textContent='✎ 点击编辑';
+      save();
+    });
+
+    var tm=null;
+    el.addEventListener('input', function(){
+      if(el.getAttribute('contenteditable')!=='true') return;
+      clearTimeout(tm);
+      tm=setTimeout(function(){
+        var v=clean(el);
+        if(v===orig){ delete store[key] } else { store[key]=v }
+        un.style.display = (store[key]!=null) ? '' : 'none';
+        save();
+      }, 400);
+    });
+
+    el.addEventListener('paste', function(e){
+      if(el.getAttribute('contenteditable')!=='true') return;
+      var d=e.clipboardData||window.clipboardData; if(!d) return;
+      var t=d.getData('text/plain');
+      e.preventDefault();
+      try{ document.execCommand('insertText', false, t) }catch(err){}
+    });
+
+    el.addEventListener('keydown', function(e){
+      if(e.key==='Escape' && el.getAttribute('contenteditable')==='true'){ lock() }
+    });
+  });
+
+  (function prune(){
+    var live={}; list.forEach(function(el,i){ live[keysByEl[i]]=1; });
+    var changed=false;
+    Object.keys(store).forEach(function(k){ if(!live[k]){ delete store[k]; changed=true; } });
+    if(changed) save();
+  })();
+
+  function buildExport(){
+    var out=[];
+    list.forEach(function(el,i){
+      var k=keysByEl[i], cur=clean(el);
+      var edited = (store[k]!=null) ? store[k] : null;
+      if(!edited) return;
+      var txt=edited.replace(/<br\s*\/?>/gi,'\n').replace(/<[^>]+>/g,'').replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&nbsp;/g,' ').trim();
+      if(!txt) return;
+      out.push('【'+labelOf(el)+'】\n'+txt+'\n');
+    });
+    return out.length ? out.join('\n— — —\n') : '';
+  }
+  var eb=document.getElementById('exportEdit');
+  if(eb) eb.addEventListener('click', function(){
+    var txt=buildExport();
+    if(!txt){ alert('你还没有改动任何内容～\n先点「✎ 点击编辑」改几段，再回来点这个按钮导出。'); return; }
+    var box=document.createElement('div');
+    box.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;z-index:9999;padding:24px';
+    box.innerHTML='<div style="background:#fff;color:#222;max-width:720px;width:100%;max-height:80vh;overflow:auto;border-radius:14px;padding:20px;font-family:inherit">'+
+      '<div style="font-weight:700;margin-bottom:8px">以下是我改过的内容，复制发给助理即可：</div>'+
+      '<textarea id="expTa" style="width:100%;height:46vh;font-family:inherit;font-size:14px;line-height:1.6;padding:10px;border:1px solid #ccc;border-radius:8px;resize:vertical">'+txt.replace(/</g,'&lt;')+'</textarea>'+
+      '<div style="margin-top:12px;text-align:right"><button id="expCopy" style="padding:8px 16px;border:none;border-radius:8px;background:#7b5cff;color:#fff;cursor:pointer;font-family:inherit">复制全部</button> <button id="expClose" style="padding:8px 16px;border:1px solid #ccc;border-radius:8px;background:#f3f3f3;cursor:pointer;font-family:inherit;margin-left:8px">关闭</button></div>'+
+      '</div>';
+    document.body.appendChild(box);
+    document.getElementById('expClose').onclick=function(){ document.body.removeChild(box); };
+    document.getElementById('expCopy').onclick=function(){
+      var ta=document.getElementById('expTa'); ta.select();
+      try{ document.execCommand('copy'); this.textContent='已复制 ✓'; }catch(e){
+        try{ navigator.clipboard.writeText(ta.value); this.textContent='已复制 ✓'; }catch(e2){ this.textContent='请手动复制'; }
+      }
+      var self=this; setTimeout(function(){ self.textContent='复制全部'; }, 1500);
+    };
+  });
+
+  var rb=document.getElementById('resetAll');
+  if(rb) rb.addEventListener('click', function(){
+    if(!confirm('把所有编辑过的内容全部还原成最初版本？此操作不可撤销。')) return;
+    try{ localStorage.removeItem(KEY) }catch(e){}
+    location.reload();
+  });
+  refreshReset();
+})();
+</script>
+</body>
+</html>
