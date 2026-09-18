@@ -1,118 +1,214 @@
 {
-  "updatedAt": "2026-09-16T12:45:18.029593+08:00",
+  "updatedAt": "2026-09-18T23:56:33.750611+08:00",
   "source": "AI 每3天自动轮换（SSS儿歌核心）",
   "current": {
-    "name": "动物叫声",
+    "name": "颜色",
     "words": [
       [
-        "cow",
-        "奶牛"
+        "red",
+        "红色"
       ],
       [
-        "pig",
-        "小猪"
+        "blue",
+        "蓝色"
       ],
       [
-        "dog",
-        "小狗"
+        "yellow",
+        "黄色"
       ],
       [
-        "cat",
-        "小猫"
+        "green",
+        "绿色"
       ],
       [
-        "duck",
-        "小鸭"
+        "orange",
+        "橙色"
       ],
       [
-        "sheep",
-        "绵羊"
+        "pink",
+        "粉色"
       ],
       [
-        "horse",
-        "小马"
+        "black",
+        "黑色"
       ],
       [
-        "baby",
-        "宝宝"
+        "white",
+        "白色"
       ],
       [
-        "mommy",
-        "妈妈"
+        "ball",
+        "球"
       ],
       [
-        "picture",
-        "图片"
+        "block",
+        "积木"
       ],
       [
-        "moo",
-        "哞"
+        "find",
+        "找"
       ],
       [
-        "oink",
-        "哼哼"
+        "point",
+        "指"
       ],
       [
-        "bark",
-        "汪汪"
+        "look",
+        "看"
       ],
       [
-        "meow",
-        "喵"
-      ],
-      [
-        "quack",
-        "嘎嘎"
-      ],
-      [
-        "baa",
-        "咩"
-      ],
-      [
-        "neigh",
-        "咴咴"
-      ],
-      [
-        "listen",
-        "听"
+        "show",
+        "比画"
       ],
       [
         "say",
         "说"
       ],
       [
-        "point",
-        "指"
+        "clap",
+        "拍手"
+      ],
+      [
+        "pick",
+        "挑"
+      ],
+      [
+        "hold",
+        "举起"
       ]
     ],
     "dialogs": [
       [
         "Mom",
-        "Listen! The cow says moo. Moo, moo!"
+        "Look! The ball is red. Red, red!"
       ],
       [
         "Baby",
-        "Moo! Moo!"
+        "Red! Red!"
       ],
       [
         "Mom",
-        "The little dog says woof. Can you bark?"
+        "Find the blue block. Point to blue!"
       ],
       [
         "Baby",
-        "Woof! Woof!"
+        "Blue! Block!"
       ],
       [
         "Mom",
-        "The duck says quack. Listen to the cat. Meow!"
+        "Show me yellow. Clap for green!"
       ],
       [
         "Baby",
-        "Meow! Kitty!"
+        "Yellow! Yay!"
       ]
     ]
   },
   "history": [
+    {
+      "date": "2026-09-18",
+      "name": "颜色",
+      "words": [
+        [
+          "red",
+          "红色"
+        ],
+        [
+          "blue",
+          "蓝色"
+        ],
+        [
+          "yellow",
+          "黄色"
+        ],
+        [
+          "green",
+          "绿色"
+        ],
+        [
+          "orange",
+          "橙色"
+        ],
+        [
+          "pink",
+          "粉色"
+        ],
+        [
+          "black",
+          "黑色"
+        ],
+        [
+          "white",
+          "白色"
+        ],
+        [
+          "ball",
+          "球"
+        ],
+        [
+          "block",
+          "积木"
+        ],
+        [
+          "find",
+          "找"
+        ],
+        [
+          "point",
+          "指"
+        ],
+        [
+          "look",
+          "看"
+        ],
+        [
+          "show",
+          "比画"
+        ],
+        [
+          "say",
+          "说"
+        ],
+        [
+          "clap",
+          "拍手"
+        ],
+        [
+          "pick",
+          "挑"
+        ],
+        [
+          "hold",
+          "举起"
+        ]
+      ],
+      "dialogs": [
+        [
+          "Mom",
+          "Look! The ball is red. Red, red!"
+        ],
+        [
+          "Baby",
+          "Red! Red!"
+        ],
+        [
+          "Mom",
+          "Find the blue block. Point to blue!"
+        ],
+        [
+          "Baby",
+          "Blue! Block!"
+        ],
+        [
+          "Mom",
+          "Show me yellow. Clap for green!"
+        ],
+        [
+          "Baby",
+          "Yellow! Yay!"
+        ]
+      ]
+    },
     {
       "date": "2026-09-16",
       "name": "动物叫声",
