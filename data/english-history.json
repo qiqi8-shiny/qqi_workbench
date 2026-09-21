@@ -1,40 +1,28 @@
 {
-  "updatedAt": "2026-09-18T23:56:33.750611+08:00",
+  "updatedAt": "2026-09-21T12:20:16.061135+08:00",
   "source": "AI 每3天自动轮换（SSS儿歌核心）",
   "current": {
-    "name": "颜色",
+    "name": "形状",
     "words": [
       [
-        "red",
-        "红色"
+        "circle",
+        "圆形"
       ],
       [
-        "blue",
-        "蓝色"
+        "square",
+        "方形"
       ],
       [
-        "yellow",
-        "黄色"
+        "triangle",
+        "三角形"
       ],
       [
-        "green",
-        "绿色"
+        "star",
+        "星星"
       ],
       [
-        "orange",
-        "橙色"
-      ],
-      [
-        "pink",
-        "粉色"
-      ],
-      [
-        "black",
-        "黑色"
-      ],
-      [
-        "white",
-        "白色"
+        "heart",
+        "爱心"
       ],
       [
         "ball",
@@ -43,6 +31,18 @@
       [
         "block",
         "积木"
+      ],
+      [
+        "ring",
+        "套圈"
+      ],
+      [
+        "cookie",
+        "饼干"
+      ],
+      [
+        "baby",
+        "宝宝"
       ],
       [
         "find",
@@ -57,54 +57,158 @@
         "看"
       ],
       [
-        "show",
-        "比画"
+        "hold",
+        "举起"
       ],
       [
-        "say",
-        "说"
+        "touch",
+        "摸"
+      ],
+      [
+        "show",
+        "比画"
       ],
       [
         "clap",
         "拍手"
       ],
       [
-        "pick",
-        "挑"
-      ],
-      [
-        "hold",
-        "举起"
+        "say",
+        "说"
       ]
     ],
     "dialogs": [
       [
         "Mom",
-        "Look! The ball is red. Red, red!"
+        "Look! A red circle. Circle, circle!"
       ],
       [
         "Baby",
-        "Red! Red!"
+        "Circle! Round!"
       ],
       [
         "Mom",
-        "Find the blue block. Point to blue!"
+        "Find the square block. Point to the triangle!"
       ],
       [
         "Baby",
-        "Blue! Block!"
+        "Triangle! Point!"
       ],
       [
         "Mom",
-        "Show me yellow. Clap for green!"
+        "Show me a star. Clap for the heart!"
       ],
       [
         "Baby",
-        "Yellow! Yay!"
+        "Star! Heart! Yay!"
       ]
     ]
   },
   "history": [
+    {
+      "date": "2026-09-21",
+      "name": "形状",
+      "words": [
+        [
+          "circle",
+          "圆形"
+        ],
+        [
+          "square",
+          "方形"
+        ],
+        [
+          "triangle",
+          "三角形"
+        ],
+        [
+          "star",
+          "星星"
+        ],
+        [
+          "heart",
+          "爱心"
+        ],
+        [
+          "ball",
+          "球"
+        ],
+        [
+          "block",
+          "积木"
+        ],
+        [
+          "ring",
+          "套圈"
+        ],
+        [
+          "cookie",
+          "饼干"
+        ],
+        [
+          "baby",
+          "宝宝"
+        ],
+        [
+          "find",
+          "找"
+        ],
+        [
+          "point",
+          "指"
+        ],
+        [
+          "look",
+          "看"
+        ],
+        [
+          "hold",
+          "举起"
+        ],
+        [
+          "touch",
+          "摸"
+        ],
+        [
+          "show",
+          "比画"
+        ],
+        [
+          "clap",
+          "拍手"
+        ],
+        [
+          "say",
+          "说"
+        ]
+      ],
+      "dialogs": [
+        [
+          "Mom",
+          "Look! A red circle. Circle, circle!"
+        ],
+        [
+          "Baby",
+          "Circle! Round!"
+        ],
+        [
+          "Mom",
+          "Find the square block. Point to the triangle!"
+        ],
+        [
+          "Baby",
+          "Triangle! Point!"
+        ],
+        [
+          "Mom",
+          "Show me a star. Clap for the heart!"
+        ],
+        [
+          "Baby",
+          "Star! Heart! Yay!"
+        ]
+      ]
+    },
     {
       "date": "2026-09-18",
       "name": "颜色",
