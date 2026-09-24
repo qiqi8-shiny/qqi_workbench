@@ -1,7 +1,39 @@
 {
-  "updatedAt": "2026-09-16T23:58:01+08:00",
+  "updatedAt": "2026-09-24T12:39:33+08:00",
   "source": "AI 每周联网抓取（医用成像/ML可解释性）",
   "items": [
+    {
+      "tag": "政策",
+      "tagClass": "tag-policy",
+      "title": "贵州省六部门联合印发医疗器械临床创新成果转化\"春雨行动\"实施方案",
+      "desc": "贵州省药监局、科技厅、工信厅、卫健委、知识产权局、医保局联合印发三年期《贵州省推进医疗器械临床创新成果转化\"春雨行动\"实施方案》，构建\"征集筛选—对接匹配—培育转化—临床应用\"闭环服务体系，聚焦医工融合打通临床创意到医疗器械上市全链条，并破解审评审批、知识产权、产业对接与医保入院等转化瓶颈。",
+      "link": "https://scjg.gzlps.gov.cn/tzgg/202609/t20260922_90928755.html",
+      "pubDate": "2026-09-21"
+    },
+    {
+      "tag": "产业",
+      "tagClass": "tag-industry",
+      "title": "FDA 最终命令驳回放射 AI 豁免 510(k) 请愿，影像 AI 迭代仍需逐案审评",
+      "desc": "FDA 最终命令（FR 2026-19074，2026-09-17 生效）正式驳回 Harrison.ai 关于放射 CADe/CADx/CADt 软件（产品代码 POK、MYN、QAS、QFM、QBS、QDQ）豁免 510(k) 的请愿，维持上市前通知强制要求。FDA 认为单次获批不能作为后续架构不同产品的等效证据，且上市后 AI 监测尚不成熟，放射影像 AI 设备迭代上市仍需逐案审评。",
+      "link": "https://regulatorynews.com/fda-denies-radiology-ai-510k-exemption",
+      "pubDate": "2026-09-17"
+    },
+    {
+      "tag": "学术",
+      "tagClass": "tag-academic",
+      "title": "多参数 MRI 可解释影像组学预测乳腺癌新辅助化疗敏感性与无复发生存（SHAP）",
+      "desc": "Academic Radiology 多中心研究（373 例）整合治疗前多参数 MRI 影像组学特征与临床变量，用随机森林构建模型并以 SHAP 解释，预测乳腺癌新辅助化疗（NAC）敏感性与无复发生存，内部验证 AUC 0.859、外部验证 0.862；SHAP 识别 DifferenceEntropy_T2 为最关键特征，为个体化治疗决策与毒性规避提供可解释依据（2026-08-26 在线发表）。",
+      "link": "https://www.academicradiology.org/article/S1076-6332(26)00574-X/abstract",
+      "pubDate": "2026-08-26"
+    },
+    {
+      "tag": "专利",
+      "tagClass": "tag-patent",
+      "title": "Springer 专著章节：用 LDA 主题建模挖掘专利数据新兴技术趋势",
+      "desc": "Springer《Lecture Notes in Networks and Systems》专著章节（2026-06-03 在线首发）以 Latent Dirichlet Allocation（LDA）构建机器学习模型，对\"汽车智能玻璃显示\"专利数据集做主题建模，识别技术潜在趋势并支撑战略研发方向决策；该方法可低成本迁移至医用成像器械专利语料，为专利主题识别与技术演化预测提供可复用范式。",
+      "link": "https://link.springer.com/chapter/10.1007/978-3-032-25080-3_14",
+      "pubDate": "2026-06-03"
+    },
     {
       "tag": "政策",
       "tagClass": "tag-policy",
