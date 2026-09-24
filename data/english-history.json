@@ -1,110 +1,230 @@
 {
-  "updatedAt": "2026-09-21T12:20:16.061135+08:00",
+  "updatedAt": "2026-09-24T12:41:38.596570+08:00",
   "source": "AI 每3天自动轮换（SSS儿歌核心）",
   "current": {
-    "name": "形状",
+    "name": "交通工具",
     "words": [
       [
-        "circle",
-        "圆形"
+        "car",
+        "小汽车"
       ],
       [
-        "square",
-        "方形"
+        "bus",
+        "公交车"
       ],
       [
-        "triangle",
-        "三角形"
+        "train",
+        "火车"
       ],
       [
-        "star",
-        "星星"
+        "boat",
+        "小船"
       ],
       [
-        "heart",
-        "爱心"
+        "plane",
+        "飞机"
       ],
       [
-        "ball",
-        "球"
+        "bike",
+        "自行车"
       ],
       [
-        "block",
-        "积木"
-      ],
-      [
-        "ring",
-        "套圈"
-      ],
-      [
-        "cookie",
-        "饼干"
+        "truck",
+        "卡车"
       ],
       [
         "baby",
         "宝宝"
       ],
       [
-        "find",
-        "找"
+        "mommy",
+        "妈妈"
       ],
       [
-        "point",
-        "指"
+        "road",
+        "马路"
+      ],
+      [
+        "go",
+        "出发"
+      ],
+      [
+        "ride",
+        "坐"
+      ],
+      [
+        "drive",
+        "开"
+      ],
+      [
+        "push",
+        "推"
+      ],
+      [
+        "stop",
+        "停"
+      ],
+      [
+        "beep",
+        "嘀嘀"
       ],
       [
         "look",
         "看"
       ],
       [
-        "hold",
-        "举起"
+        "wave",
+        "挥手"
       ],
       [
-        "touch",
-        "摸"
+        "vroom",
+        "轰隆"
       ],
       [
-        "show",
-        "比画"
-      ],
-      [
-        "clap",
-        "拍手"
-      ],
-      [
-        "say",
-        "说"
+        "point",
+        "指"
       ]
     ],
     "dialogs": [
       [
         "Mom",
-        "Look! A red circle. Circle, circle!"
+        "Look! A red car. Beep beep!"
       ],
       [
         "Baby",
-        "Circle! Round!"
+        "Beep! Car!"
       ],
       [
         "Mom",
-        "Find the square block. Point to the triangle!"
+        "The bus goes vroom. Can you ride the train?"
       ],
       [
         "Baby",
-        "Triangle! Point!"
+        "Vroom! Train go!"
       ],
       [
         "Mom",
-        "Show me a star. Clap for the heart!"
+        "Wave bye-bye to the plane. Stop, stop!"
       ],
       [
         "Baby",
-        "Star! Heart! Yay!"
+        "Bye-bye! Plane!"
       ]
     ]
   },
   "history": [
+    {
+      "date": "2026-09-24",
+      "name": "交通工具",
+      "words": [
+        [
+          "car",
+          "小汽车"
+        ],
+        [
+          "bus",
+          "公交车"
+        ],
+        [
+          "train",
+          "火车"
+        ],
+        [
+          "boat",
+          "小船"
+        ],
+        [
+          "plane",
+          "飞机"
+        ],
+        [
+          "bike",
+          "自行车"
+        ],
+        [
+          "truck",
+          "卡车"
+        ],
+        [
+          "baby",
+          "宝宝"
+        ],
+        [
+          "mommy",
+          "妈妈"
+        ],
+        [
+          "road",
+          "马路"
+        ],
+        [
+          "go",
+          "出发"
+        ],
+        [
+          "ride",
+          "坐"
+        ],
+        [
+          "drive",
+          "开"
+        ],
+        [
+          "push",
+          "推"
+        ],
+        [
+          "stop",
+          "停"
+        ],
+        [
+          "beep",
+          "嘀嘀"
+        ],
+        [
+          "look",
+          "看"
+        ],
+        [
+          "wave",
+          "挥手"
+        ],
+        [
+          "vroom",
+          "轰隆"
+        ],
+        [
+          "point",
+          "指"
+        ]
+      ],
+      "dialogs": [
+        [
+          "Mom",
+          "Look! A red car. Beep beep!"
+        ],
+        [
+          "Baby",
+          "Beep! Car!"
+        ],
+        [
+          "Mom",
+          "The bus goes vroom. Can you ride the train?"
+        ],
+        [
+          "Baby",
+          "Vroom! Train go!"
+        ],
+        [
+          "Mom",
+          "Wave bye-bye to the plane. Stop, stop!"
+        ],
+        [
+          "Baby",
+          "Bye-bye! Plane!"
+        ]
+      ]
+    },
     {
       "date": "2026-09-21",
       "name": "形状",
