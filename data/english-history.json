@@ -1,118 +1,214 @@
 {
-  "updatedAt": "2026-09-24T12:41:38.596570+08:00",
+  "updatedAt": "2026-10-06T13:22:58.742129+08:00",
   "source": "AI 每3天自动轮换（SSS儿歌核心）",
   "current": {
-    "name": "交通工具",
+    "name": "水果",
     "words": [
       [
-        "car",
-        "小汽车"
+        "apple",
+        "苹果"
       ],
       [
-        "bus",
-        "公交车"
+        "banana",
+        "香蕉"
       ],
       [
-        "train",
-        "火车"
+        "orange",
+        "橙子"
       ],
       [
-        "boat",
-        "小船"
+        "grape",
+        "葡萄"
       ],
       [
-        "plane",
-        "飞机"
+        "pear",
+        "梨"
       ],
       [
-        "bike",
-        "自行车"
+        "strawberry",
+        "草莓"
       ],
       [
-        "truck",
-        "卡车"
+        "watermelon",
+        "西瓜"
+      ],
+      [
+        "peach",
+        "桃子"
+      ],
+      [
+        "bowl",
+        "碗"
       ],
       [
         "baby",
         "宝宝"
       ],
       [
-        "mommy",
-        "妈妈"
+        "eat",
+        "吃"
       ],
       [
-        "road",
-        "马路"
+        "taste",
+        "尝"
       ],
       [
-        "go",
-        "出发"
+        "pick",
+        "挑"
       ],
       [
-        "ride",
-        "坐"
+        "bite",
+        "咬"
       ],
       [
-        "drive",
-        "开"
+        "hold",
+        "拿"
       ],
       [
-        "push",
-        "推"
-      ],
-      [
-        "stop",
-        "停"
-      ],
-      [
-        "beep",
-        "嘀嘀"
-      ],
-      [
-        "look",
-        "看"
-      ],
-      [
-        "wave",
-        "挥手"
-      ],
-      [
-        "vroom",
-        "轰隆"
+        "smell",
+        "闻"
       ],
       [
         "point",
         "指"
+      ],
+      [
+        "smile",
+        "笑"
       ]
     ],
     "dialogs": [
       [
         "Mom",
-        "Look! A red car. Beep beep!"
+        "Look! A red apple. Yummy, yummy!"
       ],
       [
         "Baby",
-        "Beep! Car!"
+        "Apple! Eat!"
       ],
       [
         "Mom",
-        "The bus goes vroom. Can you ride the train?"
+        "Pick the banana. Can you smell it?"
       ],
       [
         "Baby",
-        "Vroom! Train go!"
+        "Mmm! Banana!"
       ],
       [
         "Mom",
-        "Wave bye-bye to the plane. Stop, stop!"
+        "Point to the grapes. Bite the pear, baby."
       ],
       [
         "Baby",
-        "Bye-bye! Plane!"
+        "Yay! More fruit!"
       ]
     ]
   },
   "history": [
+    {
+      "date": "2026-10-06",
+      "name": "水果",
+      "words": [
+        [
+          "apple",
+          "苹果"
+        ],
+        [
+          "banana",
+          "香蕉"
+        ],
+        [
+          "orange",
+          "橙子"
+        ],
+        [
+          "grape",
+          "葡萄"
+        ],
+        [
+          "pear",
+          "梨"
+        ],
+        [
+          "strawberry",
+          "草莓"
+        ],
+        [
+          "watermelon",
+          "西瓜"
+        ],
+        [
+          "peach",
+          "桃子"
+        ],
+        [
+          "bowl",
+          "碗"
+        ],
+        [
+          "baby",
+          "宝宝"
+        ],
+        [
+          "eat",
+          "吃"
+        ],
+        [
+          "taste",
+          "尝"
+        ],
+        [
+          "pick",
+          "挑"
+        ],
+        [
+          "bite",
+          "咬"
+        ],
+        [
+          "hold",
+          "拿"
+        ],
+        [
+          "smell",
+          "闻"
+        ],
+        [
+          "point",
+          "指"
+        ],
+        [
+          "smile",
+          "笑"
+        ]
+      ],
+      "dialogs": [
+        [
+          "Mom",
+          "Look! A red apple. Yummy, yummy!"
+        ],
+        [
+          "Baby",
+          "Apple! Eat!"
+        ],
+        [
+          "Mom",
+          "Pick the banana. Can you smell it?"
+        ],
+        [
+          "Baby",
+          "Mmm! Banana!"
+        ],
+        [
+          "Mom",
+          "Point to the grapes. Bite the pear, baby."
+        ],
+        [
+          "Baby",
+          "Yay! More fruit!"
+        ]
+      ]
+    },
     {
       "date": "2026-09-24",
       "name": "交通工具",
