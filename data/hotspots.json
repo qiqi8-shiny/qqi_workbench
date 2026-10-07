@@ -1,7 +1,39 @@
 {
-  "updatedAt": "2026-09-24T12:39:33+08:00",
+  "updatedAt": "2026-10-07T23:56:45+08:00",
   "source": "AI 每周联网抓取（医用成像/ML可解释性）",
   "items": [
+    {
+      "tag": "政策",
+      "tagClass": "tag-policy",
+      "title": "湖北省出台措施支持高端医学影像等前沿医疗器械高质量发展",
+      "desc": "湖北省政府发布《关于支持医疗器械产业高质量发展服务支点建设的若干措施》政策解读，提出支持医用机器人、高端医学影像、人工智能、脑机接口等前沿领域高端医疗器械发展，对符合条件的优先推荐进入国家创新通道；深化医疗器械临床创新成果转化\"春雨行动\"，搭建省级转化平台，并引入专利辅导机构参与产业化服务。",
+      "link": "https://hubei.gov.cn/zhuanti/2021zt/ypaq/zcjd/202609/t20260910_6011385.shtml",
+      "pubDate": "2026-09-10"
+    },
+    {
+      "tag": "产业",
+      "tagClass": "tag-industry",
+      "title": "a2z Radiology AI 的 Abdo-Triage 获 FDA 许可扩大腹部-盆腔 CT 分诊发现",
+      "desc": "FDA 准许 a2z Radiology AI 的 Abdo-Triage 工具在腹部-盆腔 CT 上额外分诊 10 项发现（2026-09-23 报道），延续 2026 年影像 AI 密集获批态势；放射学仍是 FDA AI 算法获批主力板块，反映临床影像 AI 产品持续快速落地。",
+      "link": "https://radaislice.com/news?tag=NewsType.fda&from=legacy",
+      "pubDate": "2026-09-23"
+    },
+    {
+      "tag": "学术",
+      "tagClass": "tag-academic",
+      "title": "多模态胸片与临床文本可解释 AI 统一框架：Grad-CAM + SHAP 跨模态一致性校验",
+      "desc": "AIJFR 2026 年 9 月论文提出统一可解释 AI 框架，以 DenseNet-121 处理胸片、RadBERT 解析临床文本，Grad-CAM 生成影像热力图、SHAP 解释文本分支的 token 归因，并设计跨模态一致性校验自动揭示影像与文本解释的不一致，提升临床可信度与合规透明度（2026-09-27 发表）。",
+      "link": "https://www.aijfr.com/research-paper.php?id=7978",
+      "pubDate": "2026-09-27"
+    },
+    {
+      "tag": "专利",
+      "tagClass": "tag-patent",
+      "title": "基于专利文本 LDA 模型的企业竞争对手识别与实证",
+      "desc": "《技术与市场》2026 年第 4 期论文以目标企业领域专利为核心，用 jieba / BOW / TF-IDF 预处理，借助 LDA 递进式两次主题建模并结合 pyLDAvis 可视化识别潜在竞争对手，再构建 TD-TS-TAD 三维矩阵量化评估对手竞争力，为企业竞争情报与战略制定提供可复用范式（2026-04-15 出版）。",
+      "link": "https://jsysc.cbpt.cnki.net/portal/journal/portal/client/paper/5451a466067fae2292238a732eda30c0",
+      "pubDate": "2026-04-15"
+    },
     {
       "tag": "政策",
       "tagClass": "tag-policy",
