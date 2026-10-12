@@ -1,110 +1,230 @@
 {
-  "updatedAt": "2026-10-06T13:22:58.742129+08:00",
+  "updatedAt": "2026-10-12T12:45:16.597725+08:00",
   "source": "AI 每3天自动轮换（SSS儿歌核心）",
   "current": {
-    "name": "水果",
+    "name": "天气",
     "words": [
       [
-        "apple",
-        "苹果"
+        "sun",
+        "太阳"
       ],
       [
-        "banana",
-        "香蕉"
+        "rain",
+        "雨"
       ],
       [
-        "orange",
-        "橙子"
+        "cloud",
+        "云"
       ],
       [
-        "grape",
-        "葡萄"
+        "wind",
+        "风"
       ],
       [
-        "pear",
-        "梨"
+        "umbrella",
+        "雨伞"
       ],
       [
-        "strawberry",
-        "草莓"
+        "rainbow",
+        "彩虹"
       ],
       [
-        "watermelon",
-        "西瓜"
+        "sky",
+        "天空"
       ],
       [
-        "peach",
-        "桃子"
+        "bird",
+        "小鸟"
       ],
       [
-        "bowl",
-        "碗"
+        "puddle",
+        "水坑"
       ],
       [
-        "baby",
-        "宝宝"
+        "window",
+        "窗户"
       ],
       [
-        "eat",
-        "吃"
-      ],
-      [
-        "taste",
-        "尝"
-      ],
-      [
-        "pick",
-        "挑"
-      ],
-      [
-        "bite",
-        "咬"
-      ],
-      [
-        "hold",
-        "拿"
-      ],
-      [
-        "smell",
-        "闻"
+        "look",
+        "看"
       ],
       [
         "point",
         "指"
       ],
       [
-        "smile",
-        "笑"
+        "open",
+        "撑开"
+      ],
+      [
+        "wave",
+        "挥手"
+      ],
+      [
+        "listen",
+        "听"
+      ],
+      [
+        "splash",
+        "踩水"
+      ],
+      [
+        "clap",
+        "拍手"
+      ],
+      [
+        "say",
+        "说"
+      ],
+      [
+        "go",
+        "走"
+      ],
+      [
+        "blow",
+        "吹"
       ]
     ],
     "dialogs": [
       [
         "Mom",
-        "Look! A red apple. Yummy, yummy!"
+        "Look outside! The sun is up. Sun, sun!"
       ],
       [
         "Baby",
-        "Apple! Eat!"
+        "Sun! Warm!"
       ],
       [
         "Mom",
-        "Pick the banana. Can you smell it?"
+        "It's raining. Open your umbrella, baby."
       ],
       [
         "Baby",
-        "Mmm! Banana!"
+        "Rain! Umbrella!"
       ],
       [
         "Mom",
-        "Point to the grapes. Bite the pear, baby."
+        "Point to the rainbow in the sky. Look, a bird!"
       ],
       [
         "Baby",
-        "Yay! More fruit!"
+        "Rainbow! Bird! Yay!"
       ]
     ]
   },
   "history": [
+    {
+      "date": "2026-10-12",
+      "name": "天气",
+      "words": [
+        [
+          "sun",
+          "太阳"
+        ],
+        [
+          "rain",
+          "雨"
+        ],
+        [
+          "cloud",
+          "云"
+        ],
+        [
+          "wind",
+          "风"
+        ],
+        [
+          "umbrella",
+          "雨伞"
+        ],
+        [
+          "rainbow",
+          "彩虹"
+        ],
+        [
+          "sky",
+          "天空"
+        ],
+        [
+          "bird",
+          "小鸟"
+        ],
+        [
+          "puddle",
+          "水坑"
+        ],
+        [
+          "window",
+          "窗户"
+        ],
+        [
+          "look",
+          "看"
+        ],
+        [
+          "point",
+          "指"
+        ],
+        [
+          "open",
+          "撑开"
+        ],
+        [
+          "wave",
+          "挥手"
+        ],
+        [
+          "listen",
+          "听"
+        ],
+        [
+          "splash",
+          "踩水"
+        ],
+        [
+          "clap",
+          "拍手"
+        ],
+        [
+          "say",
+          "说"
+        ],
+        [
+          "go",
+          "走"
+        ],
+        [
+          "blow",
+          "吹"
+        ]
+      ],
+      "dialogs": [
+        [
+          "Mom",
+          "Look outside! The sun is up. Sun, sun!"
+        ],
+        [
+          "Baby",
+          "Sun! Warm!"
+        ],
+        [
+          "Mom",
+          "It's raining. Open your umbrella, baby."
+        ],
+        [
+          "Baby",
+          "Rain! Umbrella!"
+        ],
+        [
+          "Mom",
+          "Point to the rainbow in the sky. Look, a bird!"
+        ],
+        [
+          "Baby",
+          "Rainbow! Bird! Yay!"
+        ]
+      ]
+    },
     {
       "date": "2026-10-06",
       "name": "水果",
