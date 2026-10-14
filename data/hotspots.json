@@ -1,7 +1,39 @@
 {
-  "updatedAt": "2026-10-07T23:56:45+08:00",
+  "updatedAt": "2026-10-14T23:59:16+08:00",
   "source": "AI 每周联网抓取（医用成像/ML可解释性）",
   "items": [
+    {
+      "tag": "政策",
+      "tagClass": "tag-policy",
+      "title": "国家药监局核查中心就《人工智能医疗器械检查要点（征求意见稿）》公开征求意见",
+      "desc": "核查中心2026-10-08发布AI医疗器械质量管理体系现场检查技术指引，系统覆盖数据采集、数据标注、算法训练、变更控制等14个关键环节风险点，将AI器械监管从注册准入延伸至上市后现场检查，反馈截止10月28日。",
+      "link": "https://www.cfdi.org.cn/cfdi/resource/newsmobile/16900.html",
+      "pubDate": "2026-10-08"
+    },
+    {
+      "tag": "产业",
+      "tagClass": "tag-industry",
+      "title": "GuideAI Health 基于 CT 的下肢血管闭塞 AI 分诊软件获 FDA 510(k) 许可",
+      "desc": "FDA于2026-10-09授予VAOT软件510(k)许可，可对CT影像中的下肢动脉闭塞进行AI检测并在放射科工作流中优先分诊；临床测试患者级灵敏度达94%–95%，为外周动脉疾病早诊早治提供AI辅助工具。",
+      "link": "https://info.helixlife.cn/articles/detail/996372736932714931",
+      "pubDate": "2026-10-09"
+    },
+    {
+      "tag": "学术",
+      "tagClass": "tag-academic",
+      "title": "可解释机器学习融合 Gd-EOB-DTPA 增强 MRI 鉴别小肝癌（≤2cm）多中心研究发表",
+      "desc": "Academic Radiology 2026-10-06在线发表多中心研究，融合MRI影像组学+定性特征+临床数据构建可解释ML模型（外部验证AUC 0.824），并用SHAP揭示乙肝、甲胎蛋白与肝胆期影像组学特征为关键预测因子。",
+      "link": "https://www.medicinejournal.co.uk/article/S1076-6332(26)00760-9/fulltext",
+      "pubDate": "2026-10-06"
+    },
+    {
+      "tag": "专利",
+      "tagClass": "tag-patent",
+      "title": "LDA 专利景观主题建模用于企业技术战略预测的方法论文献发表",
+      "desc": "《Upravlenets》2026-03-12发表研究，以WIPO专利语料为例，将LDA主题建模与TRL成熟度评估、技术路线图结合，把专利分析转化为可操作的战略预测工具，识别出11个技术主题集群，为专利情报驱动的研发与投资决策提供方法论支撑。",
+      "link": "https://dx.doi.org/10.29141/2218-5003-2026-17-1-3",
+      "pubDate": "2026-03-12"
+    },
     {
       "tag": "政策",
       "tagClass": "tag-policy",
