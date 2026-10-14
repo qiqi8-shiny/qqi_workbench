@@ -1,118 +1,214 @@
 {
-  "updatedAt": "2026-10-12T12:45:16.597725+08:00",
+  "updatedAt": "2026-10-14T23:56:51.758513+08:00",
   "source": "AI 每3天自动轮换（SSS儿歌核心）",
   "current": {
-    "name": "天气",
+    "name": "情绪",
     "words": [
       [
-        "sun",
-        "太阳"
+        "happy",
+        "开心"
       ],
       [
-        "rain",
-        "雨"
+        "sad",
+        "难过"
       ],
       [
-        "cloud",
-        "云"
+        "angry",
+        "生气"
       ],
       [
-        "wind",
-        "风"
+        "scared",
+        "害怕"
       ],
       [
-        "umbrella",
-        "雨伞"
+        "mommy",
+        "妈妈"
       ],
       [
-        "rainbow",
-        "彩虹"
+        "baby",
+        "宝宝"
       ],
       [
-        "sky",
-        "天空"
+        "mirror",
+        "镜子"
       ],
       [
-        "bird",
-        "小鸟"
+        "face",
+        "脸"
       ],
       [
-        "puddle",
-        "水坑"
+        "tear",
+        "眼泪"
       ],
       [
-        "window",
-        "窗户"
+        "hand",
+        "小手"
       ],
       [
-        "look",
-        "看"
+        "smile",
+        "微笑"
+      ],
+      [
+        "cry",
+        "哭"
+      ],
+      [
+        "laugh",
+        "笑"
+      ],
+      [
+        "hug",
+        "抱抱"
       ],
       [
         "point",
         "指"
       ],
       [
-        "open",
-        "撑开"
-      ],
-      [
-        "wave",
-        "挥手"
-      ],
-      [
-        "listen",
-        "听"
-      ],
-      [
-        "splash",
-        "踩水"
+        "look",
+        "看"
       ],
       [
         "clap",
         "拍手"
       ],
       [
-        "say",
-        "说"
-      ],
-      [
-        "go",
-        "走"
-      ],
-      [
-        "blow",
-        "吹"
+        "calm",
+        "安静"
       ]
     ],
     "dialogs": [
       [
         "Mom",
-        "Look outside! The sun is up. Sun, sun!"
+        "Are you happy, baby? Look in the mirror. Happy, happy!"
       ],
       [
         "Baby",
-        "Sun! Warm!"
+        "Happy! Smile!"
       ],
       [
         "Mom",
-        "It's raining. Open your umbrella, baby."
+        "Oh, you are sad. Mommy gives a hug. Hug, hug."
       ],
       [
         "Baby",
-        "Rain! Umbrella!"
+        "Hug! Better!"
       ],
       [
         "Mom",
-        "Point to the rainbow in the sky. Look, a bird!"
+        "Point to angry. Clap, clap, calm down!"
       ],
       [
         "Baby",
-        "Rainbow! Bird! Yay!"
+        "Calm! Yay!"
       ]
     ]
   },
   "history": [
+    {
+      "date": "2026-10-14",
+      "name": "情绪",
+      "words": [
+        [
+          "happy",
+          "开心"
+        ],
+        [
+          "sad",
+          "难过"
+        ],
+        [
+          "angry",
+          "生气"
+        ],
+        [
+          "scared",
+          "害怕"
+        ],
+        [
+          "mommy",
+          "妈妈"
+        ],
+        [
+          "baby",
+          "宝宝"
+        ],
+        [
+          "mirror",
+          "镜子"
+        ],
+        [
+          "face",
+          "脸"
+        ],
+        [
+          "tear",
+          "眼泪"
+        ],
+        [
+          "hand",
+          "小手"
+        ],
+        [
+          "smile",
+          "微笑"
+        ],
+        [
+          "cry",
+          "哭"
+        ],
+        [
+          "laugh",
+          "笑"
+        ],
+        [
+          "hug",
+          "抱抱"
+        ],
+        [
+          "point",
+          "指"
+        ],
+        [
+          "look",
+          "看"
+        ],
+        [
+          "clap",
+          "拍手"
+        ],
+        [
+          "calm",
+          "安静"
+        ]
+      ],
+      "dialogs": [
+        [
+          "Mom",
+          "Are you happy, baby? Look in the mirror. Happy, happy!"
+        ],
+        [
+          "Baby",
+          "Happy! Smile!"
+        ],
+        [
+          "Mom",
+          "Oh, you are sad. Mommy gives a hug. Hug, hug."
+        ],
+        [
+          "Baby",
+          "Hug! Better!"
+        ],
+        [
+          "Mom",
+          "Point to angry. Clap, clap, calm down!"
+        ],
+        [
+          "Baby",
+          "Calm! Yay!"
+        ]
+      ]
+    },
     {
       "date": "2026-10-12",
       "name": "天气",
