@@ -1,110 +1,230 @@
 {
-  "updatedAt": "2026-10-14T23:56:51.758513+08:00",
+  "updatedAt": "2026-10-16T23:56:24.257711+08:00",
   "source": "AI 每3天自动轮换（SSS儿歌核心）",
   "current": {
-    "name": "情绪",
+    "name": "身体动作",
     "words": [
       [
-        "happy",
-        "开心"
+        "hands",
+        "小手"
       ],
       [
-        "sad",
-        "难过"
+        "feet",
+        "小脚"
       ],
       [
-        "angry",
-        "生气"
-      ],
-      [
-        "scared",
-        "害怕"
-      ],
-      [
-        "mommy",
-        "妈妈"
+        "knees",
+        "膝盖"
       ],
       [
         "baby",
         "宝宝"
       ],
       [
-        "mirror",
-        "镜子"
+        "mommy",
+        "妈妈"
       ],
       [
-        "face",
-        "脸"
+        "song",
+        "歌"
       ],
       [
-        "tear",
-        "眼泪"
+        "floor",
+        "地板"
       ],
       [
-        "hand",
-        "小手"
+        "circle",
+        "圆圈"
       ],
       [
-        "smile",
-        "微笑"
+        "tummy",
+        "肚子"
       ],
       [
-        "cry",
-        "哭"
+        "bear",
+        "小熊"
       ],
       [
-        "laugh",
-        "笑"
+        "walk",
+        "走"
       ],
       [
-        "hug",
-        "抱抱"
+        "hop",
+        "跳"
       ],
       [
-        "point",
-        "指"
+        "run",
+        "跑"
       ],
       [
-        "look",
-        "看"
+        "stop",
+        "停"
       ],
       [
         "clap",
         "拍手"
       ],
       [
-        "calm",
-        "安静"
+        "stomp",
+        "跺脚"
+      ],
+      [
+        "turn",
+        "转圈"
+      ],
+      [
+        "touch",
+        "摸"
+      ],
+      [
+        "tap",
+        "点"
+      ],
+      [
+        "sleep",
+        "睡觉"
       ]
     ],
     "dialogs": [
       [
         "Mom",
-        "Are you happy, baby? Look in the mirror. Happy, happy!"
+        "Walking, walking! Let's walk on the floor. Walk, walk!"
       ],
       [
         "Baby",
-        "Happy! Smile!"
+        "Walk! Walk!"
       ],
       [
         "Mom",
-        "Oh, you are sad. Mommy gives a hug. Hug, hug."
+        "Hop, hop, hop! Now stop. Clap your hands, baby!"
       ],
       [
         "Baby",
-        "Hug! Better!"
+        "Clap! Stomp! Fun!"
       ],
       [
         "Mom",
-        "Point to angry. Clap, clap, calm down!"
+        "Turn around. Touch your tummy, then sleep. Shh, night-night!"
       ],
       [
         "Baby",
-        "Calm! Yay!"
+        "Turn! La... sleep."
       ]
     ]
   },
   "history": [
+    {
+      "date": "2026-10-16",
+      "name": "身体动作",
+      "words": [
+        [
+          "hands",
+          "小手"
+        ],
+        [
+          "feet",
+          "小脚"
+        ],
+        [
+          "knees",
+          "膝盖"
+        ],
+        [
+          "baby",
+          "宝宝"
+        ],
+        [
+          "mommy",
+          "妈妈"
+        ],
+        [
+          "song",
+          "歌"
+        ],
+        [
+          "floor",
+          "地板"
+        ],
+        [
+          "circle",
+          "圆圈"
+        ],
+        [
+          "tummy",
+          "肚子"
+        ],
+        [
+          "bear",
+          "小熊"
+        ],
+        [
+          "walk",
+          "走"
+        ],
+        [
+          "hop",
+          "跳"
+        ],
+        [
+          "run",
+          "跑"
+        ],
+        [
+          "stop",
+          "停"
+        ],
+        [
+          "clap",
+          "拍手"
+        ],
+        [
+          "stomp",
+          "跺脚"
+        ],
+        [
+          "turn",
+          "转圈"
+        ],
+        [
+          "touch",
+          "摸"
+        ],
+        [
+          "tap",
+          "点"
+        ],
+        [
+          "sleep",
+          "睡觉"
+        ]
+      ],
+      "dialogs": [
+        [
+          "Mom",
+          "Walking, walking! Let's walk on the floor. Walk, walk!"
+        ],
+        [
+          "Baby",
+          "Walk! Walk!"
+        ],
+        [
+          "Mom",
+          "Hop, hop, hop! Now stop. Clap your hands, baby!"
+        ],
+        [
+          "Baby",
+          "Clap! Stomp! Fun!"
+        ],
+        [
+          "Mom",
+          "Turn around. Touch your tummy, then sleep. Shh, night-night!"
+        ],
+        [
+          "Baby",
+          "Turn! La... sleep."
+        ]
+      ]
+    },
     {
       "date": "2026-10-14",
       "name": "情绪",
