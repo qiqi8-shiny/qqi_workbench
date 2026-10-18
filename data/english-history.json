@@ -1,20 +1,12 @@
 {
-  "updatedAt": "2026-10-16T23:56:24.257711+08:00",
+  "updatedAt": "2026-10-18T23:57:10.842925+08:00",
   "source": "AI 每3天自动轮换（SSS儿歌核心）",
   "current": {
-    "name": "身体动作",
+    "name": "照镜子",
     "words": [
       [
-        "hands",
-        "小手"
-      ],
-      [
-        "feet",
-        "小脚"
-      ],
-      [
-        "knees",
-        "膝盖"
+        "mirror",
+        "镜子"
       ],
       [
         "baby",
@@ -25,94 +17,214 @@
         "妈妈"
       ],
       [
-        "song",
-        "歌"
+        "face",
+        "脸"
       ],
       [
-        "floor",
-        "地板"
+        "nose",
+        "鼻子"
       ],
       [
-        "circle",
-        "圆圈"
+        "eyes",
+        "眼睛"
       ],
       [
-        "tummy",
-        "肚子"
+        "mouth",
+        "嘴巴"
       ],
       [
-        "bear",
-        "小熊"
+        "cheek",
+        "脸颊"
       ],
       [
-        "walk",
-        "走"
+        "ear",
+        "耳朵"
       ],
       [
-        "hop",
-        "跳"
+        "hand",
+        "小手"
       ],
       [
-        "run",
-        "跑"
+        "look",
+        "看"
       ],
       [
-        "stop",
-        "停"
-      ],
-      [
-        "clap",
-        "拍手"
-      ],
-      [
-        "stomp",
-        "跺脚"
-      ],
-      [
-        "turn",
-        "转圈"
+        "point",
+        "指"
       ],
       [
         "touch",
         "摸"
       ],
       [
-        "tap",
-        "点"
+        "smile",
+        "微笑"
       ],
       [
-        "sleep",
-        "睡觉"
+        "peek",
+        "露脸"
+      ],
+      [
+        "kiss",
+        "亲亲"
+      ],
+      [
+        "clap",
+        "拍手"
+      ],
+      [
+        "wave",
+        "挥手"
+      ],
+      [
+        "find",
+        "找"
+      ],
+      [
+        "say",
+        "说"
       ]
     ],
     "dialogs": [
       [
         "Mom",
-        "Walking, walking! Let's walk on the floor. Walk, walk!"
+        "Look in the mirror! Where is baby? Peek, peek!"
       ],
       [
         "Baby",
-        "Walk! Walk!"
+        "Boo! Mirror!"
       ],
       [
         "Mom",
-        "Hop, hop, hop! Now stop. Clap your hands, baby!"
+        "Point to your nose. Touch your cheek, baby."
       ],
       [
         "Baby",
-        "Clap! Stomp! Fun!"
+        "Nose! Cheek!"
       ],
       [
         "Mom",
-        "Turn around. Touch your tummy, then sleep. Shh, night-night!"
+        "Smile at mommy. Kiss the mirror, mua!"
       ],
       [
         "Baby",
-        "Turn! La... sleep."
+        "Mua! Smile!"
       ]
     ]
   },
   "history": [
+    {
+      "date": "2026-10-18",
+      "name": "照镜子",
+      "words": [
+        [
+          "mirror",
+          "镜子"
+        ],
+        [
+          "baby",
+          "宝宝"
+        ],
+        [
+          "mommy",
+          "妈妈"
+        ],
+        [
+          "face",
+          "脸"
+        ],
+        [
+          "nose",
+          "鼻子"
+        ],
+        [
+          "eyes",
+          "眼睛"
+        ],
+        [
+          "mouth",
+          "嘴巴"
+        ],
+        [
+          "cheek",
+          "脸颊"
+        ],
+        [
+          "ear",
+          "耳朵"
+        ],
+        [
+          "hand",
+          "小手"
+        ],
+        [
+          "look",
+          "看"
+        ],
+        [
+          "point",
+          "指"
+        ],
+        [
+          "touch",
+          "摸"
+        ],
+        [
+          "smile",
+          "微笑"
+        ],
+        [
+          "peek",
+          "露脸"
+        ],
+        [
+          "kiss",
+          "亲亲"
+        ],
+        [
+          "clap",
+          "拍手"
+        ],
+        [
+          "wave",
+          "挥手"
+        ],
+        [
+          "find",
+          "找"
+        ],
+        [
+          "say",
+          "说"
+        ]
+      ],
+      "dialogs": [
+        [
+          "Mom",
+          "Look in the mirror! Where is baby? Peek, peek!"
+        ],
+        [
+          "Baby",
+          "Boo! Mirror!"
+        ],
+        [
+          "Mom",
+          "Point to your nose. Touch your cheek, baby."
+        ],
+        [
+          "Baby",
+          "Nose! Cheek!"
+        ],
+        [
+          "Mom",
+          "Smile at mommy. Kiss the mirror, mua!"
+        ],
+        [
+          "Baby",
+          "Mua! Smile!"
+        ]
+      ]
+    },
     {
       "date": "2026-10-16",
       "name": "身体动作",
