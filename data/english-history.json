@@ -1,12 +1,16 @@
 {
-  "updatedAt": "2026-10-18T23:57:10.842925+08:00",
+  "updatedAt": "2026-10-20T23:56:20.289087+08:00",
   "source": "AI 每3天自动轮换（SSS儿歌核心）",
   "current": {
-    "name": "照镜子",
+    "name": "水杯喝水",
     "words": [
       [
-        "mirror",
-        "镜子"
+        "cup",
+        "杯子"
+      ],
+      [
+        "water",
+        "水"
       ],
       [
         "baby",
@@ -17,102 +21,194 @@
         "妈妈"
       ],
       [
-        "face",
-        "脸"
-      ],
-      [
-        "nose",
-        "鼻子"
-      ],
-      [
-        "eyes",
-        "眼睛"
+        "milk",
+        "奶"
       ],
       [
         "mouth",
         "嘴巴"
       ],
       [
-        "cheek",
-        "脸颊"
-      ],
-      [
-        "ear",
-        "耳朵"
-      ],
-      [
-        "hand",
+        "hands",
         "小手"
       ],
       [
-        "look",
-        "看"
+        "bib",
+        "围嘴"
       ],
       [
-        "point",
-        "指"
+        "table",
+        "桌子"
       ],
       [
-        "touch",
-        "摸"
+        "bottle",
+        "奶瓶"
+      ],
+      [
+        "drink",
+        "喝"
+      ],
+      [
+        "hold",
+        "拿"
+      ],
+      [
+        "pour",
+        "倒"
+      ],
+      [
+        "sip",
+        "抿"
+      ],
+      [
+        "open",
+        "张开"
+      ],
+      [
+        "wipe",
+        "擦"
+      ],
+      [
+        "spill",
+        "洒"
       ],
       [
         "smile",
-        "微笑"
-      ],
-      [
-        "peek",
-        "露脸"
-      ],
-      [
-        "kiss",
-        "亲亲"
-      ],
-      [
-        "clap",
-        "拍手"
-      ],
-      [
-        "wave",
-        "挥手"
-      ],
-      [
-        "find",
-        "找"
-      ],
-      [
-        "say",
-        "说"
+        "笑"
       ]
     ],
     "dialogs": [
       [
         "Mom",
-        "Look in the mirror! Where is baby? Peek, peek!"
+        "Here is your cup! Hold it, baby. Drink, drink!"
       ],
       [
         "Baby",
-        "Boo! Mirror!"
+        "Cup! Drink!"
       ],
       [
         "Mom",
-        "Point to your nose. Touch your cheek, baby."
+        "Sip the water. Open your mouth, baby."
       ],
       [
         "Baby",
-        "Nose! Cheek!"
+        "Mmm! Water!"
       ],
       [
         "Mom",
-        "Smile at mommy. Kiss the mirror, mua!"
+        "Oops, spill! Wipe your hands. Smile, baby!"
       ],
       [
         "Baby",
-        "Mua! Smile!"
+        "Hehe! More!"
       ]
     ]
   },
   "history": [
+    {
+      "date": "2026-10-20",
+      "name": "水杯喝水",
+      "words": [
+        [
+          "cup",
+          "杯子"
+        ],
+        [
+          "water",
+          "水"
+        ],
+        [
+          "baby",
+          "宝宝"
+        ],
+        [
+          "mommy",
+          "妈妈"
+        ],
+        [
+          "milk",
+          "奶"
+        ],
+        [
+          "mouth",
+          "嘴巴"
+        ],
+        [
+          "hands",
+          "小手"
+        ],
+        [
+          "bib",
+          "围嘴"
+        ],
+        [
+          "table",
+          "桌子"
+        ],
+        [
+          "bottle",
+          "奶瓶"
+        ],
+        [
+          "drink",
+          "喝"
+        ],
+        [
+          "hold",
+          "拿"
+        ],
+        [
+          "pour",
+          "倒"
+        ],
+        [
+          "sip",
+          "抿"
+        ],
+        [
+          "open",
+          "张开"
+        ],
+        [
+          "wipe",
+          "擦"
+        ],
+        [
+          "spill",
+          "洒"
+        ],
+        [
+          "smile",
+          "笑"
+        ]
+      ],
+      "dialogs": [
+        [
+          "Mom",
+          "Here is your cup! Hold it, baby. Drink, drink!"
+        ],
+        [
+          "Baby",
+          "Cup! Drink!"
+        ],
+        [
+          "Mom",
+          "Sip the water. Open your mouth, baby."
+        ],
+        [
+          "Baby",
+          "Mmm! Water!"
+        ],
+        [
+          "Mom",
+          "Oops, spill! Wipe your hands. Smile, baby!"
+        ],
+        [
+          "Baby",
+          "Hehe! More!"
+        ]
+      ]
+    },
     {
       "date": "2026-10-18",
       "name": "照镜子",
