@@ -1,16 +1,32 @@
 {
-  "updatedAt": "2026-10-20T23:56:20.289087+08:00",
+  "updatedAt": "2026-10-28T15:05:32.938223+08:00",
   "source": "AI 每3天自动轮换（SSS儿歌核心）",
   "current": {
-    "name": "水杯喝水",
+    "name": "感官触摸",
     "words": [
-      [
-        "cup",
-        "杯子"
-      ],
       [
         "water",
         "水"
+      ],
+      [
+        "ball",
+        "球"
+      ],
+      [
+        "block",
+        "积木"
+      ],
+      [
+        "cloth",
+        "布"
+      ],
+      [
+        "leaf",
+        "叶子"
+      ],
+      [
+        "bubble",
+        "泡泡"
       ],
       [
         "baby",
@@ -21,56 +37,40 @@
         "妈妈"
       ],
       [
-        "milk",
-        "奶"
+        "spoon",
+        "勺子"
       ],
       [
-        "mouth",
-        "嘴巴"
+        "bear",
+        "小熊"
       ],
       [
-        "hands",
-        "小手"
-      ],
-      [
-        "bib",
-        "围嘴"
-      ],
-      [
-        "table",
-        "桌子"
-      ],
-      [
-        "bottle",
-        "奶瓶"
-      ],
-      [
-        "drink",
-        "喝"
+        "touch",
+        "摸"
       ],
       [
         "hold",
         "拿"
       ],
       [
-        "pour",
-        "倒"
+        "squeeze",
+        "捏"
       ],
       [
-        "sip",
-        "抿"
+        "splash",
+        "拍水"
       ],
       [
-        "open",
-        "张开"
+        "tap",
+        "点"
       ],
       [
-        "wipe",
-        "擦"
+        "shake",
+        "摇"
       ],
       [
-        "spill",
-        "洒"
+        "feel",
+        "感受"
       ],
       [
         "smile",
@@ -80,31 +80,135 @@
     "dialogs": [
       [
         "Mom",
-        "Here is your cup! Hold it, baby. Drink, drink!"
+        "Touch the water! Squeeze the ball. How does it feel?"
       ],
       [
         "Baby",
-        "Cup! Drink!"
+        "Cool! Water!"
       ],
       [
         "Mom",
-        "Sip the water. Open your mouth, baby."
+        "Hold the leaf. Tap, tap the block, baby."
       ],
       [
         "Baby",
-        "Mmm! Water!"
+        "Tap! Block!"
       ],
       [
         "Mom",
-        "Oops, spill! Wipe your hands. Smile, baby!"
+        "Shake the cloth. Splash the bubbles, smile!"
       ],
       [
         "Baby",
-        "Hehe! More!"
+        "Hehe! Fun!"
       ]
     ]
   },
   "history": [
+    {
+      "date": "2026-10-28",
+      "name": "感官触摸",
+      "words": [
+        [
+          "water",
+          "水"
+        ],
+        [
+          "ball",
+          "球"
+        ],
+        [
+          "block",
+          "积木"
+        ],
+        [
+          "cloth",
+          "布"
+        ],
+        [
+          "leaf",
+          "叶子"
+        ],
+        [
+          "bubble",
+          "泡泡"
+        ],
+        [
+          "baby",
+          "宝宝"
+        ],
+        [
+          "mommy",
+          "妈妈"
+        ],
+        [
+          "spoon",
+          "勺子"
+        ],
+        [
+          "bear",
+          "小熊"
+        ],
+        [
+          "touch",
+          "摸"
+        ],
+        [
+          "hold",
+          "拿"
+        ],
+        [
+          "squeeze",
+          "捏"
+        ],
+        [
+          "splash",
+          "拍水"
+        ],
+        [
+          "tap",
+          "点"
+        ],
+        [
+          "shake",
+          "摇"
+        ],
+        [
+          "feel",
+          "感受"
+        ],
+        [
+          "smile",
+          "笑"
+        ]
+      ],
+      "dialogs": [
+        [
+          "Mom",
+          "Touch the water! Squeeze the ball. How does it feel?"
+        ],
+        [
+          "Baby",
+          "Cool! Water!"
+        ],
+        [
+          "Mom",
+          "Hold the leaf. Tap, tap the block, baby."
+        ],
+        [
+          "Baby",
+          "Tap! Block!"
+        ],
+        [
+          "Mom",
+          "Shake the cloth. Splash the bubbles, smile!"
+        ],
+        [
+          "Baby",
+          "Hehe! Fun!"
+        ]
+      ]
+    },
     {
       "date": "2026-10-20",
       "name": "水杯喝水",
