@@ -1,7 +1,39 @@
 {
-  "updatedAt": "2026-10-14T23:59:16+08:00",
+  "updatedAt": "2026-10-28T23:59:10+08:00",
   "source": "AI 每周联网抓取（医用成像/ML可解释性）",
   "items": [
+    {
+      "tag": "政策",
+      "tagClass": "tag-policy",
+      "title": "国家药监局局长黄果署名文章：发挥监管政策引领作用，探索人工智能技术支持审评审批",
+      "desc": "NMPA 局长黄果在“十五五”开局之际发表署名文章，提出健全科学高效的药品监管体系，明确将探索以人工智能技术支持审评审批与检验检查、推动医疗器械管理法制定、加快药品追溯体系数智化升级，为高端医疗装备与 AI 医疗器械创新提供制度保障。",
+      "link": "https://www.nmpa.gov.cn/yaowen/ypjgyw/zhyw/20261021161340132.html",
+      "pubDate": "2026-10-21"
+    },
+    {
+      "tag": "产业",
+      "tagClass": "tag-industry",
+      "title": "SimBioSys 旗下 TumorSight Risk 获 FDA 510(k)：全球首个 MRI 衍生乳腺癌复发风险 AI 工具",
+      "desc": "SimBioSys 于 2026-10-15 宣布 TumorSight Risk 获 FDA 510(k) 许可（K260023），可从既有的乳腺 MRI、病理与临床数据生成 0–100 分的 5/10 年复发风险评分，无需额外活检或组织运送；2129 例多中心研究验证，高分者复发风险为低分者的 3.3 倍。",
+      "link": "https://simbiosys.com/2026/10/15/simbiosys-secures-fda-clearance-for-tumorsight-risk/",
+      "pubDate": "2026-10-15"
+    },
+    {
+      "tag": "学术",
+      "tagClass": "tag-academic",
+      "title": "FP-CIT 影像层级深度学习-影像组学融合鉴别帕金森与非典型帕金森（含 SHAP 解释）",
+      "desc": "研究者构建可解释 AI 框架，对 FP-CIT 影像自动勾画纹状体 ROI，融合影像组学与深度学习进行层级分类，并以 Grad-CAM 与 SHAP 解释预测依据；五随机种子下 PD 与非典型帕金森测试 AUC 达 0.880，SHAP 揭示分期依赖的影像组学重要性特征。",
+      "link": "https://www.cjcopen.ca/article/S1353-8020(26)00848-5/fulltext",
+      "pubDate": "2026-10-15"
+    },
+    {
+      "tag": "专利",
+      "tagClass": "tag-patent",
+      "title": "内镜黏膜下剥离(ESD)论文-专利双语料分析：LDA 揭示临床研究与器械创新系统性偏离",
+      "desc": "Forbes J Med 2026 研究以 Word2Vec 嵌入 + LDA 主题建模分析 2470 篇文献与 4526 件器械专利(2010–2025)，发现论文-专利语义相似度极低（偏离分 0.792、无主题对超 0.5），88.9% 论文主题无对应专利、83.3% 专利主题独立于学术，提示医械创新存在研究-转化鸿沟。",
+      "link": "https://forbestip.org/pdf/080b1dc9-b5e8-4382-b356-1411b16f2612/articles/forbes.galenos.2026.52028/128-139.pdf",
+      "pubDate": "2026-10-02"
+    },
     {
       "tag": "政策",
       "tagClass": "tag-policy",
