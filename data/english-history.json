@@ -1,32 +1,28 @@
 {
-  "updatedAt": "2026-10-28T15:05:32.938223+08:00",
+  "updatedAt": "2026-10-30T23:57:04.827749+08:00",
   "source": "AI 每3天自动轮换（SSS儿歌核心）",
   "current": {
-    "name": "感官触摸",
+    "name": "影子游戏",
     "words": [
       [
-        "water",
-        "水"
+        "shadow",
+        "影子"
       ],
       [
-        "ball",
-        "球"
+        "light",
+        "光"
       ],
       [
-        "block",
-        "积木"
+        "hand",
+        "小手"
       ],
       [
-        "cloth",
-        "布"
+        "wall",
+        "墙"
       ],
       [
-        "leaf",
-        "叶子"
-      ],
-      [
-        "bubble",
-        "泡泡"
+        "floor",
+        "地板"
       ],
       [
         "baby",
@@ -37,74 +33,182 @@
         "妈妈"
       ],
       [
-        "spoon",
-        "勺子"
+        "lamp",
+        "灯"
       ],
       [
-        "bear",
-        "小熊"
+        "sun",
+        "太阳"
       ],
       [
-        "touch",
-        "摸"
+        "bunny",
+        "小兔"
       ],
       [
-        "hold",
-        "拿"
+        "look",
+        "看"
       ],
       [
-        "squeeze",
-        "捏"
+        "hide",
+        "藏"
       ],
       [
-        "splash",
-        "拍水"
+        "find",
+        "找"
       ],
       [
-        "tap",
-        "点"
+        "point",
+        "指"
       ],
       [
-        "shake",
-        "摇"
+        "wave",
+        "挥手"
       ],
       [
-        "feel",
-        "感受"
+        "clap",
+        "拍手"
+      ],
+      [
+        "dance",
+        "跳舞"
       ],
       [
         "smile",
-        "笑"
+        "微笑"
       ]
     ],
     "dialogs": [
       [
         "Mom",
-        "Touch the water! Squeeze the ball. How does it feel?"
+        "Look at the wall! A shadow! Where is the light?"
       ],
       [
         "Baby",
-        "Cool! Water!"
+        "Shadow! Wall!"
       ],
       [
         "Mom",
-        "Hold the leaf. Tap, tap the block, baby."
+        "Mommy makes a bunny. Hide, hide, find it!"
       ],
       [
         "Baby",
-        "Tap! Block!"
+        "Bunny! Peek!"
       ],
       [
         "Mom",
-        "Shake the cloth. Splash the bubbles, smile!"
+        "Wave your hand. Dance with your shadow, smile!"
       ],
       [
         "Baby",
-        "Hehe! Fun!"
+        "Hehe! Shadow dance!"
       ]
     ]
   },
   "history": [
+    {
+      "date": "2026-10-30",
+      "name": "影子游戏",
+      "words": [
+        [
+          "shadow",
+          "影子"
+        ],
+        [
+          "light",
+          "光"
+        ],
+        [
+          "hand",
+          "小手"
+        ],
+        [
+          "wall",
+          "墙"
+        ],
+        [
+          "floor",
+          "地板"
+        ],
+        [
+          "baby",
+          "宝宝"
+        ],
+        [
+          "mommy",
+          "妈妈"
+        ],
+        [
+          "lamp",
+          "灯"
+        ],
+        [
+          "sun",
+          "太阳"
+        ],
+        [
+          "bunny",
+          "小兔"
+        ],
+        [
+          "look",
+          "看"
+        ],
+        [
+          "hide",
+          "藏"
+        ],
+        [
+          "find",
+          "找"
+        ],
+        [
+          "point",
+          "指"
+        ],
+        [
+          "wave",
+          "挥手"
+        ],
+        [
+          "clap",
+          "拍手"
+        ],
+        [
+          "dance",
+          "跳舞"
+        ],
+        [
+          "smile",
+          "微笑"
+        ]
+      ],
+      "dialogs": [
+        [
+          "Mom",
+          "Look at the wall! A shadow! Where is the light?"
+        ],
+        [
+          "Baby",
+          "Shadow! Wall!"
+        ],
+        [
+          "Mom",
+          "Mommy makes a bunny. Hide, hide, find it!"
+        ],
+        [
+          "Baby",
+          "Bunny! Peek!"
+        ],
+        [
+          "Mom",
+          "Wave your hand. Dance with your shadow, smile!"
+        ],
+        [
+          "Baby",
+          "Hehe! Shadow dance!"
+        ]
+      ]
+    },
     {
       "date": "2026-10-28",
       "name": "感官触摸",
