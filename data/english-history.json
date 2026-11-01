@@ -1,29 +1,9 @@
 {
-  "updatedAt": "2026-10-30T23:57:04.827749+08:00",
+  "updatedAt": "2026-11-01T23:57:35.964716+08:00",
   "source": "AI 每3天自动轮换（SSS儿歌核心）",
   "current": {
-    "name": "影子游戏",
+    "name": "学爬探索",
     "words": [
-      [
-        "shadow",
-        "影子"
-      ],
-      [
-        "light",
-        "光"
-      ],
-      [
-        "hand",
-        "小手"
-      ],
-      [
-        "wall",
-        "墙"
-      ],
-      [
-        "floor",
-        "地板"
-      ],
       [
         "baby",
         "宝宝"
@@ -33,78 +13,202 @@
         "妈妈"
       ],
       [
-        "lamp",
-        "灯"
+        "floor",
+        "地板"
       ],
       [
-        "sun",
-        "太阳"
+        "toy",
+        "玩具"
       ],
       [
-        "bunny",
-        "小兔"
+        "ball",
+        "球"
       ],
       [
-        "look",
-        "看"
+        "block",
+        "积木"
       ],
       [
-        "hide",
-        "藏"
+        "bear",
+        "小熊"
+      ],
+      [
+        "rug",
+        "地毯"
+      ],
+      [
+        "pillow",
+        "枕头"
+      ],
+      [
+        "tummy",
+        "肚子"
+      ],
+      [
+        "crawl",
+        "爬"
+      ],
+      [
+        "reach",
+        "伸手够"
+      ],
+      [
+        "move",
+        "动"
       ],
       [
         "find",
         "找"
       ],
       [
-        "point",
-        "指"
+        "sit",
+        "坐"
       ],
       [
-        "wave",
-        "挥手"
+        "roll",
+        "翻滚"
       ],
       [
         "clap",
         "拍手"
       ],
       [
-        "dance",
-        "跳舞"
-      ],
-      [
         "smile",
-        "微笑"
+        "笑"
       ]
     ],
     "dialogs": [
       [
         "Mom",
-        "Look at the wall! A shadow! Where is the light?"
+        "Crawl to the ball, baby! Crawl, crawl on the floor!"
       ],
       [
         "Baby",
-        "Shadow! Wall!"
+        "Ball! Crawl!"
       ],
       [
         "Mom",
-        "Mommy makes a bunny. Hide, hide, find it!"
+        "Reach the toy. Find the little bear!"
       ],
       [
         "Baby",
-        "Bunny! Peek!"
+        "Bear! Here!"
       ],
       [
         "Mom",
-        "Wave your hand. Dance with your shadow, smile!"
+        "Move fast, sit up, clap your hands, smile!"
       ],
       [
         "Baby",
-        "Hehe! Shadow dance!"
+        "Hehe! Crawl more!"
       ]
     ]
   },
   "history": [
+    {
+      "date": "2026-11-01",
+      "name": "学爬探索",
+      "words": [
+        [
+          "baby",
+          "宝宝"
+        ],
+        [
+          "mommy",
+          "妈妈"
+        ],
+        [
+          "floor",
+          "地板"
+        ],
+        [
+          "toy",
+          "玩具"
+        ],
+        [
+          "ball",
+          "球"
+        ],
+        [
+          "block",
+          "积木"
+        ],
+        [
+          "bear",
+          "小熊"
+        ],
+        [
+          "rug",
+          "地毯"
+        ],
+        [
+          "pillow",
+          "枕头"
+        ],
+        [
+          "tummy",
+          "肚子"
+        ],
+        [
+          "crawl",
+          "爬"
+        ],
+        [
+          "reach",
+          "伸手够"
+        ],
+        [
+          "move",
+          "动"
+        ],
+        [
+          "find",
+          "找"
+        ],
+        [
+          "sit",
+          "坐"
+        ],
+        [
+          "roll",
+          "翻滚"
+        ],
+        [
+          "clap",
+          "拍手"
+        ],
+        [
+          "smile",
+          "笑"
+        ]
+      ],
+      "dialogs": [
+        [
+          "Mom",
+          "Crawl to the ball, baby! Crawl, crawl on the floor!"
+        ],
+        [
+          "Baby",
+          "Ball! Crawl!"
+        ],
+        [
+          "Mom",
+          "Reach the toy. Find the little bear!"
+        ],
+        [
+          "Baby",
+          "Bear! Here!"
+        ],
+        [
+          "Mom",
+          "Move fast, sit up, clap your hands, smile!"
+        ],
+        [
+          "Baby",
+          "Hehe! Crawl more!"
+        ]
+      ]
+    },
     {
       "date": "2026-10-30",
       "name": "影子游戏",
