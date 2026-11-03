@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-11-01T23:57:35.964716+08:00",
+  "updatedAt": "2026-11-03T23:58:05.398838+08:00",
   "source": "AI 每3天自动轮换（SSS儿歌核心）",
   "current": {
-    "name": "学爬探索",
+    "name": "扶站学站",
     "words": [
       [
         "baby",
@@ -13,60 +13,60 @@
         "妈妈"
       ],
       [
-        "floor",
-        "地板"
+        "sofa",
+        "沙发"
+      ],
+      [
+        "chair",
+        "椅子"
+      ],
+      [
+        "table",
+        "桌子"
+      ],
+      [
+        "hands",
+        "小手"
+      ],
+      [
+        "feet",
+        "小脚"
       ],
       [
         "toy",
         "玩具"
       ],
       [
-        "ball",
-        "球"
+        "music",
+        "音乐"
       ],
       [
-        "block",
-        "积木"
+        "wall",
+        "墙壁"
       ],
       [
-        "bear",
-        "小熊"
+        "stand",
+        "站"
       ],
       [
-        "rug",
-        "地毯"
+        "pull",
+        "扶"
       ],
       [
-        "pillow",
-        "枕头"
+        "hold",
+        "抓握"
       ],
       [
-        "tummy",
-        "肚子"
+        "up",
+        "起来"
       ],
       [
-        "crawl",
-        "爬"
+        "down",
+        "蹲下"
       ],
       [
-        "reach",
-        "伸手够"
-      ],
-      [
-        "move",
-        "动"
-      ],
-      [
-        "find",
-        "找"
-      ],
-      [
-        "sit",
-        "坐"
-      ],
-      [
-        "roll",
-        "翻滚"
+        "step",
+        "迈步"
       ],
       [
         "clap",
@@ -80,31 +80,135 @@
     "dialogs": [
       [
         "Mom",
-        "Crawl to the ball, baby! Crawl, crawl on the floor!"
+        "Stand up, baby! Hold the sofa. Pull, pull!"
       ],
       [
         "Baby",
-        "Ball! Crawl!"
+        "Up! Stand!"
       ],
       [
         "Mom",
-        "Reach the toy. Find the little bear!"
+        "Step, step. Hold my hands, baby."
       ],
       [
         "Baby",
-        "Bear! Here!"
+        "Step! Go!"
       ],
       [
         "Mom",
-        "Move fast, sit up, clap your hands, smile!"
+        "Sit down, clap your hands, smile!"
       ],
       [
         "Baby",
-        "Hehe! Crawl more!"
+        "Hehe! Stand more!"
       ]
     ]
   },
   "history": [
+    {
+      "date": "2026-11-03",
+      "name": "扶站学站",
+      "words": [
+        [
+          "baby",
+          "宝宝"
+        ],
+        [
+          "mommy",
+          "妈妈"
+        ],
+        [
+          "sofa",
+          "沙发"
+        ],
+        [
+          "chair",
+          "椅子"
+        ],
+        [
+          "table",
+          "桌子"
+        ],
+        [
+          "hands",
+          "小手"
+        ],
+        [
+          "feet",
+          "小脚"
+        ],
+        [
+          "toy",
+          "玩具"
+        ],
+        [
+          "music",
+          "音乐"
+        ],
+        [
+          "wall",
+          "墙壁"
+        ],
+        [
+          "stand",
+          "站"
+        ],
+        [
+          "pull",
+          "扶"
+        ],
+        [
+          "hold",
+          "抓握"
+        ],
+        [
+          "up",
+          "起来"
+        ],
+        [
+          "down",
+          "蹲下"
+        ],
+        [
+          "step",
+          "迈步"
+        ],
+        [
+          "clap",
+          "拍手"
+        ],
+        [
+          "smile",
+          "笑"
+        ]
+      ],
+      "dialogs": [
+        [
+          "Mom",
+          "Stand up, baby! Hold the sofa. Pull, pull!"
+        ],
+        [
+          "Baby",
+          "Up! Stand!"
+        ],
+        [
+          "Mom",
+          "Step, step. Hold my hands, baby."
+        ],
+        [
+          "Baby",
+          "Step! Go!"
+        ],
+        [
+          "Mom",
+          "Sit down, clap your hands, smile!"
+        ],
+        [
+          "Baby",
+          "Hehe! Stand more!"
+        ]
+      ]
+    },
     {
       "date": "2026-11-01",
       "name": "学爬探索",
