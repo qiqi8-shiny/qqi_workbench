@@ -1,7 +1,39 @@
 {
-  "updatedAt": "2026-10-28T23:59:10+08:00",
+  "updatedAt": "2026-11-04T23:58:45+08:00",
   "source": "AI 每周联网抓取（医用成像/ML可解释性）",
   "items": [
+    {
+      "tag": "政策",
+      "tagClass": "tag-policy",
+      "title": "京津冀推进\"春雨行动\"落地，共建医疗器械创新成果转化跨区域协同机制",
+      "desc": "河北新闻网 2026-11-03 报道，京津冀三地药监局在雄安新区联合举办\"春雨行动\"推进交流活动暨医疗器械创新发展大会，落实国家药监局为期三年的医疗器械临床创新成果转化\"春雨行动\"，共建跨区域协同机制：共筑项目库实现信息互通、打通\"临床—研发—中试—上市\"转化链与\"审评—检验—注册—监管\"服务链、组建跨区域专家服务团，推动高价值医械创新项目落地转化，打造跨区域协同创新示范样板。",
+      "link": "https://hebei.hebnews.cn/2026-11/03/content_9576326.htm",
+      "pubDate": "2026-11-03"
+    },
+    {
+      "tag": "产业",
+      "tagClass": "tag-industry",
+      "title": "Deep Reasoning AI 旗下 NeuroDR 获 FDA 510(k) 许可，神经血管 CT 血管造影 AI 三维重建",
+      "desc": "Deep Reasoning AI（由康奈尔大学 AI 教授创办）于 2026-10-27 宣布 NeuroDR 获 FDA 510(k) 许可（K262134），可从常规头颈 CT 血管造影（CTA）中自动剥离骨、软组织与静脉，生成双侧颈内动脉与椎动脉的 3D 最大密度投影、容积重建与曲面重组图像并回传 PACS；约 105 天获批，是该公司首款获 FDA 许可产品，延续 2026 年影像 AI 密集获批态势。",
+      "link": "https://lasvegassun.com/news/2026/oct/27/deep-reasoning-ai-and-innolitics-achieve-fda-510k-",
+      "pubDate": "2026-10-27"
+    },
+    {
+      "tag": "学术",
+      "tagClass": "tag-academic",
+      "title": "Academic Radiology 发表可解释胸片影像组学模型识别 PRISm（含 SHAP 解释）",
+      "desc": "Academic Radiology 2026-10-21 在线发表多中心研究，基于 9 家医院 1563 名受试者构建胸片（CXR）影像组学-临床联合模型用于 preserved ratio impaired spirometry（PRISm）筛查，外部验证 AUC 0.759；以 SHAP 做全局与局部解释，揭示性别为最强预测因子，其次为影像组学特征、BMI、年龄与吸烟状态，提升模型临床可解释性（DOI 10.1016/j.acra.2026.10.011）。",
+      "link": "https://www.academicradiology.org/article/S1076-6332(26)00848-2/fulltext",
+      "pubDate": "2026-10-21"
+    },
+    {
+      "tag": "专利",
+      "tagClass": "tag-patent",
+      "title": "AI 与细胞基因治疗融合专利分析：THGNN + LDA 揭示跨学科医药技术融合景观",
+      "desc": "《Current Gene Therapy》2026-09-28 发表研究，以全球 AI-细胞基因治疗（CGT）专利构建时序异构图，用 THGNN 做链路预测（AUC 0.7539），并以 LDA 主题模型对核心 IPC 组合下的专利做主题建模（结合困惑度与主题间距离可视化确定主题数），识别 AI 与检测/治疗方法的融合方向，为跨学科医药专利的技术机会识别提供\"宏观预测—微观解释\"可迁移范式（DOI 10.2174/0115665232515473260910071847）。",
+      "link": "https://arxivlens.com/paperview/details/trends-and-hotspots-in-the-convergence-of-artificial-intelligence-and-cell-and-gene-therapy-a-patent-analysis.-2550-ec12ed3a",
+      "pubDate": "2026-09-28"
+    },
     {
       "tag": "政策",
       "tagClass": "tag-policy",
