@@ -1,9 +1,13 @@
 {
-  "updatedAt": "2026-11-03T23:58:05.398838+08:00",
+  "updatedAt": "2026-11-05T23:56:25.553093+08:00",
   "source": "AI 每3天自动轮换（SSS儿歌核心）",
   "current": {
-    "name": "扶站学站",
+    "name": "拍蛋糕",
     "words": [
+      [
+        "cake",
+        "蛋糕"
+      ],
       [
         "baby",
         "宝宝"
@@ -13,64 +17,60 @@
         "妈妈"
       ],
       [
-        "sofa",
-        "沙发"
-      ],
-      [
-        "chair",
-        "椅子"
-      ],
-      [
-        "table",
-        "桌子"
-      ],
-      [
         "hands",
         "小手"
       ],
       [
-        "feet",
-        "小脚"
+        "plate",
+        "盘子"
       ],
       [
-        "toy",
-        "玩具"
+        "pan",
+        "平底锅"
       ],
       [
-        "music",
-        "音乐"
+        "dough",
+        "面团"
       ],
       [
-        "wall",
-        "墙壁"
+        "oven",
+        "烤箱"
       ],
       [
-        "stand",
-        "站"
+        "candle",
+        "蜡烛"
       ],
       [
-        "pull",
-        "扶"
+        "song",
+        "歌"
       ],
       [
-        "hold",
-        "抓握"
-      ],
-      [
-        "up",
-        "起来"
-      ],
-      [
-        "down",
-        "蹲下"
-      ],
-      [
-        "step",
-        "迈步"
+        "pat",
+        "拍"
       ],
       [
         "clap",
         "拍手"
+      ],
+      [
+        "roll",
+        "揉"
+      ],
+      [
+        "make",
+        "做"
+      ],
+      [
+        "bake",
+        "烤"
+      ],
+      [
+        "sing",
+        "唱"
+      ],
+      [
+        "blow",
+        "吹"
       ],
       [
         "smile",
@@ -80,31 +80,135 @@
     "dialogs": [
       [
         "Mom",
-        "Stand up, baby! Hold the sofa. Pull, pull!"
+        "Pat-a-cake, pat-a-cake! Pat the cake, baby!"
       ],
       [
         "Baby",
-        "Up! Stand!"
+        "Pat! Pat! Cake!"
       ],
       [
         "Mom",
-        "Step, step. Hold my hands, baby."
+        "Roll the dough. Make a little cake, baby."
       ],
       [
         "Baby",
-        "Step! Go!"
+        "Roll! Make!"
       ],
       [
         "Mom",
-        "Sit down, clap your hands, smile!"
+        "Bake in the pan. Sing a song, smile!"
       ],
       [
         "Baby",
-        "Hehe! Stand more!"
+        "Hehe! Yummy cake!"
       ]
     ]
   },
   "history": [
+    {
+      "date": "2026-11-05",
+      "name": "拍蛋糕",
+      "words": [
+        [
+          "cake",
+          "蛋糕"
+        ],
+        [
+          "baby",
+          "宝宝"
+        ],
+        [
+          "mommy",
+          "妈妈"
+        ],
+        [
+          "hands",
+          "小手"
+        ],
+        [
+          "plate",
+          "盘子"
+        ],
+        [
+          "pan",
+          "平底锅"
+        ],
+        [
+          "dough",
+          "面团"
+        ],
+        [
+          "oven",
+          "烤箱"
+        ],
+        [
+          "candle",
+          "蜡烛"
+        ],
+        [
+          "song",
+          "歌"
+        ],
+        [
+          "pat",
+          "拍"
+        ],
+        [
+          "clap",
+          "拍手"
+        ],
+        [
+          "roll",
+          "揉"
+        ],
+        [
+          "make",
+          "做"
+        ],
+        [
+          "bake",
+          "烤"
+        ],
+        [
+          "sing",
+          "唱"
+        ],
+        [
+          "blow",
+          "吹"
+        ],
+        [
+          "smile",
+          "笑"
+        ]
+      ],
+      "dialogs": [
+        [
+          "Mom",
+          "Pat-a-cake, pat-a-cake! Pat the cake, baby!"
+        ],
+        [
+          "Baby",
+          "Pat! Pat! Cake!"
+        ],
+        [
+          "Mom",
+          "Roll the dough. Make a little cake, baby."
+        ],
+        [
+          "Baby",
+          "Roll! Make!"
+        ],
+        [
+          "Mom",
+          "Bake in the pan. Sing a song, smile!"
+        ],
+        [
+          "Baby",
+          "Hehe! Yummy cake!"
+        ]
+      ]
+    },
     {
       "date": "2026-11-03",
       "name": "扶站学站",
