@@ -1,110 +1,214 @@
 {
-  "updatedAt": "2026-11-05T23:56:25.553093+08:00",
+  "updatedAt": "2026-11-08T16:22:00.000000+08:00",
   "source": "AI 每3天自动轮换（SSS儿歌核心）",
   "current": {
-    "name": "拍蛋糕",
+    "name": "认家人",
     "words": [
       [
-        "cake",
-        "蛋糕"
-      ],
-      [
-        "baby",
-        "宝宝"
+        "daddy",
+        "爸爸"
       ],
       [
         "mommy",
         "妈妈"
       ],
       [
-        "hands",
+        "grandma",
+        "奶奶"
+      ],
+      [
+        "grandpa",
+        "爷爷"
+      ],
+      [
+        "sister",
+        "姐姐"
+      ],
+      [
+        "baby",
+        "宝宝"
+      ],
+      [
+        "family",
+        "家人"
+      ],
+      [
+        "photo",
+        "照片"
+      ],
+      [
+        "hand",
         "小手"
       ],
       [
-        "plate",
-        "盘子"
+        "home",
+        "家"
       ],
       [
-        "pan",
-        "平底锅"
+        "point",
+        "指"
       ],
       [
-        "dough",
-        "面团"
+        "find",
+        "找"
       ],
       [
-        "oven",
-        "烤箱"
+        "hug",
+        "抱抱"
       ],
       [
-        "candle",
-        "蜡烛"
+        "kiss",
+        "亲亲"
       ],
       [
-        "song",
-        "歌"
+        "wave",
+        "挥手"
       ],
       [
-        "pat",
-        "拍"
+        "look",
+        "看"
       ],
       [
-        "clap",
-        "拍手"
-      ],
-      [
-        "roll",
-        "揉"
-      ],
-      [
-        "make",
-        "做"
-      ],
-      [
-        "bake",
-        "烤"
-      ],
-      [
-        "sing",
-        "唱"
-      ],
-      [
-        "blow",
-        "吹"
+        "show",
+        "比画"
       ],
       [
         "smile",
-        "笑"
+        "微笑"
       ]
     ],
     "dialogs": [
       [
         "Mom",
-        "Pat-a-cake, pat-a-cake! Pat the cake, baby!"
+        "Daddy finger, where are you? Point to daddy!"
       ],
       [
         "Baby",
-        "Pat! Pat! Cake!"
+        "Daddy! Here!"
       ],
       [
         "Mom",
-        "Roll the dough. Make a little cake, baby."
+        "Find grandma in the photo. Hug grandma, baby."
       ],
       [
         "Baby",
-        "Roll! Make!"
+        "Grandma! Hug!"
       ],
       [
         "Mom",
-        "Bake in the pan. Sing a song, smile!"
+        "Show me sister. Kiss mommy, smile!"
       ],
       [
         "Baby",
-        "Hehe! Yummy cake!"
+        "Mua! Family!"
       ]
     ]
   },
   "history": [
+    {
+      "date": "2026-11-08",
+      "name": "认家人",
+      "words": [
+        [
+          "daddy",
+          "爸爸"
+        ],
+        [
+          "mommy",
+          "妈妈"
+        ],
+        [
+          "grandma",
+          "奶奶"
+        ],
+        [
+          "grandpa",
+          "爷爷"
+        ],
+        [
+          "sister",
+          "姐姐"
+        ],
+        [
+          "baby",
+          "宝宝"
+        ],
+        [
+          "family",
+          "家人"
+        ],
+        [
+          "photo",
+          "照片"
+        ],
+        [
+          "hand",
+          "小手"
+        ],
+        [
+          "home",
+          "家"
+        ],
+        [
+          "point",
+          "指"
+        ],
+        [
+          "find",
+          "找"
+        ],
+        [
+          "hug",
+          "抱抱"
+        ],
+        [
+          "kiss",
+          "亲亲"
+        ],
+        [
+          "wave",
+          "挥手"
+        ],
+        [
+          "look",
+          "看"
+        ],
+        [
+          "show",
+          "比画"
+        ],
+        [
+          "smile",
+          "微笑"
+        ]
+      ],
+      "dialogs": [
+        [
+          "Mom",
+          "Daddy finger, where are you? Point to daddy!"
+        ],
+        [
+          "Baby",
+          "Daddy! Here!"
+        ],
+        [
+          "Mom",
+          "Find grandma in the photo. Hug grandma, baby."
+        ],
+        [
+          "Baby",
+          "Grandma! Hug!"
+        ],
+        [
+          "Mom",
+          "Show me sister. Kiss mommy, smile!"
+        ],
+        [
+          "Baby",
+          "Mua! Family!"
+        ]
+      ]
+    },
     {
       "date": "2026-11-05",
       "name": "拍蛋糕",
