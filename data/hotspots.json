@@ -1,7 +1,39 @@
 {
-  "updatedAt": "2026-11-04T23:58:45+08:00",
+  "updatedAt": "2026-11-11T23:59:57+08:00",
   "source": "AI 每周联网抓取（医用成像/ML可解释性）",
   "items": [
+    {
+      "tag": "政策",
+      "tagClass": "tag-policy",
+      "title": "国家药监局印发《医疗器械生产质量管理规范检查指导原则》，11月1日起施行（含独立软件/AI）",
+      "desc": "国家药监局印发《医疗器械生产质量管理规范检查指导原则》（国药监械管〔2026〕14号），2026-09-14 发布、2026-11-01 起施行，同步废止 2015 年版现场检查指导原则；新修订《规范》将无菌、植入、体外诊断试剂、定制式义齿及独立软件类（含 AI 医疗器械）纳入重点监管，标志医疗器械生产质量体系进入刚性化、全周期监管时代。",
+      "link": "https://www.nmpa.gov.cn/xxgk/fgwj/gzwj/gzwjylqx/20260915163938138.html",
+      "pubDate": "2026-09-14"
+    },
+    {
+      "tag": "产业",
+      "tagClass": "tag-industry",
+      "title": "FDA 通过 510(k) 许可 GE Lung Guidance：放射科 AI 影像采集与优化引导系统",
+      "desc": "FDA 于 2026-10-02 通过传统 510(k) 许可 GE Medical Systems 的 Lung Guidance（K261042），属放射科『AI 影像采集与优化引导系统』（产品代码 QJU、Class II），可在超声检查中分析输出并反馈以优化图像与信号质量；GE 旗舰影像 AI 再获准入，延续 2026 年影像 AI 密集获批态势。",
+      "link": "https://fda.innolitics.com/device/K261042",
+      "pubDate": "2026-10-02"
+    },
+    {
+      "tag": "学术",
+      "tagClass": "tag-academic",
+      "title": "《临床放射学杂志》：基于 HRCT 可解释影像组学预测类风湿关节炎相关间质性肺病（SHAP）",
+      "desc": "《临床放射学杂志》2026 年第 45 卷第 10 期发表研究，基于 328 例类风湿关节炎患者全肺 HRCT 影像组学构建可解释机器学习模型预测 RA-ILD 风险，测试集 AUC 0.781、联合临床变量升至 0.858，并以 SHAP 揭示一阶与纹理特征为最主要预测因子，为个体化风险分层提供可解释辅助工具（发布日期 2026-10-08）。",
+      "link": "https://www.lcfsxzz.com/CN/Y2026/V45/I10/1748",
+      "pubDate": "2026-10-08"
+    },
+    {
+      "tag": "学术",
+      "tagClass": "tag-academic",
+      "title": "Frontiers in AI：肿瘤放射组学深度学习融合文献计量与 LDA 主题建模（18 主题）",
+      "desc": "Frontiers in Artificial Intelligence 2026-07-29 发表肿瘤放射组学深度学习融合领域的文献计量与可视化研究，运用 LDA 主题模型（结合困惑度与 pyLDAvis 确定 K=18）从文献语料中识别出 18 个研究主题并归为四大方向，揭示该领域从方法论创新走向临床转化的演化路径，为医用成像/影像组学研究方向研判提供主题建模范式。",
+      "link": "https://www.frontiersin.org/journals/artificial-intelligence/articles/10.3389/frai.2026.1779682/full",
+      "pubDate": "2026-07-29"
+    },
     {
       "tag": "政策",
       "tagClass": "tag-policy",
