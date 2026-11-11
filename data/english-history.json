@@ -1,110 +1,214 @@
 {
-  "updatedAt": "2026-11-08T16:22:00.000000+08:00",
+  "updatedAt": "2026-11-11T11:54:01.546788+08:00",
   "source": "AI 每3天自动轮换（SSS儿歌核心）",
   "current": {
-    "name": "认家人",
+    "name": "玩摇铃",
     "words": [
       [
-        "daddy",
-        "爸爸"
+        "rattle",
+        "摇铃"
       ],
       [
-        "mommy",
-        "妈妈"
+        "shaker",
+        "沙锤"
       ],
       [
-        "grandma",
-        "奶奶"
-      ],
-      [
-        "grandpa",
-        "爷爷"
-      ],
-      [
-        "sister",
-        "姐姐"
+        "bell",
+        "铃铛"
       ],
       [
         "baby",
         "宝宝"
       ],
       [
-        "family",
-        "家人"
-      ],
-      [
-        "photo",
-        "照片"
+        "mommy",
+        "妈妈"
       ],
       [
         "hand",
         "小手"
       ],
       [
-        "home",
-        "家"
+        "music",
+        "音乐"
       ],
       [
-        "point",
-        "指"
+        "toy",
+        "玩具"
       ],
       [
-        "find",
-        "找"
+        "box",
+        "盒子"
       ],
       [
-        "hug",
-        "抱抱"
+        "sound",
+        "声音"
       ],
       [
-        "kiss",
-        "亲亲"
+        "shake",
+        "摇"
+      ],
+      [
+        "hold",
+        "拿"
+      ],
+      [
+        "ring",
+        "摇响"
+      ],
+      [
+        "listen",
+        "听"
       ],
       [
         "wave",
-        "挥手"
+        "挥"
       ],
       [
-        "look",
-        "看"
+        "clap",
+        "拍手"
       ],
       [
-        "show",
-        "比画"
+        "drop",
+        "掉"
       ],
       [
         "smile",
-        "微笑"
+        "笑"
       ]
     ],
     "dialogs": [
       [
         "Mom",
-        "Daddy finger, where are you? Point to daddy!"
+        "Here is your rattle! Hold it, baby. Shake, shake!"
       ],
       [
         "Baby",
-        "Daddy! Here!"
+        "Shake! Rattle!"
       ],
       [
         "Mom",
-        "Find grandma in the photo. Hug grandma, baby."
+        "Ring the bell. Listen to the sound, baby."
       ],
       [
         "Baby",
-        "Grandma! Hug!"
+        "Ding! Bell!"
       ],
       [
         "Mom",
-        "Show me sister. Kiss mommy, smile!"
+        "Shake your shaker. Clap your hands, smile!"
       ],
       [
         "Baby",
-        "Mua! Family!"
+        "Hehe! Music!"
       ]
     ]
   },
   "history": [
+    {
+      "date": "2026-11-11",
+      "name": "玩摇铃",
+      "words": [
+        [
+          "rattle",
+          "摇铃"
+        ],
+        [
+          "shaker",
+          "沙锤"
+        ],
+        [
+          "bell",
+          "铃铛"
+        ],
+        [
+          "baby",
+          "宝宝"
+        ],
+        [
+          "mommy",
+          "妈妈"
+        ],
+        [
+          "hand",
+          "小手"
+        ],
+        [
+          "music",
+          "音乐"
+        ],
+        [
+          "toy",
+          "玩具"
+        ],
+        [
+          "box",
+          "盒子"
+        ],
+        [
+          "sound",
+          "声音"
+        ],
+        [
+          "shake",
+          "摇"
+        ],
+        [
+          "hold",
+          "拿"
+        ],
+        [
+          "ring",
+          "摇响"
+        ],
+        [
+          "listen",
+          "听"
+        ],
+        [
+          "wave",
+          "挥"
+        ],
+        [
+          "clap",
+          "拍手"
+        ],
+        [
+          "drop",
+          "掉"
+        ],
+        [
+          "smile",
+          "笑"
+        ]
+      ],
+      "dialogs": [
+        [
+          "Mom",
+          "Here is your rattle! Hold it, baby. Shake, shake!"
+        ],
+        [
+          "Baby",
+          "Shake! Rattle!"
+        ],
+        [
+          "Mom",
+          "Ring the bell. Listen to the sound, baby."
+        ],
+        [
+          "Baby",
+          "Ding! Bell!"
+        ],
+        [
+          "Mom",
+          "Shake your shaker. Clap your hands, smile!"
+        ],
+        [
+          "Baby",
+          "Hehe! Music!"
+        ]
+      ]
+    },
     {
       "date": "2026-11-08",
       "name": "认家人",
