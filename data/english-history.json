@@ -1,21 +1,9 @@
 {
-  "updatedAt": "2026-11-11T11:54:01.546788+08:00",
+  "updatedAt": "2026-11-13T23:56:31.677726+08:00",
   "source": "AI 每3天自动轮换（SSS儿歌核心）",
   "current": {
-    "name": "玩摇铃",
+    "name": "挠痒痒",
     "words": [
-      [
-        "rattle",
-        "摇铃"
-      ],
-      [
-        "shaker",
-        "沙锤"
-      ],
-      [
-        "bell",
-        "铃铛"
-      ],
       [
         "baby",
         "宝宝"
@@ -25,52 +13,64 @@
         "妈妈"
       ],
       [
+        "tummy",
+        "肚子"
+      ],
+      [
+        "toes",
+        "脚趾"
+      ],
+      [
+        "foot",
+        "脚"
+      ],
+      [
         "hand",
         "小手"
       ],
       [
-        "music",
-        "音乐"
+        "knee",
+        "膝盖"
       ],
       [
-        "toy",
-        "玩具"
+        "neck",
+        "脖子"
       ],
       [
-        "box",
-        "盒子"
+        "chin",
+        "下巴"
       ],
       [
-        "sound",
-        "声音"
+        "cheek",
+        "脸颊"
       ],
       [
-        "shake",
-        "摇"
+        "tickle",
+        "挠痒"
+      ],
+      [
+        "laugh",
+        "大笑"
+      ],
+      [
+        "squirm",
+        "扭动"
+      ],
+      [
+        "hug",
+        "抱抱"
+      ],
+      [
+        "kiss",
+        "亲亲"
+      ],
+      [
+        "wiggle",
+        "扭一扭"
       ],
       [
         "hold",
-        "拿"
-      ],
-      [
-        "ring",
-        "摇响"
-      ],
-      [
-        "listen",
-        "听"
-      ],
-      [
-        "wave",
-        "挥"
-      ],
-      [
-        "clap",
-        "拍手"
-      ],
-      [
-        "drop",
-        "掉"
+        "抓"
       ],
       [
         "smile",
@@ -80,31 +80,135 @@
     "dialogs": [
       [
         "Mom",
-        "Here is your rattle! Hold it, baby. Shake, shake!"
+        "Where are your toes? Tickle, tickle, baby!"
       ],
       [
         "Baby",
-        "Shake! Rattle!"
+        "Hehe! Toes!"
       ],
       [
         "Mom",
-        "Ring the bell. Listen to the sound, baby."
+        "Tickle your tummy! Squirm, squirm, wiggle!"
       ],
       [
         "Baby",
-        "Ding! Bell!"
+        "Hehe! Tummy tickle!"
       ],
       [
         "Mom",
-        "Shake your shaker. Clap your hands, smile!"
+        "Hug and kiss. Tickle your neck, smile!"
       ],
       [
         "Baby",
-        "Hehe! Music!"
+        "Hehe! More! More!"
       ]
     ]
   },
   "history": [
+    {
+      "date": "2026-11-13",
+      "name": "挠痒痒",
+      "words": [
+        [
+          "baby",
+          "宝宝"
+        ],
+        [
+          "mommy",
+          "妈妈"
+        ],
+        [
+          "tummy",
+          "肚子"
+        ],
+        [
+          "toes",
+          "脚趾"
+        ],
+        [
+          "foot",
+          "脚"
+        ],
+        [
+          "hand",
+          "小手"
+        ],
+        [
+          "knee",
+          "膝盖"
+        ],
+        [
+          "neck",
+          "脖子"
+        ],
+        [
+          "chin",
+          "下巴"
+        ],
+        [
+          "cheek",
+          "脸颊"
+        ],
+        [
+          "tickle",
+          "挠痒"
+        ],
+        [
+          "laugh",
+          "大笑"
+        ],
+        [
+          "squirm",
+          "扭动"
+        ],
+        [
+          "hug",
+          "抱抱"
+        ],
+        [
+          "kiss",
+          "亲亲"
+        ],
+        [
+          "wiggle",
+          "扭一扭"
+        ],
+        [
+          "hold",
+          "抓"
+        ],
+        [
+          "smile",
+          "笑"
+        ]
+      ],
+      "dialogs": [
+        [
+          "Mom",
+          "Where are your toes? Tickle, tickle, baby!"
+        ],
+        [
+          "Baby",
+          "Hehe! Toes!"
+        ],
+        [
+          "Mom",
+          "Tickle your tummy! Squirm, squirm, wiggle!"
+        ],
+        [
+          "Baby",
+          "Hehe! Tummy tickle!"
+        ],
+        [
+          "Mom",
+          "Hug and kiss. Tickle your neck, smile!"
+        ],
+        [
+          "Baby",
+          "Hehe! More! More!"
+        ]
+      ]
+    },
     {
       "date": "2026-11-11",
       "name": "玩摇铃",
