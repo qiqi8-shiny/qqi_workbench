@@ -1,9 +1,13 @@
 {
-  "updatedAt": "2026-11-13T23:56:31.677726+08:00",
+  "updatedAt": "2026-11-15T23:56:27.714628+08:00",
   "source": "AI 每3天自动轮换（SSS儿歌核心）",
   "current": {
-    "name": "挠痒痒",
+    "name": "泡泡游戏",
     "words": [
+      [
+        "bubble",
+        "泡泡"
+      ],
       [
         "baby",
         "宝宝"
@@ -13,98 +17,198 @@
         "妈妈"
       ],
       [
-        "tummy",
-        "肚子"
+        "wand",
+        "泡泡棒"
       ],
       [
-        "toes",
-        "脚趾"
-      ],
-      [
-        "foot",
-        "脚"
+        "soap",
+        "泡泡液"
       ],
       [
         "hand",
         "小手"
       ],
       [
-        "knee",
-        "膝盖"
+        "finger",
+        "手指"
       ],
       [
-        "neck",
-        "脖子"
+        "sky",
+        "天空"
       ],
       [
-        "chin",
-        "下巴"
+        "sun",
+        "太阳"
       ],
       [
-        "cheek",
-        "脸颊"
+        "light",
+        "光"
       ],
       [
-        "tickle",
-        "挠痒"
+        "blow",
+        "吹"
+      ],
+      [
+        "pop",
+        "戳破"
+      ],
+      [
+        "chase",
+        "追"
+      ],
+      [
+        "catch",
+        "抓"
+      ],
+      [
+        "float",
+        "飘"
+      ],
+      [
+        "point",
+        "指"
+      ],
+      [
+        "clap",
+        "拍手"
       ],
       [
         "laugh",
         "大笑"
-      ],
-      [
-        "squirm",
-        "扭动"
-      ],
-      [
-        "hug",
-        "抱抱"
-      ],
-      [
-        "kiss",
-        "亲亲"
-      ],
-      [
-        "wiggle",
-        "扭一扭"
-      ],
-      [
-        "hold",
-        "抓"
-      ],
-      [
-        "smile",
-        "笑"
       ]
     ],
     "dialogs": [
       [
         "Mom",
-        "Where are your toes? Tickle, tickle, baby!"
+        "Look, bubbles! Big bubbles, baby!"
       ],
       [
         "Baby",
-        "Hehe! Toes!"
+        "Bubble! Ba!"
       ],
       [
         "Mom",
-        "Tickle your tummy! Squirm, squirm, wiggle!"
+        "I blow. You pop! Pop, pop!"
       ],
       [
         "Baby",
-        "Hehe! Tummy tickle!"
+        "Pop! Pop!"
       ],
       [
         "Mom",
-        "Hug and kiss. Tickle your neck, smile!"
+        "Catch the bubble. Float up to the sky!"
       ],
       [
         "Baby",
-        "Hehe! More! More!"
+        "Wow! More! More!"
       ]
     ]
   },
   "history": [
+    {
+      "date": "2026-11-15",
+      "name": "泡泡游戏",
+      "words": [
+        [
+          "bubble",
+          "泡泡"
+        ],
+        [
+          "baby",
+          "宝宝"
+        ],
+        [
+          "mommy",
+          "妈妈"
+        ],
+        [
+          "wand",
+          "泡泡棒"
+        ],
+        [
+          "soap",
+          "泡泡液"
+        ],
+        [
+          "hand",
+          "小手"
+        ],
+        [
+          "finger",
+          "手指"
+        ],
+        [
+          "sky",
+          "天空"
+        ],
+        [
+          "sun",
+          "太阳"
+        ],
+        [
+          "light",
+          "光"
+        ],
+        [
+          "blow",
+          "吹"
+        ],
+        [
+          "pop",
+          "戳破"
+        ],
+        [
+          "chase",
+          "追"
+        ],
+        [
+          "catch",
+          "抓"
+        ],
+        [
+          "float",
+          "飘"
+        ],
+        [
+          "point",
+          "指"
+        ],
+        [
+          "clap",
+          "拍手"
+        ],
+        [
+          "laugh",
+          "大笑"
+        ]
+      ],
+      "dialogs": [
+        [
+          "Mom",
+          "Look, bubbles! Big bubbles, baby!"
+        ],
+        [
+          "Baby",
+          "Bubble! Ba!"
+        ],
+        [
+          "Mom",
+          "I blow. You pop! Pop, pop!"
+        ],
+        [
+          "Baby",
+          "Pop! Pop!"
+        ],
+        [
+          "Mom",
+          "Catch the bubble. Float up to the sky!"
+        ],
+        [
+          "Baby",
+          "Wow! More! More!"
+        ]
+      ]
+    },
     {
       "date": "2026-11-13",
       "name": "挠痒痒",
