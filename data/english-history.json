@@ -1,12 +1,12 @@
 {
-  "updatedAt": "2026-11-15T23:56:27.714628+08:00",
+  "updatedAt": "2026-11-17T23:56:55.906946+08:00",
   "source": "AI 每3天自动轮换（SSS儿歌核心）",
   "current": {
-    "name": "泡泡游戏",
+    "name": "玩球游戏",
     "words": [
       [
-        "bubble",
-        "泡泡"
+        "ball",
+        "球"
       ],
       [
         "baby",
@@ -17,94 +17,198 @@
         "妈妈"
       ],
       [
-        "wand",
-        "泡泡棒"
-      ],
-      [
-        "soap",
-        "泡泡液"
-      ],
-      [
         "hand",
         "小手"
       ],
       [
-        "finger",
-        "手指"
+        "floor",
+        "地板"
       ],
       [
-        "sky",
-        "天空"
+        "basket",
+        "篮子"
       ],
       [
-        "sun",
-        "太阳"
+        "rug",
+        "地毯"
       ],
       [
-        "light",
-        "光"
+        "sofa",
+        "沙发"
       ],
       [
-        "blow",
-        "吹"
+        "toy",
+        "玩具"
       ],
       [
-        "pop",
-        "戳破"
+        "friend",
+        "朋友"
       ],
       [
-        "chase",
-        "追"
+        "roll",
+        "滚"
+      ],
+      [
+        "bounce",
+        "拍球"
+      ],
+      [
+        "throw",
+        "扔"
       ],
       [
         "catch",
-        "抓"
+        "接"
       ],
       [
-        "float",
-        "飘"
+        "kick",
+        "踢"
       ],
       [
-        "point",
-        "指"
+        "push",
+        "推"
+      ],
+      [
+        "drop",
+        "放下"
       ],
       [
         "clap",
         "拍手"
-      ],
-      [
-        "laugh",
-        "大笑"
       ]
     ],
     "dialogs": [
       [
         "Mom",
-        "Look, bubbles! Big bubbles, baby!"
+        "Here's your ball, baby!"
       ],
       [
         "Baby",
-        "Bubble! Ba!"
+        "Ball! Ball!"
       ],
       [
         "Mom",
-        "I blow. You pop! Pop, pop!"
+        "Roll the ball to me."
       ],
       [
         "Baby",
-        "Pop! Pop!"
+        "Roll, roll!"
       ],
       [
         "Mom",
-        "Catch the bubble. Float up to the sky!"
+        "Good catch! Clap, clap!"
       ],
       [
         "Baby",
-        "Wow! More! More!"
+        "Again! Again!"
       ]
     ]
   },
   "history": [
+    {
+      "date": "2026-11-17",
+      "name": "玩球游戏",
+      "words": [
+        [
+          "ball",
+          "球"
+        ],
+        [
+          "baby",
+          "宝宝"
+        ],
+        [
+          "mommy",
+          "妈妈"
+        ],
+        [
+          "hand",
+          "小手"
+        ],
+        [
+          "floor",
+          "地板"
+        ],
+        [
+          "basket",
+          "篮子"
+        ],
+        [
+          "rug",
+          "地毯"
+        ],
+        [
+          "sofa",
+          "沙发"
+        ],
+        [
+          "toy",
+          "玩具"
+        ],
+        [
+          "friend",
+          "朋友"
+        ],
+        [
+          "roll",
+          "滚"
+        ],
+        [
+          "bounce",
+          "拍球"
+        ],
+        [
+          "throw",
+          "扔"
+        ],
+        [
+          "catch",
+          "接"
+        ],
+        [
+          "kick",
+          "踢"
+        ],
+        [
+          "push",
+          "推"
+        ],
+        [
+          "drop",
+          "放下"
+        ],
+        [
+          "clap",
+          "拍手"
+        ]
+      ],
+      "dialogs": [
+        [
+          "Mom",
+          "Here's your ball, baby!"
+        ],
+        [
+          "Baby",
+          "Ball! Ball!"
+        ],
+        [
+          "Mom",
+          "Roll the ball to me."
+        ],
+        [
+          "Baby",
+          "Roll, roll!"
+        ],
+        [
+          "Mom",
+          "Good catch! Clap, clap!"
+        ],
+        [
+          "Baby",
+          "Again! Again!"
+        ]
+      ]
+    },
     {
       "date": "2026-11-15",
       "name": "泡泡游戏",
