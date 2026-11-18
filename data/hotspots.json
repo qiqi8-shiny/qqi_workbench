@@ -1,7 +1,39 @@
 {
-  "updatedAt": "2026-11-11T23:59:57+08:00",
+  "updatedAt": "2026-11-18T23:56:22+08:00",
   "source": "AI 每周联网抓取（医用成像/ML可解释性）",
   "items": [
+    {
+      "tag": "政策",
+      "tagClass": "tag-policy",
+      "title": "湖南“春雨行动”集中评审82个医疗器械创新项目，肺癌AI辅助决策系统入推荐前置审评",
+      "desc": "湖南省药监局在长沙对82个申报项目集中评审，覆盖放射治疗与医用成像设备等领域，按临床价值、创新性、转化可行性三维打分并分级纳入项目库；其中3款产品获推荐纳入国家药监局审评前置服务，含从诊断到治疗全流程的肺癌AI辅助决策系统。",
+      "link": "https://finance.sina.com.cn/jjxw/2026-11-03/doc-inixmhhi8793048.shtml",
+      "pubDate": "2026-11-03"
+    },
+    {
+      "tag": "产业",
+      "tagClass": "tag-industry",
+      "title": "博莱科与Avicenna.AI脑动脉瘤CTA检测AI软件获FDA 510(k)许可",
+      "desc": "UPTUNITY | Aneurysm 基于头部CTA识别直径大于3mm的疑似囊状脑动脉瘤并支持随访定量测量；8名放射科医生对照阅片研究显示，AI辅助后患者层面检出敏感度由92.2%升至96.2%，平均每例阅片时间缩短9.9秒。",
+      "link": "https://www.itnonline.com/content/ai-enabled-software-brain-aneurysm-detection-assessment-gets-fda-approval",
+      "pubDate": "2026-11-13"
+    },
+    {
+      "tag": "学术",
+      "tagClass": "tag-academic",
+      "title": "Critical Care：CT影像组学+XGBoost+SHAP多中心预测动脉瘤性蛛网膜下腔出血预后",
+      "desc": "四中心队列用BrainHemoAI自动分割、PyRadiomics提取特征构建临床-影像组学模型，XGBoost产出可解释风险估计，SHAP值揭示驱动不良恢复的影像与临床特征，并关联脑脊液蛋白组学提出可检验机制假设；外部队列82例验证。",
+      "link": "https://bioengineer.org/ct-radiomics-model-predicts-outcomes-after-bleeding-stroke-across-four-hospitals",
+      "pubDate": "2026-11-04"
+    },
+    {
+      "tag": "专利",
+      "tagClass": "tag-patent",
+      "title": "ACM ICADI：基于LDA主题模型的医疗器械产业发展趋势主题分析",
+      "desc": "以CNKI 310篇医疗器械产业文献为语料，用困惑度与pyLDAvis确定最优主题数，经jieba分词与LDA建模提炼出“AI赋能产业发展”“数字化转型驱动高质量升级”“政策红利助推高端器械核心竞争力”三大核心主题，指出AI赋能是当前热点研究方向。",
+      "link": "https://dlnext.acm.org/doi/full/10.1145/3795926.3796020",
+      "pubDate": "2026-04-19"
+    },
     {
       "tag": "政策",
       "tagClass": "tag-policy",
