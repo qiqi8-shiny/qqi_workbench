@@ -1,12 +1,24 @@
 {
-  "updatedAt": "2026-11-17T23:56:55.906946+08:00",
+  "updatedAt": "2026-11-20T10:48:50.306856+08:00",
   "source": "AI 每3天自动轮换（SSS儿歌核心）",
   "current": {
-    "name": "玩球游戏",
+    "name": "摇船游戏",
     "words": [
       [
-        "ball",
-        "球"
+        "boat",
+        "小船"
+      ],
+      [
+        "stream",
+        "小溪"
+      ],
+      [
+        "river",
+        "小河"
+      ],
+      [
+        "water",
+        "水"
       ],
       [
         "baby",
@@ -21,90 +33,182 @@
         "小手"
       ],
       [
-        "floor",
-        "地板"
+        "song",
+        "儿歌"
       ],
       [
-        "basket",
-        "篮子"
+        "dream",
+        "梦"
       ],
       [
-        "rug",
-        "地毯"
+        "moon",
+        "月亮"
       ],
       [
-        "sofa",
-        "沙发"
+        "row",
+        "划（船）"
       ],
       [
-        "toy",
-        "玩具"
+        "rock",
+        "摇"
       ],
       [
-        "friend",
-        "朋友"
+        "sing",
+        "唱"
       ],
       [
-        "roll",
-        "滚"
+        "sway",
+        "轻轻摇摆"
       ],
       [
-        "bounce",
-        "拍球"
+        "float",
+        "漂浮"
       ],
       [
-        "throw",
-        "扔"
+        "hold",
+        "握住"
       ],
       [
-        "catch",
-        "接"
+        "pull",
+        "拉"
       ],
       [
-        "kick",
-        "踢"
-      ],
-      [
-        "push",
-        "推"
-      ],
-      [
-        "drop",
-        "放下"
-      ],
-      [
-        "clap",
-        "拍手"
+        "smile",
+        "微笑"
       ]
     ],
     "dialogs": [
       [
         "Mom",
-        "Here's your ball, baby!"
+        "Row, row, row your boat!"
       ],
       [
         "Baby",
-        "Ball! Ball!"
+        "Boat! Boat!"
       ],
       [
         "Mom",
-        "Roll the ball to me."
+        "Hold my hands. Sway, sway!"
       ],
       [
         "Baby",
-        "Roll, roll!"
+        "Wee! Water!"
       ],
       [
         "Mom",
-        "Good catch! Clap, clap!"
+        "Sing with mommy. Down the stream!"
       ],
       [
         "Baby",
-        "Again! Again!"
+        "La la... smile!"
       ]
     ]
   },
   "history": [
+    {
+      "date": "2026-11-20",
+      "name": "摇船游戏",
+      "words": [
+        [
+          "boat",
+          "小船"
+        ],
+        [
+          "stream",
+          "小溪"
+        ],
+        [
+          "river",
+          "小河"
+        ],
+        [
+          "water",
+          "水"
+        ],
+        [
+          "baby",
+          "宝宝"
+        ],
+        [
+          "mommy",
+          "妈妈"
+        ],
+        [
+          "hand",
+          "小手"
+        ],
+        [
+          "song",
+          "儿歌"
+        ],
+        [
+          "dream",
+          "梦"
+        ],
+        [
+          "moon",
+          "月亮"
+        ],
+        [
+          "row",
+          "划（船）"
+        ],
+        [
+          "rock",
+          "摇"
+        ],
+        [
+          "sing",
+          "唱"
+        ],
+        [
+          "sway",
+          "轻轻摇摆"
+        ],
+        [
+          "float",
+          "漂浮"
+        ],
+        [
+          "hold",
+          "握住"
+        ],
+        [
+          "pull",
+          "拉"
+        ],
+        [
+          "smile",
+          "微笑"
+        ]
+      ],
+      "dialogs": [
+        [
+          "Mom",
+          "Row, row, row your boat!"
+        ],
+        [
+          "Baby",
+          "Boat! Boat!"
+        ],
+        [
+          "Mom",
+          "Hold my hands. Sway, sway!"
+        ],
+        [
+          "Baby",
+          "Wee! Water!"
+        ],
+        [
+          "Mom",
+          "Sing with mommy. Down the stream!"
+        ],
+        [
+          "Baby",
+          "La la... smile!"
+        ]
+      ]
+    },
     {
       "date": "2026-11-17",
       "name": "玩球游戏",
